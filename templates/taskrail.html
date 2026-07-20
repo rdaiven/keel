@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taskrail — a kanban task board built with keel</title>
+<meta name="description" content="A fictional kanban board built entirely with keel — drag cards between To do, Doing, and Done, or move them with a keyboard-friendly select, with a WIP limit on Doing. State is saved to this browser's local storage.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The theme. This block is the entire difference between this page
+     and keel's defaults — every derived shade follows from it. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(220 18% 96%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(220 16% 93%);
+      --k-border: hsl(220 12% 86%);
+      --k-border-strong: hsl(220 10% 73%);
+      --k-text: hsl(220 26% 14%);
+      --k-text-soft: hsl(220 12% 38%);
+      --k-text-faint: hsl(220 8% 54%);
+      --k-accent: hsl(230 68% 56%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(272 58% 52%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-radius: 9px;
+      --k-ok: hsl(150 55% 36%);
+      --k-warn: hsl(35 88% 45%);
+      --k-danger: hsl(4 74% 54%);
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local: the three-column board */
+  .tr-board { display: grid; gap: var(--k-space-4); grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+  @media (max-width: 52rem) { .tr-board { grid-template-columns: 1fr; } }
+  .tr-col { background: var(--k-surface-2); border: 1px solid var(--k-border); border-radius: var(--k-radius-l); padding: var(--k-space-3); min-block-size: 8rem; }
+  .tr-col__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--k-space-3); }
+  .tr-col__cards { display: flex; flex-direction: column; gap: var(--k-space-3); min-block-size: 3rem; }
+  .tr-col.is-dragover { outline: 2px dashed var(--k-accent); outline-offset: 2px; }
+  .tr-card { cursor: grab; }
+  .tr-card.is-dragging { opacity: 0.5; }
+  .tr-card__foot { display: flex; align-items: center; justify-content: space-between; gap: var(--k-space-2); margin-top: var(--k-space-3); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — a genuinely working app
+    this time, not just chrome. <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Taskrail</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="k-container k-section" id="top">
+
+  <h1>Taskrail</h1>
+  <p class="k-text-soft" style="max-width: 40em">A small kanban board —
+  drag a card to a new column, or use its "Move to" select if you'd
+  rather not drag. Doing carries a soft limit of three cards — go over
+  and the column badge flags it, but nothing blocks the move.</p>
+
+  <div class="k-alert k-alert--soft k-mt-4">
+    Everything below is saved to <strong>this browser's local storage
+    only</strong> — nothing leaves your machine, and nothing syncs
+    between devices.
+  </div>
+
+  <!-- ADD FORM -->
+  <section class="k-card k-mt-5">
+    <p class="k-card__kicker">Add a card</p>
+    <form id="tr-form" class="k-cluster" style="align-items: flex-end">
+      <div class="k-field" style="flex: 1; min-inline-size: 14rem; margin-bottom: 0">
+        <label for="tr-title">Task</label>
+        <input id="tr-title" type="text" placeholder="e.g. Sand the drawer fronts" required>
+      </div>
+      <button class="k-btn" type="submit"><span class="k-icon k-icon--plus" aria-hidden="true"></span> Add to To do</button>
+    </form>
+  </section>
+
+  <!-- BOARD -->
+  <div class="tr-board k-mt-5" id="tr-board">
+    <div class="tr-col" data-column="todo">
+      <div class="tr-col__head">
+        <strong>To do</strong>
+        <span class="k-badge k-badge--outline" id="tr-count-todo">0</span>
+      </div>
+      <div class="tr-col__cards" data-dropzone="todo"></div>
+    </div>
+    <div class="tr-col" data-column="doing">
+      <div class="tr-col__head">
+        <strong>Doing</strong>
+        <span class="k-badge" id="tr-count-doing">0 / 3</span>
+      </div>
+      <div class="tr-col__cards" data-dropzone="doing"></div>
+    </div>
+    <div class="tr-col" data-column="done">
+      <div class="tr-col__head">
+        <strong>Done</strong>
+        <span class="k-badge k-badge--ok" id="tr-count-done">0</span>
+      </div>
+      <div class="tr-col__cards" data-dropzone="done"></div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>Taskrail — a fictional tool, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var STORE_KEY = 'kl-taskrail-v1';
+  var WIP_LIMIT = { doing: 3 };
+  var COLUMN_LABEL = { todo: 'To do', doing: 'Doing', done: 'Done' };
+
+  /* ---------- seed data ---------- */
+  function seedCards () {
+    return [
+      { id: 'tr-1', title: 'Sand the drawer fronts', column: 'todo' },
+      { id: 'tr-2', title: 'Order brass pulls', column: 'todo' },
+      { id: 'tr-3', title: 'Glue the bench legs', column: 'doing' },
+      { id: 'tr-4', title: 'Finish the tote handles', column: 'doing' },
+      { id: 'tr-5', title: 'Photograph the mug set', column: 'done' },
+      { id: 'tr-6', title: 'Restock waxed canvas', column: 'todo' }
+    ];
+  }
+
+  /* ---------- state ---------- */
+  function load () {
+    var raw;
+    try { raw = localStorage.getItem(STORE_KEY); } catch (e) { raw = null; }
+    if (!raw) {
+      var seeded = seedCards();
+      save(seeded);
+      return seeded;
+    }
+    try {
+      var parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) throw new Error('bad shape');
+      return parsed;
+    } catch (e) {
+      var fallback = seedCards();
+      save(fallback);
+      return fallback;
+    }
+  }
+
+  function save (cards) {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(cards)); } catch (e) { /* storage unavailable — app still works in-memory */ }
+  }
+
+  var cards = load();
+
+  /* ---------- the single source of truth for moving a card ----------
+     Both the drag-and-drop path and the select-dropdown path call this
+     one function — there is no separate/diverging move logic. */
+  function moveCard (id, toColumn) {
+    var card = cards.find(function (c) { return c.id === id; });
+    if (!card || card.column === toColumn) return;
+    card.column = toColumn;
+    save(cards);
+    render();
+  }
+
+  function removeCard (id) {
+    cards = cards.filter(function (c) { return c.id !== id; });
+    save(cards);
+    render();
+  }
+
+  function addCard (title) {
+    cards.push({ id: 'tr-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7), title: title, column: 'todo' });
+    save(cards);
+    render();
+  }
+
+  /* ---------- rendering ---------- */
+  var dropzones = document.querySelectorAll('[data-dropzone]');
+
+  function render () {
+    // preserve keyboard focus across the rebuild below (moving/deleting a
+    // card would otherwise drop the focused control and send focus to <body>)
+    var focused = document.activeElement;
+    var focusId = null, focusRole = null;
+    var focusedCard = focused && focused.closest('.tr-card');
+    if (focusedCard) {
+      focusId = focusedCard.dataset.id;
+      focusRole = focused.tagName === 'SELECT' ? 'select' : 'delete';
+    }
+
+    var counts = { todo: 0, doing: 0, done: 0 };
+    cards.forEach(function (c) { if (counts[c.column] !== undefined) counts[c.column] += 1; });
+
+    document.getElementById('tr-count-todo').textContent = counts.todo;
+    document.getElementById('tr-count-done').textContent = counts.done;
+
+    var doingBadge = document.getElementById('tr-count-doing');
+    doingBadge.textContent = counts.doing + ' / ' + WIP_LIMIT.doing;
+    doingBadge.classList.remove('k-badge--warn', 'k-badge--outline');
+    if (counts.doing > WIP_LIMIT.doing) {
+      doingBadge.classList.add('k-badge--warn');
+    } else {
+      doingBadge.classList.add('k-badge--outline');
+    }
+
+    dropzones.forEach(function (zone) {
+      var col = zone.dataset.dropzone;
+      zone.innerHTML = '';
+      cards.filter(function (c) { return c.column === col; }).forEach(function (card) {
+        zone.appendChild(renderCard(card));
+      });
+    });
+
+    if (focusId) {
+      var restoredCard = document.querySelector('.tr-card[data-id="' + focusId + '"]');
+      var target = restoredCard && (focusRole === 'select' ? restoredCard.querySelector('select') : restoredCard.querySelector('button'));
+      if (target) target.focus();
+      else document.getElementById('tr-title').focus();
+    }
+  }
+
+  function renderCard (card) {
+    var el = document.createElement('div');
+    el.className = 'k-card k-card--flat tr-card';
+    el.draggable = true;
+    el.dataset.id = card.id;
+
+    var title = document.createElement('p');
+    title.style.margin = '0';
+    title.textContent = card.title;
+    el.appendChild(title);
+
+    var foot = document.createElement('div');
+    foot.className = 'tr-card__foot';
+
+    var select = document.createElement('select');
+    select.className = 'k-input--small';
+    select.setAttribute('aria-label', 'Move "' + card.title + '" to column');
+    ['todo', 'doing', 'done'].forEach(function (col) {
+      var opt = document.createElement('option');
+      opt.value = col;
+      opt.textContent = 'Move to: ' + COLUMN_LABEL[col];
+      if (col === card.column) opt.selected = true;
+      select.appendChild(opt);
+    });
+    select.addEventListener('change', function () {
+      moveCard(card.id, select.value);
+    });
+
+    var delBtn = document.createElement('button');
+    delBtn.type = 'button';
+    delBtn.className = 'k-tool';
+    delBtn.setAttribute('aria-label', 'Delete card: ' + card.title);
+    delBtn.innerHTML = '<span class="k-icon k-icon--trash" aria-hidden="true"></span>';
+    delBtn.addEventListener('click', function () { removeCard(card.id); });
+
+    foot.appendChild(select);
+    foot.appendChild(delBtn);
+    el.appendChild(foot);
+
+    el.addEventListener('dragstart', function (ev) {
+      ev.dataTransfer.setData('text/plain', card.id);
+      ev.dataTransfer.effectAllowed = 'move';
+      el.classList.add('is-dragging');
+    });
+    el.addEventListener('dragend', function () {
+      el.classList.remove('is-dragging');
+    });
+
+    return el;
+  }
+
+  /* ---------- drag-and-drop wiring on the columns ---------- */
+  dropzones.forEach(function (zone) {
+    var col = zone.closest('.tr-col');
+    zone.addEventListener('dragover', function (ev) {
+      ev.preventDefault();
+      ev.dataTransfer.dropEffect = 'move';
+      col.classList.add('is-dragover');
+    });
+    zone.addEventListener('dragleave', function () {
+      col.classList.remove('is-dragover');
+    });
+    zone.addEventListener('drop', function (ev) {
+      ev.preventDefault();
+      col.classList.remove('is-dragover');
+      var id = ev.dataTransfer.getData('text/plain');
+      if (id) moveCard(id, zone.dataset.dropzone);
+    });
+  });
+
+  /* ---------- add-card form ---------- */
+  document.getElementById('tr-form').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var input = document.getElementById('tr-title');
+    var title = input.value.trim();
+    if (!title) return;
+    addCard(title);
+    ev.target.reset();
+    input.focus();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sections · Features — keel</title>
+<meta name="description" content="Seven feature sections built with keel: three-up cards, split feature, icon grid, alternating splits, bento grid, a checklist band, and a scroll-reveal stack. Rendered live with markup below.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+<main id="main">
+
+<section class="k-section">
+  <div class="k-container">
+    <h1>Features</h1>
+    <p class="k-hero__lead">Seven ways to say what the thing does, rendered live as full-bleed
+    bands with their exact markup underneath. Copy the markup, keep
+    your tokens — the copy inside is placeholder, a fictional studio
+    called Harbor &amp; Pine.</p>
+    <div class="k-cluster" style="margin-top: var(--k-space-5)">
+      <a class="k-badge k-badge--outline" href="#three-up-features">Three-up features</a>
+      <a class="k-badge k-badge--outline" href="#split-feature">Split feature</a>
+      <a class="k-badge k-badge--outline" href="#icon-grid">Icon feature grid</a>
+      <a class="k-badge k-badge--outline" href="#alternating-splits">Alternating splits</a>
+      <a class="k-badge k-badge--outline" href="#bento-grid">Bento grid</a>
+      <a class="k-badge k-badge--outline" href="#checklist-band">Feature checklist band</a>
+      <a class="k-badge k-badge--outline" href="#reveal-features">Scroll-reveal features</a>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="three-up-features">Three-up features</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Three numbered cards under a heading and a soft intro — a survey of what the thing does.</p>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container">
+    <h2>What the studio does</h2>
+    <p class="k-text-soft" style="max-width: 40em">Three services, no
+    add-ons. Each one ends with something you own outright.</p>
+    <div class="k-thirds" style="margin-top: var(--k-space-5)">
+      <div class="k-card">
+        <p class="k-card__kicker">01</p>
+        <h3 class="k-text-l">Identity</h3>
+        <p><small>A name treatment, a palette, and the rules for using
+        them — short enough to remember, firm enough to hold.</small></p>
+      </div>
+      <div class="k-card">
+        <p class="k-card__kicker">02</p>
+        <h3 class="k-text-l">Websites</h3>
+        <p><small>Static sites in plain HTML and CSS. Fast because there
+        is nothing to slow them down.</small></p>
+      </div>
+      <div class="k-card">
+        <p class="k-card__kicker">03</p>
+        <h3 class="k-text-l">Care</h3>
+        <p><small>A yearly check: links, dates, hosting, one round of
+        edits. Most clients need nothing else.</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — three-up feature cards</summary>
+      <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;h2&gt;What the studio does&lt;/h2&gt;
+    &lt;p class="k-text-soft" style="max-width: 40em"&gt;Three services, no
+    add-ons. Each one ends with something you own outright.&lt;/p&gt;
+    &lt;div class="k-thirds" style="margin-top: var(--k-space-5)"&gt;
+      &lt;div class="k-card"&gt;
+        &lt;p class="k-card__kicker"&gt;01&lt;/p&gt;
+        &lt;h3 class="k-text-l"&gt;Identity&lt;/h3&gt;
+        &lt;p&gt;&lt;small&gt;A name treatment, a palette, and the rules for using
+        them — short enough to remember, firm enough to hold.&lt;/small&gt;&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card"&gt;
+        &lt;p class="k-card__kicker"&gt;02&lt;/p&gt;
+        &lt;h3 class="k-text-l"&gt;Websites&lt;/h3&gt;
+        &lt;p&gt;&lt;small&gt;Static sites in plain HTML and CSS. Fast because there
+        is nothing to slow them down.&lt;/small&gt;&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card"&gt;
+        &lt;p class="k-card__kicker"&gt;03&lt;/p&gt;
+        &lt;h3 class="k-text-l"&gt;Care&lt;/h3&gt;
+        &lt;p&gt;&lt;small&gt;A yearly check: links, dates, hosting, one round of
+        edits. Most clients need nothing else.&lt;/small&gt;&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="split-feature">Split feature</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">One feature argued properly: copy and a checklist beside a decorative figure.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container">
+    <div class="k-split">
+      <div>
+        <h2>Built to be handed over</h2>
+        <p class="k-text-soft">Every project ends the same way: you hold
+        the keys, and the files make sense without us in the room.</p>
+        <ul class="k-checklist">
+          <li>Plain HTML and CSS you can read</li>
+          <li>A one-page maintenance guide</li>
+          <li>Every account and login in your name</li>
+          <li>A recorded walkthrough for later</li>
+        </ul>
+      </div>
+      <svg viewBox="0 0 400 300" role="img"
+           aria-label="Decorative illustration: stacked panels"
+           style="width: 100%; height: auto">
+        <rect x="0" y="0" width="400" height="300" rx="12"
+              style="fill: var(--k-accent-soft)"/>
+        <rect x="60" y="150" width="200" height="110" rx="8"
+              style="fill: var(--k-accent-light)"/>
+        <rect x="100" y="100" width="200" height="110" rx="8"
+              style="fill: var(--k-accent)"/>
+        <rect x="140" y="50" width="200" height="110" rx="8"
+              style="fill: var(--k-accent-strong)"/>
+        <circle cx="80" cy="62" r="18"
+                style="fill: var(--k-accent-2-soft); stroke: var(--k-accent-2); stroke-width: 3"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — split feature with checklist</summary>
+      <pre><code>&lt;section class="k-section k-section--alt"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;div class="k-split"&gt;
+      &lt;div&gt;
+        &lt;h2&gt;Built to be handed over&lt;/h2&gt;
+        &lt;p class="k-text-soft"&gt;Every project ends the same way: you hold
+        the keys, and the files make sense without us in the room.&lt;/p&gt;
+        &lt;ul class="k-checklist"&gt;
+          &lt;li&gt;Plain HTML and CSS you can read&lt;/li&gt;
+          &lt;li&gt;A one-page maintenance guide&lt;/li&gt;
+          &lt;li&gt;Every account and login in your name&lt;/li&gt;
+          &lt;li&gt;A recorded walkthrough for later&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;svg viewBox="0 0 400 300" role="img"
+           aria-label="Decorative illustration: stacked panels"
+           style="width: 100%; height: auto"&gt;
+        &lt;rect x="0" y="0" width="400" height="300" rx="12"
+              style="fill: var(--k-accent-soft)"/&gt;
+        &lt;rect x="60" y="150" width="200" height="110" rx="8"
+              style="fill: var(--k-accent-light)"/&gt;
+        &lt;rect x="100" y="100" width="200" height="110" rx="8"
+              style="fill: var(--k-accent)"/&gt;
+        &lt;rect x="140" y="50" width="200" height="110" rx="8"
+              style="fill: var(--k-accent-strong)"/&gt;
+        &lt;circle cx="80" cy="62" r="18"
+                style="fill: var(--k-accent-2-soft); stroke: var(--k-accent-2); stroke-width: 3"/&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="icon-grid">Icon feature grid</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Six compact features, each led by a built-in icon in an accent-soft rounded square.</p>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container">
+    <h2>Six small promises</h2>
+    <p class="k-text-soft" style="max-width: 40em">Kept the same way on
+    every project, whether it is one page or eight.</p>
+    <div class="k-grid" style="margin-top: var(--k-space-5)">
+      <div class="k-card">
+        <span class="k-avatar k-avatar--square" aria-hidden="true"><span class="k-icon k-icon--check"></span></span>
+        <h3 class="k-text-l k-mt-3 k-mb-1">Walked before launch</h3>
+        <p class="k-mb-0"><small>Every page proofed and every link
+        clicked before anyone else sees the site.</small></p>
+      </div>
+      <div class="k-card">
+        <span class="k-avatar k-avatar--square" aria-hidden="true"><span class="k-icon k-icon--mail"></span></span>
+        <h3 class="k-text-l k-mt-3 k-mb-1">A reply, not a ticket</h3>
+        <p class="k-mb-0"><small>Questions go to a person with a name,
+        and come back within two working days.</small></p>
+      </div>
+      <div class="k-card">
+        <span class="k-avatar k-avatar--square" aria-hidden="true"><span class="k-icon k-icon--calendar"></span></span>
+        <h3 class="k-text-l k-mt-3 k-mb-1">The yearly check</h3>
+        <p class="k-mb-0"><small>Links, dates, and hosting looked over
+        once a year, whether you remember to ask or not.</small></p>
+      </div>
+      <div class="k-card">
+        <span class="k-avatar k-avatar--square" aria-hidden="true"><span class="k-icon k-icon--search"></span></span>
+        <h3 class="k-text-l k-mt-3 k-mb-1">Findable pages</h3>
+        <p class="k-mb-0"><small>Titles that say what the page is, so
+        search engines and people both understand it.</small></p>
+      </div>
+      <div class="k-card">
+        <span class="k-avatar k-avatar--square" aria-hidden="true"><span class="k-icon k-icon--user"></span></span>
+        <h3 class="k-text-l k-mt-3 k-mb-1">Yours on paper</h3>
+        <p class="k-mb-0"><small>Domains, hosting, and logins registered
+        in your name from the first day.</small></p>
+      </div>
+      <div class="k-card">
+        <span class="k-avatar k-avatar--square" aria-hidden="true"><span class="k-icon k-icon--star"></span></span>
+        <h3 class="k-text-l k-mt-3 k-mb-1">Built to be kept</h3>
+        <p class="k-mb-0"><small>Plain files that will still open, and
+        still make sense, years after handover.</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — icon feature grid</summary>
+      <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;h2&gt;Six small promises&lt;/h2&gt;
+    &lt;p class="k-text-soft" style="max-width: 40em"&gt;Kept the same way on
+    every project, whether it is one page or eight.&lt;/p&gt;
+    &lt;div class="k-grid" style="margin-top: var(--k-space-5)"&gt;
+      &lt;div class="k-card"&gt;
+        &lt;span class="k-avatar k-avatar--square" aria-hidden="true"&gt;&lt;span class="k-icon k-icon--check"&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;h3 class="k-text-l k-mt-3 k-mb-1"&gt;Walked before launch&lt;/h3&gt;
+        &lt;p class="k-mb-0"&gt;&lt;small&gt;Every page proofed and every link
+        clicked before anyone else sees the site.&lt;/small&gt;&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card"&gt;
+        &lt;span class="k-avatar k-avatar--square" aria-hidden="true"&gt;&lt;span class="k-icon k-icon--mail"&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;h3 class="k-text-l k-mt-3 k-mb-1"&gt;A reply, not a ticket&lt;/h3&gt;
+        &lt;p class="k-mb-0"&gt;&lt;small&gt;Questions go to a person with a name,
+        and come back within two working days.&lt;/small&gt;&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card"&gt;
+        &lt;span class="k-avatar k-avatar--square" aria-hidden="true"&gt;&lt;span class="k-icon k-icon--calendar"&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;h3 class="k-text-l k-mt-3 k-mb-1"&gt;The yearly check&lt;/h3&gt;
+        &lt;p class="k-mb-0"&gt;&lt;small&gt;Links, dates, and hosting looked over
+        once a year, whether you remember to ask or not.&lt;/small&gt;&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card"&gt;
+        &lt;span class="k-avatar k-avatar--square" aria-hidden="true"&gt;&lt;span class="k-icon k-icon--search"&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;h3 class="k-text-l k-mt-3 k-mb-1"&gt;Findable pages&lt;/h3&gt;
+        &lt;p class="k-mb-0"&gt;&lt;small&gt;Titles that say what the page is, so
+        search engines and people both understand it.&lt;/small&gt;&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card"&gt;
+        &lt;span class="k-avatar k-avatar--square" aria-hidden="true"&gt;&lt;span class="k-icon k-icon--user"&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;h3 class="k-text-l k-mt-3 k-mb-1"&gt;Yours on paper&lt;/h3&gt;
+        &lt;p class="k-mb-0"&gt;&lt;small&gt;Domains, hosting, and logins registered
+        in your name from the first day.&lt;/small&gt;&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card"&gt;
+        &lt;span class="k-avatar k-avatar--square" aria-hidden="true"&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;h3 class="k-text-l k-mt-3 k-mb-1"&gt;Built to be kept&lt;/h3&gt;
+        &lt;p class="k-mb-0"&gt;&lt;small&gt;Plain files that will still open, and
+        still make sense, years after handover.&lt;/small&gt;&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="alternating-splits">Alternating splits</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Two stacked split rows with the figure changing sides — a rhythm for longer stories.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container">
+    <div class="k-split k-items-center">
+      <div>
+        <h2 class="k-text-xl">Drafts you can read</h2>
+        <p class="k-text-soft k-mb-0">The first thing you see is a real
+        page with real words, not a wireframe standing in for one. You
+        react to the thing itself, and the feedback gets sharper.</p>
+      </div>
+      <svg viewBox="0 0 400 260" role="img"
+           aria-label="Decorative illustration: a page of text"
+           style="width: 100%; height: auto">
+        <rect x="0" y="0" width="400" height="260" rx="12"
+              style="fill: var(--k-accent-soft)"/>
+        <rect x="48" y="44" width="200" height="18" rx="6"
+              style="fill: var(--k-accent-strong)"/>
+        <rect x="48" y="84" width="304" height="10" rx="5"
+              style="fill: var(--k-accent-light)"/>
+        <rect x="48" y="106" width="280" height="10" rx="5"
+              style="fill: var(--k-accent-light)"/>
+        <rect x="48" y="128" width="304" height="10" rx="5"
+              style="fill: var(--k-accent-light)"/>
+        <rect x="48" y="150" width="216" height="10" rx="5"
+              style="fill: var(--k-accent-light)"/>
+        <rect x="48" y="188" width="112" height="26" rx="8"
+              style="fill: var(--k-accent)"/>
+      </svg>
+    </div>
+    <div class="k-split k-items-center" style="margin-top: var(--k-space-7)">
+      <svg viewBox="0 0 400 260" role="img"
+           aria-label="Decorative illustration: a folder and a key"
+           style="width: 100%; height: auto">
+        <rect x="0" y="0" width="400" height="260" rx="12"
+              style="fill: var(--k-accent-2-soft)"/>
+        <rect x="72" y="84" width="256" height="132" rx="10"
+              style="fill: var(--k-accent-2-light)"/>
+        <rect x="72" y="60" width="120" height="40" rx="10"
+              style="fill: var(--k-accent-2)"/>
+        <circle cx="296" cy="150" r="26"
+                style="fill: var(--k-accent-soft); stroke: var(--k-accent); stroke-width: 3"/>
+        <rect x="286" y="176" width="20" height="40" rx="6"
+              style="fill: var(--k-accent)"/>
+      </svg>
+      <div>
+        <h2 class="k-text-xl">Handover is the finish line</h2>
+        <p class="k-text-soft k-mb-0">The project ends when the keys are
+        in your hand and the folder makes sense without us. Everything
+        after that is care, not dependence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — alternating splits</summary>
+      <pre><code>&lt;section class="k-section k-section--alt"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;div class="k-split k-items-center"&gt;
+      &lt;div&gt;
+        &lt;h2 class="k-text-xl"&gt;Drafts you can read&lt;/h2&gt;
+        &lt;p class="k-text-soft k-mb-0"&gt;The first thing you see is a real
+        page with real words, not a wireframe standing in for one. You
+        react to the thing itself, and the feedback gets sharper.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;svg viewBox="0 0 400 260" role="img"
+           aria-label="Decorative illustration: a page of text"
+           style="width: 100%; height: auto"&gt;
+        &lt;rect x="0" y="0" width="400" height="260" rx="12"
+              style="fill: var(--k-accent-soft)"/&gt;
+        &lt;rect x="48" y="44" width="200" height="18" rx="6"
+              style="fill: var(--k-accent-strong)"/&gt;
+        &lt;rect x="48" y="84" width="304" height="10" rx="5"
+              style="fill: var(--k-accent-light)"/&gt;
+        &lt;rect x="48" y="106" width="280" height="10" rx="5"
+              style="fill: var(--k-accent-light)"/&gt;
+        &lt;rect x="48" y="128" width="304" height="10" rx="5"
+              style="fill: var(--k-accent-light)"/&gt;
+        &lt;rect x="48" y="150" width="216" height="10" rx="5"
+              style="fill: var(--k-accent-light)"/&gt;
+        &lt;rect x="48" y="188" width="112" height="26" rx="8"
+              style="fill: var(--k-accent)"/&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+    &lt;div class="k-split k-items-center" style="margin-top: var(--k-space-7)"&gt;
+      &lt;svg viewBox="0 0 400 260" role="img"
+           aria-label="Decorative illustration: a folder and a key"
+           style="width: 100%; height: auto"&gt;
+        &lt;rect x="0" y="0" width="400" height="260" rx="12"
+              style="fill: var(--k-accent-2-soft)"/&gt;
+        &lt;rect x="72" y="84" width="256" height="132" rx="10"
+              style="fill: var(--k-accent-2-light)"/&gt;
+        &lt;rect x="72" y="60" width="120" height="40" rx="10"
+              style="fill: var(--k-accent-2)"/&gt;
+        &lt;circle cx="296" cy="150" r="26"
+                style="fill: var(--k-accent-soft); stroke: var(--k-accent); stroke-width: 3"/&gt;
+        &lt;rect x="286" y="176" width="20" height="40" rx="6"
+              style="fill: var(--k-accent)"/&gt;
+      &lt;/svg&gt;
+      &lt;div&gt;
+        &lt;h2 class="k-text-xl"&gt;Handover is the finish line&lt;/h2&gt;
+        &lt;p class="k-text-soft k-mb-0"&gt;The project ends when the keys are
+        in your hand and the folder makes sense without us. Everything
+        after that is care, not dependence.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="bento-grid">Bento grid</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">An asymmetric card arrangement: one full-width tinted card, then supporting pairs. Classes only.</p>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container">
+    <h2>The work, arranged by weight</h2>
+    <p class="k-text-soft" style="max-width: 40em">One big thing, then
+    the pairs that support it. No card here is filler.</p>
+    <div class="k-stack" style="margin-top: var(--k-space-5)">
+      <div class="k-card k-card--tint">
+        <p class="k-card__kicker">The main thing</p>
+        <h3 class="k-text-l">A site you can hand to anyone</h3>
+        <p class="k-mb-0">Plain HTML and CSS, a one-page guide, and a
+        recorded walkthrough. If we disappeared tomorrow, your site
+        would not notice.</p>
+      </div>
+      <div class="k-cols-2">
+        <div class="k-card">
+          <p class="k-card__kicker">Fast</p>
+          <h3 class="k-text-l">Nothing to wait for</h3>
+          <p class="k-mb-0"><small>No frameworks, no font downloads, no
+          consent banners. Pages arrive before the doubt does.</small></p>
+        </div>
+        <div class="k-card">
+          <p class="k-card__kicker">Quiet</p>
+          <h3 class="k-text-l">Zero third parties</h3>
+          <p class="k-mb-0"><small>No analytics, no embeds, no requests
+          leaving the page. What you read here stays here.</small></p>
+        </div>
+      </div>
+      <div class="k-cols-2">
+        <div class="k-card">
+          <p class="k-card__kicker">Owned</p>
+          <h3 class="k-text-l">Everything in your name</h3>
+          <p class="k-mb-0"><small>Domain, hosting, and logins registered
+          to you from day one — not parked with the studio.</small></p>
+        </div>
+        <div class="k-card">
+          <p class="k-card__kicker">Kept</p>
+          <h3 class="k-text-l">A yearly once-over</h3>
+          <p class="k-mb-0"><small>Links, dates, and hosting checked every
+          year, with one round of edits included.</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — bento grid</summary>
+      <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;h2&gt;The work, arranged by weight&lt;/h2&gt;
+    &lt;p class="k-text-soft" style="max-width: 40em"&gt;One big thing, then
+    the pairs that support it. No card here is filler.&lt;/p&gt;
+    &lt;div class="k-stack" style="margin-top: var(--k-space-5)"&gt;
+      &lt;div class="k-card k-card--tint"&gt;
+        &lt;p class="k-card__kicker"&gt;The main thing&lt;/p&gt;
+        &lt;h3 class="k-text-l"&gt;A site you can hand to anyone&lt;/h3&gt;
+        &lt;p class="k-mb-0"&gt;Plain HTML and CSS, a one-page guide, and a
+        recorded walkthrough. If we disappeared tomorrow, your site
+        would not notice.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="k-cols-2"&gt;
+        &lt;div class="k-card"&gt;
+          &lt;p class="k-card__kicker"&gt;Fast&lt;/p&gt;
+          &lt;h3 class="k-text-l"&gt;Nothing to wait for&lt;/h3&gt;
+          &lt;p class="k-mb-0"&gt;&lt;small&gt;No frameworks, no font downloads, no
+          consent banners. Pages arrive before the doubt does.&lt;/small&gt;&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="k-card"&gt;
+          &lt;p class="k-card__kicker"&gt;Quiet&lt;/p&gt;
+          &lt;h3 class="k-text-l"&gt;Zero third parties&lt;/h3&gt;
+          &lt;p class="k-mb-0"&gt;&lt;small&gt;No analytics, no embeds, no requests
+          leaving the page. What you read here stays here.&lt;/small&gt;&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="k-cols-2"&gt;
+        &lt;div class="k-card"&gt;
+          &lt;p class="k-card__kicker"&gt;Owned&lt;/p&gt;
+          &lt;h3 class="k-text-l"&gt;Everything in your name&lt;/h3&gt;
+          &lt;p class="k-mb-0"&gt;&lt;small&gt;Domain, hosting, and logins registered
+          to you from day one — not parked with the studio.&lt;/small&gt;&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="k-card"&gt;
+          &lt;p class="k-card__kicker"&gt;Kept&lt;/p&gt;
+          &lt;h3 class="k-text-l"&gt;A yearly once-over&lt;/h3&gt;
+          &lt;p class="k-mb-0"&gt;&lt;small&gt;Links, dates, and hosting checked every
+          year, with one round of edits included.&lt;/small&gt;&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="checklist-band">Feature checklist band</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">A tinted band with a headline and two columns of checklists — scope stated plainly.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--tint">
+  <div class="k-container">
+    <h2>What every project includes</h2>
+    <p class="k-text-soft" style="max-width: 40em">The default scope —
+    not an upsell menu. If it is on this list, it is already in the
+    price we quoted.</p>
+    <div class="k-cols-2" style="margin-top: var(--k-space-5)">
+      <ul class="k-checklist k-mb-0">
+        <li>Real words, edited with you</li>
+        <li>Pages that load in one breath</li>
+        <li>A contact flow that gets answered</li>
+        <li>Accessible by default, tested by hand</li>
+      </ul>
+      <ul class="k-checklist k-mb-0">
+        <li>Hosting set up in your name</li>
+        <li>A one-page maintenance guide</li>
+        <li>A recorded handover walkthrough</li>
+        <li>The first yearly check, on us</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — feature checklist band</summary>
+      <pre><code>&lt;section class="k-section k-section--tint"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;h2&gt;What every project includes&lt;/h2&gt;
+    &lt;p class="k-text-soft" style="max-width: 40em"&gt;The default scope —
+    not an upsell menu. If it is on this list, it is already in the
+    price we quoted.&lt;/p&gt;
+    &lt;div class="k-cols-2" style="margin-top: var(--k-space-5)"&gt;
+      &lt;ul class="k-checklist k-mb-0"&gt;
+        &lt;li&gt;Real words, edited with you&lt;/li&gt;
+        &lt;li&gt;Pages that load in one breath&lt;/li&gt;
+        &lt;li&gt;A contact flow that gets answered&lt;/li&gt;
+        &lt;li&gt;Accessible by default, tested by hand&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;ul class="k-checklist k-mb-0"&gt;
+        &lt;li&gt;Hosting set up in your name&lt;/li&gt;
+        &lt;li&gt;A one-page maintenance guide&lt;/li&gt;
+        &lt;li&gt;A recorded handover walkthrough&lt;/li&gt;
+        &lt;li&gt;The first yearly check, on us&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="reveal-features">Scroll-reveal features</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Three stacked feature blocks that fade and lift in as they enter the viewport with <code>.k-reveal</code> — scroll-driven, not a one-shot load animation.</p>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container">
+    <h2>What holds up over time</h2>
+    <p class="k-text-soft" style="max-width: 40em">Three habits the
+    studio does not skip, each worth a beat of its own as you read
+    down the page.</p>
+    <div class="k-stack" style="margin-top: var(--k-space-6); gap: var(--k-space-6)">
+      <div class="k-card k-reveal">
+        <p class="k-card__kicker">01</p>
+        <h3 class="k-text-l">Real words first</h3>
+        <p class="k-mb-0"><small>Every page is drafted in finished
+        sentences before a single pixel of layout exists.</small></p>
+      </div>
+      <div class="k-card k-reveal">
+        <p class="k-card__kicker">02</p>
+        <h3 class="k-text-l">One season, one project</h3>
+        <p class="k-mb-0"><small>No context-switching between clients —
+        the studio's full attention, in writing.</small></p>
+      </div>
+      <div class="k-card k-reveal">
+        <p class="k-card__kicker">03</p>
+        <h3 class="k-text-l">A folder you can read</h3>
+        <p class="k-mb-0"><small>Plain HTML and CSS, handed over with a
+        guide that fits on one page.</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — scroll-reveal features</summary>
+      <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;h2&gt;What holds up over time&lt;/h2&gt;
+    &lt;p class="k-text-soft" style="max-width: 40em"&gt;Three habits the
+    studio does not skip, each worth a beat of its own as you read
+    down the page.&lt;/p&gt;
+    &lt;div class="k-stack" style="margin-top: var(--k-space-6); gap: var(--k-space-6)"&gt;
+      &lt;div class="k-card k-reveal"&gt;
+        &lt;p class="k-card__kicker"&gt;01&lt;/p&gt;
+        &lt;h3 class="k-text-l"&gt;Real words first&lt;/h3&gt;
+        &lt;p class="k-mb-0"&gt;&lt;small&gt;Every page is drafted in finished
+        sentences before a single pixel of layout exists.&lt;/small&gt;&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card k-reveal"&gt;
+        &lt;p class="k-card__kicker"&gt;02&lt;/p&gt;
+        &lt;h3 class="k-text-l"&gt;One season, one project&lt;/h3&gt;
+        &lt;p class="k-mb-0"&gt;&lt;small&gt;No context-switching between clients —
+        the studio's full attention, in writing.&lt;/small&gt;&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card k-reveal"&gt;
+        &lt;p class="k-card__kicker"&gt;03&lt;/p&gt;
+        &lt;h3 class="k-text-l"&gt;A folder you can read&lt;/h3&gt;
+        &lt;p class="k-mb-0"&gt;&lt;small&gt;Plain HTML and CSS, handed over with a
+        guide that fits on one page.&lt;/small&gt;&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+</main>
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

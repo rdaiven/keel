@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get started — keel</title>
+<meta name="description" content="Getting started with keel: download one file, link it, write semantic HTML. No build step, no configuration, no JavaScript.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+      <aside class="k-sticky docs-side k-sidebar--collapsible" id="docs-sidebar">
+        <button class="k-tool docs-sidebar-toggle" type="button" id="docs-sidebar-toggle"
+                aria-pressed="false" aria-label="Collapse sidebar to icons">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Documentation">
+          <details class="k-nav-group" open>
+            <summary>Getting started</summary>
+          <ul class="k-list k-list--flush">
+            <li aria-current="page"><a href="start.html">Start</a></li>
+            <li><a href="frameworks.html">Framework guides</a></li>
+            <li><a href="concepts.html">Concepts</a></li>
+            <li><a href="changelog.html">Changelog</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Reference</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="tokens.html">Tokens</a></li>
+            <li><a href="base.html">Base</a></li>
+            <li><a href="typography.html">Typography</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="components.html">Components</a>
+            <ul class="k-list k-list--flush docs-sub">
+              <li><a href="components-actions.html">Actions</a></li>
+              <li><a href="components-forms.html">Forms</a></li>
+              <li><a href="components-surfaces.html">Surfaces &amp; data</a></li>
+              <li><a href="components-feedback.html">Feedback</a></li>
+              <li><a href="components-overlays.html">Overlays</a></li>
+              <li><a href="components-navigation.html">Navigation</a></li>
+              <li><a href="components-identity.html">Identity &amp; media</a></li>
+              <li><a href="components-motion.html">Motion</a></li>
+              <li><a href="components-extending.html">Extending</a></li>
+              <li><a href="components-app.html">Application</a></li>
+            </ul>
+          </li>
+            <li><a href="utilities.html">Utilities</a></li>
+            <li><a href="icons.html">Icons</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Build</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="sections.html">Sections</a></li>
+            <li><a href="../templates.html">Templates</a></li>
+            <li><a href="../design.html">Design system</a></li>
+            <li><a href="paths.html">Paths</a></li>
+          </ul>
+          </details>
+        </nav>
+        <div id="docs-anchors"></div>
+      </aside>
+      <main id="main" class="docs-main">
+        <h1>Get started</h1>
+        <p class="k-hero__lead">One file, no build step. Link it, write
+        semantic HTML, and keel does the rest.</p>
+
+        <div class="k-cols-2 k-mb-4">
+          <div class="k-editor k-editor--dark k-mb-0">
+            <div class="k-editor__bar">
+              <span class="k-editor__dots" aria-hidden="true"></span>
+              <span class="k-editor__name">terminal</span>
+            </div>
+            <div class="k-editor__body"><pre><code>npm i keelcss</code></pre></div>
+          </div>
+          <div class="k-editor k-editor--dark k-mb-0">
+            <div class="k-editor__bar">
+              <span class="k-editor__dots" aria-hidden="true"></span>
+              <span class="k-editor__name">index.html</span>
+            </div>
+            <div class="k-editor__body"><pre><code>&lt;link rel="stylesheet" href="keel.css"&gt;</code></pre></div>
+          </div>
+        </div>
+
+        <div class="k-alert k-alert--soft">
+          <p>No CDN required and no bundler either — <code>keel.css</code>
+          is a single file: download it, link it, forget it.</p>
+        </div>
+
+        <div class="k-thirds k-mt-6 k-mb-6">
+          <div class="k-card">
+            <p class="k-card__kicker">01</p>
+            <h4>Install</h4>
+            <p><small>Download <a href="../css/keel.css">keel.css</a>, or
+            run <code>npm i keelcss</code>.</small></p>
+          </div>
+          <div class="k-card">
+            <p class="k-card__kicker">02</p>
+            <h4>Link</h4>
+            <p><small>One <code>&lt;link&gt;</code> tag in your
+            <code>&lt;head&gt;</code> — no config file.</small></p>
+          </div>
+          <div class="k-card">
+            <p class="k-card__kicker">03</p>
+            <h4>Build</h4>
+            <p><small>Write semantic HTML. Buttons, cards, forms —
+            already styled.</small></p>
+          </div>
+        </div>
+
+        <h2>Get the file</h2>
+        <p>keel is one stylesheet — download it and put it next to your
+        HTML. Readable ~92 KB; minified ~64 KB (about 11 KB over the wire
+        with gzip). The named
+        <a href="components-identity.html#c-icons">icon set</a> (<span data-keel-count="icons">326</span> icons) is a separate optional file
+        (<code>keel-icons.css</code>) — link it only if you use icons,
+        or build a smaller subset with the
+        <a href="icons.html">package builder</a>.</p>
+        <p class="k-cluster">
+          <a class="k-btn" href="../css/keel.css" download>Download keel.css</a>
+          <a class="k-btn k-btn--ghost" href="../css/keel.min.css" download>keel.min.css</a>
+          <a class="k-btn k-btn--ghost" href="../css/keel-icons.css" download>keel-icons.css</a>
+        </p>
+        <p>Prefer the terminal? The repo ships a zero-dependency CLI
+        (<code>tools/cli.mjs</code>): <code>node tools/cli.mjs init</code> scaffolds
+        keel and a starter page; <code>add &lt;icon&gt;</code>,
+        <code>system</code> and more build the rest. Publishing to npm —
+        so <code>npx keelcss init</code> works anywhere — is coming.
+        There's also a <a href="../tools/keel-mcp.mjs">keel MCP server</a> so
+        AI tools can generate a system, add icons, and drop in
+        sections.</p>
+
+        <h2 id="compose">Compose your setup</h2>
+        <p>keel is always the base. Add the icon set and a design
+        <a href="paths.html">path</a> only if you need them — the exact
+        links, <strong>in the right order</strong>, build below. Copy them
+        into your <code>&lt;head&gt;</code>.</p>
+        <div class="k-panel">
+          <div class="k-panel__body">
+            <fieldset class="k-fieldset k-fieldset--plain k-mb-4">
+              <label class="k-field--split">
+                <span>Icon set <small class="k-text-faint">keel-icons.css — <span data-keel-count="icons">326</span> named icons</small></span>
+                <input type="checkbox" id="opt-icons">
+              </label>
+              <label class="k-field--split">
+                <span>Minified <small class="k-text-faint">smaller <code>.min.css</code> files</small></span>
+                <input type="checkbox" id="opt-min">
+              </label>
+            </fieldset>
+            <p class="k-uppercase k-text-faint k-mb-2">Design path <span style="text-transform: none">— one, or none</span></p>
+            <div class="k-segmented" id="opt-path" role="group" aria-label="Design path">
+              <button type="button" data-path="" aria-pressed="true">None</button>
+              <button type="button" data-path="clay" aria-pressed="false">Clay</button>
+              <button type="button" data-path="brutal" aria-pressed="false">Brutal</button>
+              <button type="button" data-path="liquid" aria-pressed="false">Liquid</button>
+              <button type="button" data-path="maximal" aria-pressed="false">Maximal</button>
+            </div>
+            <pre class="k-mt-4 k-mb-0"><code id="compose-out">&lt;link rel="stylesheet" href="keel.css"&gt;</code></pre>
+          </div>
+        </div>
+        <p><small>Order is the whole trick: keel first, then icons, then a
+        path — each one continues the last. Prefer a CDN? Once keel is on
+        npm, jsDelivr serves every file at
+        <code>cdn.jsdelivr.net/npm/keelcss/…</code> in the same order.</small></p>
+
+        <h2>Link it</h2>
+        <pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;My site&lt;/title&gt;
+  &lt;link rel="stylesheet" href="keel.css"&gt;
+  &lt;!-- optional: the named icon set --&gt;
+  &lt;link rel="stylesheet" href="keel-icons.css"&gt;
+&lt;/head&gt;</code></pre>
+        <p class="k-text-soft">On Astro, Vite/React, Next, 11ty/Hugo,
+        WordPress, or a server framework? The
+        <a href="frameworks.html">framework guides</a> show the one-line
+        way to link keel in each.</p>
+
+        <h2>Write a page</h2>
+        <p>Pages are full-width <strong>bands</strong> with an inner
+        container; content inside needs no classes — the
+        <a href="base.html">base layer</a> designs semantic HTML for
+        you.</p>
+        <pre><code>&lt;body&gt;
+
+  &lt;section class="k-hero"&gt;
+    &lt;div class="k-container"&gt;
+      &lt;h1&gt;Daiven Woodworks&lt;/h1&gt;
+      &lt;p class="k-hero__lead"&gt;Furniture built to be kept.&lt;/p&gt;
+      &lt;a class="k-btn" href="#contact"&gt;Get a quote&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class="k-section k-section--alt"&gt;
+    &lt;div class="k-container--narrow k-container"&gt;
+      &lt;h2&gt;About the shop&lt;/h2&gt;
+      &lt;p&gt;Plain paragraphs, links, lists and tables
+      are already styled. Just write.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+&lt;/body&gt;</code></pre>
+        <p>See a complete page assembled this way on the
+        <a href="../example.html">example page</a>.</p>
+
+        <h2>Make it yours</h2>
+        <p>The defaults you're looking at are just keel's starting
+        tokens. Generate your own on the <a href="../design.html">design
+        system page</a> — pick a color, a mood, and a font pairing —
+        then paste the exported tokens <em>after</em> the keel link
+        tag:</p>
+        <pre><code>&lt;link rel="stylesheet" href="keel.css"&gt;
+&lt;style&gt;
+  /* pasted from the design system page */
+  @layer tokens {
+    :root { --k-accent: hsl(160 84% 32%); /* … */ }
+  }
+&lt;/style&gt;</code></pre>
+        <p>Because tokens live in their own cascade layer, this replaces
+        keel's defaults cleanly — why that works, and why your CSS
+        always wins, is on <a href="concepts.html">concepts</a>.</p>
+        <p>Shades derive: override <code>--k-accent</code> alone and the
+        strong, light, soft, and transparent variants follow — see
+        <a href="concepts.html">design-system-first</a>.</p>
+
+        <h2>Extend it</h2>
+        <pre><code>.btn-sale {
+  --k-btn-bg: var(--k-warn);
+  --k-btn-bg-hover: color-mix(in oklab, var(--k-warn), black 15%);
+}</code></pre>
+        <p>Components read local knobs with token defaults, so a custom
+        variant is a few lines of plain CSS. The grammar behind it, and
+        a worked recipe, are on
+        <a href="components-extending.html">components</a>.</p>
+
+        <h2>What's in the box</h2>
+        <dl>
+          <dt><a href="tokens.html">tokens</a></dt>
+          <dd>~30 custom properties — every visual decision, in one place.</dd>
+          <dt><a href="base.html">base</a></dt>
+          <dd>Semantic HTML styled: prose, forms, tables, dialogs, details.</dd>
+          <dt><a href="layout.html">layout</a></dt>
+          <dd>Full-bleed bands, three container widths, six structural arrangements.</dd>
+          <dt><a href="components.html">components</a></dt>
+          <dd>A full component library, organized into categories: buttons and groups, cards,
+          badges, alerts, banners, nav, tabs, dropdowns (rich menus),
+          drawers, tooltips, popovers, toasts, modals, accordions, lists,
+          data tables, pagination, avatars, stats, timelines, empty
+          states, a scroll-snap carousel, spinners, skeletons, switches,
+          rating, combobox, token multi-select, value+unit and stepper
+          fields, form groups, a code editor, an application/builder
+          tier, and a <span data-keel-count="icons">326</span>-icon set with <code>.k-icon-box</code>
+          framing.</dd>
+          <dt><a href="utilities.html">utilities</a></dt>
+          <dd>A small token-bound utility surface — spacing, text, display,
+          flex — with no arbitrary values.</dd>
+        </dl>
+
+        <h2>Honest notes</h2>
+        <ul>
+          <li>keel needs a browser with <code>@layer</code> support —
+          every major browser since 2022. No fallback, by design.</li>
+          <li>keel is <strong>pre-1.0</strong>. Class names and tokens may still tighten; changes land in the <a href="changelog.html">changelog</a>.</li>
+          <li>keel ships no JavaScript. The design-system tool on this
+          site is part of the site, not the framework.</li>
+          <li>More on all three in <a href="concepts.html">concepts</a>.</li>
+        </ul>
+      </main>
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+<script>
+  /* the install composer — site chrome, not the framework. Builds the
+     <link> tags live; play.js adds the copy button to the <pre>. */
+  (function () {
+    var out = document.getElementById("compose-out");
+    if (!out) return;
+    var icons = document.getElementById("opt-icons");
+    var min = document.getElementById("opt-min");
+    var pathBtns = document.querySelectorAll("#opt-path [data-path]");
+    var path = "";
+    function ext() { return min.checked ? ".min.css" : ".css"; }
+    function render() {
+      var lines = ['<link rel="stylesheet" href="keel' + ext() + '">'];
+      if (icons.checked) lines.push('<link rel="stylesheet" href="keel-icons' + ext() + '">');
+      if (path) lines.push('<link rel="stylesheet" href="keel-path-' + path + ext() + '">');
+      out.textContent = lines.join("\n");
+    }
+    icons.addEventListener("change", render);
+    min.addEventListener("change", render);
+    pathBtns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        pathBtns.forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        path = b.dataset.path;
+        render();
+      });
+    });
+    render();
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Long Form — an article template built with keel</title>
+<meta name="description" content="A magazine-style article template built entirely with keel. Warm paper theme in one tokens block; the essay itself is zero-class semantic HTML.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Replace this block and the page becomes yours. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(40 30% 96%);
+      --k-surface: hsl(42 38% 98.5%);
+      --k-surface-2: hsl(40 25% 92%);
+      --k-border: hsl(38 18% 84%);
+      --k-border-strong: hsl(38 16% 70%);
+      --k-text: hsl(30 20% 15%);
+      --k-text-soft: hsl(30 12% 34%);
+      --k-text-faint: hsl(30 8% 50%);
+      --k-accent: hsl(160 55% 25%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(15 60% 33%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-font-display: Georgia, "Times New Roman", serif;
+      --k-font-body: Georgia, "Times New Roman", serif;
+      --k-display-weight: 700;
+      --k-tracking: -0.01em;
+      --k-radius: 6px;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme. <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">The Long Form</a>
+      <ul class="k-nav__links">
+        <li><a href="#essay">Essay</a></li>
+        <li><a href="#archive">Archive</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="k-section" id="top">
+  <div class="k-container--narrow k-container">
+    <div class="k-cluster" style="margin-bottom: var(--k-space-4)">
+      <span class="k-badge k-badge--outline">Essay</span>
+      <span class="k-badge k-badge--outline">July 2026</span>
+      <span class="k-badge k-badge--outline">9 min read</span>
+    </div>
+    <h1>In praise of the small tool</h1>
+    <p class="k-hero__lead">
+      On the quiet satisfaction of building software the way you'd
+      build a bench: sized to one job, repairable by its owner, and
+      finished when it works.
+    </p>
+    <div class="k-media" style="margin-top: var(--k-space-5)">
+      <span class="k-avatar" aria-hidden="true">NV</span>
+      <div class="k-media__body">
+        <p style="margin: 0"><strong>Nora Vale</strong><br>
+        <small>Contributing writer — tools, craft, and the smaller web</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<article class="k-section k-section--alt" id="essay">
+  <div class="k-container--narrow k-container">
+
+    <p>
+      The most reliable piece of software I own is a script that renames
+      scanned receipts. It is forty lines long, it has never had a
+      roadmap, and it has run without complaint for six years. Nobody
+      would call it a product. It doesn't scale, it doesn't sync, and if
+      you asked it to handle someone else's receipts it would probably
+      refuse out of politeness. It does one job, for one person, and it
+      does it completely.
+    </p>
+    <p>
+      We don't have a good word for this category of thing. "App" is too
+      grand and "script" is too dismissive, so I've settled on calling
+      them small tools — software with the temperament of a hand plane.
+      A hand plane does not want to become a workshop. It wants to make
+      one kind of cut well, sit in a drawer without demanding attention,
+      and be sharpened by its owner when it dulls.
+    </p>
+
+    <h2>What a tool owes its owner</h2>
+    <p>
+      A small tool owes you three things: it should be legible, so you
+      can read the whole of it in one sitting; it should be repairable,
+      so that when it breaks — and it will, gently, when some format
+      changes underneath it — the fix is an evening, not a migration;
+      and it should be boring, in the honorable sense that a good hinge
+      is boring. My receipt script fails in exactly one way, by printing
+      the name of the file it couldn't parse. That's the whole error
+      handling story, and in six years it has been enough.
+    </p>
+    <p>
+      Notice what's missing from that list: growth. A bench does not
+      aspire to be a table. The pressure to generalize — to add the
+      config file, the plugin system, the second user — is where small
+      tools go to die. Every option you add is a promise you've made to
+      a future you can't see, and promises compound faster than
+      interest.
+    </p>
+
+    <blockquote>
+      <p>The tool you can fix at your own bench, with the skills you
+      already have, is worth ten that phone home for permission.</p>
+    </blockquote>
+
+    <h3>The habit of making them</h3>
+    <p>
+      Building small tools is less a technique than a habit of noticing.
+      The signs that a task wants a tool are consistent enough to list:
+    </p>
+    <ul>
+      <li>You've done the same fiddly thing three times this month and
+      resented it slightly more each time.</li>
+      <li>The steps are stable — the annoyance is repetition, not
+      judgment.</li>
+      <li>You can describe the whole job in one sentence without using
+      the word "and" more than once.</li>
+      <li>Getting it wrong is recoverable. Small tools should practice
+      on things that can be un-broken.</li>
+    </ul>
+    <p>
+      When a task passes that test, I give it an evening. Not a weekend
+      — an evening. The constraint is the point: whatever you can build
+      in an evening is small enough to still understand in five years.
+      Most of my tools begin life as a shell alias, get promoted to a
+      script when the alias grows a second line, and stop there. The
+      promotion path ends at <code>~/bin</code>; nothing I own has ever
+      needed to leave it.
+    </p>
+
+    <figure>
+      <svg viewBox="0 0 640 300" role="img"
+        aria-label="A stylized workbench with a hand plane, a saw, and a pencil resting on it"
+        style="display: block; width: 100%; height: auto; background: var(--k-surface-2); border-radius: var(--k-radius)">
+        <rect x="60" y="190" width="520" height="26" rx="4" style="fill: var(--k-accent-2)"/>
+        <rect x="100" y="216" width="22" height="70" style="fill: var(--k-accent-2)"/>
+        <rect x="518" y="216" width="22" height="70" style="fill: var(--k-accent-2)"/>
+        <rect x="120" y="158" width="130" height="32" rx="8" style="fill: var(--k-accent)"/>
+        <rect x="160" y="136" width="34" height="24" rx="4" style="fill: var(--k-accent)"/>
+        <polygon points="300,186 448,186 448,158 330,158" style="fill: var(--k-text-faint)"/>
+        <rect x="448" y="150" width="44" height="18" rx="6" style="fill: var(--k-accent-2)"/>
+        <rect x="330" y="120" width="150" height="8" rx="4" transform="rotate(-8 330 120)" style="fill: var(--k-accent)" opacity="0.5"/>
+      </svg>
+      <figcaption>The whole workshop: a plane, a saw, a pencil. Nothing
+      here requires a login.</figcaption>
+    </figure>
+
+    <p>
+      The bench metaphor holds up better than most, because a bench is
+      also where tools earn their keep. Here is the current population
+      of mine, honestly accounted:
+    </p>
+    <table>
+      <thead>
+        <tr><th>Tool</th><th>Its one job</th><th>Age</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>receipts</td><td>Rename scans by date and vendor</td><td>6 years</td></tr>
+        <tr><td>stow-notes</td><td>File a note into the right month's folder</td><td>4 years</td></tr>
+        <tr><td>pressgang</td><td>Build this site from a folder of text</td><td>3 years</td></tr>
+        <tr><td>whatport</td><td>Say what's listening on a port, in words</td><td>2 years</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Four tools, fifteen years of combined service, zero updates I
+      didn't choose to make. I know professional software with worse
+      uptime and considerably worse manners.
+    </p>
+
+    <hr>
+
+    <p>
+      There is an argument that this is all nostalgia — that real work
+      happens in real systems, and the small tool is a hobbyist's
+      indulgence. I'd put it the other way around. The small tool is
+      where you find out what software is like when nobody is trying to
+      keep you inside it. No metrics, no retention, no reason for it to
+      want anything from you at all. Just a job, done, and a quiet
+      drawer to go back into.
+    </p>
+    <p>
+      Build one this month. Something trivial. Rename your receipts.
+      The point isn't the minutes saved — it's the standing reminder,
+      sitting there in <code>~/bin</code>, that the tools can still
+      belong to you.
+    </p>
+
+  </div>
+</article>
+
+<section class="k-section" id="archive">
+  <div class="k-container">
+    <h2>More from the archive</h2>
+    <div class="k-thirds" style="margin-top: var(--k-space-5)">
+      <article class="k-card k-card--hover">
+        <p class="k-card__kicker">Essay · May 2026</p>
+        <h4>The last good manual</h4>
+        <p><small>What a 1974 lathe handbook knows about documentation
+        that most READMEs have forgotten.</small></p>
+        <a href="#archive">Read the essay</a>
+      </article>
+      <article class="k-card k-card--hover">
+        <p class="k-card__kicker">Essay · March 2026</p>
+        <h4>Slow files</h4>
+        <p><small>A defense of the plain text folder as the most durable
+        database ever shipped.</small></p>
+        <a href="#archive">Read the essay</a>
+      </article>
+      <article class="k-card k-card--hover">
+        <p class="k-card__kicker">Interview · January 2026</p>
+        <h4>The typesetter's daughter</h4>
+        <p><small>A conversation about inheriting a print shop, and what
+        stayed true when the presses went quiet.</small></p>
+        <a href="#archive">Read the interview</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tint">
+  <div class="k-container--narrow k-container k-center">
+    <h2>One essay a month</h2>
+    <p>No more than that, and never less considered. Unsubscribe links
+    at the top, where they belong.</p>
+    <form style="max-width: 26rem; margin-inline: auto">
+      <label class="k-visually-hidden" for="nl-email">Email address</label>
+      <div class="k-input-group">
+        <input id="nl-email" type="email" name="email" placeholder="you@example.com">
+        <button class="k-btn" type="submit">Subscribe</button>
+      </div>
+      <p class="k-field__hint" style="margin-top: var(--k-space-2)">
+        This form is part of a template and doesn't send anything.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span><strong style="color: var(--k-text)">The Long Form</strong> — a fictional publication, shown as a keel template. <a href="mailto:hello@example.com">hello@example.com</a></span>
+    <span>Built with keel — <a href="../templates.html">all templates</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

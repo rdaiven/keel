@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Identity &amp; media — keel</title>
+<meta name="description" content="keel's identity and media components: hero, avatar, avatar group, media object, a built-in icon set, and a scroll-snap gallery.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<style>
+  .demo-box { background: var(--k-accent-soft); border: 1px dashed var(--k-accent);
+              border-radius: var(--k-radius-s); padding: var(--k-space-3);
+              font-size: var(--k-text-xs); font-family: var(--k-font-mono);
+              color: var(--k-accent-strong); text-align: center; }
+
+  /* page-local custom variants — demos for the "Your own variants"
+     and "Extending keel" sections below */
+  .btn-sale {
+    --k-btn-bg: var(--k-warn);
+    --k-btn-bg-hover: color-mix(in oklab, var(--k-warn), black 15%);
+  }
+  .btn-quiet {
+    --k-btn-bg: var(--k-accent-trans-10);
+    --k-btn-fg: var(--k-accent-strong);
+    --k-btn-bg-hover: var(--k-accent-trans-20);
+  }
+
+  .testimonial {
+    background: var(--k-surface);
+    border: 1px solid var(--k-border);
+    border-radius: var(--k-radius-l);
+    padding: var(--k-space-5);
+  }
+  .testimonial__quote {
+    font-size: var(--k-text-l);
+    color: var(--k-text-soft);
+    margin: 0 0 var(--k-space-3);
+  }
+  .testimonial__name {
+    font-family: var(--k-font-mono);
+    font-size: var(--k-text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--k-text-faint);
+  }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+
+      <aside class="k-sticky docs-side k-sidebar--collapsible" id="docs-sidebar">
+        <button class="k-tool docs-sidebar-toggle" type="button" id="docs-sidebar-toggle"
+                aria-pressed="false" aria-label="Collapse sidebar to icons">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Documentation">
+          <details class="k-nav-group" open>
+            <summary>Getting started</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="start.html">Start</a></li>
+            <li><a href="frameworks.html">Framework guides</a></li>
+            <li><a href="concepts.html">Concepts</a></li>
+            <li><a href="changelog.html">Changelog</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Reference</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="tokens.html">Tokens</a></li>
+            <li><a href="base.html">Base</a></li>
+            <li><a href="typography.html">Typography</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="components.html">Components</a>
+            <ul class="k-list k-list--flush docs-sub">
+              <li><a href="components-actions.html">Actions</a></li>
+              <li><a href="components-forms.html">Forms</a></li>
+              <li><a href="components-surfaces.html">Surfaces &amp; data</a></li>
+              <li><a href="components-feedback.html">Feedback</a></li>
+              <li><a href="components-overlays.html">Overlays</a></li>
+              <li><a href="components-navigation.html">Navigation</a></li>
+              <li aria-current="page"><a href="components-identity.html">Identity &amp; media</a></li>
+              <li><a href="components-motion.html">Motion</a></li>
+              <li><a href="components-extending.html">Extending</a></li>
+              <li><a href="components-app.html">Application</a></li>
+            </ul>
+          </li>
+            <li><a href="utilities.html">Utilities</a></li>
+            <li><a href="icons.html">Icons</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Build</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="sections.html">Sections</a></li>
+            <li><a href="../templates.html">Templates</a></li>
+            <li><a href="../design.html">Design system</a></li>
+            <li><a href="paths.html">Paths</a></li>
+          </ul>
+          </details>
+        </nav>
+        <div id="docs-anchors"></div>
+      </aside>
+
+      <main id="main" class="docs-main">
+
+      <h1>Identity &amp; media</h1>
+      <p class="k-text-soft">People, pictures, and page openers — heroes, avatars, icons, and a row that scrolls.</p>
+
+    <section id="c-hero">
+      <h2>Hero</h2>
+      <p><code>.k-hero</code> is a section with extra vertical
+      breathing room for the top of a page. <code>__eyebrow</code> is
+      a small mono line above the heading; <code>__lead</code> is a
+      larger, softer opening paragraph (used on this page's own
+      intro). Shown compactly here — a real hero takes the full band.
+      <code>--center</code> centers the hero text and the lead along
+      with it — for openers that sit in the middle rather than ranged
+      left.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="background: var(--k-surface); border: 1px solid var(--k-border); border-radius: var(--k-radius); padding: var(--k-space-5); margin-bottom: var(--k-space-4)">
+          <p class="k-hero__eyebrow">Eyebrow · small mono line</p>
+          <h3>A hero heading</h3>
+          <p class="k-hero__lead" style="margin-bottom: 0">The lead is larger and softer than
+          body text, capped at a readable line length.</p>
+        </div>
+      </details>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-hero--center" style="background: var(--k-surface); border: 1px solid var(--k-border); border-radius: var(--k-radius); padding: var(--k-space-5); margin-bottom: var(--k-space-4)">
+          <p class="k-hero__eyebrow">Eyebrow · small mono line</p>
+          <h3>A centered hero</h3>
+          <p class="k-hero__lead" style="margin-bottom: 0">The lead centers too, still
+          capped at a readable line length.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;section class="k-hero"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;p class="k-hero__eyebrow"&gt;Eyebrow&lt;/p&gt;
+    &lt;h1&gt;A hero heading&lt;/h1&gt;
+    &lt;p class="k-hero__lead"&gt;The opening paragraph.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- centered --&gt;
+&lt;section class="k-hero k-hero--center"&gt;…&lt;/section&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-avatar">
+      <h2>Avatar</h2>
+      <p><code>.k-avatar</code> is a circle with initials in it;
+      <code>--small</code> and <code>--large</code> resize it, and
+      <code>--square</code> rounds the corners instead of the full
+      circle — for org logos or app marks. Put an
+      <code>img</code> inside instead of text and it fills the circle
+      (give the image an <code>alt</code> naming the person).
+      <code>--ring</code> draws a surface gap and an accent ring around
+      the circle — for the "active" or highlighted person in a row; the
+      <code>--k-avatar-ring</code> knob sets the ring color.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-cluster" style="margin-bottom: var(--k-space-4)">
+          <span class="k-avatar k-avatar--small" aria-hidden="true">rd</span>
+          <span class="k-avatar" aria-hidden="true">rd</span>
+          <span class="k-avatar k-avatar--large" aria-hidden="true">rd</span>
+          <span class="k-avatar k-avatar--square" aria-hidden="true">rd</span>
+        </div>
+      </details>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-cluster" style="margin-bottom: var(--k-space-4)">
+          <span class="k-avatar" aria-hidden="true">rd</span>
+          <span class="k-avatar k-avatar--ring" aria-hidden="true">mk</span>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;span class="k-avatar k-avatar--small" aria-hidden="true"&gt;rd&lt;/span&gt;
+&lt;span class="k-avatar" aria-hidden="true"&gt;rd&lt;/span&gt;
+&lt;span class="k-avatar k-avatar--large" aria-hidden="true"&gt;rd&lt;/span&gt;
+
+&lt;!-- ringed / active --&gt;
+&lt;span class="k-avatar k-avatar--ring" aria-hidden="true"&gt;mk&lt;/span&gt;
+
+&lt;!-- image variant --&gt;
+&lt;span class="k-avatar"&gt;&lt;img src="me.jpg" alt="R. Daiven"&gt;&lt;/span&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-avatar-group">
+      <h2>Avatar group</h2>
+      <p><code>.k-avatar-group</code> overlaps a row of avatars —
+      each after the first pulls in, and a surface-colored ring keeps
+      them readable where they stack. Order matters: later avatars sit
+      on top. If the group stands for "these people", say so in text
+      nearby; overlapping circles alone name nobody.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-cluster" style="margin-bottom: var(--k-space-4)">
+          <span class="k-avatar-group">
+            <span class="k-avatar" aria-hidden="true">rd</span>
+            <span class="k-avatar" aria-hidden="true">mk</span>
+            <span class="k-avatar" aria-hidden="true">jt</span>
+            <span class="k-avatar" aria-hidden="true">+2</span>
+          </span>
+          <small>rd, mk, jt and 2 others</small>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;span class="k-avatar-group"&gt;
+  &lt;span class="k-avatar" aria-hidden="true"&gt;rd&lt;/span&gt;
+  &lt;span class="k-avatar" aria-hidden="true"&gt;mk&lt;/span&gt;
+  &lt;span class="k-avatar" aria-hidden="true"&gt;jt&lt;/span&gt;
+  &lt;span class="k-avatar" aria-hidden="true"&gt;+2&lt;/span&gt;
+&lt;/span&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-media-object">
+      <h2>Media object</h2>
+      <p><code>.k-media</code> puts a fixed thing (usually an avatar)
+      beside flowing text. The first child stays its own size;
+      <code>.k-media__body</code> takes the rest. The figure sits at the
+      top of the body by default; <code>--center</code> aligns it to the
+      body's vertical middle instead, and <code>--reverse</code> moves
+      it to the other side. The gap between them is the
+      <code>--k-media-gap</code> knob.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-media" style="margin-bottom: var(--k-space-4)">
+          <span class="k-avatar" aria-hidden="true">rd</span>
+          <div class="k-media__body">
+            <p><strong>rdaiven</strong> <small>· 2 days ago</small></p>
+            <p>The body wraps beside the avatar rather than under it,
+            however long it runs.</p>
+          </div>
+        </div>
+      </details>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-media k-media--reverse k-media--center" style="margin-bottom: var(--k-space-4)">
+          <span class="k-avatar" aria-hidden="true">mk</span>
+          <div class="k-media__body">
+            <p><strong>mkeel</strong> <small>· just now</small></p>
+            <p>Reversed and centered: the avatar sits on the right and
+            lines up with the middle of this text.</p>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-media"&gt;
+  &lt;span class="k-avatar" aria-hidden="true"&gt;rd&lt;/span&gt;
+  &lt;div class="k-media__body"&gt;
+    &lt;p&gt;&lt;strong&gt;rdaiven&lt;/strong&gt; &lt;small&gt;· 2 days ago&lt;/small&gt;&lt;/p&gt;
+    &lt;p&gt;Comment text.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- figure on the right, centered against the body --&gt;
+&lt;div class="k-media k-media--reverse k-media--center"&gt;…&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-icons">
+      <h2>Icons</h2>
+      <p>The <code>.k-icon</code> mechanism is in the core file; the
+      sixty-four named icons live in an optional
+      <code>keel-icons.css</code> (~40&nbsp;KB min) — link it after
+      <code>keel.css</code> to use <code>.k-icon--&lt;name&gt;</code>,
+      or leave it out to keep the core lean. Either way, zero external
+      requests: each icon is an inline-SVG mask painted with
+      <code>currentColor</code>, so it takes the text color around it
+      and scales with the font-size, like a character.
+      They're decorative by default — add
+      <code>aria-hidden="true"</code>; if an icon carries meaning on
+      its own, give it <code>role="img"</code> and an
+      <code>aria-label</code> instead. There are no brand logos on
+      purpose — brands change, and shipping them would date the set;
+      bring your own SVGs for those.</p>
+      <p class="k-cluster" style="margin-bottom: var(--k-space-3)">
+        <span class="k-icon k-icon--star" aria-hidden="true"></span>
+        <span class="k-icon k-icon--search" aria-hidden="true"></span>
+        <span class="k-icon k-icon--settings" aria-hidden="true"></span>
+        <span class="k-icon k-icon--bell" aria-hidden="true"></span>
+        <span class="k-icon k-icon--heart" aria-hidden="true"></span>
+        <span class="k-icon k-icon--download" aria-hidden="true"></span>
+        <span class="k-icon k-icon--calendar" aria-hidden="true"></span>
+        <span class="k-icon k-icon--check-circle" aria-hidden="true"></span>
+        <span class="k-icon k-icon--globe" aria-hidden="true"></span>
+        <span class="k-icon k-icon--code" aria-hidden="true"></span>
+      </p>
+      <p>Browse and copy the full set on the
+      <a href="icons.html">Icons page</a> — searchable, click-to-copy.
+      Decorative icons take <code>aria-hidden="true"</code>; a meaningful
+      icon-only control takes <code>role="img"</code> and an
+      <code>aria-label</code>.</p>
+    </section>
+
+    <section id="c-gallery">
+      <h2>Gallery</h2>
+      <p><code>.k-gallery</code> is a scroll-snap carousel — a row
+      that overflows sideways and snaps each item to the start edge.
+      Swipe on touch, scroll or shift-scroll with a wheel, tab through
+      the links inside; it's just scrolling, so it works everywhere.
+      Item width is the <code>--k-gallery-item</code> knob (default
+      <code>min(78%, 20rem)</code>). Where the platform supports
+      native <code>::scroll-marker</code> dots — Chrome only, today —
+      they appear under the row for free; everywhere else you simply
+      get the row, no script, nothing broken.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="margin-bottom: var(--k-space-4)">
+          <div class="k-gallery">
+            <div class="k-card"><h4>Slide one</h4><p><small>Swipe or scroll sideways — each card snaps to the start edge.</small></p></div>
+            <div class="k-card"><h4>Slide two</h4><p><small>Cards, images, anything — the children just need a width.</small></p></div>
+            <div class="k-card"><h4>Slide three</h4><p><small>In Chrome, native dots render below this row.</small></p></div>
+            <div class="k-card"><h4>Slide four</h4><p><small>The last one. Scroll back — it snaps the other way too.</small></p></div>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-gallery"&gt;
+  &lt;div class="k-card"&gt;…&lt;/div&gt;
+  &lt;div class="k-card"&gt;…&lt;/div&gt;
+  &lt;div class="k-card"&gt;…&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- narrower slides via the knob --&gt;
+&lt;div class="k-gallery" style="--k-gallery-item: 14rem"&gt;…&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+      </main>
+
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

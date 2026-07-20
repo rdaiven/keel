@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Craft Academy — an online-course template built with keel</title>
+<meta name="description" content="A playful online-course landing page built entirely with keel: sunny yellow and deep purple, a curriculum accordion, an instructor card, and an FAQ. One tokens block is the whole theme.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Replace this block and the page becomes yours. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(48 90% 96%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(48 70% 91%);
+      --k-border: hsl(48 30% 82%);
+      --k-border-strong: hsl(48 25% 66%);
+      --k-text: hsl(268 40% 14%);
+      --k-text-soft: hsl(268 22% 34%);
+      --k-text-faint: hsl(268 12% 50%);
+      --k-accent: hsl(268 62% 44%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(48 95% 52%);
+      --k-on-accent-2: hsl(268 40% 14%);
+      --k-font-display: "Trebuchet MS", "Segoe UI", sans-serif;
+      --k-display-weight: 800;
+      --k-tracking: -0.01em;
+      --k-radius: 22px;
+      --k-density: 1.1;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme. <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Craft Academy</a>
+      <ul class="k-nav__links">
+        <li><a href="#curriculum">Curriculum</a></li>
+        <li><a href="#instructor">Instructor</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="k-hero k-section--tint" id="top">
+  <div class="k-container k-center">
+    <p class="k-hero__eyebrow">Cohort-based · 6 weeks · beginner-friendly</p>
+    <h1>Learn to letter, by hand,<br>in six Saturday mornings.</h1>
+    <p class="k-hero__lead" style="margin-inline: auto">Craft Academy
+    teaches modern hand-lettering and brush calligraphy through short
+    video lessons, weekly prompts, and real feedback from an instructor
+    — not a forum full of strangers.</p>
+    <p class="k-cluster k-mt-5" style="justify-content: center">
+      <a class="k-btn k-btn--large" href="#pricing">Enroll in the next cohort</a>
+      <a class="k-btn k-btn--ghost k-btn--large" href="#curriculum">See the curriculum</a>
+    </p>
+    <div class="k-cols-4 k-mt-7">
+      <div><span class="k-stat__value">1,900+</span><span class="k-stat__label">graduates</span></div>
+      <div><span class="k-stat__value">4.9/5</span><span class="k-stat__label">average rating</span></div>
+      <div><span class="k-stat__value">6</span><span class="k-stat__label">weeks, one Saturday each</span></div>
+      <div><span class="k-stat__value">92%</span><span class="k-stat__label">finish the final piece</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM — accordion grouped by module -->
+<section class="k-section" id="curriculum">
+  <div class="k-container--narrow k-container">
+    <h2>The curriculum</h2>
+    <p class="k-text-soft">Six modules, released weekly. Everything stays
+    unlocked once it's yours — go back anytime.</p>
+    <div class="k-accordion k-mt-5">
+      <details name="curriculum" open>
+        <summary>Module 1 — Grip, posture, and your first strokes</summary>
+        <ul class="k-list">
+          <li>Choosing a brush pen (and why the cheap one is fine to start)</li>
+          <li>Upstrokes vs. downstrokes: the one rule that fixes 80% of mistakes</li>
+          <li>Warm-up drill sheet (printable, 10 minutes a day)</li>
+        </ul>
+      </details>
+      <details name="curriculum">
+        <summary>Module 2 — Lowercase letterforms</summary>
+        <ul class="k-list">
+          <li>The four letter families and how to drill them together</li>
+          <li>Connecting letters without losing consistent slant</li>
+          <li>Common mistakes gallery: real student pages, annotated</li>
+        </ul>
+      </details>
+      <details name="curriculum">
+        <summary>Module 3 — Uppercase &amp; flourishing</summary>
+        <ul class="k-list">
+          <li>Capital letters that don't fight your lowercase rhythm</li>
+          <li>Adding flourishes without overdoing it</li>
+          <li>Live-drawn demo: an entire quote, start to finish</li>
+        </ul>
+      </details>
+      <details name="curriculum">
+        <summary>Module 4 — Composition &amp; layout</summary>
+        <ul class="k-list">
+          <li>Laying out a quote before you touch ink</li>
+          <li>Hierarchy: making one line matter more than the rest</li>
+          <li>Working from a thumbnail sketch to a final piece</li>
+        </ul>
+      </details>
+      <details name="curriculum">
+        <summary>Module 5 — Color &amp; materials</summary>
+        <ul class="k-list">
+          <li>Watercolor backgrounds that won't fight your ink</li>
+          <li>Paper stocks worth the extra cost, and ones that aren't</li>
+          <li>Building a starter kit for under ₱2,000</li>
+        </ul>
+      </details>
+      <details name="curriculum">
+        <summary>Module 6 — Your final piece &amp; critique</summary>
+        <ul class="k-list">
+          <li>Planning a piece worth framing</li>
+          <li>Submitting for live critique with the instructor</li>
+          <li>Graduation showcase — your work, shared with the cohort</li>
+        </ul>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- INSTRUCTOR -->
+<section class="k-section k-section--alt" id="instructor">
+  <div class="k-container">
+    <h2>Feedback from an actual person</h2>
+    <div class="k-split" style="align-items: center; margin-top: var(--k-space-5)">
+      <div class="k-card">
+        <p class="k-card__kicker">Your instructor</p>
+        <h3>Nadia Villaruz</h3>
+        <p>Letterer for twelve years, four of them teaching. Nadia's
+        client work has shipped on packaging, murals, and two national
+        stamp designs — she teaches the same fundamentals she still
+        uses on paid work.</p>
+        <p class="k-badge k-badge--secondary">Responds within 24 hours</p>
+      </div>
+      <div>
+        <p>Every weekly prompt gets a real critique from Nadia, not an
+        auto-grader. You post your page, she marks it up, you see
+        exactly what to fix before the next module opens.</p>
+        <p>Cohorts stay small on purpose — forty seats, never more — so
+        every submission gets read.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING / ENROLL -->
+<section class="k-section" id="pricing">
+  <div class="k-container">
+    <h2>Enroll</h2>
+    <div class="k-cols-3 k-mt-5">
+      <div class="k-card">
+        <p class="k-card__kicker">Self-paced</p>
+        <h3>Watch anytime</h3>
+        <p class="k-stat__value">₱2,400</p>
+        <p>All six modules, no live critique, lifetime access.</p>
+        <p class="k-mt-4"><a class="k-btn k-btn--ghost" href="#top">Start now</a></p>
+      </div>
+      <div class="k-card k-card--hover" style="border-color: var(--k-accent); border-width: 2px">
+        <p class="k-badge k-badge--solid">Most popular</p>
+        <h3>Cohort</h3>
+        <p class="k-stat__value">₱4,200</p>
+        <p>Six live Saturdays, weekly critique, graduation showcase.</p>
+        <p class="k-mt-4"><a class="k-btn k-btn--large" href="#top">Join the next cohort</a></p>
+      </div>
+      <div class="k-card">
+        <p class="k-card__kicker">Group of 3+</p>
+        <h3>Bring your friends</h3>
+        <p class="k-stat__value">₱3,600</p>
+        <p>Per seat, cohort access, plus a shared group critique slot.</p>
+        <p class="k-mt-4"><a class="k-btn k-btn--ghost" href="#top">Enroll a group</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="k-section k-section--alt" id="faq">
+  <div class="k-container--narrow k-container">
+    <h2>Questions</h2>
+    <div class="k-alert k-alert--soft k-mt-4">
+      No drawing experience needed — module one starts from how to hold
+      the pen.
+    </div>
+    <div class="k-accordion k-mt-5">
+      <details name="faq">
+        <summary>Do I need a graphics tablet?</summary>
+        <p>No — everything is done with a brush pen and paper. A
+        materials list ships with your welcome email.</p>
+      </details>
+      <details name="faq">
+        <summary>What if I miss a live Saturday?</summary>
+        <p>Every session is recorded within an hour and stays in your
+        account permanently, so you can catch up on your own time.</p>
+      </details>
+      <details name="faq">
+        <summary>Is there a refund policy?</summary>
+        <p>Full refund if you request it before module two opens — no
+        questions asked.</p>
+      </details>
+      <details name="faq">
+        <summary>How long do I keep access?</summary>
+        <p>Forever. Once a module unlocks it's yours, cohort or
+        self-paced.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="k-section k-section--accent">
+  <div class="k-container k-center">
+    <h2>The next cohort starts in three weeks.</h2>
+    <p style="max-width: 34em; margin-inline: auto">Forty seats, and it
+    usually fills before the deadline.</p>
+    <p class="k-cluster k-mt-5" style="justify-content: center">
+      <a class="k-btn k-btn--large" href="#pricing">Claim a seat</a>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>Craft Academy — a fictional school, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

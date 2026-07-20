@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karagatan Fund — a marine-conservation template built with keel</title>
+<meta name="description" content="A warm, ocean-inspired nonprofit landing page built entirely with keel: deep teal and sandy neutrals, an SVG wave divider, an impact stat row, and donation tiers. One tokens block is the whole theme.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Replace this block and the page becomes yours. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(38 45% 96%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(38 35% 91%);
+      --k-border: hsl(38 20% 82%);
+      --k-border-strong: hsl(38 20% 66%);
+      --k-text: hsl(190 40% 12%);
+      --k-text-soft: hsl(190 18% 32%);
+      --k-text-faint: hsl(190 10% 48%);
+      --k-accent: hsl(188 62% 26%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(32 70% 52%);
+      --k-on-accent-2: hsl(190 40% 12%);
+      --k-font-display: Georgia, "Times New Roman", serif;
+      --k-display-weight: 700;
+      --k-tracking: -0.005em;
+      --k-radius: 14px;
+      --k-density: 1.05;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local: SVG wave divider between two bands */
+  .kg-wave { display: block; inline-size: 100%; block-size: 5rem; }
+  .kg-wave--top { margin-block-end: -1px; }
+
+  /* donation-tier radios styled as selectable cards, :checked highlights */
+  .kg-tier { position: relative; }
+  .kg-tier input {
+    position: absolute; inset-block-start: var(--k-space-4); inset-inline-end: var(--k-space-4);
+    width: 1.15em; height: 1.15em;
+  }
+  .kg-tier:has(input:checked) { border-color: var(--k-accent); border-width: 2px; }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme, the divider is inline SVG.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Karagatan Fund</a>
+      <ul class="k-nav__links">
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#work">Our work</a></li>
+        <li><a href="#give">Give</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="k-hero" id="top">
+  <div class="k-container k-center">
+    <p class="k-hero__eyebrow">Karagatan Fund · reef &amp; coastline restoration</p>
+    <h1>The reef doesn't need<br>a miracle. It needs a decade.</h1>
+    <p class="k-hero__lead" style="margin-inline: auto">We work with
+    fishing communities across the Visayas to replant coral, rebuild
+    mangrove nurseries, and hand reef management back to the people who
+    live beside it.</p>
+    <p class="k-cluster k-mt-5" style="justify-content: center">
+      <a class="k-btn k-btn--large" href="#give">Support the work</a>
+      <a class="k-btn k-btn--ghost k-btn--large" href="#work">See our work</a>
+    </p>
+  </div>
+</section>
+
+<!-- WAVE DIVIDER -->
+<svg class="kg-wave kg-wave--top" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0 40 Q150 0 300 40 T600 40 T900 40 T1200 40 V80 H0 Z" fill="var(--k-surface-2)"/>
+</svg>
+
+<!-- IMPACT STAT ROW -->
+<section class="k-section k-section--tight" style="background: var(--k-surface-2)" id="impact">
+  <div class="k-container">
+    <div class="k-cols-4 k-center">
+      <div><span class="k-stat__value">12</span><span class="k-stat__label">reefs restored</span></div>
+      <div><span class="k-stat__value">340,000</span><span class="k-stat__label">coral fragments planted</span></div>
+      <div><span class="k-stat__value">18</span><span class="k-stat__label">partner fishing communities</span></div>
+      <div><span class="k-stat__value">2,100 ha</span><span class="k-stat__label">mangrove under care</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE DIVIDER (mirrored) -->
+<svg class="kg-wave" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true" style="transform: rotate(180deg)">
+  <path d="M0 40 Q150 0 300 40 T600 40 T900 40 T1200 40 V80 H0 Z" fill="var(--k-surface-2)"/>
+</svg>
+
+<!-- OUR WORK -->
+<section class="k-section" id="work">
+  <div class="k-container">
+    <h2>Three programs, one coastline</h2>
+    <div class="k-cols-3 k-mt-5">
+      <div class="k-card k-card--hover">
+        <p class="k-card__kicker">Reef restoration</p>
+        <h3>Coral nurseries</h3>
+        <p>Fragment-and-transplant nurseries run by trained local divers,
+        monitored quarterly for survival and growth.</p>
+      </div>
+      <div class="k-card k-card--hover">
+        <p class="k-card__kicker">Coastal defense</p>
+        <h3>Mangrove replanting</h3>
+        <p>Native species only, planted by the barangay that will manage
+        the stand for the next thirty years.</p>
+      </div>
+      <div class="k-card k-card--hover">
+        <p class="k-card__kicker">Livelihoods</p>
+        <h3>Community reef wardens</h3>
+        <p>A paid, trained warden program so protecting the reef is a
+        job, not a volunteer favor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DONATION TIERS -->
+<section class="k-section k-section--alt" id="give">
+  <div class="k-container--narrow k-container">
+    <h2>Choose a tier</h2>
+    <p class="k-text-soft">Every tier funds a specific, named piece of
+    the work — not a general fund.</p>
+    <form class="k-mt-5" action="#" method="get">
+      <div class="k-cols-3">
+        <label class="k-card kg-tier">
+          <input type="radio" name="tier" value="500">
+          <p class="k-card__kicker">₱500 / month</p>
+          <h3>Plant coral</h3>
+          <p>Funds fragments and frames for one nursery cycle.</p>
+        </label>
+        <label class="k-card kg-tier">
+          <input type="radio" name="tier" value="1500" checked>
+          <p class="k-card__kicker">₱1,500 / month</p>
+          <h3>Sponsor a warden</h3>
+          <p>Covers a third of one community reef warden's monthly pay.</p>
+        </label>
+        <label class="k-card kg-tier">
+          <input type="radio" name="tier" value="5000">
+          <p class="k-card__kicker">₱5,000 / month</p>
+          <h3>Adopt a hectare</h3>
+          <p>Funds mangrove replanting and five years of monitoring.</p>
+        </label>
+      </div>
+      <p class="k-cluster k-mt-5" style="justify-content: center">
+        <button class="k-btn k-btn--large" type="submit">Give monthly</button>
+        <a class="k-btn k-btn--ghost" href="#top">Give once instead</a>
+      </p>
+    </form>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="k-section k-section--accent">
+  <div class="k-container k-center">
+    <h2>The next planting season starts in April.</h2>
+    <p style="max-width: 34em; margin-inline: auto">Recurring gifts let
+    us plan a season instead of chasing one. That's the difference
+    between a reef and a photo of one.</p>
+    <p class="k-cluster k-mt-5" style="justify-content: center">
+      <a class="k-btn k-btn--large" href="#give">Become a monthly donor</a>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>Karagatan Fund — a fictional nonprofit, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

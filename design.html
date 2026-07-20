@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design system — keel</title>
+<meta name="description" content="Seed a design system from up to five colors — primary, secondary, accent, and optional text and background — plus a mood and font pairing. keel derives the rest by math, with a WCAG AA guardrail, and exports the tokens as CSS.">
+<link rel="stylesheet" href="css/keel.css">
+<link rel="stylesheet" href="css/keel-icons.css">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/docs.css">
+<style>
+  .play-swatches { display: grid; gap: var(--k-space-2); margin-top: var(--k-space-3);
+                   grid-template-columns: repeat(auto-fit, minmax(3.4rem, 1fr)); }
+  .play-swatches .sw i { display: block; height: 2.2rem; border-radius: var(--k-radius-s);
+                         border: 1px solid var(--k-border); }
+  .play-swatches .sw small { display: block; font-size: 0.68rem;
+                             color: var(--k-text-faint); margin-top: 2px;
+                             overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .play-choice { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--k-space-2); }
+  .play-choice button {
+    font: inherit; text-align: left; cursor: pointer;
+    background: var(--k-surface); color: var(--k-text);
+    border: 1px solid var(--k-border-strong); border-radius: var(--k-radius);
+    padding: var(--k-space-2) var(--k-space-3);
+  }
+  .play-choice button[aria-pressed="true"] {
+    border-color: var(--k-accent);
+    box-shadow: 0 0 0 3px var(--k-accent-soft);
+  }
+  .play-choice .spec { display: block; font-size: var(--k-text-l); line-height: 1.2; }
+  .play-choice .spec-name { display: block; font-size: var(--k-text-xs); color: var(--k-text-faint); }
+  .play-slider { display: grid; grid-template-columns: 6.5rem 1fr; gap: var(--k-space-3);
+                 align-items: center; font-size: var(--k-text-s); }
+  .play-slider input[type="range"] { width: 100%; accent-color: var(--k-accent); }
+  .play-ratio { font-family: var(--k-font-mono); font-size: var(--k-text-xs);
+                color: var(--k-text-soft); }
+  .play-css { max-height: 20rem; }
+  /* picker chrome is now keel's .k-swatch / .k-picker components;
+     only the tool-specific bits stay page-local */
+  .pick { display: grid; gap: var(--k-space-2); }
+  .pick__row { display: flex; gap: var(--k-space-2); align-items: center; }
+  .pick__hex { font-family: var(--k-font-mono); max-inline-size: 7.5em; }
+  .pick__sliders { display: grid; gap: var(--k-space-2); }
+  /* wider tool layout — controls flow into balanced columns, the output
+     panel sticks so it stays in view while you tune the controls */
+  .play-controls > .k-field { margin-bottom: var(--k-space-5); }
+  @media (min-width: 900px) {
+    .play-layout { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(320px, 1fr);
+                   gap: var(--k-space-4); align-items: start; }
+    .play-controls { columns: 2; column-gap: var(--k-space-6); }
+    .play-controls > .k-field { break-inside: avoid; }
+    .play-output { position: sticky; top: var(--k-space-4); }
+  }
+  /* export hub — a labelled row per option so each has an identity, and
+     the extra formats/prefix stay tucked away until asked for */
+  .export-row { display: grid; grid-template-columns: 10rem 1fr; gap: var(--k-space-3);
+                align-items: center; margin-block: var(--k-space-3); }
+  .export-row > .k-btn { inline-size: 100%; }
+  .export-row > p { margin: 0; font-size: var(--k-text-xs);
+                    color: var(--k-text-soft); line-height: 1.45; }
+  .export-more > summary { font-weight: 600; cursor: pointer;
+                           margin-top: var(--k-space-3); }
+  @media (max-width: 560px) {
+    .export-row { grid-template-columns: 1fr; align-items: start; gap: var(--k-space-1); }
+  }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="docs/start.html">Docs</a></li>
+        <li><a href="templates.html">Templates</a></li>
+        <li><a href="docs/sections.html">Sections</a></li>
+        <li><a href="docs/icons.html">Icons</a></li>
+        <li><a href="design.html" aria-current="page">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="docs/start.html">Docs</a></li>
+        <li><a href="templates.html">Templates</a></li>
+        <li><a href="docs/sections.html">Sections</a></li>
+        <li><a href="docs/icons.html">Icons</a></li>
+        <li><a href="design.html" aria-current="page">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+<main id="main">
+
+<section class="k-section" id="tool">
+  <div class="k-container--wide k-container">
+    <h1>Your design system</h1>
+    <p class="k-hero__lead">
+      Seed it with your brand — up to five colors: a primary, a secondary,
+      an accent, and optionally your own text and background. Add a mood,
+      a font pairing, and a type scale. The rest — neutrals, surfaces,
+      the fluid type sizes, variants, status
+      colors — is derived by math. Colors you pick are used exactly as
+      picked; the readout warns if a pair falls below WCAG AA. The result
+      applies to this whole site and follows you from page to page; when
+      it looks right, copy the tokens.
+    </p>
+
+    <div class="play-layout" style="margin-top: var(--k-space-6)">
+      <div class="k-card play-controls">
+        <div class="k-field">
+          <label for="p1-hex">Primary color</label>
+          <div class="pick" id="pick-primary">
+            <div class="pick__row">
+              <button type="button" class="k-swatch" id="p1-chip"
+                      popovertarget="p1-pop" aria-label="Open the color picker"></button>
+              <div class="k-picker__field" style="flex: 1">
+                <select id="p1-fmt" aria-label="Color format">
+                  <option value="hex">Hex</option>
+                  <option value="rgb">RGB</option>
+                  <option value="hsl">HSL</option>
+                  <option value="hsv">HSV</option>
+                  <option value="cmyk">CMYK</option>
+                </select>
+                <input id="p1-hex" type="text" spellcheck="false"
+                       value="#4a5df0" aria-label="Brand color value">
+              </div>
+              <button class="k-btn k-btn--ghost k-btn--small" type="button" id="p1-eye" hidden>Pick from screen</button>
+            </div>
+            <div class="k-picker" id="p1-pop" popover>
+              <div class="k-picker__area" id="p1-area" tabindex="0" role="application"
+                   aria-label="Shade area — drag to pick; arrow keys adjust">
+                <span class="k-picker__cursor" id="p1-cursor"></span>
+              </div>
+              <div class="pick__sliders">
+                <div class="play-slider"><label for="p1-h" style="margin:0">Hue</label><input type="range" class="pick-range" id="p1-h" min="0" max="360" step="1"></div>
+                <div class="play-slider"><label for="p1-s" style="margin:0">Saturation</label><input type="range" class="pick-range" id="p1-s" min="0" max="100" step="1"></div>
+                <div class="play-slider"><label for="p1-l" style="margin:0">Lightness</label><input type="range" class="pick-range" id="p1-l" min="5" max="95" step="1"></div>
+              </div>
+              <div class="k-picker__row"><span class="k-picker__label">Presets</span></div>
+              <div class="k-picker__swatches" id="p1-swatches" role="group" aria-label="Preset brand colors"></div>
+              <div class="k-picker__row"><span class="k-picker__label">Recent</span></div>
+              <div class="k-picker__swatches" id="p1-recent" role="group" aria-label="Recently used colors"></div>
+              <div class="k-picker__row"><span class="k-picker__label">Saved</span>
+                <button class="k-btn k-btn--ghost k-btn--small" type="button" id="p1-save">+ Add</button></div>
+              <div class="k-picker__swatches" id="p1-saved" role="group" aria-label="Saved colors"></div>
+            </div>
+          </div>
+          <p class="k-field__hint">Your primary — neutrals and surfaces tint
+          from it. Click the swatch to open the picker; saved colors
+          remove with a right-click.</p>
+        </div>
+
+        <div class="k-field">
+          <label id="harmony-label">Secondary color</label>
+          <div class="play-choice" role="group" aria-labelledby="harmony-label" id="harmony-group">
+            <button type="button" data-harmony="complement" aria-pressed="false">Complement<span class="spec-name">opposite — maximum contrast</span></button>
+            <button type="button" data-harmony="analog" aria-pressed="false">Analogous<span class="spec-name">neighbor — quiet, tonal</span></button>
+            <button type="button" data-harmony="triad" aria-pressed="true">Triadic<span class="spec-name">a third around — lively</span></button>
+            <button type="button" data-harmony="custom" aria-pressed="false">Custom<span class="spec-name">pick your own hex</span></button>
+          </div>
+          <div id="color2-row" hidden style="margin-top: var(--k-space-3)">
+            <div class="pick" id="pick-secondary">
+              <div class="pick__row">
+                <button type="button" class="k-swatch" id="p2-chip"
+                        popovertarget="p2-pop" aria-label="Open the color picker"></button>
+                <div class="k-picker__field" style="flex: 1">
+                  <select id="p2-fmt" aria-label="Color format">
+                    <option value="hex">Hex</option>
+                    <option value="rgb">RGB</option>
+                    <option value="hsl">HSL</option>
+                    <option value="hsv">HSV</option>
+                    <option value="cmyk">CMYK</option>
+                  </select>
+                  <input id="p2-hex" type="text" spellcheck="false"
+                         value="#d81b4f" aria-label="Secondary color value">
+                </div>
+                <button class="k-btn k-btn--ghost k-btn--small" type="button" id="p2-eye" hidden>Pick from screen</button>
+              </div>
+              <div class="k-picker" id="p2-pop" popover>
+                <div class="k-picker__area" id="p2-area" tabindex="0" role="application"
+                     aria-label="Shade area — drag to pick; arrow keys adjust">
+                  <span class="k-picker__cursor" id="p2-cursor"></span>
+                </div>
+                <div class="pick__sliders">
+                  <div class="play-slider"><label for="p2-h" style="margin:0">Hue</label><input type="range" class="pick-range" id="p2-h" min="0" max="360" step="1"></div>
+                  <div class="play-slider"><label for="p2-s" style="margin:0">Saturation</label><input type="range" class="pick-range" id="p2-s" min="0" max="100" step="1"></div>
+                  <div class="play-slider"><label for="p2-l" style="margin:0">Lightness</label><input type="range" class="pick-range" id="p2-l" min="5" max="95" step="1"></div>
+                </div>
+                <div class="k-picker__row"><span class="k-picker__label">Presets</span></div>
+                <div class="k-picker__swatches" id="p2-swatches" role="group" aria-label="Preset brand colors"></div>
+                <div class="k-picker__row"><span class="k-picker__label">Recent</span></div>
+                <div class="k-picker__swatches" id="p2-recent" role="group" aria-label="Recently used colors"></div>
+                <div class="k-picker__row"><span class="k-picker__label">Saved</span>
+                  <button class="k-btn k-btn--ghost k-btn--small" type="button" id="p2-save">+ Add</button></div>
+                <div class="k-picker__swatches" id="p2-saved" role="group" aria-label="Saved colors"></div>
+              </div>
+            </div>
+          </div>
+          <p class="k-field__hint">Harmonies derive it from your primary, so the pair
+          can't clash. Used by secondary buttons, badges, and tint bands.</p>
+        </div>
+
+        <div class="k-field">
+          <label for="p3-hex">Accent color</label>
+          <div class="pick" id="pick-accent">
+            <div class="pick__row">
+              <button type="button" class="k-swatch" id="p3-chip"
+                      popovertarget="p3-pop" aria-label="Open the color picker"></button>
+              <div class="k-picker__field" style="flex: 1">
+                <select id="p3-fmt" aria-label="Color format">
+                  <option value="hex">Hex</option>
+                  <option value="rgb">RGB</option>
+                  <option value="hsl">HSL</option>
+                  <option value="hsv">HSV</option>
+                  <option value="cmyk">CMYK</option>
+                </select>
+                <input id="p3-hex" type="text" spellcheck="false"
+                       value="#178d81" aria-label="Accent color value">
+              </div>
+              <button class="k-btn k-btn--ghost k-btn--small" type="button" id="p3-eye" hidden>Pick from screen</button>
+            </div>
+            <div class="k-picker" id="p3-pop" popover>
+              <div class="k-picker__area" id="p3-area" tabindex="0" role="application"
+                   aria-label="Shade area — drag to pick; arrow keys adjust">
+                <span class="k-picker__cursor" id="p3-cursor"></span>
+              </div>
+              <div class="pick__sliders">
+                <div class="play-slider"><label for="p3-h" style="margin:0">Hue</label><input type="range" class="pick-range" id="p3-h" min="0" max="360" step="1"></div>
+                <div class="play-slider"><label for="p3-s" style="margin:0">Saturation</label><input type="range" class="pick-range" id="p3-s" min="0" max="100" step="1"></div>
+                <div class="play-slider"><label for="p3-l" style="margin:0">Lightness</label><input type="range" class="pick-range" id="p3-l" min="5" max="95" step="1"></div>
+              </div>
+              <div class="k-picker__row"><span class="k-picker__label">Presets</span></div>
+              <div class="k-picker__swatches" id="p3-swatches" role="group" aria-label="Preset brand colors"></div>
+              <div class="k-picker__row"><span class="k-picker__label">Recent</span></div>
+              <div class="k-picker__swatches" id="p3-recent" role="group" aria-label="Recently used colors"></div>
+              <div class="k-picker__row"><span class="k-picker__label">Saved</span>
+                <button class="k-btn k-btn--ghost k-btn--small" type="button" id="p3-save">+ Add</button></div>
+              <div class="k-picker__swatches" id="p3-saved" role="group" aria-label="Saved colors"></div>
+            </div>
+          </div>
+          <p class="k-field__hint">A third brand color for highlights, tags,
+          and the occasional call-out. Powers <code>--k-accent-3</code>,
+          <code>.k-btn--tertiary</code>, and <code>.k-badge--tertiary</code>.</p>
+        </div>
+
+        <div class="k-field">
+          <label id="foundation-label">Text &amp; background <span class="k-text-faint">— optional</span></label>
+          <div class="play-choice" role="group" aria-labelledby="foundation-label" id="foundation-group">
+            <button type="button" data-found="auto" aria-pressed="true">Auto<span class="spec-name">derived from the mood</span></button>
+            <button type="button" data-found="custom" aria-pressed="false">Custom<span class="spec-name">pick them yourself</span></button>
+          </div>
+          <div id="foundation-row" hidden style="margin-top: var(--k-space-3)">
+            <div class="k-stack k-stack--tight">
+              <span class="k-picker__label">Text</span>
+              <div class="pick" id="pick-text">
+                <div class="pick__row">
+                  <button type="button" class="k-swatch" id="pt-chip"
+                          popovertarget="pt-pop" aria-label="Open the text color picker"></button>
+                  <div class="k-picker__field" style="flex: 1">
+                    <select id="pt-fmt" aria-label="Color format">
+                      <option value="hex">Hex</option>
+                      <option value="rgb">RGB</option>
+                      <option value="hsl">HSL</option>
+                      <option value="hsv">HSV</option>
+                      <option value="cmyk">CMYK</option>
+                    </select>
+                    <input id="pt-hex" type="text" spellcheck="false" aria-label="Text color value">
+                  </div>
+                  <button class="k-btn k-btn--ghost k-btn--small" type="button" id="pt-eye" hidden>Pick from screen</button>
+                </div>
+                <div class="k-picker" id="pt-pop" popover>
+                  <div class="k-picker__area" id="pt-area" tabindex="0" role="application"
+                       aria-label="Shade area — drag to pick; arrow keys adjust">
+                    <span class="k-picker__cursor" id="pt-cursor"></span>
+                  </div>
+                  <div class="pick__sliders">
+                    <div class="play-slider"><label for="pt-h" style="margin:0">Hue</label><input type="range" class="pick-range" id="pt-h" min="0" max="360" step="1"></div>
+                    <div class="play-slider"><label for="pt-s" style="margin:0">Saturation</label><input type="range" class="pick-range" id="pt-s" min="0" max="100" step="1"></div>
+                    <div class="play-slider"><label for="pt-l" style="margin:0">Lightness</label><input type="range" class="pick-range" id="pt-l" min="5" max="95" step="1"></div>
+                  </div>
+                  <div class="k-picker__row"><span class="k-picker__label">Presets</span></div>
+                  <div class="k-picker__swatches" id="pt-swatches" role="group" aria-label="Preset colors"></div>
+                  <div class="k-picker__row"><span class="k-picker__label">Recent</span></div>
+                  <div class="k-picker__swatches" id="pt-recent" role="group" aria-label="Recently used colors"></div>
+                  <div class="k-picker__row"><span class="k-picker__label">Saved</span>
+                    <button class="k-btn k-btn--ghost k-btn--small" type="button" id="pt-save">+ Add</button></div>
+                  <div class="k-picker__swatches" id="pt-saved" role="group" aria-label="Saved colors"></div>
+                </div>
+              </div>
+              <span class="k-picker__label">Background</span>
+              <div class="pick" id="pick-bg">
+                <div class="pick__row">
+                  <button type="button" class="k-swatch" id="pb-chip"
+                          popovertarget="pb-pop" aria-label="Open the background color picker"></button>
+                  <div class="k-picker__field" style="flex: 1">
+                    <select id="pb-fmt" aria-label="Color format">
+                      <option value="hex">Hex</option>
+                      <option value="rgb">RGB</option>
+                      <option value="hsl">HSL</option>
+                      <option value="hsv">HSV</option>
+                      <option value="cmyk">CMYK</option>
+                    </select>
+                    <input id="pb-hex" type="text" spellcheck="false" aria-label="Background color value">
+                  </div>
+                  <button class="k-btn k-btn--ghost k-btn--small" type="button" id="pb-eye" hidden>Pick from screen</button>
+                </div>
+                <div class="k-picker" id="pb-pop" popover>
+                  <div class="k-picker__area" id="pb-area" tabindex="0" role="application"
+                       aria-label="Shade area — drag to pick; arrow keys adjust">
+                    <span class="k-picker__cursor" id="pb-cursor"></span>
+                  </div>
+                  <div class="pick__sliders">
+                    <div class="play-slider"><label for="pb-h" style="margin:0">Hue</label><input type="range" class="pick-range" id="pb-h" min="0" max="360" step="1"></div>
+                    <div class="play-slider"><label for="pb-s" style="margin:0">Saturation</label><input type="range" class="pick-range" id="pb-s" min="0" max="100" step="1"></div>
+                    <div class="play-slider"><label for="pb-l" style="margin:0">Lightness</label><input type="range" class="pick-range" id="pb-l" min="5" max="95" step="1"></div>
+                  </div>
+                  <div class="k-picker__row"><span class="k-picker__label">Presets</span></div>
+                  <div class="k-picker__swatches" id="pb-swatches" role="group" aria-label="Preset colors"></div>
+                  <div class="k-picker__row"><span class="k-picker__label">Recent</span></div>
+                  <div class="k-picker__swatches" id="pb-recent" role="group" aria-label="Recently used colors"></div>
+                  <div class="k-picker__row"><span class="k-picker__label">Saved</span>
+                    <button class="k-btn k-btn--ghost k-btn--small" type="button" id="pb-save">+ Add</button></div>
+                  <div class="k-picker__swatches" id="pb-saved" role="group" aria-label="Saved colors"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="k-field__hint">Leave on Auto to let the mood set your
+          text and background. Pick them yourself and the tool respects
+          your exact colors — and warns in the contrast readout if the
+          pair falls below WCAG AA.</p>
+        </div>
+
+        <div class="k-field">
+          <label id="mood-label">Mood</label>
+          <div class="play-choice" role="group" aria-labelledby="mood-label" id="mood-group">
+            <button type="button" data-mood="calm" aria-pressed="true">Calm<span class="spec-name">quiet, airy, soft edges</span></button>
+            <button type="button" data-mood="bold" aria-pressed="false">Bold<span class="spec-name">high contrast, sharp</span></button>
+            <button type="button" data-mood="warm" aria-pressed="false">Warm<span class="spec-name">tinted paper, round</span></button>
+            <button type="button" data-mood="slate" aria-pressed="false">Slate<span class="spec-name">cool, muted, businesslike</span></button>
+            <button type="button" data-mood="night" aria-pressed="false">Night<span class="spec-name">dark surfaces</span></button>
+            <button type="button" data-mood="dusk" aria-pressed="false">Dusk<span class="spec-name">dark &amp; warm, soft edges</span></button>
+            <button type="button" data-mood="forest" aria-pressed="false">Forest<span class="spec-name">cool, natural, calm</span></button>
+            <button type="button" data-mood="rose" aria-pressed="false">Rose<span class="spec-name">warm, soft, rounded</span></button>
+            <button type="button" data-mood="mono" aria-pressed="false">Mono<span class="spec-name">near-grayscale, minimal</span></button>
+            <button type="button" data-mood="contrast" aria-pressed="false">Contrast<span class="spec-name">punchy, sharp, max AA</span></button>
+          </div>
+        </div>
+
+        <div class="k-field">
+          <label id="theme-label">Preview</label>
+          <div class="play-choice" role="group" aria-labelledby="theme-label" id="theme-group">
+            <button type="button" data-dark="light" aria-pressed="false"><span class="k-icon k-icon--light" aria-hidden="true"></span> Light<span class="spec-name">your system in light</span></button>
+            <button type="button" data-dark="dark" aria-pressed="false"><span class="k-icon k-icon--dark" aria-hidden="true"></span> Dark<span class="spec-name">your system in dark</span></button>
+          </div>
+        </div>
+
+        <div class="k-field">
+          <label id="font-label">Font pairing</label>
+          <div class="play-choice" role="group" aria-labelledby="font-label" id="font-group">
+            <button type="button" data-fonts="grotesk" aria-pressed="true"><span class="spec" style="font-family: system-ui; font-weight: 700">Ag</span><span class="spec-name">Grotesk — one voice</span></button>
+            <button type="button" data-fonts="editorial" aria-pressed="false"><span class="spec" style="font-family: Georgia, serif; font-weight: 600">Ag</span><span class="spec-name">Editorial — serif display</span></button>
+            <button type="button" data-fonts="humanist" aria-pressed="false"><span class="spec" style="font-family: 'Segoe UI', Verdana, sans-serif; font-weight: 600; letter-spacing: .01em">Ag</span><span class="spec-name">Humanist — open, friendly</span></button>
+            <button type="button" data-fonts="console" aria-pressed="false"><span class="spec" style="font-family: Consolas, monospace; font-weight: 700">Ag</span><span class="spec-name">Console — mono display</span></button>
+            <button type="button" data-fonts="rounded" aria-pressed="false"><span class="spec" style="font-family: ui-rounded, 'Segoe UI', system-ui; font-weight: 700">Ag</span><span class="spec-name">Rounded — friendly product</span></button>
+            <button type="button" data-fonts="print" aria-pressed="false"><span class="spec" style="font-family: Georgia, serif; font-weight: 400">Ag</span><span class="spec-name">Print — serif body, sans display</span></button>
+            <button type="button" data-fonts="inter" aria-pressed="false"><span class="spec" style="font-family: 'Inter', system-ui; font-weight: 700">Ag</span><span class="spec-name">Inter — the product standard · self-hosted</span></button>
+            <button type="button" data-fonts="manrope" aria-pressed="false"><span class="spec" style="font-family: 'Manrope', system-ui; font-weight: 700">Ag</span><span class="spec-name">Manrope — friendly, truly rounded · self-hosted</span></button>
+            <button type="button" data-fonts="space" aria-pressed="false"><span class="spec" style="font-family: 'Space Grotesk', system-ui; font-weight: 700">Ag</span><span class="spec-name">Space Grotesk — techy display · self-hosted</span></button>
+            <button type="button" data-fonts="playfair" aria-pressed="false"><span class="spec" style="font-family: 'Playfair Display', Georgia, serif; font-weight: 700">Ag</span><span class="spec-name">Playfair — elegant display · self-hosted</span></button>
+            <button type="button" data-fonts="lora" aria-pressed="false"><span class="spec" style="font-family: 'Lora', Georgia, serif; font-weight: 700">Ag</span><span class="spec-name">Lora — literary serif · self-hosted</span></button>
+            <button type="button" data-fonts="jetbrains" aria-pressed="false"><span class="spec" style="font-family: 'JetBrains Mono', monospace; font-weight: 700">Ag</span><span class="spec-name">JetBrains — dev mono display · self-hosted</span></button>
+            <button type="button" data-fonts="classic" aria-pressed="false"><span class="spec" style="font-family: Georgia, serif; font-weight: 700">Ag</span><span class="spec-name">Classic — full serif, print feel</span></button>
+            <button type="button" data-fonts="terminal" aria-pressed="false"><span class="spec" style="font-family: Consolas, monospace; font-weight: 700">Ag</span><span class="spec-name">Terminal — mono throughout</span></button>
+          </div>
+          <p class="k-field__hint">The first six are system stacks —
+          zero requests, but they render with whatever your OS has. The
+          self-hosted six ship with the site as woff2 files and look
+          identical everywhere; the export includes a Google Fonts link
+          alternative.</p>
+        </div>
+
+        <div class="k-field">
+          <label for="s-base">Base text size — <span id="base-val" class="k-mono k-text-accent">17px</span></label>
+          <input type="range" id="s-base" min="14" max="21" step="0.5" value="17"
+                 style="width: 100%; accent-color: var(--k-accent); margin-top: var(--k-space-2)">
+          <p class="k-field__hint">Body text sits here; every other size is
+          measured from it — drag to taste.</p>
+        </div>
+
+        <div class="k-field">
+          <label id="scale-label">Type scale</label>
+          <div class="play-choice" role="group" aria-labelledby="scale-label" id="scale-group">
+            <button type="button" data-scale="minor-third" aria-pressed="false">Minor third<span class="spec-name">1.200 — subtle</span></button>
+            <button type="button" data-scale="major-third" aria-pressed="false">Major third<span class="spec-name">1.250 — gentle</span></button>
+            <button type="button" data-scale="fourth" aria-pressed="true">Perfect fourth<span class="spec-name">1.333 — classic</span></button>
+            <button type="button" data-scale="aug-fourth" aria-pressed="false">Aug. fourth<span class="spec-name">1.414 — bold</span></button>
+            <button type="button" data-scale="golden" aria-pressed="false">Golden<span class="spec-name">1.618 — dramatic</span></button>
+          </div>
+          <p class="k-field__hint">Headings step up from the base by this
+          ratio and grow fluidly on wider screens — all seven
+          <code>--k-text-*</code> sizes generated as <code>clamp()</code>,
+          no math on your end.</p>
+        </div>
+      </div>
+
+      <div class="k-card k-stack play-output">
+        <div class="k-stack k-stack--tight">
+          <div class="play-slider">
+            <label for="s-contrast" style="margin:0">Contrast</label>
+            <input type="range" id="s-contrast" min="0" max="100" value="50">
+          </div>
+          <div class="play-slider">
+            <label for="s-corners" style="margin:0">Corners</label>
+            <input type="range" id="s-corners" min="0" max="100" value="40">
+          </div>
+          <div class="play-slider">
+            <label for="s-density" style="margin:0">Density</label>
+            <input type="range" id="s-density" min="0" max="100" value="50">
+          </div>
+        </div>
+
+        <div class="play-swatches" aria-hidden="true" id="swatches"></div>
+        <p class="play-ratio" id="ratio-readout">contrast —</p>
+
+        <div class="k-cluster" style="margin-top: var(--k-space-2)">
+          <button class="k-btn k-btn--ghost k-btn--small" type="button" id="shuffle">Shuffle</button>
+          <button class="k-btn k-btn--ghost k-btn--small" type="button" id="reset">Reset</button>
+        </div>
+
+        <p class="k-card__kicker" style="margin-top: var(--k-space-4)">Take your system with you</p>
+        <div class="export-row">
+          <button class="k-btn" type="button" id="copy-tokens">Copy tokens CSS</button>
+          <p>Start here. Paste this block right after your <code>keel.css</code>
+          link and it re-themes the whole page. This is all most projects need.</p>
+        </div>
+
+        <details class="export-more">
+          <summary>More formats</summary>
+          <div class="export-row">
+            <button class="k-btn k-btn--soft k-btn--small" type="button" id="copy-full">Full token set</button>
+            <p>Every keel token with your seeds inlined; derived shades stay
+            live <code>color-mix()</code>, so they keep following any token you retune.</p>
+          </div>
+          <div class="export-row">
+            <button class="k-btn k-btn--soft k-btn--small" type="button" id="copy-dtcg">JSON (DTCG)</button>
+            <p>The design-token standard — for Figma and design-token tools.</p>
+          </div>
+          <div class="export-row">
+            <button class="k-btn k-btn--ghost k-btn--small" type="button" id="copy-tw">Tailwind config</button>
+            <p>Colors and type sizes for <code>tailwind.config.js</code>.</p>
+          </div>
+          <div class="export-row">
+            <button class="k-btn k-btn--ghost k-btn--small" type="button" id="copy-scss">SCSS variables</button>
+            <p><code>$k-*</code> variables for a Sass build.</p>
+          </div>
+          <div class="export-row">
+            <button class="k-btn k-btn--ghost k-btn--small" type="button" id="copy-json">Flat JSON</button>
+            <p>Plain key/value pairs — for anything else.</p>
+          </div>
+          <details style="margin-top: var(--k-space-2)">
+            <summary>Preview the token CSS</summary>
+            <pre class="play-css"><code id="css-out"></code></pre>
+          </details>
+        </details>
+
+        <details class="export-more">
+          <summary>Make the classes yours</summary>
+          <p class="k-field__hint" style="margin-top: var(--k-space-2)">Download keel
+          with your own class prefix — <code>.k-btn</code> becomes
+          <code>.yours-btn</code> throughout. Tokens stay <code>--k-*</code>,
+          so your own <code>--black</code> and friends are never touched.</p>
+          <div class="k-cluster" style="align-items: center; gap: var(--k-space-2)">
+            <input id="prefix-input" type="text" spellcheck="false" value="k" class="k-mono"
+                   aria-label="Class prefix" style="max-inline-size: 6rem">
+            <span class="k-text-faint k-mono k-text-s">→ <span id="prefix-preview">.k-btn</span></span>
+            <button class="k-btn k-btn--ghost k-btn--small" type="button" id="download-prefixed">Download keel.css</button>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="k-card" style="margin-top: var(--k-space-5)">
+      <p class="k-card__kicker">Live preview</p>
+      <div class="k-split">
+        <div>
+          <h3>Everything follows your seeds</h3>
+          <p>Body text with a <a href="#tool">link</a>, some
+          <strong>weight</strong>, and inline <code>code</code> — set in
+          your pairing, on your surfaces. <small>Small print takes the
+          soft text tone.</small></p>
+          <div class="k-cluster">
+            <button class="k-btn" type="button">Primary</button>
+            <button class="k-btn k-btn--secondary" type="button">Secondary</button>
+            <button class="k-btn k-btn--tertiary" type="button">Accent</button>
+            <button class="k-btn k-btn--ghost" type="button">Ghost</button>
+            <span class="k-badge">badge</span>
+            <span class="k-badge k-badge--secondary">secondary</span>
+            <span class="k-badge k-badge--tertiary">accent</span>
+            <span class="k-icon k-icon--star" aria-hidden="true"></span>
+            <span class="k-icon k-icon--check" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div>
+          <div class="k-field">
+            <label for="pv-input">A field</label>
+            <input id="pv-input" type="text" placeholder="Focus me — the ring is your accent">
+          </div>
+          <div class="k-alert k-alert--ok"><p>An alert, edged with your
+          status green. Every shade here derived from your seeds.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container--narrow k-container">
+    <h2>Using what you made</h2>
+    <ol>
+      <li>Click <strong>Copy tokens CSS</strong> above.</li>
+      <li>Paste it into your stylesheet <em>after</em> the keel
+      <code>&lt;link&gt;</code> tag — it replaces the default tokens
+      layer.</li>
+      <li>That's the entire theming story. Every keel page you build
+      now renders in your system.</li>
+    </ol>
+    <p><small>Wondering where the numbers come from? Derived neutrals are
+    held to WCAG AA — body text to 7:1 against the background, accent
+    pairs to 4.5:1 — nudged in code before anything reaches the screen.
+    Colors you pick yourself are kept exactly as chosen; the readout
+    warns if a pair falls short. Browse the
+    <a href="docs/components.html">components</a> or the
+    <a href="example.html">example page</a> to see your system at
+    work.</small></p>
+  </div>
+</section>
+
+</main>
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="assets/play.js"></script>
+<script src="assets/docs.js"></script>
+</body>
+</html>

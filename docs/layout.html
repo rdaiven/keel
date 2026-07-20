@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Layout — keel</title>
+<meta name="description" content="keel's layout layer: full-bleed section bands, five container widths, and structural arrangements — stack, cluster, split, thirds, grid, fixed columns, sidebar, sticky, frames. Structural, never positional.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<style>
+  .demo-box { background: var(--k-accent-soft); border: 1px dashed var(--k-accent);
+              border-radius: var(--k-radius-s); padding: var(--k-space-3);
+              font-size: var(--k-text-xs); font-family: var(--k-font-mono);
+              color: var(--k-accent-strong); text-align: center; }
+  .band-caption { font-family: var(--k-font-mono); font-size: var(--k-text-xs);
+                  letter-spacing: 0.08em; text-transform: uppercase;
+                  color: var(--k-text-faint); margin-bottom: var(--k-space-3); }
+  .k-section--accent .band-caption { color: inherit; opacity: 0.8; }
+  .band-strip { padding: var(--k-space-2) var(--k-space-4);
+                border-radius: var(--k-radius-s); border: 1px solid var(--k-border); }
+  .band-strip .band-caption { margin-bottom: 0; }
+  .space-scale { display: grid; grid-template-columns: 7rem 1fr;
+                 gap: var(--k-space-2) var(--k-space-3); align-items: center;
+                 font-family: var(--k-font-mono); font-size: var(--k-text-xs);
+                 color: var(--k-text-soft); }
+  .space-bar { display: inline-block; block-size: 1.1rem;
+               background: var(--k-accent); border-radius: 2px;
+               vertical-align: middle; }
+  .lay-frame { border: 1px solid var(--k-border); border-radius: var(--k-radius);
+               background: var(--k-bg); padding: 6px;
+               display: flex; flex-direction: column; gap: 4px;
+               block-size: 120px; margin-bottom: var(--k-space-3); }
+  .lay-row { display: flex; gap: 4px; }
+  .lay-bar { background: var(--k-accent-soft); border-radius: 2px; }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+
+      <aside class="k-sticky docs-side k-sidebar--collapsible" id="docs-sidebar">
+        <button class="k-tool docs-sidebar-toggle" type="button" id="docs-sidebar-toggle"
+                aria-pressed="false" aria-label="Collapse sidebar to icons">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Documentation">
+          <details class="k-nav-group" open>
+            <summary>Getting started</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="start.html">Start</a></li>
+            <li><a href="frameworks.html">Framework guides</a></li>
+            <li><a href="concepts.html">Concepts</a></li>
+            <li><a href="changelog.html">Changelog</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Reference</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="tokens.html">Tokens</a></li>
+            <li><a href="base.html">Base</a></li>
+            <li><a href="typography.html">Typography</a></li>
+            <li aria-current="page"><a href="layout.html">Layout</a></li>
+            <li><a href="components.html">Components</a>
+            <ul class="k-list k-list--flush docs-sub">
+              <li><a href="components-actions.html">Actions</a></li>
+              <li><a href="components-forms.html">Forms</a></li>
+              <li><a href="components-surfaces.html">Surfaces &amp; data</a></li>
+              <li><a href="components-feedback.html">Feedback</a></li>
+              <li><a href="components-overlays.html">Overlays</a></li>
+              <li><a href="components-navigation.html">Navigation</a></li>
+              <li><a href="components-identity.html">Identity &amp; media</a></li>
+              <li><a href="components-motion.html">Motion</a></li>
+              <li><a href="components-extending.html">Extending</a></li>
+              <li><a href="components-app.html">Application</a></li>
+            </ul>
+          </li>
+            <li><a href="utilities.html">Utilities</a></li>
+            <li><a href="icons.html">Icons</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Build</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="sections.html">Sections</a></li>
+            <li><a href="../templates.html">Templates</a></li>
+            <li><a href="../design.html">Design system</a></li>
+            <li><a href="paths.html">Paths</a></li>
+          </ul>
+          </details>
+        </nav>
+        <div id="docs-anchors"></div>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <h1>Layout</h1>
+        <p class="k-text-soft">Full-bleed bands, five container widths, and
+        structural arrangements — direction, gap, and wrapping, never x/y
+        placement.</p>
+
+        <h2 id="spacing">Spacing</h2>
+        <p>Eight steps: 1–4 are static, for spacing inside components;
+        5–8 are fluid, for section rhythm — resize the window and watch
+        them breathe. Everything multiplies by <code>--k-density</code>.</p>
+        <p class="band-caption">The scale — each bar is the token's actual width, live</p>
+        <div class="space-scale k-mb-4">
+          <span>--k-space-1</span><span><span class="space-bar" style="inline-size: var(--k-space-1)"></span></span>
+          <span>--k-space-2</span><span><span class="space-bar" style="inline-size: var(--k-space-2)"></span></span>
+          <span>--k-space-3</span><span><span class="space-bar" style="inline-size: var(--k-space-3)"></span></span>
+          <span>--k-space-4</span><span><span class="space-bar" style="inline-size: var(--k-space-4)"></span></span>
+          <span>--k-space-5</span><span><span class="space-bar" style="inline-size: var(--k-space-5)"></span></span>
+          <span>--k-space-6</span><span><span class="space-bar" style="inline-size: var(--k-space-6)"></span></span>
+          <span>--k-space-7</span><span><span class="space-bar" style="inline-size: var(--k-space-7)"></span></span>
+          <span>--k-space-8</span><span><span class="space-bar" style="inline-size: var(--k-space-8)"></span></span>
+        </div>
+        <p class="band-caption">Where each step lives</p>
+        <div class="k-thirds k-mb-4">
+          <div>
+            <div class="k-card"><p class="band-caption" style="margin-bottom: 0">a card</p></div>
+            <p class="band-caption" style="margin-top: var(--k-space-2)">cards pad with space-5</p>
+          </div>
+          <div>
+            <div class="k-cluster"><span class="k-btn k-btn--small">one</span><span class="k-btn k-btn--small k-btn--ghost">two</span></div>
+            <p class="band-caption" style="margin-top: var(--k-space-2)">clusters gap with space-3</p>
+          </div>
+          <div>
+            <div class="band-strip"><p class="band-caption">a band</p></div>
+            <p class="band-caption" style="margin-top: var(--k-space-2)">sections breathe with space-7</p>
+          </div>
+        </div>
+        <details>
+          <summary>Using space tokens in your own CSS</summary>
+          <pre><code>.feature { padding: var(--k-space-5); }        /* fluid — breathes */
+.toolbar { gap: var(--k-space-3); }            /* static — steady */
+.closing { padding-block: var(--k-space-7); }  /* section rhythm */
+:root    { --k-density: 0.85; }                /* the whole scale tightens */</code></pre>
+        </details>
+
+        <h2>Bands</h2>
+        <p>The whole layer is two ideas: <strong>bands</strong> (a
+        <code>section</code> with a <code>container</code> inside) and
+        <strong>arrangements</strong> (how the things inside a container
+        relate to each other).</p>
+        <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;!-- content --&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+        <p><code>.k-section</code> is a full-width band with generous
+        vertical padding and no background of its own; modifiers change one
+        thing each — shown here as compact strips with each class applied
+        directly:</p>
+        <div class="k-stack k-stack--tight k-mb-4">
+          <div class="band-strip"><p class="band-caption">k-section — plain band, no background</p></div>
+          <div class="band-strip k-section--alt"><p class="band-caption">k-section--alt</p></div>
+          <div class="band-strip k-section--tint"><p class="band-caption">k-section--tint</p></div>
+          <div class="band-strip k-section--tint-2"><p class="band-caption">k-section--tint-2</p></div>
+          <div class="band-strip k-section--accent"><p class="band-caption">k-section--accent</p></div>
+        </div>
+        <dl>
+          <dt><code>.k-section--tight</code></dt>
+          <dd>Less vertical padding, for bands that shouldn't breathe as much.</dd>
+          <dt><code>.k-section--alt</code></dt>
+          <dd>Surface background with a top and bottom border.</dd>
+          <dt><code>.k-section--tint</code></dt>
+          <dd>Soft accent background.</dd>
+          <dt><code>.k-section--tint-2</code></dt>
+          <dd>Soft <em>secondary</em> background — same idea, second color.</dd>
+          <dt><code>.k-section--accent</code></dt>
+          <dd>Full accent background with inverted text — use sparingly.</dd>
+        </dl>
+        <p>Alternating plain and <code>--alt</code> bands is the usual rhythm
+        of a keel page.</p>
+        <p>The band's vertical padding is itself a knob,
+        <code>--k-section-pad</code> — that's all <code>--tight</code>
+        actually does:</p>
+        <pre><code>&lt;section class="k-section" style="--k-section-pad: var(--k-space-8)"&gt;…&lt;/section&gt;</code></pre>
+
+        <h2>Containers</h2>
+        <p>Bands are always full width; the <em>container</em> inside each
+        band decides how wide the content runs — the full story of that
+        pairing is on <a href="concepts.html">Concepts</a>.</p>
+        <dl>
+          <dt><code>.k-container</code></dt>
+          <dd>The default reading width (<code>--k-width</code>, 72rem).</dd>
+          <dt><code>.k-container--narrow</code></dt>
+          <dd>Prose width (46rem).</dd>
+          <dt><code>.k-container--wide</code></dt>
+          <dd>Wide content like grids of cards (90rem).</dd>
+          <dt><code>.k-container--gutter</code></dt>
+          <dd>Fluid side margins via <code>--k-gutter</code>, no width cap.
+          Prefer it over <code>--wide</code> for full-screen layouts that
+          should breathe rather than stop at a max-width.</dd>
+          <dt><code>.k-container--full</code></dt>
+          <dd>Edge to edge, with a small inline padding.</dd>
+        </dl>
+        <pre><code>&lt;div class="k-container--gutter k-container"&gt;…&lt;/div&gt;</code></pre>
+        <div class="k-stack k-stack--tight k-mb-4">
+          <div class="k-container--narrow k-container"><div class="demo-box">.k-container--narrow · 46rem</div></div>
+          <div class="k-container"><div class="demo-box">.k-container · 72rem</div></div>
+          <div class="k-container--wide k-container"><div class="demo-box">.k-container--wide · 90rem</div></div>
+          <div class="k-container--gutter k-container"><div class="demo-box">.k-container--gutter · fluid margins, no cap</div></div>
+          <div class="demo-box">.k-container--full · edge to edge</div>
+        </div>
+        <p>Modifiers are used together with the base class, e.g.
+        <code>class="k-container--narrow k-container"</code>; on small
+        screens they all resolve to roughly full width minus a gutter.</p>
+
+        <h2>Arrangements</h2>
+        <p>The structural classes below describe how children relate inside
+        a container — direction, gap, and wrapping, nothing about where
+        anything sits on the page.</p>
+
+        <div class="k-flow">
+        <div>
+          <h3>Stack</h3>
+          <p><code>.k-stack</code> lays children in a column with a
+          consistent gap; <code>--tight</code> and <code>--loose</code>
+          shrink or grow that gap.</p>
+          <div class="k-stack" style="margin-bottom: var(--k-space-4)">
+            <div class="demo-box">one</div>
+            <div class="demo-box">two</div>
+            <div class="demo-box">three</div>
+          </div>
+          <details>
+            <summary>Markup</summary>
+            <pre><code>&lt;div class="k-stack"&gt;        &lt;!-- or k-stack--tight / k-stack--loose --&gt;
+  &lt;div&gt;one&lt;/div&gt;
+  &lt;div&gt;two&lt;/div&gt;
+  &lt;div&gt;three&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </details>
+        </div>
+
+        <div>
+          <h3>Flow</h3>
+          <p><code>.k-flow</code> is owl spacing: a margin between siblings
+          instead of a flex gap, so unlike <code>.k-stack</code> it keeps
+          content in normal flow. The gap is a custom-property knob —
+          set <code>--k-flow</code> on the element to tune it per use;
+          it defaults to <code>--k-space-4</code>.</p>
+          <div class="k-flow" style="--k-flow: var(--k-space-6); margin-bottom: var(--k-space-4)">
+            <div class="demo-box">one</div>
+            <div class="demo-box">two · --k-flow: var(--k-space-6)</div>
+            <div class="demo-box">three</div>
+          </div>
+          <details>
+            <summary>Markup</summary>
+            <pre><code>&lt;div class="k-flow"&gt;   &lt;!-- default gap: --k-space-4 --&gt;
+  &lt;p&gt;…&lt;/p&gt;
+  &lt;p&gt;…&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="k-flow" style="--k-flow: var(--k-space-6)"&gt;
+  …
+&lt;/div&gt;</code></pre>
+          </details>
+        </div>
+
+        <div>
+          <h3>Cluster</h3>
+          <p><code>.k-cluster</code> lays children in a row that wraps,
+          vertically centered — buttons, tags, meta rows.</p>
+          <div class="k-cluster" style="margin-bottom: var(--k-space-4)">
+            <div class="demo-box">a button</div>
+            <div class="demo-box">a longer item</div>
+            <div class="demo-box">tag</div>
+            <div class="demo-box">another</div>
+          </div>
+          <details>
+            <summary>Markup</summary>
+            <pre><code>&lt;div class="k-cluster"&gt;
+  &lt;a class="k-btn" href="#"&gt;Primary&lt;/a&gt;
+  &lt;a class="k-btn k-btn--ghost" href="#"&gt;Secondary&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+          </details>
+        </div>
+
+        <div>
+          <h3>Split</h3>
+          <p><code>.k-split</code> is two equal columns; add
+          <code>--wide-start</code> to make the first column wider
+          (1.6:1). Below 820px both stack into a single column.</p>
+          <div class="k-split" style="margin-bottom: var(--k-space-4)">
+            <div class="demo-box">first half</div>
+            <div class="demo-box">second half</div>
+          </div>
+          <div class="k-split k-split--wide-start" style="margin-bottom: var(--k-space-4)">
+            <div class="demo-box">wide start (1.6fr)</div>
+            <div class="demo-box">1fr</div>
+          </div>
+          <details>
+            <summary>Markup</summary>
+            <pre><code>&lt;div class="k-split"&gt;                    &lt;!-- 1fr 1fr --&gt;
+  &lt;div&gt;…&lt;/div&gt;
+  &lt;div&gt;…&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="k-split k-split--wide-start"&gt; &lt;!-- 1.6fr 1fr --&gt;
+  &lt;div&gt;…&lt;/div&gt;
+  &lt;div&gt;…&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </details>
+        </div>
+
+        <div>
+          <h3>Thirds</h3>
+          <p><code>.k-thirds</code> is exactly three equal columns.
+          Below 640px they stack.</p>
+          <div class="k-thirds" style="margin-bottom: var(--k-space-4)">
+            <div class="demo-box">1/3</div>
+            <div class="demo-box">2/3</div>
+            <div class="demo-box">3/3</div>
+          </div>
+          <details>
+            <summary>Markup</summary>
+            <pre><code>&lt;div class="k-thirds"&gt;
+  &lt;div&gt;…&lt;/div&gt;
+  &lt;div&gt;…&lt;/div&gt;
+  &lt;div&gt;…&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </details>
+        </div>
+
+        <div>
+          <h3>Grid</h3>
+          <p><code>.k-grid</code> is a responsive card grid: as many
+          columns as fit at a 15rem minimum (<code>auto-fit</code> +
+          <code>minmax</code>), wrapping by itself — no breakpoints, no
+          column counts to manage.</p>
+          <div class="k-grid" style="margin-bottom: var(--k-space-4)">
+            <div class="demo-box">card</div>
+            <div class="demo-box">card</div>
+            <div class="demo-box">card</div>
+            <div class="demo-box">card</div>
+            <div class="demo-box">card</div>
+          </div>
+          <details>
+            <summary>Markup</summary>
+            <pre><code>&lt;div class="k-grid"&gt;
+  &lt;div class="k-card"&gt;…&lt;/div&gt;
+  &lt;div class="k-card"&gt;…&lt;/div&gt;
+  &lt;div class="k-card"&gt;…&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </details>
+        </div>
+
+        <div>
+          <h3>Columns</h3>
+          <p><code>.k-cols-2</code>, <code>.k-cols-3</code> and
+          <code>.k-cols-4</code> are fixed-count grids for when you know
+          exactly how many columns you want — unlike <code>.k-grid</code>,
+          which decides for itself. All three collapse to a single column
+          below 640px; <code>.k-cols-4</code> takes an intermediate step
+          and stays at two columns until 1080px.</p>
+          <div class="k-cols-2" style="margin-bottom: var(--k-space-4)">
+            <div class="demo-box">1/2</div>
+            <div class="demo-box">2/2</div>
+          </div>
+          <div class="k-cols-3" style="margin-bottom: var(--k-space-4)">
+            <div class="demo-box">1/3</div>
+            <div class="demo-box">2/3</div>
+            <div class="demo-box">3/3</div>
+          </div>
+          <div class="k-cols-4" style="margin-bottom: var(--k-space-4)">
+            <div class="demo-box">1/4</div>
+            <div class="demo-box">2/4</div>
+            <div class="demo-box">3/4</div>
+            <div class="demo-box">4/4</div>
+          </div>
+          <details>
+            <summary>Markup</summary>
+            <pre><code>&lt;div class="k-cols-2"&gt;…&lt;/div&gt;  &lt;!-- 2 cols ≥640px, 1 below --&gt;
+&lt;div class="k-cols-3"&gt;…&lt;/div&gt;  &lt;!-- 3 cols ≥640px, 1 below --&gt;
+&lt;div class="k-cols-4"&gt;…&lt;/div&gt;  &lt;!-- 4 cols ≥1080px, 2 from 640px, 1 below --&gt;</code></pre>
+          </details>
+        </div>
+
+        <div>
+          <h3>Center</h3>
+          <p><code>.k-center</code> centers text. That's all it does —
+          it doesn't center blocks or position anything.</p>
+          <div class="k-center" style="margin-bottom: var(--k-space-4)">
+            <div class="demo-box">text-align: center</div>
+          </div>
+          <details>
+            <summary>Markup</summary>
+            <pre><code>&lt;div class="k-container--narrow k-container k-center"&gt;
+  &lt;h2&gt;A centered closing band&lt;/h2&gt;
+  &lt;p&gt;…&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+          </details>
+        </div>
+
+        <div>
+          <h3 id="bento">Bento</h3>
+          <p><code>.k-bento</code> is a dense feature grid: uniform cells
+          with a few spanning stars. Cells are your own markup — cards
+          work well. <code>.k-bento__wide</code> spans two columns,
+          <code>.k-bento__tall</code> two rows, <code>.k-bento__hero</code>
+          both; dense flow backfills the gaps, and everything stacks to
+          one column on phones. Four columns from 1080px, two from
+          640px.</p>
+          <div class="k-bento" style="margin-bottom: var(--k-space-4)">
+            <div class="demo-box k-bento__hero">__hero (2×2)</div>
+            <div class="demo-box">cell</div>
+            <div class="demo-box">cell</div>
+            <div class="demo-box k-bento__wide">__wide (2×1)</div>
+            <div class="demo-box k-bento__tall">__tall (1×2)</div>
+            <div class="demo-box">cell</div>
+            <div class="demo-box">cell</div>
+          </div>
+          <details>
+            <summary>Markup</summary>
+            <pre><code>&lt;div class="k-bento"&gt;
+  &lt;div class="k-card k-bento__hero"&gt;the star&lt;/div&gt;
+  &lt;div class="k-card"&gt;…&lt;/div&gt;
+  &lt;div class="k-card k-bento__wide"&gt;…&lt;/div&gt;
+  &lt;div class="k-card k-bento__tall"&gt;…&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </details>
+        </div>
+        </div>
+
+        <h2>Sidebar &amp; sticky</h2>
+        <div class="k-flow">
+        <div>
+          <h3>Sidebar</h3>
+          <p><code>.k-sidebar</code> is a sidebar-plus-main split: from
+          820px the first child becomes a sidebar
+          (<code>minmax(14rem,&nbsp;1fr)</code>) and the second child takes
+          three times the room (<code>3fr</code>). Below 820px they stack.</p>
+          <div class="k-sidebar" style="margin-bottom: var(--k-space-4)">
+            <div class="demo-box">sidebar · minmax(14rem, 1fr)</div>
+            <div class="demo-box">main · 3fr</div>
+          </div>
+          <details>
+            <summary>Markup</summary>
+            <pre><code>&lt;div class="k-sidebar"&gt;
+  &lt;nav&gt;…&lt;/nav&gt;    &lt;!-- sidebar --&gt;
+  &lt;main&gt;…&lt;/main&gt;  &lt;!-- main --&gt;
+&lt;/div&gt;</code></pre>
+          </details>
+        </div>
+
+        <div>
+          <h3>Sticky</h3>
+          <p><code>.k-sticky</code> keeps an element pinned while its
+          container scrolls past, resting <code>--k-space-4</code> from the
+          top. It only does something when a <strong>sibling is taller</strong>
+          than it — a sticky element alone in a short container just sits
+          there. The usual pairing is the sidebar above: scroll this demo's
+          column and the left box stays put.</p>
+          <div class="k-sidebar" style="margin-bottom: var(--k-space-4)">
+            <div class="k-sticky demo-box">sticky · top: --k-space-4</div>
+            <div class="k-stack k-stack--tight">
+              <div class="demo-box" style="padding-block: var(--k-space-6)">tall content</div>
+              <div class="demo-box" style="padding-block: var(--k-space-6)">keeps going</div>
+              <div class="demo-box" style="padding-block: var(--k-space-6)">and going</div>
+            </div>
+          </div>
+          <details>
+            <summary>Markup</summary>
+            <pre><code>&lt;div class="k-sidebar"&gt;
+  &lt;nav class="k-sticky"&gt;…&lt;/nav&gt;  &lt;!-- pins while main scrolls --&gt;
+  &lt;main&gt;…&lt;/main&gt;
+&lt;/div&gt;</code></pre>
+          </details>
+        </div>
+        </div>
+
+        <h2>Frame</h2>
+        <p><code>.k-frame</code> crops media to a fixed aspect ratio —
+        16:9 by default — with <code>object-fit: cover</code>, so any
+        image, video or iframe fills it without distortion. Modifiers:
+        <code>--square</code> (1:1), <code>--4x3</code>, and
+        <code>--portrait</code> (3:4).</p>
+        <div class="k-cols-4" style="margin-bottom: var(--k-space-4)">
+          <div>
+            <div class="k-frame"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 90'%3E%3Crect width='160' height='90' fill='%23dfe4f7'/%3E%3Ccircle cx='122' cy='24' r='11' fill='%23aab6ee'/%3E%3Cpath d='M0 70 42 44 76 64 112 40 160 62V90H0Z' fill='%23808fe0'/%3E%3C/svg%3E" alt="Placeholder landscape"></div>
+            <p class="band-caption" style="margin-top: var(--k-space-2)">k-frame · 16:9</p>
+          </div>
+          <div>
+            <div class="k-frame k-frame--square"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 90'%3E%3Crect width='160' height='90' fill='%23dfe4f7'/%3E%3Ccircle cx='122' cy='24' r='11' fill='%23aab6ee'/%3E%3Cpath d='M0 70 42 44 76 64 112 40 160 62V90H0Z' fill='%23808fe0'/%3E%3C/svg%3E" alt="Placeholder landscape, square crop"></div>
+            <p class="band-caption" style="margin-top: var(--k-space-2)">--square · 1:1</p>
+          </div>
+          <div>
+            <div class="k-frame k-frame--4x3"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 90'%3E%3Crect width='160' height='90' fill='%23dfe4f7'/%3E%3Ccircle cx='122' cy='24' r='11' fill='%23aab6ee'/%3E%3Cpath d='M0 70 42 44 76 64 112 40 160 62V90H0Z' fill='%23808fe0'/%3E%3C/svg%3E" alt="Placeholder landscape, 4:3 crop"></div>
+            <p class="band-caption" style="margin-top: var(--k-space-2)">--4x3</p>
+          </div>
+          <div>
+            <div class="k-frame k-frame--portrait"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 90'%3E%3Crect width='160' height='90' fill='%23dfe4f7'/%3E%3Ccircle cx='122' cy='24' r='11' fill='%23aab6ee'/%3E%3Cpath d='M0 70 42 44 76 64 112 40 160 62V90H0Z' fill='%23808fe0'/%3E%3C/svg%3E" alt="Placeholder landscape, portrait crop"></div>
+            <p class="band-caption" style="margin-top: var(--k-space-2)">--portrait · 3:4</p>
+          </div>
+        </div>
+        <details>
+          <summary>Markup</summary>
+          <pre><code>&lt;div class="k-frame"&gt;                 &lt;!-- 16:9 --&gt;
+  &lt;img src="photo.jpg" alt="…"&gt;
+&lt;/div&gt;
+
+&lt;div class="k-frame k-frame--square"&gt;…&lt;/div&gt;   &lt;!-- 1:1 --&gt;
+&lt;div class="k-frame k-frame--4x3"&gt;…&lt;/div&gt;      &lt;!-- 4:3 --&gt;
+&lt;div class="k-frame k-frame--portrait"&gt;…&lt;/div&gt; &lt;!-- 3:4 --&gt;</code></pre>
+        </details>
+
+        <h2>Breakpoints</h2>
+        <p>keel has exactly three fixed breakpoints, and every responsive
+        rule in the framework uses one of them:</p>
+        <table>
+          <thead>
+            <tr><th>Name</th><th>Width</th><th>Used by</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>sm</code></td><td>640px</td><td><code>.k-thirds</code>, <code>.k-cols-2</code>, <code>.k-cols-3</code>, <code>.k-cols-4</code> (to 2 cols)</td></tr>
+            <tr><td><code>md</code></td><td>820px</td><td><code>.k-split</code>, <code>.k-sidebar</code>, the mobile/desktop-only utilities</td></tr>
+            <tr><td><code>lg</code></td><td>1080px</td><td><code>.k-cols-4</code> (to 4 cols)</td></tr>
+          </tbody>
+        </table>
+        <p>An honest note: these are not tokens, because they can't be —
+        media queries cannot read custom properties. They are three
+        documented numbers, and that's all they will ever be.</p>
+
+        <h2 id="page-layouts">Page layouts</h2>
+        <p>These are page skeletons, not components — each one is bands +
+        containers + one arrangement. Steal the shape, then fill it from
+        <a href="sections.html">sections</a>.</p>
+        <div class="k-cols-2">
+          <div class="k-card">
+            <h3>Marketing page</h3>
+            <p>Stacked full-bleed bands: hero, a thirds band, a split band,
+            a closing CTA band.</p>
+            <div class="lay-frame" aria-hidden="true">
+              <div class="lay-bar" style="flex: 2"></div>
+              <div class="lay-row" style="flex: 1.4">
+                <div class="lay-bar" style="flex: 1"></div>
+                <div class="lay-bar" style="flex: 1"></div>
+                <div class="lay-bar" style="flex: 1"></div>
+              </div>
+              <div class="lay-row" style="flex: 1.4">
+                <div class="lay-bar" style="flex: 1"></div>
+                <div class="lay-bar" style="flex: 1"></div>
+              </div>
+              <div class="lay-bar" style="flex: 1; background: var(--k-accent); opacity: 0.5"></div>
+            </div>
+            <details>
+              <summary>Skeleton</summary>
+              <pre><code>&lt;section class="k-hero"&gt;
+  &lt;div class="k-container"&gt;…&lt;/div&gt;
+&lt;/section&gt;
+&lt;section class="k-section k-section--alt"&gt;
+  &lt;div class="k-container"&gt;&lt;div class="k-thirds"&gt;…&lt;/div&gt;&lt;/div&gt;
+&lt;/section&gt;
+&lt;section class="k-section"&gt;
+  &lt;div class="k-container"&gt;&lt;div class="k-split"&gt;…&lt;/div&gt;&lt;/div&gt;
+&lt;/section&gt;
+&lt;section class="k-section k-section--accent"&gt;
+  &lt;div class="k-container k-center"&gt;…&lt;/div&gt;
+&lt;/section&gt;</code></pre>
+            </details>
+          </div>
+          <div class="k-card">
+            <h3>Documentation</h3>
+            <p>A top nav bar, then a sticky sidebar beside the content — on
+            this very site a right rail joins in from 1280px.</p>
+            <div class="lay-frame" aria-hidden="true">
+              <div class="lay-bar" style="flex: none; block-size: 12px"></div>
+              <div class="lay-row" style="flex: 1">
+                <div class="lay-bar" style="flex: 1"></div>
+                <div class="lay-bar" style="flex: 3"></div>
+              </div>
+            </div>
+            <details>
+              <summary>Skeleton</summary>
+              <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container--wide k-container"&gt;
+    &lt;div class="k-sidebar"&gt;
+      &lt;aside class="k-sticky"&gt;…nav…&lt;/aside&gt;
+      &lt;main&gt;…&lt;/main&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+            </details>
+          </div>
+          <div class="k-card">
+            <h3>Article</h3>
+            <p>A narrow prose measure, with one wide figure breaking out
+            between the narrow bands.</p>
+            <div class="lay-frame" aria-hidden="true">
+              <div class="lay-bar" style="flex: 1.6; inline-size: 55%; margin-inline: auto"></div>
+              <div class="lay-bar" style="flex: 1.2; background: var(--k-accent); opacity: 0.5"></div>
+              <div class="lay-bar" style="flex: 1.6; inline-size: 55%; margin-inline: auto"></div>
+            </div>
+            <details>
+              <summary>Skeleton</summary>
+              <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container--narrow k-container"&gt;…prose…&lt;/div&gt;
+  &lt;div class="k-container"&gt;&lt;figure&gt;…wide figure…&lt;/figure&gt;&lt;/div&gt;
+  &lt;div class="k-container--narrow k-container"&gt;…prose…&lt;/div&gt;
+&lt;/section&gt;</code></pre>
+            </details>
+          </div>
+          <div class="k-card">
+            <h3>App shell</h3>
+            <p>A header bar, a sidebar carrying a list nav, and a content
+            area of cards. keel handles the layout; app behavior is your
+            JS or framework.</p>
+            <div class="lay-frame" aria-hidden="true">
+              <div class="lay-bar" style="flex: none; block-size: 12px; background: var(--k-accent); opacity: 0.5"></div>
+              <div class="lay-row" style="flex: 1">
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 4px">
+                  <div class="lay-bar" style="flex: 1"></div>
+                  <div class="lay-bar" style="flex: 1"></div>
+                  <div class="lay-bar" style="flex: 1"></div>
+                </div>
+                <div style="flex: 3; display: grid; grid-template-columns: 1fr 1fr; gap: 4px">
+                  <div class="lay-bar"></div>
+                  <div class="lay-bar"></div>
+                  <div class="lay-bar"></div>
+                  <div class="lay-bar"></div>
+                </div>
+              </div>
+            </div>
+            <details>
+              <summary>Skeleton</summary>
+              <pre><code>&lt;header class="k-section--alt"&gt;
+  &lt;div class="k-container--wide k-container"&gt;
+    &lt;nav class="k-nav"&gt;…&lt;/nav&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+&lt;section class="k-section k-section--tight"&gt;
+  &lt;div class="k-container--wide k-container"&gt;
+    &lt;div class="k-sidebar"&gt;
+      &lt;ul class="k-list"&gt;…nav items…&lt;/ul&gt;
+      &lt;main&gt;&lt;div class="k-cols-2"&gt;
+        &lt;div class="k-card"&gt;…&lt;/div&gt;
+        &lt;div class="k-card"&gt;…&lt;/div&gt;
+      &lt;/div&gt;&lt;/main&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+            </details>
+          </div>
+        </div>
+      </main>
+
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

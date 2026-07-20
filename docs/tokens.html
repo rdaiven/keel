@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tokens — keel</title>
+<meta name="description" content="The keel token reference: ~30 custom properties in @layer tokens, the only place visual decisions live. Names, defaults, and how to replace them.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+      <aside class="k-sticky docs-side k-sidebar--collapsible" id="docs-sidebar">
+        <button class="k-tool docs-sidebar-toggle" type="button" id="docs-sidebar-toggle"
+                aria-pressed="false" aria-label="Collapse sidebar to icons">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Documentation">
+          <details class="k-nav-group" open>
+            <summary>Getting started</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="start.html">Start</a></li>
+            <li><a href="frameworks.html">Framework guides</a></li>
+            <li><a href="concepts.html">Concepts</a></li>
+            <li><a href="changelog.html">Changelog</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Reference</summary>
+          <ul class="k-list k-list--flush">
+            <li aria-current="page"><a href="tokens.html">Tokens</a></li>
+            <li><a href="base.html">Base</a></li>
+            <li><a href="typography.html">Typography</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="components.html">Components</a>
+            <ul class="k-list k-list--flush docs-sub">
+              <li><a href="components-actions.html">Actions</a></li>
+              <li><a href="components-forms.html">Forms</a></li>
+              <li><a href="components-surfaces.html">Surfaces &amp; data</a></li>
+              <li><a href="components-feedback.html">Feedback</a></li>
+              <li><a href="components-overlays.html">Overlays</a></li>
+              <li><a href="components-navigation.html">Navigation</a></li>
+              <li><a href="components-identity.html">Identity &amp; media</a></li>
+              <li><a href="components-motion.html">Motion</a></li>
+              <li><a href="components-extending.html">Extending</a></li>
+              <li><a href="components-app.html">Application</a></li>
+            </ul>
+          </li>
+            <li><a href="utilities.html">Utilities</a></li>
+            <li><a href="icons.html">Icons</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Build</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="sections.html">Sections</a></li>
+            <li><a href="../templates.html">Templates</a></li>
+            <li><a href="../design.html">Design system</a></li>
+            <li><a href="paths.html">Paths</a></li>
+          </ul>
+          </details>
+        </nav>
+        <div id="docs-anchors"></div>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <h1>Tokens</h1>
+        <p class="k-text-soft">About 30 custom properties in <code>@layer tokens</code> — the only place visual decisions live. Replacing this layer is the entire theming story.</p>
+
+        <h2>Overriding</h2>
+        <p>Paste your own tokens <em>after</em> the keel link tag, inside the same <code>@layer tokens</code> — later declarations in the same layer win, so anything you leave out keeps its default.</p>
+        <pre><code>&lt;link rel="stylesheet" href="keel.css"&gt;
+&lt;style&gt;
+  @layer tokens {
+    :root {
+      --k-accent: hsl(160 84% 32%);
+      --k-radius: 4px;
+      --k-density: 0.9;
+    }
+  }
+&lt;/style&gt;</code></pre>
+        <p>You don't have to write a full set by hand — the <a href="../design.html">design system page</a> generates one from a color, a mood, and a font pairing.</p>
+
+        <h2>Color relationships</h2>
+        <p>The accent shades derive from their seed via <code>color-mix()</code>: override <code>--k-accent</code> alone and strong, light, soft, and both transparencies re-derive automatically. The one exception is <code>--k-on-accent</code>, which stays explicit — contrast is a judgment the math can't make safely. The deeper story is on the <a href="concepts.html">concepts page</a>.</p>
+        <pre><code>@layer tokens {
+  :root { --k-accent: hsl(160 84% 32%); --k-on-accent: hsl(0 0% 100%); }
+}</code></pre>
+
+        <h2>Auto dark</h2>
+        <p>Opt-in: put <code>data-k-auto-dark</code> on the
+        <code>html</code> element and, when the visitor's OS prefers
+        dark, the neutral seeds flip to a night set — every derived
+        shade follows. It's a sensible default, not a designed theme;
+        sites that care about their dark mode should ship their own
+        tokens block instead (the <a href="../design.html">design
+        page</a>'s Night and Dusk moods are a starting point). keel
+        also ships quiet print styles: chrome and overlays hidden,
+        bands flattened to ink on white.</p>
+        <pre><code>&lt;html lang="en" data-k-auto-dark&gt;</code></pre>
+
+        <h2>Flat skin</h2>
+        <p>Opt-in: put <code>data-k-flat</code> on the
+        <code>html</code> element to strip elevation — the shadow
+        scale collapses to <code>none</code> and the second surface
+        step is redrawn from the border, so cards, buttons and popovers
+        read as thin, borders-only shapes. It's a separate axis from
+        color, so it composes with any mood or with auto&nbsp;dark;
+        pair it with a smaller <code>--k-radius</code> and a denser
+        scale for the full range from designed to bare.</p>
+        <pre><code>&lt;html lang="en" data-k-flat&gt;</code></pre>
+
+        <h2>Color</h2>
+        <p>The swatches are live — each cell paints with its own token, so this reference re-renders in your palette.</p>
+        <table>
+      <thead>
+        <tr><th>Token</th><th>What it does</th><th>Default</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-bg)"></span> <code>--k-bg</code></td>
+          <td>Page background.</td>
+          <td><code>hsl(228 20% 98.5%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-surface)"></span> <code>--k-surface</code></td>
+          <td>Raised surfaces: cards, alt bands, inputs, dialogs.</td>
+          <td><code>hsl(0 0% 100%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-surface-2)"></span> <code>--k-surface-2</code></td>
+          <td>Second surface step: code blocks, table stripes, progress tracks.</td>
+          <td><code>hsl(228 18% 95%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-border)"></span> <code>--k-border</code></td>
+          <td>Default border for cards, tables, rules, band edges.</td>
+          <td><code>hsl(228 14% 87%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-border-strong)"></span> <code>--k-border-strong</code></td>
+          <td>Stronger border where the edge must read: inputs, ghost buttons.</td>
+          <td><code>hsl(228 14% 76%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-text)"></span> <code>--k-text</code></td>
+          <td>Body text color.</td>
+          <td><code>hsl(228 22% 14%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-text-soft)"></span> <code>--k-text-soft</code></td>
+          <td>Secondary text: leads, descriptions, table headers.</td>
+          <td><code>hsl(228 12% 36%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-text-faint)"></span> <code>--k-text-faint</code></td>
+          <td>Tertiary text: captions, hints, placeholders, footers.</td>
+          <td><code>hsl(228 9% 52%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-accent)"></span> <code>--k-accent</code></td>
+          <td>The brand color: links, buttons, focus rings, selection.</td>
+          <td><code>hsl(231 84% 56%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-accent-strong)"></span> <code>--k-accent-strong</code></td>
+          <td>Darker accent for hover states and small text on light surfaces. Derives from the seed.</td>
+          <td><code>color-mix(in oklab, var(--k-accent), black 20%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-accent-light)"></span> <code>--k-accent-light</code></td>
+          <td>Lighter accent for accents on dark surfaces. Derives from the seed.</td>
+          <td><code>color-mix(in oklab, var(--k-accent), white 25%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-on-accent)"></span> <code>--k-on-accent</code></td>
+          <td>Text placed on the accent: button labels, accent bands.</td>
+          <td><code>hsl(0 0% 100%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-accent-soft)"></span> <code>--k-accent-soft</code></td>
+          <td>Pale accent wash: tint bands, badges, marks. Derives from the seed, mixed into the page background.</td>
+          <td><code>color-mix(in oklab, var(--k-accent) 12%, var(--k-bg))</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-accent-trans-10)"></span> <code>--k-accent-trans-10</code></td>
+          <td>Accent at 10% opacity. Genuinely transparent — the swatch shows the page behind it.</td>
+          <td><code>color-mix(in srgb, var(--k-accent) 10%, transparent)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-accent-trans-20)"></span> <code>--k-accent-trans-20</code></td>
+          <td>Accent at 20% opacity: focus ring shadows. Transparent, like the 10% step.</td>
+          <td><code>color-mix(in srgb, var(--k-accent) 20%, transparent)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-accent-2)"></span> <code>--k-accent-2</code></td>
+          <td>The secondary brand color: secondary buttons and badges. Derived from the primary by harmony on the design page, or set exactly.</td>
+          <td><code>hsl(351 72% 44%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-accent-2-strong)"></span> <code>--k-accent-2-strong</code></td>
+          <td>Darker secondary for hover states. Derives from the seed.</td>
+          <td><code>color-mix(in oklab, var(--k-accent-2), black 20%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-accent-2-light)"></span> <code>--k-accent-2-light</code></td>
+          <td>Lighter secondary for dark surfaces. Derives from the seed.</td>
+          <td><code>color-mix(in oklab, var(--k-accent-2), white 25%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-on-accent-2)"></span> <code>--k-on-accent-2</code></td>
+          <td>Text placed on the secondary.</td>
+          <td><code>hsl(0 0% 100%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-accent-2-soft)"></span> <code>--k-accent-2-soft</code></td>
+          <td>Pale secondary wash: secondary badges and <code>.k-section--tint-2</code> bands. Derives from the seed, mixed into the page background.</td>
+          <td><code>color-mix(in oklab, var(--k-accent-2) 12%, var(--k-bg))</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-accent-2-trans-10)"></span> <code>--k-accent-2-trans-10</code></td>
+          <td>Secondary at 10% opacity. Genuinely transparent — the swatch shows the page behind it.</td>
+          <td><code>color-mix(in srgb, var(--k-accent-2) 10%, transparent)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-accent-2-trans-20)"></span> <code>--k-accent-2-trans-20</code></td>
+          <td>Secondary at 20% opacity. Transparent, like the 10% step.</td>
+          <td><code>color-mix(in srgb, var(--k-accent-2) 20%, transparent)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-accent-3)"></span> <code>--k-accent-3</code></td>
+          <td>The tertiary/accent brand color: tertiary buttons and badges, highlights. Set exactly on the design page. Carries the same <code>-strong</code>, <code>-light</code>, <code>-soft</code>, and <code>-trans-10/20</code> variants as the others.</td>
+          <td><code>hsl(174 70% 28%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-on-accent-3)"></span> <code>--k-on-accent-3</code></td>
+          <td>Text placed on the accent.</td>
+          <td><code>hsl(0 0% 100%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-accent-3-soft)"></span> <code>--k-accent-3-soft</code></td>
+          <td>Pale accent wash: tertiary badges and <code>.k-section--tint-3</code> bands. Derives from the seed, mixed into the page background.</td>
+          <td><code>color-mix(in oklab, var(--k-accent-3) 12%, var(--k-bg))</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-ok)"></span> <code>--k-ok</code></td>
+          <td>Status: success. Used by ok badges and alerts.</td>
+          <td><code>hsl(152 60% 30%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-warn)"></span> <code>--k-warn</code></td>
+          <td>Status: caution. Used by warn badges and alerts.</td>
+          <td><code>hsl(38 92% 34%)</code></td>
+        </tr>
+        <tr>
+          <td><span style="display:inline-block;width:1.1em;height:1.1em;border-radius:3px;border:1px solid var(--k-border);vertical-align:-0.2em;background:var(--k-danger)"></span> <code>--k-danger</code></td>
+          <td>Status: error. Used by danger badges and alerts.</td>
+          <td><code>hsl(4 74% 42%)</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+        <h2>Type</h2>
+        <p>The scale is fluid — each step is a <code>clamp()</code> that breathes with the viewport, no breakpoints.</p>
+        <table>
+      <thead>
+        <tr><th>Token</th><th>What it does</th><th>Default</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>--k-font-display</code></td>
+          <td>Headings and stat values.</td>
+          <td><code>system-ui, "Segoe UI", sans-serif</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-font-body</code></td>
+          <td>Everything else.</td>
+          <td><code>system-ui, "Segoe UI", sans-serif</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-font-mono</code></td>
+          <td>Code, kbd, kickers, eyebrows, the brand mark.</td>
+          <td><code>ui-monospace, Consolas, "Cascadia Mono", monospace</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-display-weight</code></td>
+          <td>Weight of headings. Fonts with variable weight can go anywhere between 400 and 900.</td>
+          <td><code>650</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-tracking</code></td>
+          <td>Letter-spacing of headings.</td>
+          <td><code>-0.015em</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-leading</code></td>
+          <td>Body line-height.</td>
+          <td><code>1.65</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-leading-tight</code></td>
+          <td>Heading line-height.</td>
+          <td><code>1.12</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-text-xs</code></td>
+          <td>Smallest step: badges, hints, table headers, labels.</td>
+          <td><code>clamp(0.78rem, 0.75rem + 0.15vw, 0.84rem)</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-text-s</code></td>
+          <td>Small step: code blocks, tables, small print, nav links.</td>
+          <td><code>clamp(0.88rem, 0.85rem + 0.18vw, 0.95rem)</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-text-m</code></td>
+          <td>Body size.</td>
+          <td><code>clamp(1rem, 0.96rem + 0.22vw, 1.1rem)</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-text-l</code></td>
+          <td>Large step: h4, leads, blockquotes.</td>
+          <td><code>clamp(1.15rem, 1.06rem + 0.45vw, 1.35rem)</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-text-xl</code></td>
+          <td>h3.</td>
+          <td><code>clamp(1.4rem, 1.22rem + 0.9vw, 1.8rem)</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-text-2xl</code></td>
+          <td>h2 and stat values.</td>
+          <td><code>clamp(1.8rem, 1.48rem + 1.6vw, 2.5rem)</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-text-3xl</code></td>
+          <td>h1.</td>
+          <td><code>clamp(2.4rem, 1.9rem + 2.6vw, 3.6rem)</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+        <h2>Space</h2>
+        <p>Every step multiplies by <code>--k-density</code> — one number loosens or tightens the whole page; steps 1–4 are static, 5–8 fluid.</p>
+        <table>
+      <thead>
+        <tr><th>Token</th><th>What it does</th><th>Default</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>--k-density</code></td>
+          <td>Global spacing multiplier. 0.85 is compact, 1.15 is airy.</td>
+          <td><code>1</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-space-1</code></td>
+          <td>Hairline gaps: list items, hints, labels.</td>
+          <td><code>calc(0.25rem * var(--k-density))</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-space-2</code></td>
+          <td>Tight padding: table cells, input blocks, badges.</td>
+          <td><code>calc(0.5rem * var(--k-density))</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-space-3</code></td>
+          <td>Small gaps: clusters, heading margins, alerts.</td>
+          <td><code>calc(0.75rem * var(--k-density))</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-space-4</code></td>
+          <td>The base rhythm: paragraph margins, stack gaps, card grids.</td>
+          <td><code>calc(1rem * var(--k-density))</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-space-5</code></td>
+          <td>Card padding, split gaps, blockquote margins. Fluid.</td>
+          <td><code>calc(clamp(1.4rem, 1.2rem + 0.9vw, 2rem) * var(--k-density))</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-space-6</code></td>
+          <td>Loose stacks, tight bands, horizontal rules, footers. Fluid.</td>
+          <td><code>calc(clamp(2.25rem, 1.85rem + 1.8vw, 3.4rem) * var(--k-density))</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-space-7</code></td>
+          <td>Section band padding. Fluid.</td>
+          <td><code>calc(clamp(3.25rem, 2.5rem + 3.5vw, 5.5rem) * var(--k-density))</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-space-8</code></td>
+          <td>Hero band padding. Fluid.</td>
+          <td><code>calc(clamp(4.5rem, 3.3rem + 5.5vw, 8rem) * var(--k-density))</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+        <h2>Shape</h2>
+        <p>One knob: <code>--k-radius</code> — the small and large steps derive from it, and <code>0</code> makes the whole framework square.</p>
+        <table>
+      <thead>
+        <tr><th>Token</th><th>What it does</th><th>Default</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>--k-radius</code></td>
+          <td>Base corner radius: buttons, code blocks, alerts, images, fieldsets.</td>
+          <td><code>8px</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-radius-s</code></td>
+          <td>Small step, derived: inline code, inputs, pagination.</td>
+          <td><code>calc(var(--k-radius) * 0.5)</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-radius-l</code></td>
+          <td>Large step, derived: cards, dialogs.</td>
+          <td><code>calc(var(--k-radius) * 1.75)</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+        <h2>Width</h2>
+        <table>
+      <thead>
+        <tr><th>Token</th><th>What it does</th><th>Default</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>--k-width-narrow</code></td>
+          <td>Prose measure. Used by <code>.k-container--narrow</code>.</td>
+          <td><code>46rem</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-width</code></td>
+          <td>Default container width. Used by <code>.k-container</code>.</td>
+          <td><code>72rem</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-width-wide</code></td>
+          <td>Wide container for grids and tables. Used by <code>.k-container--wide</code>.</td>
+          <td><code>90rem</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-gutter</code></td>
+          <td>Fluid side margin. Drives the margin-based <code>.k-container--gutter</code> — no width cap, just breathing room.</td>
+          <td><code>clamp(1.25rem, 5vw, 5rem)</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+        <h2>Other</h2>
+        <table>
+      <thead>
+        <tr><th>Token</th><th>What it does</th><th>Default</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>--k-shadow-s</code></td>
+          <td>Subtle edge shadow for small controls.</td>
+          <td><code>0 1px 2px hsl(228 35% 12% / 0.05)</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-shadow</code></td>
+          <td>The default elevation: cards and dialogs.</td>
+          <td><code>0 1px 2px hsl(228 35% 12% / 0.04), 0 6px 18px -8px hsl(228 35% 12% / 0.10)</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-shadow-l</code></td>
+          <td>High elevation: dropdown menus, lifted cards.</td>
+          <td><code>0 2px 6px hsl(228 35% 12% / 0.05), 0 22px 44px -18px hsl(228 35% 12% / 0.20)</code></td>
+        </tr>
+        <tr>
+          <td><code>--k-ease</code></td>
+          <td>Duration and easing for every transition.</td>
+          <td><code>160ms ease</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+        <p><small>A note on stability: keel is pre-1.0. Token
+        names may still tighten before 1.0 — changes land in the
+        <a href="changelog.html">changelog</a>.
+        Treat this list as the current proposal, not a contract.</small></p>
+      </main>
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

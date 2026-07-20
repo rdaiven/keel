@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Utilities — keel</title>
+<meta name="description" content="keel's utilities layer: a deliberately small, token-bound utility surface — display, spacing, text, flex, surface, border, and motion helpers. Every value is a token; no arbitrary values, no responsive prefixes.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<style>
+  .demo-box { background: var(--k-accent-soft); border: 1px dashed var(--k-accent);
+              border-radius: var(--k-radius-s); padding: var(--k-space-3);
+              font-size: var(--k-text-xs); font-family: var(--k-font-mono);
+              color: var(--k-accent-strong); text-align: center; }
+  .band-caption { font-family: var(--k-font-mono); font-size: var(--k-text-xs);
+                  letter-spacing: 0.08em; text-transform: uppercase;
+                  color: var(--k-text-faint); margin-bottom: var(--k-space-3); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+
+      <aside class="k-sticky docs-side k-sidebar--collapsible" id="docs-sidebar">
+        <button class="k-tool docs-sidebar-toggle" type="button" id="docs-sidebar-toggle"
+                aria-pressed="false" aria-label="Collapse sidebar to icons">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Documentation">
+          <details class="k-nav-group" open>
+            <summary>Getting started</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="start.html">Start</a></li>
+            <li><a href="frameworks.html">Framework guides</a></li>
+            <li><a href="concepts.html">Concepts</a></li>
+            <li><a href="changelog.html">Changelog</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Reference</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="tokens.html">Tokens</a></li>
+            <li><a href="base.html">Base</a></li>
+            <li><a href="typography.html">Typography</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="components.html">Components</a>
+            <ul class="k-list k-list--flush docs-sub">
+              <li><a href="components-actions.html">Actions</a></li>
+              <li><a href="components-forms.html">Forms</a></li>
+              <li><a href="components-surfaces.html">Surfaces &amp; data</a></li>
+              <li><a href="components-feedback.html">Feedback</a></li>
+              <li><a href="components-overlays.html">Overlays</a></li>
+              <li><a href="components-navigation.html">Navigation</a></li>
+              <li><a href="components-identity.html">Identity &amp; media</a></li>
+              <li><a href="components-motion.html">Motion</a></li>
+              <li><a href="components-extending.html">Extending</a></li>
+              <li><a href="components-app.html">Application</a></li>
+            </ul>
+          </li>
+            <li aria-current="page"><a href="utilities.html">Utilities</a></li>
+            <li><a href="icons.html">Icons</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Build</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="sections.html">Sections</a></li>
+            <li><a href="../templates.html">Templates</a></li>
+            <li><a href="../design.html">Design system</a></li>
+            <li><a href="paths.html">Paths</a></li>
+          </ul>
+          </details>
+        </nav>
+        <div id="docs-anchors"></div>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <h1>Utilities</h1>
+        <p class="k-text-soft">A deliberately small, token-bound utility
+        surface — a hand of cards, not a vocabulary; no arbitrary values,
+        no responsive prefixes.</p>
+
+        <h2>Display</h2>
+        <dl>
+          <dt><code>.k-d-none</code> · <code>.k-d-block</code> · <code>.k-d-flex</code> · <code>.k-d-inline-flex</code> · <code>.k-d-grid</code></dt>
+          <dd>One display value each. That's the whole set — there is no
+          utility for every display mode, only the ones a page actually
+          switches between.</dd>
+          <dt><code>.k-mobile-only</code> · <code>.k-desktop-only</code></dt>
+          <dd>Show an element on only one side of keel's <strong>md
+          breakpoint (820px)</strong>: <code>.k-mobile-only</code> renders
+          below it and disappears above; <code>.k-desktop-only</code> does
+          the opposite. This is the only responsive behavior in the whole
+          utilities layer.</dd>
+          <dt><code>.k-visually-hidden</code></dt>
+          <dd>Hides an element visually while keeping it in the
+          accessibility tree — screen readers still announce it. Use it
+          for skip links, icon-button labels, and headings that structure
+          a page for assistive tech. Never use <code>display: none</code>
+          (or <code>.k-d-none</code>) for content you want announced;
+          that removes it for everyone.</dd>
+          <dt><code>.k-print-hide</code></dt>
+          <dd>Hides an element only in <code>@media print</code> — for
+          navigation, floating actions, and anything else that has no
+          business on a printed page.</dd>
+        </dl>
+        <div class="k-d-flex k-gap-3 k-mb-4" style="flex-wrap: wrap">
+          <div class="k-d-flex k-gap-2 k-p-2 k-border k-rounded">
+            <div class="demo-box">.k-d-flex</div>
+            <div class="demo-box">row</div>
+          </div>
+          <div class="k-d-grid k-gap-2 k-p-2 k-border k-rounded" style="grid-template-columns: repeat(2, auto)">
+            <div class="demo-box">.k-d-grid</div>
+            <div class="demo-box">1</div>
+            <div class="demo-box">2</div>
+            <div class="demo-box">3</div>
+          </div>
+        </div>
+        <p class="k-text-soft"><small><code>.k-mobile-only</code> and
+        <code>.k-desktop-only</code> can't be demoed on the page itself —
+        resize this window past 820px, or see them in action in the
+        site's own header on a phone-width screen.</small></p>
+        <details>
+          <summary>Markup</summary>
+          <pre><code>&lt;a class="k-visually-hidden" href="#main"&gt;Skip to content&lt;/a&gt;
+
+&lt;p class="k-mobile-only"&gt;Shown below 820px.&lt;/p&gt;
+&lt;p class="k-desktop-only"&gt;Shown at 820px and up.&lt;/p&gt;
+
+&lt;div class="k-d-flex k-gap-2"&gt;…&lt;/div&gt;
+&lt;div class="k-d-grid k-gap-2" style="grid-template-columns: repeat(2, auto)"&gt;…&lt;/div&gt;</code></pre>
+        </details>
+
+        <h2>Spacing</h2>
+        <p>Properties on the token scale, nothing else. No negative
+        values — if you need those, write CSS.</p>
+        <table>
+          <thead>
+            <tr><th>Class pattern</th><th>Property</th><th>Scale</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>.k-mt-*</code></td><td><code>margin-top</code></td><td>0–8</td></tr>
+            <tr><td><code>.k-mb-*</code></td><td><code>margin-bottom</code></td><td>0–8</td></tr>
+            <tr><td><code>.k-ml-*</code></td><td><code>margin-inline-start</code></td><td>1–4</td></tr>
+            <tr><td><code>.k-mr-*</code></td><td><code>margin-inline-end</code></td><td>1–4</td></tr>
+            <tr><td><code>.k-p-*</code></td><td><code>padding</code></td><td>0–6</td></tr>
+            <tr><td><code>.k-px-*</code></td><td><code>padding-inline</code></td><td>2–5</td></tr>
+            <tr><td><code>.k-py-*</code></td><td><code>padding-block</code></td><td>2–5</td></tr>
+            <tr><td><code>.k-pt-*</code> · <code>.k-pb-*</code></td><td><code>padding-block-start</code> / <code>-end</code></td><td>2–4</td></tr>
+            <tr><td><code>.k-pl-*</code> · <code>.k-pr-*</code></td><td><code>padding-inline-start</code> / <code>-end</code></td><td>2–4</td></tr>
+            <tr><td><code>.k-gap-*</code></td><td><code>gap</code></td><td>1–6</td></tr>
+            <tr><td><code>.k-mx-auto</code></td><td><code>margin-inline: auto</code></td><td>—</td></tr>
+          </tbody>
+        </table>
+        <p>Each step is the matching <code>--k-space-*</code> token
+        (<code>.k-mt-4</code> is <code>margin-top: var(--k-space-4)</code>;
+        step 0 is a plain zero), so everything still scales with
+        <code>--k-density</code>.</p>
+        <div class="k-mb-4">
+          <div class="demo-box">baseline</div>
+          <div class="demo-box k-mt-2">.k-mt-2</div>
+          <div class="demo-box k-mt-5">.k-mt-5</div>
+          <div class="demo-box k-mt-8">.k-mt-8</div>
+        </div>
+        <details>
+          <summary>Markup</summary>
+          <pre><code>&lt;div&gt;baseline&lt;/div&gt;
+&lt;div class="k-mt-2"&gt;.k-mt-2&lt;/div&gt;
+&lt;div class="k-mt-5"&gt;.k-mt-5&lt;/div&gt;
+&lt;div class="k-mt-8"&gt;.k-mt-8&lt;/div&gt;</code></pre>
+        </details>
+
+        <h2>Text</h2>
+        <dl>
+          <dt><code>.k-text-xs</code> · <code>.k-text-s</code> · <code>.k-text-l</code> · <code>.k-text-xl</code></dt>
+          <dd>Font size from the type scale. There is deliberately no
+          <code>.k-text-m</code> — that's the body default — and no
+          utility for the heading sizes; headings are headings.</dd>
+          <dt><code>.k-text-soft</code> · <code>.k-text-faint</code> · <code>.k-text-accent</code> · <code>.k-text-accent-2</code> · <code>.k-text-accent-3</code></dt>
+          <dd>Text color from the tokens: softened, faint, or one of the
+          three brand colors.</dd>
+          <dt><code>.k-text-ok</code> · <code>.k-text-warn</code> · <code>.k-text-danger</code></dt>
+          <dd>The three semantic status colors — the same ones the alert
+          and badge variants use.</dd>
+          <dt><code>.k-text-center</code> · <code>.k-text-start</code> · <code>.k-text-end</code></dt>
+          <dd>Text alignment. Logical properties, so they follow the
+          writing direction.</dd>
+          <dt><code>.k-bold</code></dt>
+          <dd>Font weight 650 — the same weight keel uses for strong text
+          and display type.</dd>
+          <dt><code>.k-mono</code></dt>
+          <dd>The mono font stack, for inline figures and identifiers.</dd>
+          <dt><code>.k-uppercase</code></dt>
+          <dd>Uppercase with letter-spacing <em>and</em> a drop to the
+          xs size — an opinionated label style, not a bare
+          <code>text-transform</code>.</dd>
+          <dt><code>.k-nowrap</code></dt>
+          <dd>Prevents wrapping. For dates, figures, and short phrases
+          that read wrong when broken.</dd>
+          <dt><code>.k-truncate</code></dt>
+          <dd>One line, cut with an ellipsis. Needs a constrained width
+          to have anything to truncate against.</dd>
+          <dt><code>.k-balance</code></dt>
+          <dd><code>text-wrap: balance</code> — evens out line lengths.
+          Headings already get this from the base layer; use it on the
+          odd standfirst or card blurb.</dd>
+        </dl>
+        <div class="demo-box k-truncate k-mb-4" style="max-width: 16rem; text-align: start">
+          .k-truncate — this line is longer than its box and gets cut with an ellipsis
+        </div>
+        <details>
+          <summary>Markup</summary>
+          <pre><code>&lt;p class="k-truncate" style="max-width: 16rem"&gt;
+  A line longer than its box gets cut with an ellipsis…
+&lt;/p&gt;</code></pre>
+        </details>
+
+        <h2>Flex &amp; size</h2>
+        <dl>
+          <dt><code>.k-items-center</code> · <code>.k-items-start</code> · <code>.k-items-end</code> · <code>.k-items-baseline</code></dt>
+          <dd>Cross-axis alignment for a flex or grid parent.</dd>
+          <dt><code>.k-justify-between</code> · <code>.k-justify-center</code> · <code>.k-justify-start</code> · <code>.k-justify-end</code></dt>
+          <dd>Main-axis distribution.</dd>
+          <dt><code>.k-flex-col</code> · <code>.k-flex-wrap</code></dt>
+          <dd>Stack a flex row into a column, or let it wrap.</dd>
+          <dt><code>.k-grow</code></dt>
+          <dd><code>flex-grow: 1</code> — the child that takes the
+          leftover room.</dd>
+          <dt><code>.k-flex-none</code></dt>
+          <dd><code>flex: none</code> — the child that must not shrink
+          or grow: icons, avatars, buttons in a row.</dd>
+          <dt><code>.k-w-full</code></dt>
+          <dd>Full inline size.</dd>
+          <dt><code>.k-maxw-narrow</code> · <code>.k-maxw</code></dt>
+          <dd>Max inline size capped at the container-width tokens
+          (<code>--k-width-narrow</code>, <code>--k-width</code>) —
+          for capping an element without introducing a new container.</dd>
+          <dt><code>.k-aspect-square</code> · <code>.k-aspect-video</code> · <code>.k-aspect-portrait</code></dt>
+          <dd>Fixed <code>aspect-ratio</code> (1/1, 16/9, 3/4) for any
+          element — the same ratios <code>.k-frame</code>'s modifiers use,
+          available without the frame's other styling.</dd>
+        </dl>
+        <div class="k-d-flex k-items-center k-justify-between k-gap-3 k-mb-3" style="background: var(--k-surface-2); border-radius: var(--k-radius); padding: var(--k-space-3)">
+          <span class="demo-box k-grow k-truncate">.k-grow — takes the leftover room</span>
+          <span class="demo-box k-flex-none">.k-flex-none</span>
+        </div>
+        <div class="k-d-flex k-gap-3 k-mb-4">
+          <div class="demo-box k-aspect-square" style="width: 4rem">1:1</div>
+          <div class="demo-box k-aspect-video" style="width: 6rem">16:9</div>
+          <div class="demo-box k-aspect-portrait" style="width: 3.5rem">3:4</div>
+        </div>
+        <details>
+          <summary>Markup</summary>
+          <pre><code>&lt;div class="k-d-flex k-items-center k-justify-between k-gap-3"&gt;
+  &lt;span class="k-grow k-truncate"&gt;A long filename that truncates&lt;/span&gt;
+  &lt;button class="k-btn k-btn--small k-flex-none"&gt;Open&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div class="k-aspect-square" style="width: 4rem"&gt;…&lt;/div&gt;
+&lt;div class="k-aspect-video" style="width: 6rem"&gt;…&lt;/div&gt;
+&lt;div class="k-aspect-portrait" style="width: 3.5rem"&gt;…&lt;/div&gt;</code></pre>
+        </details>
+
+        <h2>Surface</h2>
+        <dl>
+          <dt><code>.k-rounded-s</code> · <code>.k-rounded</code> · <code>.k-rounded-l</code> · <code>.k-rounded-full</code></dt>
+          <dd>Corner radius from the shape tokens; <code>-full</code> is a
+          pill or circle.</dd>
+          <dt><code>.k-border</code></dt>
+          <dd>The standard one-pixel border in the border color. Combine
+          with a side or color utility below.</dd>
+          <dt><code>.k-border-t</code> · <code>.k-border-b</code> · <code>.k-border-l</code> · <code>.k-border-r</code></dt>
+          <dd>One-pixel border on a single logical side, for dividers and
+          table-row rules.</dd>
+          <dt><code>.k-border-accent</code> · <code>.k-border-accent-2</code> · <code>.k-border-accent-3</code> · <code>.k-border-ok</code> · <code>.k-border-warn</code> · <code>.k-border-danger</code></dt>
+          <dd>Recolors an existing border to a token — pair with
+          <code>.k-border</code> or a side utility; on its own it has
+          nothing to color.</dd>
+          <dt><code>.k-shadow</code> · <code>.k-shadow-l</code></dt>
+          <dd>The token shadows — the same ones cards and dialogs use.</dd>
+          <dt><code>.k-bg-surface</code> · <code>.k-bg-surface-2</code> · <code>.k-bg-accent-soft</code> · <code>.k-bg-accent-2-soft</code> · <code>.k-bg-accent-3-soft</code></dt>
+          <dd>Background from the tokens: surface, raised surface, and a
+          soft wash of each brand color. Every color utility here points
+          at a token, never a raw color. <code>.k-bg-soft</code> is a
+          shorter alias for <code>.k-bg-accent-soft</code> — same token,
+          same value, just less to type when there's only one accent in
+          play.</dd>
+          <dt><code>.k-bg-ok-soft</code> · <code>.k-bg-warn-soft</code> · <code>.k-bg-danger-soft</code></dt>
+          <dd>The same soft-wash treatment for the three status colors —
+          for inline status chips that aren't a full <code>.k-alert</code>.</dd>
+          <dt><code>.k-bg-gradient</code> · <code>.k-bg-gradient-soft</code></dt>
+          <dd>The derived two-color gradient (<code>--k-gradient</code>)
+          and its soft, low-opacity version — a hero backdrop or a subtle
+          section wash, without hand-mixing a gradient of your own.</dd>
+          <dt><code>.k-text-gradient</code></dt>
+          <dd>Clips the same gradient to text instead of a background —
+          for one accent word in a heading, not a whole paragraph (a
+          gradient fill hurts legibility past a few words).</dd>
+          <dt><code>.k-bg-mesh</code> · <code>.k-bg-mesh--live</code></dt>
+          <dd>A soft, multi-point radial gradient built from both accent
+          seeds — hero material. <code>--live</code> lets the points drift
+          slowly and continuously; both are covered in full, with a live
+          example, under <a href="components-surfaces.html#c-effects">Surface
+          effects</a>.</dd>
+          <dt><code>.k-sticky-top</code></dt>
+          <dd><code>position: sticky</code> pinned to the viewport top —
+          for a sticky header or table toolbar. Pair with
+          <code>.k-glass</code> for a frosted sticky bar.</dd>
+        </dl>
+        <div class="k-d-flex k-gap-3 k-mb-4" style="flex-wrap: wrap">
+          <div class="k-bg-surface k-border k-rounded k-p-3 k-text-xs k-mono">surface · border · rounded</div>
+          <div class="k-bg-surface-2 k-rounded-l k-p-3 k-text-xs k-mono">surface-2 · rounded-l</div>
+          <div class="k-bg-accent-soft k-rounded-full k-px-4 k-py-2 k-text-xs k-mono">accent-soft · rounded-full</div>
+          <div class="k-bg-surface k-border k-border-accent k-rounded k-p-3 k-text-xs k-mono">border-accent</div>
+          <div class="k-bg-ok-soft k-text-ok k-rounded k-p-3 k-text-xs k-mono">ok-soft · text-ok</div>
+          <div class="k-bg-warn-soft k-text-warn k-rounded k-p-3 k-text-xs k-mono">warn-soft · text-warn</div>
+          <div class="k-bg-gradient k-rounded k-p-3 k-text-xs k-mono" style="color: white">bg-gradient</div>
+          <div class="k-bg-gradient-soft k-rounded k-p-3 k-text-xs k-mono">bg-gradient-soft</div>
+          <div class="k-rounded k-p-3 k-text-l k-bold" style="background: var(--k-surface)"><span class="k-text-gradient">text-gradient</span></div>
+        </div>
+        <details>
+          <summary>Markup</summary>
+          <pre><code>&lt;div class="k-bg-surface k-border k-rounded k-p-3"&gt;…&lt;/div&gt;
+&lt;div class="k-bg-surface-2 k-rounded-l k-p-3"&gt;…&lt;/div&gt;
+&lt;div class="k-bg-accent-soft k-rounded-full k-px-4 k-py-2"&gt;…&lt;/div&gt;
+&lt;div class="k-bg-surface k-border k-border-accent k-rounded k-p-3"&gt;…&lt;/div&gt;
+&lt;div class="k-bg-ok-soft k-text-ok k-rounded k-p-3"&gt;…&lt;/div&gt;
+&lt;div class="k-bg-gradient k-rounded k-p-3"&gt;…&lt;/div&gt;
+&lt;h2&gt;&lt;span class="k-text-gradient"&gt;One accent word&lt;/span&gt; in a heading&lt;/h2&gt;</code></pre>
+        </details>
+
+        <h2>Motion</h2>
+        <p>Entry animations and interaction utilities from keel's motion
+        layer — one-shot on mount, and off entirely under
+        <code>prefers-reduced-motion: reduce</code>. See
+        <a href="components-motion.html">Motion</a> for the full set,
+        including scroll-driven reveal and the progress bar.</p>
+        <dl>
+          <dt><code>.k-anim-fade</code> · <code>.k-anim-up</code> · <code>.k-anim-pop</code> · <code>.k-anim-slide</code></dt>
+          <dd>Fade, rise, pop, or slide in once on mount. Duration is the
+          <code>--k-anim-duration</code> token (450ms default).</dd>
+          <dt><code>.k-stagger</code></dt>
+          <dd>Put on a parent and its children get increasing entry
+          delay automatically, no per-child class needed. Where
+          <code>sibling-index()</code> is supported the step is computed
+          per child, so a list of any length staggers all the way
+          through; elsewhere it falls back to six fixed steps, with
+          everything past the sixth child sharing the last one.</dd>
+          <dt><code>.k-anim-delay-1</code> · <code>.k-anim-delay-2</code> · <code>.k-anim-delay-3</code> · <code>.k-anim-delay-4</code></dt>
+          <dd>Manual 80ms delay steps for offsetting a single element's
+          entry animation outside a <code>.k-stagger</code> list.</dd>
+          <dt><code>.k-lift</code></dt>
+          <dd>Generic hover lift — translate and shadow — for any element,
+          not just cards. Scoped to <code>@media (hover: hover) and
+          (pointer: fine)</code>, so a tap on a touch screen can't leave
+          it stuck lifted — touch has no hover-out event to reverse the
+          transition. Reach for the same media query on any custom hover
+          effect you write; it's the general fix for "sticky hover" on
+          touch, not something a class alone can express.</dd>
+          <dt><code>.k-marquee</code> / <code>.k-marquee__track</code></dt>
+          <dd>Continuous horizontal scroll for a logo strip or ticker.
+          Duplicate the track's children once so the loop is seamless;
+          pauses on hover. Speed is the <code>--k-marquee-duration</code>
+          token (24s default).</dd>
+        </dl>
+        <div class="k-mb-4" style="overflow: hidden">
+          <div class="k-d-flex k-gap-3 k-stagger">
+            <div class="demo-box k-anim-up">1</div>
+            <div class="demo-box k-anim-up">2</div>
+            <div class="demo-box k-anim-up">3</div>
+          </div>
+        </div>
+        <details>
+          <summary>Markup</summary>
+          <pre><code>&lt;div class="k-d-flex k-gap-3 k-stagger"&gt;
+  &lt;div class="k-anim-up"&gt;1&lt;/div&gt;
+  &lt;div class="k-anim-up"&gt;2&lt;/div&gt;
+  &lt;div class="k-anim-up"&gt;3&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="k-marquee"&gt;
+  &lt;div class="k-marquee__track"&gt;
+    &lt;span&gt;Logo A&lt;/span&gt; &lt;span&gt;Logo B&lt;/span&gt; &lt;span&gt;Logo C&lt;/span&gt;
+    &lt;span aria-hidden="true"&gt;Logo A&lt;/span&gt; &lt;span aria-hidden="true"&gt;Logo B&lt;/span&gt; &lt;span aria-hidden="true"&gt;Logo C&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </details>
+
+        <div class="k-alert k-mt-6">
+          <p class="k-bold" style="margin-bottom: var(--k-space-2)">When not to use utilities</p>
+          <ul>
+            <li>If the same cluster of utilities keeps appearing across
+            pages, that's a component asking to exist — name it once
+            instead of repeating it.</li>
+            <li>If a whole page feels too tight or too airy, don't sprinkle
+            spacing utilities everywhere — change <code>--k-density</code>
+            once and let every space scale with it.</li>
+            <li>If the brand changes, change the tokens. Never reach for
+            color utilities to repaint pieces of a page — that's how a
+            design system stops being one.</li>
+          </ul>
+        </div>
+      </main>
+
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

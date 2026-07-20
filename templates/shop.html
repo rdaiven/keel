@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terra &amp; Twine — a storefront template built with keel</title>
+<meta name="description" content="An e-commerce storefront template built entirely with keel: a product grid, a native-dialog quick-view with a size picker, and a cart drawer built on the native popover API. The whole theme is one tokens block.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Replace this block and the page becomes yours. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(24 14% 95%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(24 14% 91%);
+      --k-border: hsl(24 10% 84%);
+      --k-border-strong: hsl(24 10% 68%);
+      --k-text: hsl(20 18% 14%);
+      --k-text-soft: hsl(20 9% 34%);
+      --k-text-faint: hsl(20 7% 48%);
+      --k-accent: hsl(14 55% 42%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(20 14% 20%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-tracking: -0.01em;
+      --k-radius: 4px;
+      --k-density: 1;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local: quick-view dialogs share this trigger card wrapper so
+     an entire product card is clickable without nesting <button> */
+  .sh-card { position: relative; }
+  .sh-card__open {
+    position: absolute; inset: 0; inline-size: 100%; block-size: auto;
+    background: transparent; border: 0; padding: 0; cursor: pointer;
+  }
+  .sh-card__body { position: relative; pointer-events: none; }
+  .sh-card__body a, .sh-card__body button { pointer-events: auto; }
+
+  /* quick-view dialog: two columns, image left, details right */
+  .sh-quickview[open] { max-inline-size: 42rem; inline-size: 92vw; }
+  .sh-quickview__grid { display: grid; gap: var(--k-space-5); }
+  @media (min-width: 640px) {
+    .sh-quickview__grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* cart panel: content layout only — geometry/slide-in comes from
+     .k-drawer, which now supports popover elements as well as dialog */
+  .sh-cart { display: flex; flex-direction: column; gap: var(--k-space-4); }
+  .sh-cart__items { flex: 1 1 auto; overflow-y: auto; }
+  .sh-cart__line { display: grid; grid-template-columns: 3.5rem 1fr auto; gap: var(--k-space-3); align-items: center; }
+  .sh-cart__line + .sh-cart__line { margin-block-start: var(--k-space-4); }
+  .sh-cart__foot { border-block-start: 1px solid var(--k-border); padding-block-start: var(--k-space-4); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme, the quick-view is a native <code>&lt;dialog&gt;</code>
+    and the cart is a native <code>popover</code>.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Terra &amp; Twine</a>
+      <ul class="k-nav__links">
+        <li><a href="#apparel">Apparel</a></li>
+        <li><a href="#home">Home goods</a></li>
+        <li><a href="#about">About</a></li>
+        <li>
+          <button type="button" class="k-btn k-btn--ghost k-btn--small" popovertarget="sh-cart">
+            <span class="k-icon k-icon--shopping-bag" aria-hidden="true"></span> Cart
+            <span class="k-badge k-badge--solid">3</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="k-hero" id="top">
+  <div class="k-container">
+    <p class="k-hero__eyebrow">Heavyweight cotton &amp; canvas · small runs</p>
+    <h1>Clothes and goods built<br>to outlast the trend.</h1>
+    <p class="k-hero__lead">Terra &amp; Twine cuts small runs of heavyweight
+    apparel and canvas home goods, dyed in earth tones that don't fade to
+    nothing after a season.</p>
+    <p class="k-cluster k-mt-5">
+      <a class="k-btn k-btn--large" href="#apparel">Shop apparel</a>
+      <a class="k-btn k-btn--ghost" href="#home">Shop home goods</a>
+    </p>
+  </div>
+</section>
+
+<!-- APPAREL -->
+<section class="k-section" id="apparel">
+  <div class="k-container">
+    <h2>Apparel</h2>
+    <p class="k-text-soft" style="max-width: 40em">Tap any piece for sizing,
+    a closer look, and to add it to your bag — the quick-view is a native
+    <code>&lt;dialog&gt;</code>, no framework required.</p>
+    <div class="k-cols-3 k-mt-5">
+
+      <div class="k-card k-card--hover sh-card">
+        <button type="button" class="sh-card__open" onclick="document.getElementById('qv-tee').showModal()" aria-label="Quick view: Fieldweight Tee"></button>
+        <div class="sh-card__body">
+          <div class="k-frame">
+            <svg viewBox="0 0 320 180" role="img" aria-label="The Fieldweight Tee in clay red">
+              <rect width="320" height="180" fill="hsl(24 20% 90%)"/>
+              <path d="M118 46 L130 30 L190 30 L202 46 L232 62 L214 92 L196 80 L196 156 L124 156 L124 80 L106 92 L88 62 Z" fill="hsl(14 55% 42%)"/>
+              <path d="M130 30 Q160 48 190 30 L184 44 Q160 58 136 44 Z" fill="hsl(20 14% 20%)"/>
+            </svg>
+          </div>
+          <p class="k-card__kicker k-mt-4">Tee · S–XL</p>
+          <h3>Fieldweight Tee</h3>
+          <p>8oz combed cotton, garment-dyed, boxy cut.</p>
+          <p class="k-cluster k-justify-between">
+            <strong>$38</strong>
+            <span class="k-badge k-badge--outline">Clay</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="k-card k-card--hover sh-card">
+        <button type="button" class="sh-card__open" onclick="document.getElementById('qv-jacket').showModal()" aria-label="Quick view: Canvas Utility Jacket"></button>
+        <div class="sh-card__body">
+          <div class="k-frame">
+            <svg viewBox="0 0 320 180" role="img" aria-label="The Canvas Utility Jacket in charcoal">
+              <rect width="320" height="180" fill="hsl(24 20% 90%)"/>
+              <path d="M112 40 L130 26 L190 26 L208 40 L226 56 L206 92 L192 78 L192 158 L128 158 L128 78 L114 92 L94 56 Z" fill="hsl(20 14% 20%)"/>
+              <rect x="140" y="60" width="20" height="26" rx="2" fill="hsl(24 20% 90%)"/>
+              <rect x="164" y="60" width="20" height="26" rx="2" fill="hsl(24 20% 90%)"/>
+              <path d="M130 26 Q160 44 190 26 L184 40 Q160 54 136 40 Z" fill="hsl(14 55% 42%)"/>
+            </svg>
+          </div>
+          <p class="k-card__kicker k-mt-4">Jacket · S–XL</p>
+          <h3>Canvas Utility Jacket</h3>
+          <p>12oz waxed canvas shell, blanket lined, four pockets.</p>
+          <p class="k-cluster k-justify-between">
+            <strong>$148</strong>
+            <span class="k-badge k-badge--outline">Charcoal</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="k-card k-card--hover sh-card">
+        <button type="button" class="sh-card__open" onclick="document.getElementById('qv-apron').showModal()" aria-label="Quick view: Selvage Denim Apron"></button>
+        <div class="sh-card__body">
+          <div class="k-frame">
+            <svg viewBox="0 0 320 180" role="img" aria-label="The Selvage Denim Apron in indigo">
+              <rect width="320" height="180" fill="hsl(24 20% 90%)"/>
+              <path d="M130 34 L190 34 L198 60 L182 60 L182 156 L138 156 L138 60 L122 60 Z" fill="hsl(212 30% 28%)"/>
+              <rect x="146" y="76" width="28" height="34" rx="3" fill="hsl(212 24% 36%)"/>
+              <line x1="130" y1="34" x2="98" y2="18" stroke="hsl(212 30% 28%)" stroke-width="4"/>
+              <line x1="190" y1="34" x2="222" y2="18" stroke="hsl(212 30% 28%)" stroke-width="4"/>
+            </svg>
+          </div>
+          <p class="k-card__kicker k-mt-4">Apron · One size</p>
+          <h3>Selvage Denim Apron</h3>
+          <p>14oz raw denim, brass hardware, cross-back straps.</p>
+          <p class="k-cluster k-justify-between">
+            <strong>$86</strong>
+            <span class="k-badge k-badge--outline">Indigo</span>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOME GOODS -->
+<section class="k-section k-section--alt" id="home">
+  <div class="k-container">
+    <h2>Home goods</h2>
+    <p class="k-text-soft" style="max-width: 40em">Canvas and stoneware for
+    the rest of the house.</p>
+    <div class="k-cols-3 k-mt-5">
+
+      <div class="k-card k-card--hover sh-card">
+        <button type="button" class="sh-card__open" onclick="document.getElementById('qv-tote').showModal()" aria-label="Quick view: Waxed Canvas Tote"></button>
+        <div class="sh-card__body">
+          <div class="k-frame">
+            <svg viewBox="0 0 320 180" role="img" aria-label="The Waxed Canvas Tote in olive">
+              <rect width="320" height="180" fill="hsl(24 20% 90%)"/>
+              <rect x="118" y="70" width="84" height="76" rx="4" fill="hsl(70 18% 34%)"/>
+              <path d="M134 70 Q134 40 160 40 Q186 40 186 70" fill="none" stroke="hsl(20 14% 20%)" stroke-width="5"/>
+            </svg>
+          </div>
+          <p class="k-card__kicker k-mt-4">Tote · One size</p>
+          <h3>Waxed Canvas Tote</h3>
+          <p>18oz waxed canvas, leather base, holds a week of groceries.</p>
+          <p class="k-cluster k-justify-between">
+            <strong>$64</strong>
+            <span class="k-badge k-badge--outline">Olive</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="k-card k-card--hover sh-card">
+        <button type="button" class="sh-card__open" onclick="document.getElementById('qv-beanie').showModal()" aria-label="Quick view: Wool Watch Cap"></button>
+        <div class="sh-card__body">
+          <div class="k-frame">
+            <svg viewBox="0 0 320 180" role="img" aria-label="The Wool Watch Cap in clay red">
+              <rect width="320" height="180" fill="hsl(24 20% 90%)"/>
+              <path d="M126 110 Q126 58 160 58 Q194 58 194 110 Z" fill="hsl(14 55% 42%)"/>
+              <rect x="122" y="104" width="76" height="20" rx="10" fill="hsl(14 45% 32%)"/>
+            </svg>
+          </div>
+          <p class="k-card__kicker k-mt-4">Cap · One size</p>
+          <h3>Wool Watch Cap</h3>
+          <p>Merino rib knit, folded brim, made in one weight only.</p>
+          <p class="k-cluster k-justify-between">
+            <strong>$32</strong>
+            <span class="k-badge k-badge--outline">Clay</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="k-card k-card--hover sh-card">
+        <button type="button" class="sh-card__open" onclick="document.getElementById('qv-mugs').showModal()" aria-label="Quick view: Terracotta Mug Set"></button>
+        <div class="sh-card__body">
+          <div class="k-frame">
+            <svg viewBox="0 0 320 180" role="img" aria-label="A set of two terracotta mugs">
+              <rect width="320" height="180" fill="hsl(24 20% 90%)"/>
+              <rect x="110" y="70" width="46" height="56" rx="6" fill="hsl(14 55% 42%)"/>
+              <path d="M156 84 q18 0 18 20 t-18 20" fill="none" stroke="hsl(14 55% 42%)" stroke-width="6"/>
+              <rect x="176" y="80" width="46" height="56" rx="6" fill="hsl(20 14% 20%)"/>
+              <path d="M222 94 q18 0 18 20 t-18 20" fill="none" stroke="hsl(20 14% 20%)" stroke-width="6"/>
+            </svg>
+          </div>
+          <p class="k-card__kicker k-mt-4">Stoneware · Set of 2</p>
+          <h3>Terracotta Mug Set</h3>
+          <p>Hand-glazed stoneware, one clay and one charcoal, 12oz.</p>
+          <p class="k-cluster k-justify-between">
+            <strong>$28</strong>
+            <span class="k-badge k-badge--outline">Set of 2</span>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="k-section" id="about">
+  <div class="k-container--narrow k-container">
+    <h2>Cut in small runs, on purpose</h2>
+    <p>Every Terra &amp; Twine run is under two hundred pieces, cut from
+    deadstock and mill-end fabric so nothing sits in a warehouse waiting to
+    be discounted. When a run sells out, it doesn't come back — the next
+    one is a different bolt of cloth entirely.</p>
+    <p class="k-cluster k-mt-5">
+      <a class="k-btn" href="#apparel">Shop what's in stock</a>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>Terra &amp; Twine — a fictional shop, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+<!-- QUICK-VIEW DIALOGS -->
+<dialog class="sh-quickview" id="qv-tee" aria-labelledby="qv-tee-title">
+  <div class="sh-quickview__grid">
+    <div class="k-frame k-frame--square">
+      <svg viewBox="0 0 320 320" role="img" aria-label="The Fieldweight Tee, larger view">
+        <rect width="320" height="320" fill="hsl(24 20% 90%)"/>
+        <path d="M108 96 L124 74 L196 74 L212 96 L250 116 L228 154 L204 138 L204 246 L116 246 L116 138 L92 154 L70 116 Z" fill="hsl(14 55% 42%)"/>
+        <path d="M124 74 Q160 98 196 74 L188 92 Q160 110 132 92 Z" fill="hsl(20 14% 20%)"/>
+      </svg>
+    </div>
+    <div>
+      <h3 id="qv-tee-title">Fieldweight Tee</h3>
+      <p class="k-text-l k-bold">$38</p>
+      <p class="k-text-soft">8oz combed cotton, garment-dyed for a chalky,
+      worn-in hand from the first wash. Boxy cut, dropped shoulder.</p>
+      <fieldset class="k-field">
+        <legend>Size</legend>
+        <div class="k-segmented" role="group" aria-label="Size">
+          <button type="button" aria-pressed="false">S</button>
+          <button type="button" aria-pressed="true">M</button>
+          <button type="button" aria-pressed="false">L</button>
+          <button type="button" aria-pressed="false">XL</button>
+        </div>
+      </fieldset>
+      <p class="k-cluster k-mt-5">
+        <button class="k-btn" type="button"><span class="k-icon k-icon--cart-plus" aria-hidden="true"></span> Add to cart</button>
+        <button class="k-btn k-btn--ghost" type="button" onclick="document.getElementById('qv-tee').close()">Close</button>
+      </p>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="sh-quickview" id="qv-jacket" aria-labelledby="qv-jacket-title">
+  <div class="sh-quickview__grid">
+    <div class="k-frame k-frame--square">
+      <svg viewBox="0 0 320 320" role="img" aria-label="The Canvas Utility Jacket, larger view">
+        <rect width="320" height="320" fill="hsl(24 20% 90%)"/>
+        <path d="M100 84 L128 62 L192 62 L220 84 L246 108 L216 154 L196 132 L196 250 L124 250 L124 132 L104 154 L74 108 Z" fill="hsl(20 14% 20%)"/>
+        <rect x="140" y="120" width="20" height="30" rx="2" fill="hsl(24 20% 90%)"/>
+        <rect x="164" y="120" width="20" height="30" rx="2" fill="hsl(24 20% 90%)"/>
+        <path d="M128 62 Q160 88 192 62 L184 82 Q160 100 136 82 Z" fill="hsl(14 55% 42%)"/>
+      </svg>
+    </div>
+    <div>
+      <h3 id="qv-jacket-title">Canvas Utility Jacket</h3>
+      <p class="k-text-l k-bold">$148</p>
+      <p class="k-text-soft">12oz waxed canvas shell over a wool-blend
+      blanket lining. Four bellowed pockets, corozo buttons.</p>
+      <fieldset class="k-field">
+        <legend>Size</legend>
+        <div class="k-segmented" role="group" aria-label="Size">
+          <button type="button" aria-pressed="false">S</button>
+          <button type="button" aria-pressed="false">M</button>
+          <button type="button" aria-pressed="true">L</button>
+          <button type="button" aria-pressed="false">XL</button>
+        </div>
+      </fieldset>
+      <p class="k-cluster k-mt-5">
+        <button class="k-btn" type="button"><span class="k-icon k-icon--cart-plus" aria-hidden="true"></span> Add to cart</button>
+        <button class="k-btn k-btn--ghost" type="button" onclick="document.getElementById('qv-jacket').close()">Close</button>
+      </p>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="sh-quickview" id="qv-apron" aria-labelledby="qv-apron-title">
+  <div class="sh-quickview__grid">
+    <div class="k-frame k-frame--square">
+      <svg viewBox="0 0 320 320" role="img" aria-label="The Selvage Denim Apron, larger view">
+        <rect width="320" height="320" fill="hsl(24 20% 90%)"/>
+        <path d="M124 70 L196 70 L208 108 L184 108 L184 246 L136 246 L136 108 L112 108 Z" fill="hsl(212 30% 28%)"/>
+        <rect x="146" y="130" width="28" height="40" rx="3" fill="hsl(212 24% 36%)"/>
+        <line x1="124" y1="70" x2="80" y2="46" stroke="hsl(212 30% 28%)" stroke-width="5"/>
+        <line x1="196" y1="70" x2="240" y2="46" stroke="hsl(212 30% 28%)" stroke-width="5"/>
+      </svg>
+    </div>
+    <div>
+      <h3 id="qv-apron-title">Selvage Denim Apron</h3>
+      <p class="k-text-l k-bold">$86</p>
+      <p class="k-text-soft">14oz raw selvage denim, unwashed. Brass rivets,
+      cross-back straps that soften with wear.</p>
+      <fieldset class="k-field">
+        <legend>Size</legend>
+        <div class="k-segmented" role="group" aria-label="Size">
+          <button type="button" aria-pressed="true">One size</button>
+        </div>
+      </fieldset>
+      <p class="k-cluster k-mt-5">
+        <button class="k-btn" type="button"><span class="k-icon k-icon--cart-plus" aria-hidden="true"></span> Add to cart</button>
+        <button class="k-btn k-btn--ghost" type="button" onclick="document.getElementById('qv-apron').close()">Close</button>
+      </p>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="sh-quickview" id="qv-tote" aria-labelledby="qv-tote-title">
+  <div class="sh-quickview__grid">
+    <div class="k-frame k-frame--square">
+      <svg viewBox="0 0 320 320" role="img" aria-label="The Waxed Canvas Tote, larger view">
+        <rect width="320" height="320" fill="hsl(24 20% 90%)"/>
+        <rect x="106" y="120" width="108" height="98" rx="5" fill="hsl(70 18% 34%)"/>
+        <path d="M130 120 Q130 76 160 76 Q190 76 190 120" fill="none" stroke="hsl(20 14% 20%)" stroke-width="7"/>
+      </svg>
+    </div>
+    <div>
+      <h3 id="qv-tote-title">Waxed Canvas Tote</h3>
+      <p class="k-text-l k-bold">$64</p>
+      <p class="k-text-soft">18oz waxed canvas body with a full-grain
+      leather base and handles — built to hold its shape empty or full.</p>
+      <fieldset class="k-field">
+        <legend>Size</legend>
+        <div class="k-segmented" role="group" aria-label="Size">
+          <button type="button" aria-pressed="true">One size</button>
+        </div>
+      </fieldset>
+      <p class="k-cluster k-mt-5">
+        <button class="k-btn" type="button"><span class="k-icon k-icon--cart-plus" aria-hidden="true"></span> Add to cart</button>
+        <button class="k-btn k-btn--ghost" type="button" onclick="document.getElementById('qv-tote').close()">Close</button>
+      </p>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="sh-quickview" id="qv-beanie" aria-labelledby="qv-beanie-title">
+  <div class="sh-quickview__grid">
+    <div class="k-frame k-frame--square">
+      <svg viewBox="0 0 320 320" role="img" aria-label="The Wool Watch Cap, larger view">
+        <rect width="320" height="320" fill="hsl(24 20% 90%)"/>
+        <path d="M118 190 Q118 110 160 110 Q202 110 202 190 Z" fill="hsl(14 55% 42%)"/>
+        <rect x="112" y="180" width="96" height="26" rx="13" fill="hsl(14 45% 32%)"/>
+      </svg>
+    </div>
+    <div>
+      <h3 id="qv-beanie-title">Wool Watch Cap</h3>
+      <p class="k-text-l k-bold">$32</p>
+      <p class="k-text-soft">Merino rib knit in one weight, one fold. Warm
+      to well below freezing, packs flat in a coat pocket.</p>
+      <fieldset class="k-field">
+        <legend>Size</legend>
+        <div class="k-segmented" role="group" aria-label="Size">
+          <button type="button" aria-pressed="true">One size</button>
+        </div>
+      </fieldset>
+      <p class="k-cluster k-mt-5">
+        <button class="k-btn" type="button"><span class="k-icon k-icon--cart-plus" aria-hidden="true"></span> Add to cart</button>
+        <button class="k-btn k-btn--ghost" type="button" onclick="document.getElementById('qv-beanie').close()">Close</button>
+      </p>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="sh-quickview" id="qv-mugs" aria-labelledby="qv-mugs-title">
+  <div class="sh-quickview__grid">
+    <div class="k-frame k-frame--square">
+      <svg viewBox="0 0 320 320" role="img" aria-label="The Terracotta Mug Set, larger view">
+        <rect width="320" height="320" fill="hsl(24 20% 90%)"/>
+        <rect x="98" y="118" width="56" height="70" rx="7" fill="hsl(14 55% 42%)"/>
+        <path d="M154 134 q22 0 22 24 t-22 24" fill="none" stroke="hsl(14 55% 42%)" stroke-width="7"/>
+        <rect x="176" y="130" width="56" height="70" rx="7" fill="hsl(20 14% 20%)"/>
+        <path d="M232 146 q22 0 22 24 t-22 24" fill="none" stroke="hsl(20 14% 20%)" stroke-width="7"/>
+      </svg>
+    </div>
+    <div>
+      <h3 id="qv-mugs-title">Terracotta Mug Set</h3>
+      <p class="k-text-l k-bold">$28</p>
+      <p class="k-text-soft">Two hand-glazed stoneware mugs, one clay and
+      one charcoal, thrown in small batches at a single wheel.</p>
+      <fieldset class="k-field">
+        <legend>Size</legend>
+        <div class="k-segmented" role="group" aria-label="Size">
+          <button type="button" aria-pressed="true">Set of 2</button>
+        </div>
+      </fieldset>
+      <p class="k-cluster k-mt-5">
+        <button class="k-btn" type="button"><span class="k-icon k-icon--cart-plus" aria-hidden="true"></span> Add to cart</button>
+        <button class="k-btn k-btn--ghost" type="button" onclick="document.getElementById('qv-mugs').close()">Close</button>
+      </p>
+    </div>
+  </div>
+</dialog>
+
+<!-- CART — a native popover styled as an offcanvas via .k-drawer -->
+<div id="sh-cart" popover class="k-drawer sh-cart" aria-label="Cart">
+  <div class="k-cluster k-justify-between">
+    <h3 style="margin: 0">Your bag</h3>
+    <button type="button" class="k-btn k-btn--ghost k-btn--icon k-btn--small" popovertarget="sh-cart" popovertargetaction="hide" aria-label="Close cart">
+      <span class="k-icon k-icon--x" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <div class="sh-cart__items">
+    <div class="sh-cart__line">
+      <div class="k-frame k-frame--square">
+        <svg viewBox="0 0 60 60" role="img" aria-label="Fieldweight Tee thumbnail">
+          <rect width="60" height="60" fill="hsl(24 20% 90%)"/>
+          <path d="M20 18 L26 12 L34 12 L40 18 L46 22 L42 30 L38 26 L38 46 L22 46 L22 26 L18 30 L14 22 Z" fill="hsl(14 55% 42%)"/>
+        </svg>
+      </div>
+      <div>
+        <p class="k-bold" style="margin: 0">Fieldweight Tee</p>
+        <p class="k-text-s k-text-faint" style="margin: 0">Size M · Qty 1</p>
+      </div>
+      <strong>$38</strong>
+    </div>
+
+    <div class="sh-cart__line">
+      <div class="k-frame k-frame--square">
+        <svg viewBox="0 0 60 60" role="img" aria-label="Waxed Canvas Tote thumbnail">
+          <rect width="60" height="60" fill="hsl(24 20% 90%)"/>
+          <rect x="18" y="24" width="24" height="20" rx="2" fill="hsl(70 18% 34%)"/>
+          <path d="M24 24 Q24 14 30 14 Q36 14 36 24" fill="none" stroke="hsl(20 14% 20%)" stroke-width="2"/>
+        </svg>
+      </div>
+      <div>
+        <p class="k-bold" style="margin: 0">Waxed Canvas Tote</p>
+        <p class="k-text-s k-text-faint" style="margin: 0">One size · Qty 1</p>
+      </div>
+      <strong>$64</strong>
+    </div>
+
+    <div class="sh-cart__line">
+      <div class="k-frame k-frame--square">
+        <svg viewBox="0 0 60 60" role="img" aria-label="Terracotta Mug Set thumbnail">
+          <rect width="60" height="60" fill="hsl(24 20% 90%)"/>
+          <rect x="16" y="22" width="14" height="18" rx="2" fill="hsl(14 55% 42%)"/>
+          <rect x="32" y="24" width="14" height="18" rx="2" fill="hsl(20 14% 20%)"/>
+        </svg>
+      </div>
+      <div>
+        <p class="k-bold" style="margin: 0">Terracotta Mug Set</p>
+        <p class="k-text-s k-text-faint" style="margin: 0">Set of 2 · Qty 1</p>
+      </div>
+      <strong>$28</strong>
+    </div>
+  </div>
+
+  <div class="sh-cart__foot">
+    <p class="k-cluster" style="justify-content: space-between">
+      <span class="k-text-soft">Subtotal</span>
+      <strong>$130</strong>
+    </p>
+    <p class="k-text-s k-text-faint">Shipping and tax at checkout.</p>
+    <a class="k-btn" style="display: block; text-align: center" href="#top">Checkout</a>
+  </div>
+</div>
+
+</body>
+</html>

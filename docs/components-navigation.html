@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Navigation — keel</title>
+<meta name="description" content="keel's navigation components: nav bar, tabs, breadcrumb, pagination, footer.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<style>
+  .demo-box { background: var(--k-accent-soft); border: 1px dashed var(--k-accent);
+              border-radius: var(--k-radius-s); padding: var(--k-space-3);
+              font-size: var(--k-text-xs); font-family: var(--k-font-mono);
+              color: var(--k-accent-strong); text-align: center; }
+
+  /* page-local custom variants — demos for the "Your own variants"
+     and "Extending keel" sections below */
+  .btn-sale {
+    --k-btn-bg: var(--k-warn);
+    --k-btn-bg-hover: color-mix(in oklab, var(--k-warn), black 15%);
+  }
+  .btn-quiet {
+    --k-btn-bg: var(--k-accent-trans-10);
+    --k-btn-fg: var(--k-accent-strong);
+    --k-btn-bg-hover: var(--k-accent-trans-20);
+  }
+
+  .testimonial {
+    background: var(--k-surface);
+    border: 1px solid var(--k-border);
+    border-radius: var(--k-radius-l);
+    padding: var(--k-space-5);
+  }
+  .testimonial__quote {
+    font-size: var(--k-text-l);
+    color: var(--k-text-soft);
+    margin: 0 0 var(--k-space-3);
+  }
+  .testimonial__name {
+    font-family: var(--k-font-mono);
+    font-size: var(--k-text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--k-text-faint);
+  }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+
+      <aside class="k-sticky docs-side k-sidebar--collapsible" id="docs-sidebar">
+        <button class="k-tool docs-sidebar-toggle" type="button" id="docs-sidebar-toggle"
+                aria-pressed="false" aria-label="Collapse sidebar to icons">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Documentation">
+          <details class="k-nav-group" open>
+            <summary>Getting started</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="start.html">Start</a></li>
+            <li><a href="frameworks.html">Framework guides</a></li>
+            <li><a href="concepts.html">Concepts</a></li>
+            <li><a href="changelog.html">Changelog</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Reference</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="tokens.html">Tokens</a></li>
+            <li><a href="base.html">Base</a></li>
+            <li><a href="typography.html">Typography</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="components.html">Components</a>
+            <ul class="k-list k-list--flush docs-sub">
+              <li><a href="components-actions.html">Actions</a></li>
+              <li><a href="components-forms.html">Forms</a></li>
+              <li><a href="components-surfaces.html">Surfaces &amp; data</a></li>
+              <li><a href="components-feedback.html">Feedback</a></li>
+              <li><a href="components-overlays.html">Overlays</a></li>
+              <li aria-current="page"><a href="components-navigation.html">Navigation</a></li>
+              <li><a href="components-identity.html">Identity &amp; media</a></li>
+              <li><a href="components-motion.html">Motion</a></li>
+              <li><a href="components-extending.html">Extending</a></li>
+              <li><a href="components-app.html">Application</a></li>
+            </ul>
+          </li>
+            <li><a href="utilities.html">Utilities</a></li>
+            <li><a href="icons.html">Icons</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Build</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="sections.html">Sections</a></li>
+            <li><a href="../templates.html">Templates</a></li>
+            <li><a href="../design.html">Design system</a></li>
+            <li><a href="paths.html">Paths</a></li>
+          </ul>
+          </details>
+        </nav>
+        <div id="docs-anchors"></div>
+      </aside>
+
+      <main id="main" class="docs-main">
+
+      <h1>Navigation</h1>
+      <p class="k-text-soft">Getting around — the header, the trail, the page links, the closing band.</p>
+
+    <section id="c-navigation">
+      <h2>Navigation</h2>
+      <p><code>.k-nav</code> is a brand on one side, links on the
+      other, wrapping on small screens. The current page's link gets
+      <code>aria-current="page"</code> — keel styles that attribute,
+      so the highlight and the accessibility state are the same thing.
+      The header of this page is a live example.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="background: var(--k-surface); border: 1px solid var(--k-border); border-radius: var(--k-radius); padding-inline: var(--k-space-4); margin-bottom: var(--k-space-4)">
+          <nav class="k-nav" aria-label="Demo">
+            <a class="k-nav__brand" href="#">brand</a>
+            <ul class="k-nav__links">
+              <li><a href="#">Docs</a></li>
+              <li><a href="#" aria-current="page">Pricing</a></li>
+              <li><a href="#">About</a></li>
+            </ul>
+          </nav>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;header class="k-section--alt"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;nav class="k-nav" aria-label="Site"&gt;
+      &lt;a class="k-nav__brand" href="../index.html"&gt;brand&lt;/a&gt;
+      &lt;ul class="k-nav__links"&gt;
+        &lt;li&gt;&lt;a href="docs.html"&gt;Docs&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="pricing.html" aria-current="page"&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
+&lt;/header&gt;</code></pre>
+      </details>
+      <p>Add <code>.k-nav--stack</code> and the same nav turns
+      vertical: the links drop into a full-width column, each one a
+      target with a leading bar. Hover tints the surface; the
+      <code>aria-current="page"</code> link takes an accent-soft
+      background and an accent leading border. It's meant for a
+      sidebar — constrain the width and it reads as one.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="background: var(--k-surface); border: 1px solid var(--k-border); border-radius: var(--k-radius); padding: var(--k-space-3); margin-bottom: var(--k-space-4); max-width: 220px">
+          <nav class="k-nav k-nav--stack" aria-label="Stack demo">
+            <ul class="k-nav__links">
+              <li><a href="#">Overview</a></li>
+              <li><a href="#" aria-current="page">Settings</a></li>
+              <li><a href="#">Members</a></li>
+              <li><a href="#">Billing</a></li>
+            </ul>
+          </nav>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;nav class="k-nav k-nav--stack" aria-label="Sidebar"&gt;
+  &lt;ul class="k-nav__links"&gt;
+    &lt;li&gt;&lt;a href="overview.html"&gt;Overview&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="settings.html" aria-current="page"&gt;Settings&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="members.html"&gt;Members&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-sidebar">
+      <h2>Sidebar nav, collapsible</h2>
+      <p><code>.k-nav--stack</code> handles the links; <code>.k-nav-group</code>
+      groups them under a labeled, collapsible heading — a plain
+      <code>&lt;details&gt;/&lt;summary&gt;</code>, so opening and closing a
+      group needs no JavaScript at all. A <code>.k-tool</code> button can
+      shrink the whole sidebar down to an icon-only rail with
+      <code>.k-sidebar--collapsible</code> — that toggle is the only
+      JavaScript in this pattern, the same one-line tolerance keel already
+      uses for the burger and every modal on this page. This is the same
+      sidebar keel's own docs use — try the real thing in the left column
+      of any docs page, not just the demo below.</p>
+      <div class="k-sidebar--collapsible" id="demo-sidebar" style="background: var(--k-surface); border: 1px solid var(--k-border); border-radius: var(--k-radius); padding: var(--k-space-3); margin-bottom: var(--k-space-4); max-width: 220px">
+        <button class="k-tool docs-sidebar-toggle" type="button" aria-pressed="false" aria-label="Collapse sidebar to icons"
+                onclick="var s=document.getElementById('demo-sidebar'); var c=s.classList.toggle('is-collapsed'); this.setAttribute('aria-pressed', c); this.setAttribute('aria-label', c ? 'Expand sidebar' : 'Collapse sidebar to icons');">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Sidebar demo">
+          <details class="k-nav-group" open>
+            <summary><span class="k-icon k-icon--star" aria-hidden="true"></span> <span class="nav-label">Getting started</span></summary>
+            <ul class="k-list k-list--flush">
+              <li><a href="#"><span class="k-icon k-icon--home" aria-hidden="true"></span><span class="nav-label">Overview</span></a></li>
+              <li><a href="#" aria-current="page"><span class="k-icon k-icon--tag" aria-hidden="true"></span><span class="nav-label">Settings</span></a></li>
+            </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary><span class="k-icon k-icon--file" aria-hidden="true"></span> <span class="nav-label">Reference</span></summary>
+            <ul class="k-list k-list--flush">
+              <li><a href="#"><span class="k-icon k-icon--list" aria-hidden="true"></span><span class="nav-label">Members</span></a></li>
+              <li><a href="#"><span class="k-icon k-icon--credit-card" aria-hidden="true"></span><span class="nav-label">Billing</span></a></li>
+            </ul>
+          </details>
+        </nav>
+      </div>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-sidebar--collapsible" id="docs-sidebar"&gt;
+  &lt;button class="k-tool" type="button" aria-pressed="false"
+          aria-label="Collapse sidebar to icons" id="docs-sidebar-toggle"&gt;
+    &lt;span class="k-icon k-icon--sidebar" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+
+  &lt;nav class="k-nav k-nav--stack" aria-label="Sidebar"&gt;
+    &lt;details class="k-nav-group" open&gt;
+      &lt;summary&gt;Getting started&lt;/summary&gt;
+      &lt;ul class="k-list k-list--flush"&gt;
+        &lt;li&gt;&lt;a href="overview.html"&gt;&lt;span class="k-icon k-icon--home"&gt;&lt;/span&gt;&lt;span class="nav-label"&gt;Overview&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="settings.html" aria-current="page"&gt;&lt;span class="k-icon k-icon--tag"&gt;&lt;/span&gt;&lt;span class="nav-label"&gt;Settings&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/details&gt;
+  &lt;/nav&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  // the only JS this pattern needs — same tolerance as showModal()
+  document.getElementById('docs-sidebar-toggle').addEventListener('click', function () {
+    var collapsed = document.getElementById('docs-sidebar').classList.toggle('is-collapsed');
+    this.setAttribute('aria-pressed', collapsed);
+  });
+&lt;/script&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-burger">
+      <h2>Responsive nav (burger)</h2>
+      <p>keel's honest answer to the hamburger: the menu is a
+      <code>.k-drawer</code> — a real modal <code>dialog</code> — so
+      the focus trap, Esc, and the backdrop are the platform's, not a
+      script's. Opening it is the one line of JavaScript on the
+      button: <code>showModal()</code>. Closing needs none — a close
+      button sits at the top, beside the "Menu" heading in a
+      <code>.k-cluster</code> row, inside a <code>form
+      method="dialog"</code>. The trigger is a
+      <code>.k-btn--icon</code> with the built-in
+      <code>.k-icon--menu</code>; it's icon-only, so the
+      <code>aria-label</code> is not optional — same for the close
+      button and <code>.k-icon--x</code>. On wide screens you
+      don't collapse anything clever — you simply show the links and
+      hide the button, one utility each:
+      <code>.k-desktop-only</code> on the link list,
+      <code>.k-mobile-only</code> on the burger.</p>
+      <p><small>Also try: <code>.k-drawer</code> opens from the end
+      (right in LTR); add <code>.k-drawer--start</code> and it opens
+      from the start (left) instead — same dialog, one class. The
+      toggle below swaps it live on the demo drawer.</small></p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-segmented" role="group" aria-label="Drawer side" style="margin-bottom: var(--k-space-3)">
+          <button type="button" id="demo-side-right" aria-pressed="true"
+                  onclick="document.getElementById('demo-burger-drawer').classList.remove('k-drawer--start'); document.getElementById('demo-side-right').setAttribute('aria-pressed','true'); document.getElementById('demo-side-left').setAttribute('aria-pressed','false');">Right</button>
+          <button type="button" id="demo-side-left" aria-pressed="false"
+                  onclick="document.getElementById('demo-burger-drawer').classList.add('k-drawer--start'); document.getElementById('demo-side-left').setAttribute('aria-pressed','true'); document.getElementById('demo-side-right').setAttribute('aria-pressed','false');">Left</button>
+        </div>
+        <div style="background: var(--k-surface); border: 1px solid var(--k-border); border-radius: var(--k-radius); padding-inline: var(--k-space-4); margin-bottom: var(--k-space-4)">
+          <nav class="k-nav" aria-label="Burger demo">
+            <a class="k-nav__brand" href="#c-burger">brand</a>
+            <button class="k-btn k-btn--icon k-btn--ghost" type="button" aria-label="Menu" onclick="document.getElementById('demo-burger-drawer').showModal()"><span class="k-icon k-icon--menu" aria-hidden="true"></span></button>
+          </nav>
+          <dialog class="k-drawer" id="demo-burger-drawer" aria-label="Menu">
+            <div class="k-cluster k-justify-between">
+              <h4 class="k-mt-0 k-mb-0">Menu</h4>
+              <form method="dialog">
+                <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+                  <span class="k-icon k-icon--x" aria-hidden="true"></span>
+                </button>
+              </form>
+            </div>
+            <ul class="k-menu">
+              <li><a href="#c-navigation" onclick="this.closest('dialog').close()">Navigation</a></li>
+              <li><a href="#c-tabs" onclick="this.closest('dialog').close()">Tabs</a></li>
+              <li><a href="#c-breadcrumb" onclick="this.closest('dialog').close()">Breadcrumb</a></li>
+              <li><a href="#c-pagination" onclick="this.closest('dialog').close()">Pagination</a></li>
+            </ul>
+          </dialog>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;nav class="k-nav" aria-label="Site"&gt;
+  &lt;a class="k-nav__brand" href="../index.html"&gt;brand&lt;/a&gt;
+
+  &lt;!-- wide screens: just show the links --&gt;
+  &lt;ul class="k-nav__links k-desktop-only"&gt;
+    &lt;li&gt;&lt;a href="docs.html"&gt;Docs&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="pricing.html"&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;!-- small screens: the burger, one line of JS --&gt;
+  &lt;button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+          aria-label="Menu"
+          onclick="document.getElementById('site-menu').showModal()"&gt;
+    &lt;span class="k-icon k-icon--menu" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/nav&gt;
+
+&lt;dialog class="k-drawer" id="site-menu" aria-label="Menu"&gt;
+  &lt;div class="k-cluster k-justify-between"&gt;
+    &lt;h4 class="k-mt-0 k-mb-0"&gt;Menu&lt;/h4&gt;
+    &lt;form method="dialog"&gt;
+      &lt;button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu"&gt;
+        &lt;span class="k-icon k-icon--x" aria-hidden="true"&gt;&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+  &lt;ul class="k-menu"&gt;
+    &lt;li&gt;&lt;a href="docs.html"&gt;Docs&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="pricing.html"&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/dialog&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-tabs">
+      <h2>Tabs</h2>
+      <p><code>.k-tabs</code> is the visual tab bar — a row of links
+      or buttons on a baseline rule, scrolling sideways if it
+      overflows. The active tab is marked with
+      <code>aria-current</code> (or <code>aria-selected="true"</code>
+      in a scripted ARIA tabs widget) and gets the accent underline —
+      the visual state is the accessibility state. Honestly: keel
+      ships the bar, not the panel switching. Point the tabs at
+      separate pages, use a <code>.k-accordion</code> instead, or
+      write the three lines of JavaScript yourself.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="margin-bottom: var(--k-space-4)">
+          <ul class="k-tabs">
+            <li><a href="#" aria-current="true">Overview</a></li>
+            <li><a href="#">Activity</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Billing</a></li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;ul class="k-tabs"&gt;
+  &lt;li&gt;&lt;a href="overview.html" aria-current="true"&gt;Overview&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="activity.html"&gt;Activity&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="settings.html"&gt;Settings&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="billing.html"&gt;Billing&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+      </details>
+      <p>For a lighter look, <code>.k-tabs--pill</code> drops the
+      baseline rule and turns each tab into a chip. The active tab —
+      <code>aria-current</code> or <code>aria-selected="true"</code> —
+      fills with a soft accent instead of gaining an underline; the
+      rest tint on hover. Same markup, same accessibility state, a
+      different shape.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="margin-bottom: var(--k-space-4)">
+          <ul class="k-tabs k-tabs--pill">
+            <li><button type="button" aria-selected="true">Overview</button></li>
+            <li><button type="button">Activity</button></li>
+            <li><button type="button">Settings</button></li>
+            <li><button type="button">Billing</button></li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;ul class="k-tabs k-tabs--pill"&gt;
+  &lt;li&gt;&lt;button type="button" aria-selected="true"&gt;Overview&lt;/button&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;button type="button"&gt;Activity&lt;/button&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;button type="button"&gt;Settings&lt;/button&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;button type="button"&gt;Billing&lt;/button&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-segmented">
+      <h2>Segmented control</h2>
+      <p><code>.k-segmented</code> is a compact pill track holding a
+      few buttons (or radios); the active segment fills with a raised
+      surface "thumb". Mark it with <code>aria-pressed="true"</code> on
+      a button, <code>aria-checked="true"</code> on a radio, or
+      <code>.is-active</code> — the visual state is the accessibility
+      state. It's the more compact, single-choice cousin of the
+      bordered <code>.k-btn-group</code> and of tabs: where
+      <code>.k-tabs</code> switch page-level views, this is a small
+      inline toggle for one setting. It's chrome only — your JavaScript
+      (or radios in a form) tracks the selection.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="margin-bottom: var(--k-space-4)">
+          <div class="k-segmented" role="group" aria-label="View">
+            <button type="button" aria-pressed="false">Day</button>
+            <button type="button" aria-pressed="true">Week</button>
+            <button type="button" aria-pressed="false">Month</button>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-segmented" role="group" aria-label="View"&gt;
+  &lt;button type="button" aria-pressed="false"&gt;Day&lt;/button&gt;
+  &lt;button type="button" aria-pressed="true"&gt;Week&lt;/button&gt;
+  &lt;button type="button" aria-pressed="false"&gt;Month&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-breadcrumb">
+      <h2>Breadcrumb</h2>
+      <p><code>.k-breadcrumb</code> is a list with slash separators.
+      Mark the current page with <code>aria-current="page"</code> on a
+      plain <code>span</code> — it renders bold instead of as a link.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <nav aria-label="Breadcrumb" style="margin-bottom: var(--k-space-4)">
+          <ol class="k-breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Docs</a></li>
+            <li><span aria-current="page">Components</span></li>
+          </ol>
+        </nav>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;nav aria-label="Breadcrumb"&gt;
+  &lt;ol class="k-breadcrumb"&gt;
+    &lt;li&gt;&lt;a href="../index.html"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="docs.html"&gt;Docs&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span aria-current="page"&gt;Components&lt;/span&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-pagination">
+      <h2>Pagination</h2>
+      <p><code>.k-pagination</code> is a row of page links. The
+      current page gets <code>aria-current="page"</code>, which keel
+      fills with the accent — again, the visual state <em>is</em> the
+      accessibility state.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <nav aria-label="Pagination" style="margin-bottom: var(--k-space-4)">
+          <ul class="k-pagination">
+            <li><a href="#">‹</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#" aria-current="page">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><span>…</span></li>
+            <li><a href="#">9</a></li>
+            <li><a href="#">›</a></li>
+          </ul>
+        </nav>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;nav aria-label="Pagination"&gt;
+  &lt;ul class="k-pagination"&gt;
+    &lt;li&gt;&lt;a href="?p=1"&gt;1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="?p=2" aria-current="page"&gt;2&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="?p=3"&gt;3&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;…&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="?p=9"&gt;9&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-footer">
+      <h2>Footer</h2>
+      <p><code>.k-footer</code> is a quiet closing band: top border,
+      small faint text. The footer at the bottom of this page is the
+      live demo — scroll down.</p>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;footer class="k-footer"&gt;
+  &lt;div class="k-container k-cluster" style="justify-content: space-between"&gt;
+    &lt;span&gt;keel — a CSS framework by Daiven Reyes.&lt;/span&gt;
+    &lt;span&gt;&lt;a href="https://rdaiven.github.io"&gt;rdaiven.github.io&lt;/a&gt;&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-skip">
+      <h2>Skip link</h2>
+      <p>The first focusable thing on a page should let keyboard
+      users jump past the header. <code>.k-skip-link</code> ships
+      hidden off-screen above the page and slides into view on focus —
+      pair it with <code>&lt;a class="k-skip-link" href="#main"&gt;</code>
+      as the first child of <code>body</code>, and an element with
+      <code>id="main"</code> to land on. This page uses it: press
+      <kbd>Tab</kbd> from the top of this document to see it appear.</p>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;body&gt;
+  &lt;a class="k-skip-link" href="#main"&gt;Skip to content&lt;/a&gt;
+  …
+  &lt;main id="main"&gt;…&lt;/main&gt;</code></pre>
+      </details>
+    </section>
+
+      </main>
+
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

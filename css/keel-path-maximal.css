@@ -1,0 +1,67 @@
+/* keel path: maximal — maximalism.
+   A PATH is a continuation of keel, not part of the install: link it
+   after keel.css only if your design is heading this way. Bigger type,
+   heavier decoration, gradients on the furniture — density turned up
+   while the guardrail holds: gradients decorate edges and fills, never
+   the text color, so contrast stays guaranteed.
+
+     <link rel="stylesheet" href="keel.css">
+     <link rel="stylesheet" href="keel-path-maximal.css">
+
+   Styles live in @layer path — above keel's layers, below your own
+   unlayered CSS, which still always wins. */
+
+@layer path {
+  :root {
+    /* scale the display end of the type ramp up */
+    --k-text-2xl: clamp(2.1rem, 1.6rem + 2.4vw, 3.2rem);
+    --k-text-3xl: clamp(2.9rem, 2.1rem + 4vw, 5rem);
+    --k-display-weight: 800;
+    --k-tracking: -0.03em;
+    --k-radius: 14px;
+    --k-shadow: 0 2px 8px hsl(228 35% 12% / 0.07),
+                0 18px 44px -12px hsl(228 35% 12% / 0.22);
+  }
+
+  /* headings get a gradient underline flourish — decoration, not text color */
+  h1, h2 {
+    text-wrap: balance;
+  }
+  h2 {
+    padding-block-end: var(--k-space-2);
+    background: linear-gradient(to right, var(--k-accent), var(--k-accent-2)) no-repeat left bottom / 4rem 4px;
+  }
+
+  /* cards carry a gradient top edge; hover lifts harder */
+  .k-card {
+    border-block-start: 4px solid transparent;
+    background:
+      linear-gradient(var(--k-surface), var(--k-surface)) padding-box,
+      var(--k-gradient) border-box;
+  }
+  .k-card--hover:hover { translate: 0 -4px; box-shadow: var(--k-shadow-l); }
+
+  /* buttons go bold: gradient fill on the primary, pill everywhere */
+  .k-btn { border-radius: 999px; font-weight: 700; }
+  .k-btn:not(.k-btn--ghost):not(.k-btn--soft):not(.k-btn--secondary):not(.k-btn--link) {
+    background: var(--k-gradient);
+  }
+
+  .k-badge { border-radius: 999px; font-weight: 700; }
+
+  /* alt sections get the mesh treatment for free — richer than the
+     token wash, so the band clearly glows */
+  .k-section--alt {
+    background-image:
+      radial-gradient(60rem 34rem at 82% -20%, color-mix(in oklab, var(--k-accent), transparent 80%), transparent 62%),
+      radial-gradient(52rem 30rem at -2% 120%, color-mix(in oklab, var(--k-accent-2), transparent 80%), transparent 62%);
+  }
+
+  /* a plain rule becomes a gradient bar */
+  hr {
+    border: 0; block-size: 4px; border-radius: 2px;
+    background: var(--k-gradient);
+  }
+
+  blockquote { border-inline-start: 5px solid; border-image: var(--k-gradient) 1; }
+}

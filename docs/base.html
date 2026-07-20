@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Base — keel</title>
+<meta name="description" content="The keel base layer: semantic HTML styled with zero classes. Headings, prose, code, media, tables, forms, and disclosure elements — rendered, with the markup shown.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+      <aside class="k-sticky docs-side k-sidebar--collapsible" id="docs-sidebar">
+        <button class="k-tool docs-sidebar-toggle" type="button" id="docs-sidebar-toggle"
+                aria-pressed="false" aria-label="Collapse sidebar to icons">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Documentation">
+          <details class="k-nav-group" open>
+            <summary>Getting started</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="start.html">Start</a></li>
+            <li><a href="frameworks.html">Framework guides</a></li>
+            <li><a href="concepts.html">Concepts</a></li>
+            <li><a href="changelog.html">Changelog</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Reference</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="tokens.html">Tokens</a></li>
+            <li aria-current="page"><a href="base.html">Base</a></li>
+            <li><a href="typography.html">Typography</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="components.html">Components</a>
+            <ul class="k-list k-list--flush docs-sub">
+              <li><a href="components-actions.html">Actions</a></li>
+              <li><a href="components-forms.html">Forms</a></li>
+              <li><a href="components-surfaces.html">Surfaces &amp; data</a></li>
+              <li><a href="components-feedback.html">Feedback</a></li>
+              <li><a href="components-overlays.html">Overlays</a></li>
+              <li><a href="components-navigation.html">Navigation</a></li>
+              <li><a href="components-identity.html">Identity &amp; media</a></li>
+              <li><a href="components-motion.html">Motion</a></li>
+              <li><a href="components-extending.html">Extending</a></li>
+              <li><a href="components-app.html">Application</a></li>
+            </ul>
+          </li>
+            <li><a href="utilities.html">Utilities</a></li>
+            <li><a href="icons.html">Icons</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Build</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="sections.html">Sections</a></li>
+            <li><a href="../templates.html">Templates</a></li>
+            <li><a href="../design.html">Design system</a></li>
+            <li><a href="paths.html">Paths</a></li>
+          </ul>
+          </details>
+        </nav>
+        <div id="docs-anchors"></div>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <h1>Base</h1>
+        <p class="k-text-soft">The second cascade layer styles semantic HTML directly — content with zero classes already looks designed. Each group shows the elements rendered, then the exact markup under a "Markup" disclosure.</p>
+
+        <h2>Headings &amp; prose</h2>
+        <p>The whole type scale is fluid — every step is a <code>clamp()</code> — so text breathes with the viewport with no breakpoint styles.</p>
+
+    <h1>Heading one</h1>
+    <h2>Heading two</h2>
+    <h3>Heading three</h3>
+    <h4>Heading four</h4>
+    <p>A paragraph with <a href="#">a link</a>, <strong>strong
+    text</strong>, <em>emphasis</em>, inline <code>code</code>,
+    <mark>marked text</mark>, and <small>small print</small>.</p>
+    <ul>
+      <li>An unordered list item</li>
+      <li>Another item</li>
+      <li>A third</li>
+    </ul>
+    <ol>
+      <li>First step</li>
+      <li>Second step</li>
+      <li>Third step</li>
+    </ol>
+    <dl>
+      <dt>Definition term</dt>
+      <dd>The description that goes with it.</dd>
+      <dt>Another term</dt>
+      <dd>Another description.</dd>
+    </dl>
+    <blockquote>
+      <p>A blockquote. It reads slightly larger and softer, with an
+      accent rule on the start edge.</p>
+    </blockquote>
+    <hr>
+    <p>A horizontal rule sits above this paragraph.</p>
+
+    <details>
+      <summary>Markup</summary>
+      <pre><code>&lt;h1&gt;Heading one&lt;/h1&gt;
+&lt;h2&gt;Heading two&lt;/h2&gt;
+&lt;h3&gt;Heading three&lt;/h3&gt;
+&lt;h4&gt;Heading four&lt;/h4&gt;
+&lt;p&gt;A paragraph with &lt;a href="#"&gt;a link&lt;/a&gt;, &lt;strong&gt;strong
+text&lt;/strong&gt;, &lt;em&gt;emphasis&lt;/em&gt;, inline &lt;code&gt;code&lt;/code&gt;,
+&lt;mark&gt;marked text&lt;/mark&gt;, and &lt;small&gt;small print&lt;/small&gt;.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;An unordered list item&lt;/li&gt;
+  &lt;li&gt;Another item&lt;/li&gt;
+  &lt;li&gt;A third&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+  &lt;li&gt;First step&lt;/li&gt;
+  &lt;li&gt;Second step&lt;/li&gt;
+  &lt;li&gt;Third step&lt;/li&gt;
+&lt;/ol&gt;
+&lt;dl&gt;
+  &lt;dt&gt;Definition term&lt;/dt&gt;
+  &lt;dd&gt;The description that goes with it.&lt;/dd&gt;
+  &lt;dt&gt;Another term&lt;/dt&gt;
+  &lt;dd&gt;Another description.&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;A blockquote. It reads slightly larger and softer, with an
+  accent rule on the start edge.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;A horizontal rule sits above this paragraph.&lt;/p&gt;</code></pre>
+    </details>
+
+        <h2>Rhythm</h2>
+        <p>A heading that follows content — a paragraph, list, table, code
+        block, figure, blockquote, or details — automatically gets
+        <code>--k-space-6</code> of breathing room above it. No classes.
+        The paragraph below ends a thought, and the heading after it makes
+        its own space:</p>
+        <p>Some content ends here.</p>
+        <h3>A heading that follows it</h3>
+        <p>The gap above that heading came from the base layer, not from a
+        margin utility. This is why keel pages have rhythm without spacing
+        utilities.</p>
+
+        <h2>Code</h2>
+    <p>Inline <code>code</code> gets a quiet chip. Keyboard input like
+    <kbd>Ctrl</kbd> + <kbd>S</kbd> gets the same chip with a heavier
+    bottom edge. Blocks scroll sideways instead of wrapping.</p>
+    <pre><code>@layer tokens {
+  :root {
+    --k-accent: hsl(231 84% 56%);
+    --k-radius: 8px;
+  }
+}</code></pre>
+
+    <details>
+      <summary>Markup</summary>
+      <pre><code>&lt;p&gt;Inline &lt;code&gt;code&lt;/code&gt; gets a quiet chip. Keyboard input like
+&lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt; gets the same chip with a heavier
+bottom edge. Blocks scroll sideways instead of wrapping.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@layer tokens {
+  :root {
+    --k-accent: hsl(231 84% 56%);
+    --k-radius: 8px;
+  }
+}&lt;/code&gt;&lt;/pre&gt;</code></pre>
+    </details>
+
+        <h2>Keyboard keys</h2>
+    <p>The bare <kbd>kbd</kbd> element renders as a raised key cap — a
+    mono face, a strong border, and a heavier bottom edge that reads as
+    depth. No class is needed; <code>.k-kbd</code> is available if you
+    want the look on another element.</p>
+    <p>Press <kbd>⌘</kbd> <kbd>K</kbd> to search, <kbd>Esc</kbd> to
+    close.</p>
+
+    <details>
+      <summary>Markup</summary>
+      <pre><code>&lt;p&gt;Press &lt;kbd&gt;⌘&lt;/kbd&gt; &lt;kbd&gt;K&lt;/kbd&gt; to search,
+&lt;kbd&gt;Esc&lt;/kbd&gt; to close.&lt;/p&gt;</code></pre>
+    </details>
+
+        <h2>Code block with copy</h2>
+    <p>Wrap a <code>pre</code> in <code>.k-code</code> to place a
+    <code>.k-code__copy</code> button in the top-right corner. The button
+    stays hidden until you hover the block or focus something inside it.
+    keel styles the chrome only — wiring the copy is one line of your own
+    JavaScript that calls <code>navigator.clipboard.writeText</code>.</p>
+    <div class="k-code"><button type="button" class="k-code__copy"><span class="k-icon k-icon--copy" aria-hidden="true"></span> Copy</button><pre><code>npm run build</code></pre></div>
+
+    <details>
+      <summary>Markup</summary>
+      <pre><code>&lt;div class="k-code"&gt;
+  &lt;button type="button" class="k-code__copy"&gt;
+    &lt;span class="k-icon k-icon--copy" aria-hidden="true"&gt;&lt;/span&gt; Copy
+  &lt;/button&gt;
+  &lt;pre&gt;&lt;code&gt;npm run build&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  document.querySelector('.k-code__copy').addEventListener('click', () =&gt;
+    navigator.clipboard.writeText('npm run build'));
+&lt;/script&gt;</code></pre>
+    </details>
+
+        <h2>Media</h2>
+    <figure>
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='320'%3E%3Crect width='640' height='320' fill='%23e4e7f0'/%3E%3Cline x1='0' y1='0' x2='640' y2='320' stroke='%23b8bfd4' stroke-width='2'/%3E%3Cline x1='640' y1='0' x2='0' y2='320' stroke='%23b8bfd4' stroke-width='2'/%3E%3Ctext x='320' y='166' text-anchor='middle' font-family='monospace' font-size='16' fill='%23555f7a'%3E640 x 320%3C/text%3E%3C/svg%3E" alt="Placeholder">
+      <figcaption>Images get the base radius and never overflow their
+      container. This one is an inline SVG data URI — no request
+      leaves the page.</figcaption>
+    </figure>
+
+    <details>
+      <summary>Markup</summary>
+      <pre><code>&lt;figure&gt;
+  &lt;img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='320'%3E%3Crect width='640' height='320' fill='%23e4e7f0'/%3E%3Cline x1='0' y1='0' x2='640' y2='320' stroke='%23b8bfd4' stroke-width='2'/%3E%3Cline x1='640' y1='0' x2='0' y2='320' stroke='%23b8bfd4' stroke-width='2'/%3E%3Ctext x='320' y='166' text-anchor='middle' font-family='monospace' font-size='16' fill='%23555f7a'%3E640 x 320%3C/text%3E%3C/svg%3E" alt="Placeholder"&gt;
+  &lt;figcaption&gt;Images get the base radius and never overflow their
+  container. This one is an inline SVG data URI — no request
+  leaves the page.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+    </details>
+
+        <h2>Tables</h2>
+    <table>
+      <thead>
+        <tr><th>Layer</th><th>Job</th><th>Size</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>tokens</td><td>Every visual decision</td><td>~30 properties</td></tr>
+        <tr><td>base</td><td>Semantic HTML, styled</td><td>0 classes</td></tr>
+        <tr><td>layout</td><td>Bands and structure</td><td>~10 classes</td></tr>
+        <tr><td>components</td><td>Thin, token-fed pieces</td><td>~15 classes</td></tr>
+      </tbody>
+    </table>
+
+    <details>
+      <summary>Markup</summary>
+      <pre><code>&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Layer&lt;/th&gt;&lt;th&gt;Job&lt;/th&gt;&lt;th&gt;Size&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;tokens&lt;/td&gt;&lt;td&gt;Every visual decision&lt;/td&gt;&lt;td&gt;~30 properties&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;base&lt;/td&gt;&lt;td&gt;Semantic HTML, styled&lt;/td&gt;&lt;td&gt;0 classes&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;layout&lt;/td&gt;&lt;td&gt;Bands and structure&lt;/td&gt;&lt;td&gt;~10 classes&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;components&lt;/td&gt;&lt;td&gt;Thin, token-fed pieces&lt;/td&gt;&lt;td&gt;~15 classes&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+    </details>
+
+        <h2>Forms</h2>
+    <form>
+      <p>
+        <label for="demo-name">Name</label>
+        <input type="text" id="demo-name" name="name" placeholder="Ana Reyes">
+      </p>
+      <p>
+        <label for="demo-zone">Delivery zone</label>
+        <select id="demo-zone" name="zone">
+          <option>Metro</option>
+          <option>Provincial</option>
+          <option>Pickup</option>
+        </select>
+      </p>
+      <p>
+        <label for="demo-notes">Notes</label>
+        <textarea id="demo-notes" name="notes" rows="3" placeholder="Anything we should know?"></textarea>
+      </p>
+      <fieldset>
+        <legend>Options</legend>
+        <p>
+          <label style="display:inline; font-weight:400">
+            <input type="checkbox" name="gift"> Gift wrap
+          </label>
+        </p>
+        <p>
+          <label style="display:inline; font-weight:400">
+            <input type="radio" name="speed" checked> Standard
+          </label>
+          <label style="display:inline; font-weight:400">
+            <input type="radio" name="speed"> Express
+          </label>
+        </p>
+        <p>
+          <label for="demo-qty">Quantity</label>
+          <input type="range" id="demo-qty" name="qty" min="1" max="10" value="3">
+        </p>
+        <p>
+          <label for="demo-color">Accent color</label>
+          <input type="color" id="demo-color" name="color" value="#3d5af1">
+        </p>
+      </fieldset>
+      <p>
+        <label for="demo-progress">Order progress</label>
+        <progress id="demo-progress" max="100" value="60">60%</progress>
+      </p>
+    </form>
+
+    <details>
+      <summary>Markup</summary>
+      <pre><code>&lt;form&gt;
+  &lt;p&gt;
+    &lt;label for="demo-name"&gt;Name&lt;/label&gt;
+    &lt;input type="text" id="demo-name" name="name" placeholder="Ana Reyes"&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;label for="demo-zone"&gt;Delivery zone&lt;/label&gt;
+    &lt;select id="demo-zone" name="zone"&gt;
+      &lt;option&gt;Metro&lt;/option&gt;
+      &lt;option&gt;Provincial&lt;/option&gt;
+      &lt;option&gt;Pickup&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;label for="demo-notes"&gt;Notes&lt;/label&gt;
+    &lt;textarea id="demo-notes" name="notes" rows="3"
+      placeholder="Anything we should know?"&gt;&lt;/textarea&gt;
+  &lt;/p&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Options&lt;/legend&gt;
+    &lt;p&gt;
+      &lt;label style="display:inline; font-weight:400"&gt;
+        &lt;input type="checkbox" name="gift"&gt; Gift wrap
+      &lt;/label&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+      &lt;label style="display:inline; font-weight:400"&gt;
+        &lt;input type="radio" name="speed" checked&gt; Standard
+      &lt;/label&gt;
+      &lt;label style="display:inline; font-weight:400"&gt;
+        &lt;input type="radio" name="speed"&gt; Express
+      &lt;/label&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+      &lt;label for="demo-qty"&gt;Quantity&lt;/label&gt;
+      &lt;input type="range" id="demo-qty" name="qty" min="1" max="10" value="3"&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+      &lt;label for="demo-color"&gt;Accent color&lt;/label&gt;
+      &lt;input type="color" id="demo-color" name="color" value="#3d5af1"&gt;
+    &lt;/p&gt;
+  &lt;/fieldset&gt;
+  &lt;p&gt;
+    &lt;label for="demo-progress"&gt;Order progress&lt;/label&gt;
+    &lt;progress id="demo-progress" max="100" value="60"&gt;60%&lt;/progress&gt;
+  &lt;/p&gt;
+&lt;/form&gt;</code></pre>
+    </details>
+    <p><small>One honest wrinkle: base makes <code>label</code> a
+    block, which suits text fields. For checkbox and radio rows the
+    samples above set <code>display:inline</code> on the label —
+    that's the one inline style on this page.</small></p>
+
+        <h2>Disclosure &amp; dialog</h2>
+    <details>
+      <summary>A details element, closed by default</summary>
+      <p>It opens and closes with no JavaScript at all — this behavior
+      is built into HTML. keel only styles the surface.</p>
+    </details>
+
+    <details>
+      <summary>Markup</summary>
+      <pre><code>&lt;details&gt;
+  &lt;summary&gt;A details element, closed by default&lt;/summary&gt;
+  &lt;p&gt;It opens and closes with no JavaScript at all — this behavior
+  is built into HTML. keel only styles the surface.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+    </details>
+
+    <h3 style="margin-top: var(--k-space-6)">Dialog</h3>
+    <p>Base styles <code>dialog</code> — surface, radius, shadow, and a
+    dimmed backdrop. But a dialog needs one line of JavaScript to open,
+    and keel ships none. That line is yours to write:</p>
+    <pre><code>&lt;dialog id="confirm"&gt;
+  &lt;h3&gt;Delete draft?&lt;/h3&gt;
+  &lt;p&gt;This can't be undone.&lt;/p&gt;
+  &lt;form method="dialog"&gt;
+    &lt;button&gt;Cancel&lt;/button&gt;
+    &lt;button value="delete"&gt;Delete&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/dialog&gt;
+
+&lt;script&gt;
+  document.querySelector('#confirm').showModal();
+&lt;/script&gt;</code></pre>
+    <p>Once open, <code>&lt;form method="dialog"&gt;</code> closes it
+    without more script.</p>
+
+        <p class="k-alert">The contract: <strong>if an element looks wrong with zero classes, that's a keel bug</strong> — plain semantic HTML is the base layer's job, not something for you to patch with classes.</p>
+      </main>
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

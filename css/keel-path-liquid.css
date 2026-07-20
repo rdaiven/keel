@@ -1,0 +1,76 @@
+/* keel path: liquid — glassmorphism, everywhere.
+   A PATH is a continuation of keel, not part of the install: link it
+   after keel.css only if your design is heading this way. Surfaces
+   become frosted panes: translucent fills, backdrop blur, a diagonal
+   specular sheen and a light top edge — all in pure CSS. Text contrast
+   is preserved: fills stay tinted enough to read against.
+
+     <link rel="stylesheet" href="keel.css">
+     <link rel="stylesheet" href="keel-path-liquid.css">
+
+   Glass needs something to see through, so this path also lays down a
+   soft colored backdrop derived from the brand accents. A page that
+   sets its own background wins — these rules live in @layer path, above
+   keel's layers but below your own unlayered CSS. Where backdrop-filter
+   is unavailable, surfaces render clean and solid, so the page still
+   looks intentional on every browser. */
+
+@layer path {
+  :root {
+    --k-radius: 16px;
+    --k-liquid-blur: 22px;
+    /* how opaque a frosted surface stays — lower shows more backdrop,
+       higher protects text contrast */
+    --k-liquid-tint: 66%;
+    /* the specular top edge: a bright inner line, like light on a rim */
+    --k-liquid-edge: inset 0 1px 0 color-mix(in srgb, white 55%, transparent);
+    --k-shadow: 0 10px 30px -12px hsl(228 40% 8% / 0.35), var(--k-liquid-edge);
+    --k-shadow-l: 0 30px 60px -22px hsl(228 40% 8% / 0.45), var(--k-liquid-edge);
+  }
+
+  /* Give the page something to frost over. Derived from the accents, so
+     it wears the site's own brand; a page's own background overrides it. */
+  body {
+    background-attachment: fixed;
+    background-image:
+      radial-gradient(60rem 42rem at 82% -8%,  color-mix(in srgb, var(--k-accent-2) 55%, transparent), transparent 58%),
+      radial-gradient(54rem 38rem at 2% 34%,   color-mix(in srgb, var(--k-accent) 48%, transparent),  transparent 58%),
+      radial-gradient(48rem 36rem at 62% 114%, color-mix(in srgb, var(--k-accent-2) 42%, transparent), transparent 58%);
+  }
+
+  .k-card, .k-panel, .k-stat, dialog, .k-menu, .k-toast, .k-popover {
+    background-color: color-mix(in srgb, var(--k-surface) var(--k-liquid-tint), transparent);
+    /* specular sheen: a diagonal highlight sliding across the glass */
+    background-image: linear-gradient(135deg,
+      color-mix(in srgb, white 22%, transparent), transparent 42%);
+    -webkit-backdrop-filter: blur(var(--k-liquid-blur)) saturate(1.8);
+    backdrop-filter: blur(var(--k-liquid-blur)) saturate(1.8);
+    border: 1px solid color-mix(in srgb, white 38%, var(--k-border));
+    box-shadow: var(--k-shadow);
+  }
+
+  .k-nav {
+    background-color: color-mix(in srgb, var(--k-bg) 62%, transparent);
+    -webkit-backdrop-filter: blur(var(--k-liquid-blur)) saturate(1.8);
+    backdrop-filter: blur(var(--k-liquid-blur)) saturate(1.8);
+    border-block-end: 1px solid color-mix(in srgb, white 22%, var(--k-border));
+  }
+
+  .k-btn--ghost, .k-btn--soft {
+    background-color: color-mix(in srgb, var(--k-surface) 46%, transparent);
+    background-image: linear-gradient(135deg,
+      color-mix(in srgb, white 24%, transparent), transparent 46%);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid color-mix(in srgb, white 36%, var(--k-border));
+  }
+
+  /* no backdrop-filter → solid surfaces, no sheen; the design still reads */
+  @supports not (backdrop-filter: blur(1px)) {
+    .k-card, .k-panel, .k-stat, dialog, .k-menu, .k-toast, .k-popover,
+    .k-nav, .k-btn--ghost, .k-btn--soft {
+      background-color: var(--k-surface);
+      background-image: none;
+    }
+  }
+}

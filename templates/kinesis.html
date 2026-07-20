@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kinesis Lab — a motion technique study built with keel</title>
+<meta name="description" content="A vanilla-JS motion technique showcase built on keel: cursor-follower easing, a scroll-driven scene, layered parallax, and a tilt-on-hover card — each contained to its own section, each with a reduced-motion fallback. The theme is one tokens block; the JS is one inline script.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Replace this block and the page becomes yours. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(230 20% 97%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(230 16% 93%);
+      --k-border: hsl(230 12% 86%);
+      --k-border-strong: hsl(230 12% 74%);
+      --k-text: hsl(232 30% 14%);
+      --k-text-soft: hsl(232 14% 36%);
+      --k-text-faint: hsl(232 10% 52%);
+      --k-accent: hsl(252 78% 58%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(184 78% 38%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-font-display: "Segoe UI", system-ui, sans-serif;
+      --k-display-weight: 700;
+      --k-radius: 10px;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* KINESIS demo chrome — page-local only. Every effect below is scoped
+     to its own bounded container so techniques never fight each other
+     or the page's normal scroll. */
+  .kn-stage {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--k-radius);
+    background: var(--k-surface-2);
+    border: 1px solid var(--k-border);
+  }
+
+  /* 1 — cursor follower */
+  .kn-cursor-stage { block-size: 16rem; cursor: none; }
+  .kn-cursor-stage__hint {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    color: var(--k-text-faint); font-size: var(--k-text-s); pointer-events: none;
+  }
+  .kn-dot {
+    position: absolute; top: 0; left: 0; inline-size: 22px; block-size: 22px;
+    border-radius: 50%; background: var(--k-accent);
+    /* positioned via transform in JS, translate(-50%,-50%) keeps it centered on the point */
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .kn-cursor-stage--static { cursor: default; }
+  .kn-cursor-stage--static .kn-dot { top: 50%; left: 50%; }
+
+  /* 2 — scroll-driven scene */
+  .kn-scroll-stage { block-size: 18rem; overflow-y: auto; }
+  .kn-scroll-track { block-size: 54rem; padding: var(--k-space-5); }
+  .kn-scroll-card {
+    position: sticky; top: var(--k-space-4);
+    background: var(--k-surface); border: 1px solid var(--k-border);
+    border-radius: var(--k-radius); padding: var(--k-space-5);
+    box-shadow: var(--k-shadow-s);
+    /* JS sets opacity/transform inline as the track scrolls past it */
+  }
+  .kn-scroll-marker {
+    margin-block-end: var(--k-space-6); color: var(--k-text-faint); font-size: var(--k-text-s);
+  }
+
+  /* 3 — parallax */
+  .kn-parallax-stage { block-size: 16rem; }
+  .kn-parallax-layer {
+    position: absolute; border-radius: 50%; opacity: 0.85;
+    /* base position; JS nudges translateY per layer on scroll */
+  }
+  .kn-parallax-layer--back { inline-size: 9rem; block-size: 9rem; background: var(--k-surface); border: 1px solid var(--k-border); inset-inline-start: 8%; inset-block-start: 20%; }
+  .kn-parallax-layer--mid { inline-size: 6rem; block-size: 6rem; background: var(--k-accent-2-soft); inset-inline-start: 42%; inset-block-start: 46%; }
+  .kn-parallax-layer--front { inline-size: 3.5rem; block-size: 3.5rem; background: var(--k-accent); inset-inline-start: 68%; inset-block-start: 30%; }
+  .kn-parallax-label {
+    position: absolute; inset-inline-start: var(--k-space-4); inset-block-end: var(--k-space-3);
+    color: var(--k-text-faint); font-size: var(--k-text-xs); letter-spacing: 0.06em; text-transform: uppercase;
+  }
+
+  /* 4 — tilt-on-hover card */
+  .kn-tilt-wrap { perspective: 900px; }
+  .kn-tilt-card {
+    background: var(--k-surface); border: 1px solid var(--k-border);
+    border-radius: var(--k-radius); padding: var(--k-space-6);
+    box-shadow: var(--k-shadow-s);
+    transform: perspective(900px) rotateX(0deg) rotateY(0deg);
+    transition: transform 220ms ease, box-shadow 220ms ease;
+    will-change: transform;
+  }
+  .kn-tilt-card--live:hover { box-shadow: var(--k-shadow); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — including the one
+    category keel's own components can't cover alone: page-local
+    vanilla JS. Every effect here respects reduced-motion.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Kinesis Lab</a>
+      <ul class="k-nav__links">
+        <li><a href="#cursor">Cursor follower</a></li>
+        <li><a href="#scroll">Scroll scene</a></li>
+        <li><a href="#parallax">Parallax</a></li>
+        <li><a href="#tilt">Tilt card</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="k-section k-section--tight" id="top">
+  <div class="k-container k-container--narrow">
+    <p class="k-hero__eyebrow">Motion technique study</p>
+    <h1>Four ways to move a pixel with JavaScript.</h1>
+    <p class="k-hero__lead">keel ships zero JavaScript by design — its
+    animations are CSS, and every one of them is gated behind
+    <code>prefers-reduced-motion</code>. This page is the deliberate
+    exception: a reference for the handful of effects that need a
+    script, built the same way you'd build them in a real project —
+    small, page-local, and contained to one section each.</p>
+    <div class="k-alert k-alert--soft k-mt-5">
+      <p><strong>Every technique below checks
+      <code>matchMedia("(prefers-reduced-motion: reduce)")</code> before
+      it starts.</strong> If your system asks for reduced motion, each
+      section falls back to a static, fully readable state instead of
+      running its animation loop — try it in your OS accessibility
+      settings and reload.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 1 — CURSOR FOLLOWER -->
+<section class="k-section k-section--alt" id="cursor">
+  <div class="k-container">
+    <div class="k-panel">
+      <div class="k-panel__header">
+        <p class="k-card__kicker">01 · Pointer tracking</p>
+        <h2 style="margin: 0">Cursor follower</h2>
+      </div>
+      <div class="k-panel__body">
+        <p class="k-text-soft">A dot eases toward the pointer instead of
+        snapping to it: each frame it moves a fraction of the remaining
+        distance (linear interpolation, or "lerp"), driven by
+        <code>requestAnimationFrame</code>. The <code>pointermove</code>
+        listener is bound to this box alone, not <code>document</code>,
+        so it never reads mouse movement anywhere else on the page.</p>
+        <div class="kn-stage kn-cursor-stage" id="kn-cursor-stage" data-kn-cursor>
+          <p class="kn-cursor-stage__hint">Move your pointer inside this box</p>
+          <div class="kn-dot" data-kn-cursor-dot></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 — SCROLL-DRIVEN SCENE -->
+<section class="k-section" id="scroll">
+  <div class="k-container">
+    <div class="k-panel">
+      <div class="k-panel__header">
+        <p class="k-card__kicker">02 · Scroll progress</p>
+        <h2 style="margin: 0">Scroll-driven scene</h2>
+      </div>
+      <div class="k-panel__body">
+        <p class="k-text-soft">This box scrolls internally
+        (<code>overflow-y: auto</code>) so the effect stays put instead
+        of hijacking the page. A <code>scroll</code> listener on the box
+        itself computes progress and fades/rises a card into place —
+        pure scroll-position math, no library.</p>
+        <div class="kn-stage kn-scroll-stage" id="kn-scroll-stage" data-kn-scroll>
+          <div class="kn-scroll-track">
+            <p class="kn-scroll-marker">Scroll down inside this box ↓</p>
+            <div class="kn-scroll-card" data-kn-scroll-target>
+              <p class="k-card__kicker">Frame 04</p>
+              <h3 style="margin-block-start: 0">The card resolves as you scroll</h3>
+              <p class="k-text-s k-text-soft" style="margin-bottom: 0">
+              Opacity and position are set from the box's own scroll
+              offset — reload with reduced motion on and this card just
+              stays fully visible, no listener attached.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 — PARALLAX -->
+<section class="k-section k-section--alt" id="parallax">
+  <div class="k-container">
+    <div class="k-panel">
+      <div class="k-panel__header">
+        <p class="k-card__kicker">03 · Layered depth</p>
+        <h2 style="margin: 0">Parallax on scroll</h2>
+      </div>
+      <div class="k-panel__body">
+        <p class="k-text-soft">Three circles move at three different
+        rates as the page scrolls this section into and out of view —
+        the classic depth illusion. One shared
+        <code>requestAnimationFrame</code> loop reads this section's
+        <code>getBoundingClientRect()</code> each frame and stops
+        updating once the section leaves the viewport, so it never runs
+        unnecessarily.</p>
+        <div class="kn-stage kn-parallax-stage" id="kn-parallax-stage" data-kn-parallax>
+          <div class="kn-parallax-layer kn-parallax-layer--back" data-kn-parallax-layer data-rate="0.12"></div>
+          <div class="kn-parallax-layer kn-parallax-layer--mid" data-kn-parallax-layer data-rate="0.28"></div>
+          <div class="kn-parallax-layer kn-parallax-layer--front" data-kn-parallax-layer data-rate="0.5"></div>
+          <span class="kn-parallax-label">scroll the page</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 — TILT ON HOVER -->
+<section class="k-section" id="tilt">
+  <div class="k-container">
+    <div class="k-panel">
+      <div class="k-panel__header">
+        <p class="k-card__kicker">04 · Pointer-relative rotation</p>
+        <h2 style="margin: 0">Tilt-on-hover card</h2>
+      </div>
+      <div class="k-panel__body">
+        <p class="k-text-soft">The card rotates on two axes based on
+        where your pointer sits inside it — <code>rotateX</code> from
+        vertical position, <code>rotateY</code> from horizontal —
+        applied with a plain CSS <code>transform</code>, reset on
+        <code>pointerleave</code>. No animation loop needed; the
+        browser's own compositor handles the easing via a CSS
+        transition.</p>
+        <div class="kn-tilt-wrap" style="max-inline-size: 24rem">
+          <div class="kn-tilt-card" id="kn-tilt-card" data-kn-tilt>
+            <p class="k-card__kicker">Hover to tilt</p>
+            <h3 style="margin-block-start: 0">Depth without a library</h3>
+            <p class="k-text-s k-text-soft" style="margin-bottom: 0">
+            Twelve lines of JS, one CSS transition, and a perspective on
+            the wrapper.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--accent">
+  <div class="k-container k-center">
+    <h2>That's the whole toolbox</h2>
+    <p style="max-width: 36em; margin-inline: auto">Four techniques, four
+    small functions, one reduced-motion check apiece. Copy the
+    <code>&lt;script&gt;</code> at the bottom of this file's source —
+    it's the entire dependency.</p>
+    <p class="k-mt-5"><a class="k-btn k-btn--large" href="../templates.html">All templates</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>Kinesis Lab — a fictional study, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+<script>
+  /* Kinesis motion techniques — page-local vanilla JS, scoped to this
+     page only. keel ships zero JS; this is the deliberate exception.
+     Every technique checks prefers-reduced-motion before it sets up
+     any animation loop or motion-driving listener, and falls back to
+     a static, fully readable state when the user has asked for less
+     motion. */
+  var prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  // 1 — cursor follower: lerp toward the pointer, scoped to one box.
+  function initCursorFollower() {
+    var stage = document.querySelector('[data-kn-cursor]');
+    var dot = document.querySelector('[data-kn-cursor-dot]');
+    if (!stage || !dot) return;
+
+    if (prefersReducedMotion) {
+      // Static fallback: dot sits centered, no listener, no rAF loop.
+      stage.classList.add('kn-cursor-stage--static');
+      return;
+    }
+
+    var target = { x: stage.clientWidth / 2, y: stage.clientHeight / 2 };
+    var pos = { x: target.x, y: target.y };
+    var raf = null;
+
+    stage.addEventListener('pointermove', function (e) {
+      var rect = stage.getBoundingClientRect();
+      target.x = e.clientX - rect.left;
+      target.y = e.clientY - rect.top;
+    });
+
+    function tick() {
+      // Ease 18% of the remaining distance toward the target each frame.
+      pos.x += (target.x - pos.x) * 0.18;
+      pos.y += (target.y - pos.y) * 0.18;
+      dot.style.transform = 'translate(' + (pos.x - 11) + 'px, ' + (pos.y - 11) + 'px)';
+      raf = requestAnimationFrame(tick);
+    }
+    raf = requestAnimationFrame(tick);
+  }
+
+  // 2 — scroll-driven scene: fade/rise a card from the box's own scroll offset.
+  function initScrollScene() {
+    var box = document.querySelector('[data-kn-scroll]');
+    var target = document.querySelector('[data-kn-scroll-target]');
+    if (!box || !target) return;
+
+    if (prefersReducedMotion) {
+      // Static fallback: card stays fully visible, plain internal
+      // scroll still works (that's normal page content, not motion),
+      // but no scroll listener drives opacity/transform.
+      target.style.opacity = '1';
+      target.style.transform = 'none';
+      return;
+    }
+
+    target.style.opacity = '0';
+    target.style.transform = 'translateY(24px)';
+    target.style.transition = 'opacity 120ms linear, transform 120ms linear';
+
+    function update() {
+      var max = box.scrollHeight - box.clientHeight;
+      var progress = max > 0 ? Math.min(1, box.scrollTop / (max * 0.6)) : 1;
+      target.style.opacity = String(progress);
+      target.style.transform = 'translateY(' + (24 * (1 - progress)) + 'px)';
+    }
+    box.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+
+  // shared: coalesce a high-frequency event (scroll, pointermove) into at
+  // most one call to fn per animation frame. Used by both techniques below;
+  // the cursor follower above runs its own continuous loop instead, since
+  // it's easing toward a moving target rather than reacting to an event.
+  function rafThrottle(fn) {
+    var ticking = false;
+    return function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        fn();
+      });
+    };
+  }
+
+  // 3 — parallax: one shared rAF loop, scoped to this section's rect.
+  function initParallax() {
+    var stage = document.querySelector('[data-kn-parallax]');
+    var layers = document.querySelectorAll('[data-kn-parallax-layer]');
+    if (!stage || !layers.length) return;
+
+    if (prefersReducedMotion) {
+      // Static fallback: layers stay at their CSS base positions —
+      // no scroll listener, no rAF loop is ever started.
+      return;
+    }
+
+    function apply() {
+      var rect = stage.getBoundingClientRect();
+      var viewportMid = window.innerHeight / 2;
+      var offset = rect.top + rect.height / 2 - viewportMid;
+      var inView = rect.bottom > 0 && rect.top < window.innerHeight;
+      if (inView) {
+        layers.forEach(function (layer) {
+          var rate = parseFloat(layer.getAttribute('data-rate')) || 0.2;
+          layer.style.transform = 'translateY(' + (offset * rate * -1) + 'px)';
+        });
+      }
+    }
+
+    window.addEventListener('scroll', rafThrottle(apply), { passive: true });
+    apply();
+  }
+
+  // 4 — tilt-on-hover: rotateX/rotateY from pointer position, CSS eases the return.
+  function initTiltCard() {
+    var card = document.querySelector('[data-kn-tilt]');
+    if (!card) return;
+
+    if (prefersReducedMotion) {
+      // Static fallback: card stays flat, no pointermove listener attached.
+      return;
+    }
+
+    card.classList.add('kn-tilt-card--live');
+    var maxTilt = 10; // degrees
+    var rect = null; // cached on pointerenter — static for the hover's duration
+    var lastX = 0, lastY = 0;
+
+    function paint() {
+      if (!rect) return;
+      var px = (lastX - rect.left) / rect.width;  // 0..1
+      var py = (lastY - rect.top) / rect.height;  // 0..1
+      var rotY = (px - 0.5) * (maxTilt * 2);
+      var rotX = (0.5 - py) * (maxTilt * 2);
+      card.style.transform = 'perspective(900px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
+    }
+    var schedulePaint = rafThrottle(paint);
+
+    card.addEventListener('pointerenter', function () {
+      rect = card.getBoundingClientRect();
+    });
+
+    card.addEventListener('pointermove', function (e) {
+      lastX = e.clientX; lastY = e.clientY;
+      schedulePaint();
+    });
+
+    card.addEventListener('pointerleave', function () {
+      rect = null;
+      card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
+    });
+  }
+
+  initCursorFollower();
+  initScrollScene();
+  initParallax();
+  initTiltCard();
+</script>
+</body>
+</html>

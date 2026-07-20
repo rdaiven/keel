@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sections · Pricing — keel</title>
+<meta name="description" content="Five copy-paste pricing sections built with keel: three-tier pricing, a two-tier split, a comparison table, a single price band, and a pricing FAQ. Each section is rendered live with its markup below.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+<main id="main">
+
+<section class="k-section">
+  <div class="k-container">
+    <h1>Sections · Pricing</h1>
+    <p class="k-hero__lead">Five ways to put a number on the page and
+    stand behind it. Same rules as the main
+    <a href="sections.html">sections</a> page: every pattern below is
+    rendered as a real full-bleed band, with its exact markup
+    underneath, and it re-renders in whatever tokens the
+    <a href="../design.html">design system page</a> gives you.</p>
+    <p class="k-text-soft">Prices inside the sections are placeholder —
+    fictional harbor-town businesses again — and each pattern keeps to
+    one currency, so what you paste stays coherent.</p>
+    <div class="k-cluster" style="margin-top: var(--k-space-5)">
+      <a class="k-badge k-badge--outline" href="#three-tier-pricing">Three-tier pricing</a>
+      <a class="k-badge k-badge--outline" href="#two-tier-split">Two-tier split</a>
+      <a class="k-badge k-badge--outline" href="#comparison-table">Comparison table</a>
+      <a class="k-badge k-badge--outline" href="#single-price-band">Single price band</a>
+      <a class="k-badge k-badge--outline" href="#pricing-faq">Pricing FAQ</a>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="three-tier-pricing">Three-tier pricing</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Three tiers, one highlighted. The middle card gets the solid button and the badge; the others stay ghost.</p>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container">
+    <h2 class="k-center">Plans</h2>
+    <p class="k-center k-text-soft">Fixed prices, agreed before work
+    starts. No hourly surprises.</p>
+    <div class="k-thirds" style="margin-top: var(--k-space-5)">
+      <div class="k-card">
+        <h3 class="k-text-l">Page</h3>
+        <p><span class="k-stat__value">$900</span> <small>one time</small></p>
+        <ul class="k-checklist k-text-s">
+          <li>A single well-made page</li>
+          <li>Your words, edited</li>
+          <li>Hosting set up in your name</li>
+          <li>Done in two weeks</li>
+        </ul>
+        <a class="k-btn k-btn--ghost k-w-full k-justify-center" href="#">Choose Page</a>
+      </div>
+      <div class="k-card" style="border-color: var(--k-accent)">
+        <div class="k-cluster k-justify-between">
+          <h3 class="k-text-l k-mb-0">Site</h3>
+          <span class="k-badge k-badge--secondary">Popular</span>
+        </div>
+        <p><span class="k-stat__value">$3,400</span> <small>one time</small></p>
+        <ul class="k-checklist k-text-s">
+          <li>Up to eight pages</li>
+          <li>Identity refresh included</li>
+          <li>A contact flow that gets answered</li>
+          <li>First year of care included</li>
+        </ul>
+        <a class="k-btn k-w-full k-justify-center" href="#">Choose Site</a>
+      </div>
+      <div class="k-card">
+        <h3 class="k-text-l">Studio</h3>
+        <p><span class="k-stat__value">$650</span> <small>per year</small></p>
+        <ul class="k-checklist k-text-s">
+          <li>The yearly check, done for you</li>
+          <li>One round of edits a year</li>
+          <li>Same-week answers by email</li>
+          <li>For sites we built</li>
+        </ul>
+        <a class="k-btn k-btn--ghost k-w-full k-justify-center" href="#">Choose Studio</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — three-tier pricing</summary>
+      <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;h2 class="k-center"&gt;Plans&lt;/h2&gt;
+    &lt;p class="k-center k-text-soft"&gt;Fixed prices, agreed before work
+    starts. No hourly surprises.&lt;/p&gt;
+    &lt;div class="k-thirds" style="margin-top: var(--k-space-5)"&gt;
+      &lt;div class="k-card"&gt;
+        &lt;h3 class="k-text-l"&gt;Page&lt;/h3&gt;
+        &lt;p&gt;&lt;span class="k-stat__value"&gt;$900&lt;/span&gt; &lt;small&gt;one time&lt;/small&gt;&lt;/p&gt;
+        &lt;ul class="k-checklist k-text-s"&gt;
+          &lt;li&gt;A single well-made page&lt;/li&gt;
+          &lt;li&gt;Your words, edited&lt;/li&gt;
+          &lt;li&gt;Hosting set up in your name&lt;/li&gt;
+          &lt;li&gt;Done in two weeks&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;a class="k-btn k-btn--ghost k-w-full k-justify-center" href="#"&gt;Choose Page&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card" style="border-color: var(--k-accent)"&gt;
+        &lt;div class="k-cluster k-justify-between"&gt;
+          &lt;h3 class="k-text-l k-mb-0"&gt;Site&lt;/h3&gt;
+          &lt;span class="k-badge k-badge--secondary"&gt;Popular&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;p&gt;&lt;span class="k-stat__value"&gt;$3,400&lt;/span&gt; &lt;small&gt;one time&lt;/small&gt;&lt;/p&gt;
+        &lt;ul class="k-checklist k-text-s"&gt;
+          &lt;li&gt;Up to eight pages&lt;/li&gt;
+          &lt;li&gt;Identity refresh included&lt;/li&gt;
+          &lt;li&gt;A contact flow that gets answered&lt;/li&gt;
+          &lt;li&gt;First year of care included&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;a class="k-btn k-w-full k-justify-center" href="#"&gt;Choose Site&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card"&gt;
+        &lt;h3 class="k-text-l"&gt;Studio&lt;/h3&gt;
+        &lt;p&gt;&lt;span class="k-stat__value"&gt;$650&lt;/span&gt; &lt;small&gt;per year&lt;/small&gt;&lt;/p&gt;
+        &lt;ul class="k-checklist k-text-s"&gt;
+          &lt;li&gt;The yearly check, done for you&lt;/li&gt;
+          &lt;li&gt;One round of edits a year&lt;/li&gt;
+          &lt;li&gt;Same-week answers by email&lt;/li&gt;
+          &lt;li&gt;For sites we built&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;a class="k-btn k-btn--ghost k-w-full k-justify-center" href="#"&gt;Choose Studio&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="two-tier-split">Two-tier split</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Two plans side by side when three would be padding. The favored card wears k-glow instead of a border trick.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container">
+    <h2 class="k-center">Two ways to keep the books</h2>
+    <p class="k-center k-text-soft">Start on Ledger. Move up when the
+    numbers do.</p>
+    <div class="k-cols-2" style="margin-top: var(--k-space-5)">
+      <div class="k-card">
+        <h3 class="k-text-l">Ledger</h3>
+        <p><span class="k-stat__value">₱450</span> <small>per month</small></p>
+        <ul class="k-checklist k-text-s">
+          <li>One business, one ledger</li>
+          <li>A summary page every month</li>
+          <li>Export everything, any time</li>
+        </ul>
+        <a class="k-btn k-btn--ghost k-w-full k-justify-center" href="#">Start with Ledger</a>
+      </div>
+      <div class="k-card k-glow">
+        <div class="k-cluster k-justify-between">
+          <h3 class="k-text-l k-mb-0">Pro</h3>
+          <span class="k-badge">For growing crews</span>
+        </div>
+        <p><span class="k-stat__value">₱1,200</span> <small>per month</small></p>
+        <ul class="k-checklist k-text-s">
+          <li>Up to five businesses</li>
+          <li>Receipts filed by camera</li>
+          <li>Quarterly tax pack, ready to sign</li>
+          <li>Same-day answers by chat</li>
+        </ul>
+        <a class="k-btn k-w-full k-justify-center" href="#">Go Pro</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — two-tier split</summary>
+      <pre><code>&lt;section class="k-section k-section--alt"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;h2 class="k-center"&gt;Two ways to keep the books&lt;/h2&gt;
+    &lt;p class="k-center k-text-soft"&gt;Start on Ledger. Move up when the
+    numbers do.&lt;/p&gt;
+    &lt;div class="k-cols-2" style="margin-top: var(--k-space-5)"&gt;
+      &lt;div class="k-card"&gt;
+        &lt;h3 class="k-text-l"&gt;Ledger&lt;/h3&gt;
+        &lt;p&gt;&lt;span class="k-stat__value"&gt;₱450&lt;/span&gt; &lt;small&gt;per month&lt;/small&gt;&lt;/p&gt;
+        &lt;ul class="k-checklist k-text-s"&gt;
+          &lt;li&gt;One business, one ledger&lt;/li&gt;
+          &lt;li&gt;A summary page every month&lt;/li&gt;
+          &lt;li&gt;Export everything, any time&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;a class="k-btn k-btn--ghost k-w-full k-justify-center" href="#"&gt;Start with Ledger&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card k-glow"&gt;
+        &lt;div class="k-cluster k-justify-between"&gt;
+          &lt;h3 class="k-text-l k-mb-0"&gt;Pro&lt;/h3&gt;
+          &lt;span class="k-badge"&gt;For growing crews&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;p&gt;&lt;span class="k-stat__value"&gt;₱1,200&lt;/span&gt; &lt;small&gt;per month&lt;/small&gt;&lt;/p&gt;
+        &lt;ul class="k-checklist k-text-s"&gt;
+          &lt;li&gt;Up to five businesses&lt;/li&gt;
+          &lt;li&gt;Receipts filed by camera&lt;/li&gt;
+          &lt;li&gt;Quarterly tax pack, ready to sign&lt;/li&gt;
+          &lt;li&gt;Same-day answers by chat&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;a class="k-btn k-w-full k-justify-center" href="#"&gt;Go Pro&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="comparison-table">Comparison table</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Features against plans in a bordered table: check and x icons in the cells, a caption on top, and the prices in a tfoot row aligned with k-num.</p>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container--narrow k-container">
+    <h2>What each plan carries</h2>
+    <table class="k-table--bordered">
+      <caption>Features by plan — both prices are flat, agreed up front</caption>
+      <thead>
+        <tr>
+          <th scope="col">Feature</th>
+          <th scope="col" class="k-center">Page</th>
+          <th scope="col" class="k-center">Site</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Your own domain, in your name</td>
+          <td class="k-center"><span class="k-icon k-icon--check" aria-hidden="true" style="color: var(--k-ok)"></span><span class="k-visually-hidden">Included</span></td>
+          <td class="k-center"><span class="k-icon k-icon--check" aria-hidden="true" style="color: var(--k-ok)"></span><span class="k-visually-hidden">Included</span></td>
+        </tr>
+        <tr>
+          <td>Words edited before they ship</td>
+          <td class="k-center"><span class="k-icon k-icon--check" aria-hidden="true" style="color: var(--k-ok)"></span><span class="k-visually-hidden">Included</span></td>
+          <td class="k-center"><span class="k-icon k-icon--check" aria-hidden="true" style="color: var(--k-ok)"></span><span class="k-visually-hidden">Included</span></td>
+        </tr>
+        <tr>
+          <td>Identity refresh included</td>
+          <td class="k-center"><span class="k-icon k-icon--x k-text-faint" aria-hidden="true"></span><span class="k-visually-hidden">Not included</span></td>
+          <td class="k-center"><span class="k-icon k-icon--check" aria-hidden="true" style="color: var(--k-ok)"></span><span class="k-visually-hidden">Included</span></td>
+        </tr>
+        <tr>
+          <td>A contact flow that gets answered</td>
+          <td class="k-center"><span class="k-icon k-icon--x k-text-faint" aria-hidden="true"></span><span class="k-visually-hidden">Not included</span></td>
+          <td class="k-center"><span class="k-icon k-icon--check" aria-hidden="true" style="color: var(--k-ok)"></span><span class="k-visually-hidden">Included</span></td>
+        </tr>
+        <tr>
+          <td>First year of care included</td>
+          <td class="k-center"><span class="k-icon k-icon--x k-text-faint" aria-hidden="true"></span><span class="k-visually-hidden">Not included</span></td>
+          <td class="k-center"><span class="k-icon k-icon--check" aria-hidden="true" style="color: var(--k-ok)"></span><span class="k-visually-hidden">Included</span></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Price, one time</td>
+          <td class="k-num">$900</td>
+          <td class="k-num">$3,400</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — comparison table</summary>
+      <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container--narrow k-container"&gt;
+    &lt;h2&gt;What each plan carries&lt;/h2&gt;
+    &lt;table class="k-table--bordered"&gt;
+      &lt;caption&gt;Features by plan — both prices are flat, agreed up front&lt;/caption&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th scope="col"&gt;Feature&lt;/th&gt;
+          &lt;th scope="col" class="k-center"&gt;Page&lt;/th&gt;
+          &lt;th scope="col" class="k-center"&gt;Site&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Your own domain, in your name&lt;/td&gt;
+          &lt;td class="k-center"&gt;&lt;span class="k-icon k-icon--check" aria-hidden="true" style="color: var(--k-ok)"&gt;&lt;/span&gt;&lt;span class="k-visually-hidden"&gt;Included&lt;/span&gt;&lt;/td&gt;
+          &lt;td class="k-center"&gt;&lt;span class="k-icon k-icon--check" aria-hidden="true" style="color: var(--k-ok)"&gt;&lt;/span&gt;&lt;span class="k-visually-hidden"&gt;Included&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Words edited before they ship&lt;/td&gt;
+          &lt;td class="k-center"&gt;&lt;span class="k-icon k-icon--check" aria-hidden="true" style="color: var(--k-ok)"&gt;&lt;/span&gt;&lt;span class="k-visually-hidden"&gt;Included&lt;/span&gt;&lt;/td&gt;
+          &lt;td class="k-center"&gt;&lt;span class="k-icon k-icon--check" aria-hidden="true" style="color: var(--k-ok)"&gt;&lt;/span&gt;&lt;span class="k-visually-hidden"&gt;Included&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Identity refresh included&lt;/td&gt;
+          &lt;td class="k-center"&gt;&lt;span class="k-icon k-icon--x k-text-faint" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="k-visually-hidden"&gt;Not included&lt;/span&gt;&lt;/td&gt;
+          &lt;td class="k-center"&gt;&lt;span class="k-icon k-icon--check" aria-hidden="true" style="color: var(--k-ok)"&gt;&lt;/span&gt;&lt;span class="k-visually-hidden"&gt;Included&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;A contact flow that gets answered&lt;/td&gt;
+          &lt;td class="k-center"&gt;&lt;span class="k-icon k-icon--x k-text-faint" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="k-visually-hidden"&gt;Not included&lt;/span&gt;&lt;/td&gt;
+          &lt;td class="k-center"&gt;&lt;span class="k-icon k-icon--check" aria-hidden="true" style="color: var(--k-ok)"&gt;&lt;/span&gt;&lt;span class="k-visually-hidden"&gt;Included&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;First year of care included&lt;/td&gt;
+          &lt;td class="k-center"&gt;&lt;span class="k-icon k-icon--x k-text-faint" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="k-visually-hidden"&gt;Not included&lt;/span&gt;&lt;/td&gt;
+          &lt;td class="k-center"&gt;&lt;span class="k-icon k-icon--check" aria-hidden="true" style="color: var(--k-ok)"&gt;&lt;/span&gt;&lt;span class="k-visually-hidden"&gt;Included&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+      &lt;tfoot&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Price, one time&lt;/td&gt;
+          &lt;td class="k-num"&gt;$900&lt;/td&gt;
+          &lt;td class="k-num"&gt;$3,400&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tfoot&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="single-price-band">Single price band</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">One price, one list, one button. The inline two-column checklist keeps six items from becoming a tower.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--tint-2">
+  <div class="k-container--narrow k-container k-center">
+    <p class="k-uppercase k-text-faint">One plan, everything in it</p>
+    <h2 class="k-mb-1">The whole thing, flat</h2>
+    <p><span class="k-stat__value">₱9,500</span> <small>per year</small></p>
+    <ul class="k-checklist k-cols-2 k-text-s" style="text-align: start; max-width: 32rem; margin-inline: auto">
+      <li>Hosting and the domain</li>
+      <li>The yearly check</li>
+      <li>One round of edits</li>
+      <li>Backups, kept off-site</li>
+      <li>Same-week answers</li>
+      <li>No meetings required</li>
+    </ul>
+    <a class="k-btn" href="#">Reserve a slot</a>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — single price band</summary>
+      <pre><code>&lt;section class="k-section k-section--tint-2"&gt;
+  &lt;div class="k-container--narrow k-container k-center"&gt;
+    &lt;p class="k-uppercase k-text-faint"&gt;One plan, everything in it&lt;/p&gt;
+    &lt;h2 class="k-mb-1"&gt;The whole thing, flat&lt;/h2&gt;
+    &lt;p&gt;&lt;span class="k-stat__value"&gt;₱9,500&lt;/span&gt; &lt;small&gt;per year&lt;/small&gt;&lt;/p&gt;
+    &lt;ul class="k-checklist k-cols-2 k-text-s" style="text-align: start; max-width: 32rem; margin-inline: auto"&gt;
+      &lt;li&gt;Hosting and the domain&lt;/li&gt;
+      &lt;li&gt;The yearly check&lt;/li&gt;
+      &lt;li&gt;One round of edits&lt;/li&gt;
+      &lt;li&gt;Backups, kept off-site&lt;/li&gt;
+      &lt;li&gt;Same-week answers&lt;/li&gt;
+      &lt;li&gt;No meetings required&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;a class="k-btn" href="#"&gt;Reserve a slot&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="pricing-faq">Pricing FAQ</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">The two answers everyone needs as cards, then an accordion for the rest. Native details — no JavaScript.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container--narrow k-container">
+    <h2>Money questions</h2>
+    <div class="k-cols-2" style="margin-bottom: var(--k-space-5)">
+      <div class="k-card k-card--flat">
+        <p class="k-card__kicker">Deposits</p>
+        <p class="k-text-s k-mb-0">Half up front, half at handover. The
+        deposit is what holds your slot in the season.</p>
+      </div>
+      <div class="k-card k-card--flat">
+        <p class="k-card__kicker">Refunds</p>
+        <p class="k-text-s k-mb-0">Walk away before the draft and the
+        deposit comes back, minus the first week.</p>
+      </div>
+    </div>
+    <div class="k-accordion">
+      <details name="pricing-faq">
+        <summary>Why is there no hourly rate?</summary>
+        <p>Hourly billing rewards slow work. A fixed price agreed up
+        front means the risk of a long week is ours, not yours.</p>
+      </details>
+      <details name="pricing-faq">
+        <summary>What happens if the project grows?</summary>
+        <p>We stop and re-quote before doing the extra work. Nothing
+        new is built on a number you have not seen.</p>
+      </details>
+      <details name="pricing-faq">
+        <summary>Can I pay in parts?</summary>
+        <p>Yes — thirds is common: at start, at draft, at handover.
+        Say so before we begin and it goes in the agreement.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — pricing faq</summary>
+      <pre><code>&lt;section class="k-section k-section--alt"&gt;
+  &lt;div class="k-container--narrow k-container"&gt;
+    &lt;h2&gt;Money questions&lt;/h2&gt;
+    &lt;div class="k-cols-2" style="margin-bottom: var(--k-space-5)"&gt;
+      &lt;div class="k-card k-card--flat"&gt;
+        &lt;p class="k-card__kicker"&gt;Deposits&lt;/p&gt;
+        &lt;p class="k-text-s k-mb-0"&gt;Half up front, half at handover. The
+        deposit is what holds your slot in the season.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card k-card--flat"&gt;
+        &lt;p class="k-card__kicker"&gt;Refunds&lt;/p&gt;
+        &lt;p class="k-text-s k-mb-0"&gt;Walk away before the draft and the
+        deposit comes back, minus the first week.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="k-accordion"&gt;
+      &lt;details name="pricing-faq"&gt;
+        &lt;summary&gt;Why is there no hourly rate?&lt;/summary&gt;
+        &lt;p&gt;Hourly billing rewards slow work. A fixed price agreed up
+        front means the risk of a long week is ours, not yours.&lt;/p&gt;
+      &lt;/details&gt;
+      &lt;details name="pricing-faq"&gt;
+        &lt;summary&gt;What happens if the project grows?&lt;/summary&gt;
+        &lt;p&gt;We stop and re-quote before doing the extra work. Nothing
+        new is built on a number you have not seen.&lt;/p&gt;
+      &lt;/details&gt;
+      &lt;details name="pricing-faq"&gt;
+        &lt;summary&gt;Can I pay in parts?&lt;/summary&gt;
+        &lt;p&gt;Yes — thirds is common: at start, at draft, at handover.
+        Say so before we begin and it goes in the agreement.&lt;/p&gt;
+      &lt;/details&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+</main>
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

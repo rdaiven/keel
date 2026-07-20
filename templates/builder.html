@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Helm — a page builder built with keel</title>
+<meta name="description" content="A fictional page-builder interface built entirely with keel's application tier — toolbar, block palette, layers tree, live artboard, inspector. The whole violet dark theme is one tokens block in the head of this page.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The theme. This block is the entire difference between this page
+     and keel's defaults — every derived shade follows from it. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(240 12% 8%);
+      --k-surface: hsl(242 12% 11%);
+      --k-surface-2: hsl(244 12% 16%);
+      --k-border: hsl(244 10% 21%);
+      --k-border-strong: hsl(244 10% 31%);
+      --k-text: hsl(240 16% 93%);
+      --k-text-soft: hsl(242 10% 70%);
+      --k-text-faint: hsl(242 8% 54%);
+      --k-accent: hsl(255 85% 72%);
+      --k-on-accent: hsl(250 45% 10%);
+      --k-accent-2: hsl(185 80% 60%);
+      --k-on-accent-2: hsl(210 50% 8%);
+      --k-radius: 8px;
+      --k-ok: hsl(152 50% 56%);
+      --k-warn: hsl(38 92% 62%);
+      --k-danger: hsl(4 78% 66%);
+    }
+  }
+  html { color-scheme: dark; }
+  /* Tighter padding for the template notice — the page's only other rule. */
+  .demo-note { padding-block: var(--k-space-2); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — an application UI this
+    time. Open on a wide screen for the full three-panel layout.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<div class="k-app" style="min-block-size: calc(100dvh - 3rem)">
+
+  <header class="k-app__head">
+    <div class="k-toolbar">
+      <div class="k-toolbar__group">
+        <strong class="k-mono">Helm</strong>
+      </div>
+      <div class="k-toolbar__sep"></div>
+      <div class="k-toolbar__group k-text-s">
+        <span class="k-text-soft">landing-v3</span>
+        <span class="k-badge k-badge--outline">draft</span>
+      </div>
+      <div class="k-toolbar__sep"></div>
+      <div class="k-btn-group" role="group" aria-label="Preview device">
+        <button type="button" class="k-btn k-btn--ghost k-btn--small" aria-pressed="true"
+          onclick="[...this.parentElement.children].forEach(b=>b.setAttribute('aria-pressed',b===this)) /* demo wiring — a real builder is your JS */">Desktop</button>
+        <button type="button" class="k-btn k-btn--ghost k-btn--small" aria-pressed="false"
+          onclick="[...this.parentElement.children].forEach(b=>b.setAttribute('aria-pressed',b===this)) /* demo wiring — a real builder is your JS */">Tablet</button>
+        <button type="button" class="k-btn k-btn--ghost k-btn--small" aria-pressed="false"
+          onclick="[...this.parentElement.children].forEach(b=>b.setAttribute('aria-pressed',b===this)) /* demo wiring — a real builder is your JS */">Mobile</button>
+      </div>
+      <div class="k-toolbar__spring"></div>
+      <div class="k-toolbar__group">
+        <button type="button" class="k-tool" aria-label="Undo"><span class="k-icon k-icon--arrow-left" aria-hidden="true"></span></button>
+        <button type="button" class="k-tool" aria-label="Redo"><span class="k-icon k-icon--arrow-right" aria-hidden="true"></span></button>
+        <button type="button" class="k-tool" aria-label="Preview on canvas"><span class="k-icon k-icon--eye" aria-hidden="true"></span></button>
+        <button type="button" class="k-tool" aria-label="Page settings"><span class="k-icon k-icon--settings" aria-hidden="true"></span></button>
+        <button type="button" class="k-tool" aria-label="Save"><span class="k-icon k-icon--save" aria-hidden="true"></span></button>
+      </div>
+      <div class="k-toolbar__sep"></div>
+      <button type="button" class="k-btn k-btn--ghost k-btn--small"><span class="k-icon k-icon--eye" aria-hidden="true"></span> Preview</button>
+      <button type="button" class="k-btn k-btn--small">Publish</button>
+    </div>
+  </header>
+
+  <aside class="k-app__rail" aria-label="Blocks and layers">
+    <div class="k-p-3">
+      <p class="k-props__group" style="border-block-start: 0; margin-block-start: 0">Blocks</p>
+      <div class="k-cols-2 k-gap-2">
+        <div class="k-card k-card--flat k-center" style="--k-card-pad: var(--k-space-2)">
+          <span class="k-icon k-icon--star" aria-hidden="true"></span>
+          <small class="k-d-block">Hero</small>
+        </div>
+        <div class="k-card k-card--flat k-center" style="--k-card-pad: var(--k-space-2)">
+          <span class="k-icon k-icon--list" aria-hidden="true"></span>
+          <small class="k-d-block">Text</small>
+        </div>
+        <div class="k-card k-card--flat k-center" style="--k-card-pad: var(--k-space-2)">
+          <span class="k-icon k-icon--image" aria-hidden="true"></span>
+          <small class="k-d-block">Image</small>
+        </div>
+        <div class="k-card k-card--flat k-center" style="--k-card-pad: var(--k-space-2)">
+          <span class="k-icon k-icon--plus" aria-hidden="true"></span>
+          <small class="k-d-block">Button</small>
+        </div>
+        <div class="k-card k-card--flat k-center" style="--k-card-pad: var(--k-space-2)">
+          <span class="k-icon k-icon--grid" aria-hidden="true"></span>
+          <small class="k-d-block">Cards</small>
+        </div>
+        <div class="k-card k-card--flat k-center" style="--k-card-pad: var(--k-space-2)">
+          <span class="k-icon k-icon--more-h" aria-hidden="true"></span>
+          <small class="k-d-block">Footer</small>
+        </div>
+      </div>
+
+      <p class="k-props__group">Layers</p>
+      <ul class="k-tree">
+        <li>
+          <details open>
+            <summary class="k-tree__row"><span class="k-icon k-icon--chevron-right k-tree__twist" aria-hidden="true"></span><span class="k-icon k-icon--file" aria-hidden="true"></span>Page</summary>
+            <ul>
+              <li>
+                <details open>
+                  <summary class="k-tree__row" aria-selected="true" data-target="art-hero"><span class="k-icon k-icon--chevron-right k-tree__twist" aria-hidden="true"></span><span class="k-icon k-icon--star" aria-hidden="true"></span>Hero</summary>
+                  <ul>
+                    <li><button type="button" class="k-tree__row"><span class="k-icon k-icon--list" aria-hidden="true"></span>Heading</button></li>
+                    <li><button type="button" class="k-tree__row"><span class="k-icon k-icon--list" aria-hidden="true"></span>Lead</button></li>
+                    <li><button type="button" class="k-tree__row"><span class="k-icon k-icon--list" aria-hidden="true"></span>Button</button></li>
+                  </ul>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary class="k-tree__row" data-target="art-features"><span class="k-icon k-icon--chevron-right k-tree__twist" aria-hidden="true"></span><span class="k-icon k-icon--grid" aria-hidden="true"></span>Section — Features</summary>
+                  <ul>
+                    <li><button type="button" class="k-tree__row"><span class="k-icon k-icon--grid" aria-hidden="true"></span>Card</button></li>
+                    <li><button type="button" class="k-tree__row"><span class="k-icon k-icon--grid" aria-hidden="true"></span>Card</button></li>
+                    <li><button type="button" class="k-tree__row"><span class="k-icon k-icon--grid" aria-hidden="true"></span>Card</button></li>
+                  </ul>
+                </details>
+              </li>
+              <li><button type="button" class="k-tree__row" data-target="art-footer"><span class="k-icon k-icon--more-h" aria-hidden="true"></span>Footer</button></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <main id="main" class="k-app__work">
+    <div class="k-canvas">
+      <div class="k-artboard">
+        <!-- the artboard is a real keel page — same framework, one level down -->
+        <section id="art-hero" class="k-selected k-p-5" style="position: relative /* demo positioning — anchors the selection strip */">
+          <!-- selection mini-toolbar — floats over the selected block; inert demo -->
+          <div class="k-toolbar" style="position: absolute; top: 8px; right: 8px; /* demo positioning */
+               padding: 2px; border: 1px solid var(--k-border); border-radius: var(--k-radius-s); box-shadow: var(--k-shadow)">
+            <button type="button" class="k-tool" aria-label="Move block up"><span class="k-icon k-icon--arrow-up" aria-hidden="true"></span></button>
+            <button type="button" class="k-tool" aria-label="Move block down"><span class="k-icon k-icon--arrow-down" aria-hidden="true"></span></button>
+            <button type="button" class="k-tool" aria-label="Duplicate block"><span class="k-icon k-icon--copy" aria-hidden="true"></span></button>
+            <button type="button" class="k-tool" aria-label="Delete block"><span class="k-icon k-icon--trash" aria-hidden="true"></span></button>
+          </div>
+          <p class="k-hero__eyebrow">Ferrow &amp; Co.</p>
+          <h2>Software for slow mornings.</h2>
+          <p class="k-hero__lead k-text-s">One quiet tool for notes,
+          plans, and the odd good idea — nothing pings, nothing scrolls
+          forever.</p>
+          <div class="k-cluster">
+            <a class="k-btn k-btn--small">Start free</a>
+            <a class="k-btn k-btn--ghost k-btn--small">Read more</a>
+          </div>
+        </section>
+        <section id="art-features" class="k-p-4">
+          <div class="k-thirds" style="gap: var(--k-space-3)">
+            <div class="k-card k-card--flat" style="--k-card-pad: var(--k-space-3)">
+              <p class="k-card__kicker">Notes</p>
+              <small>Plain pages that stay where you left them.</small>
+            </div>
+            <div class="k-card k-card--flat" style="--k-card-pad: var(--k-space-3)">
+              <p class="k-card__kicker">Plans</p>
+              <small>A week at a glance, never a quarter.</small>
+            </div>
+            <div class="k-card k-card--flat" style="--k-card-pad: var(--k-space-3)">
+              <p class="k-card__kicker">Ideas</p>
+              <small>A shoebox with a search field.</small>
+            </div>
+          </div>
+        </section>
+        <footer id="art-footer" class="k-footer" style="padding: var(--k-space-3) var(--k-space-4)">
+          <small>Ferrow &amp; Co. — made slowly, on purpose.</small>
+        </footer>
+      </div>
+
+      <!-- second artboard — a canvas can hold as many as you like -->
+      <p class="k-text-xs k-text-faint" style="margin: var(--k-space-4) 0 var(--k-space-2)">Mobile · 390</p>
+      <div class="k-artboard" style="inline-size: 22rem">
+        <section class="k-p-4">
+          <p class="k-hero__eyebrow">Ferrow &amp; Co.</p>
+          <h3>Software for slow mornings.</h3>
+          <p class="k-text-s k-text-soft">One quiet tool for notes, plans,
+          and the odd good idea.</p>
+          <a class="k-btn k-btn--small">Start free</a>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <aside class="k-app__side" aria-label="Inspector">
+    <div class="k-p-3">
+      <div class="k-cluster k-justify-between">
+        <strong>Hero</strong>
+        <span class="k-badge">selected</span>
+      </div>
+      <div class="k-props k-mt-3">
+        <p class="k-props__group" style="border-block-start: 0; margin-block-start: 0">Layout</p>
+        <div class="k-props__row">
+          <label for="p-width">Width</label>
+          <select id="p-width">
+            <option>Narrow</option>
+            <option selected>Default</option>
+            <option>Wide</option>
+          </select>
+        </div>
+        <div class="k-props__row">
+          <label id="p-dir-label">Layout</label>
+          <div class="k-btn-group" role="group" aria-labelledby="p-dir-label">
+            <button type="button" class="k-btn k-btn--icon k-btn--ghost k-btn--small" aria-pressed="true" aria-label="Row"><span class="k-icon k-icon--flex-row" aria-hidden="true"></span></button>
+            <button type="button" class="k-btn k-btn--icon k-btn--ghost k-btn--small" aria-pressed="false" aria-label="Column"><span class="k-icon k-icon--flex-column" aria-hidden="true"></span></button>
+            <button type="button" class="k-btn k-btn--icon k-btn--ghost k-btn--small" aria-pressed="false" aria-label="Grid"><span class="k-icon k-icon--grid" aria-hidden="true"></span></button>
+          </div>
+        </div>
+        <div class="k-props__row">
+          <label id="p-align-label">Align</label>
+          <div class="k-btn-group" role="group" aria-labelledby="p-align-label">
+            <button type="button" class="k-btn k-btn--icon k-btn--ghost k-btn--small" aria-pressed="false" aria-label="Align left"><span class="k-icon k-icon--align-left" aria-hidden="true"></span></button>
+            <button type="button" class="k-btn k-btn--icon k-btn--ghost k-btn--small" aria-pressed="true" aria-label="Align center"><span class="k-icon k-icon--align-center" aria-hidden="true"></span></button>
+            <button type="button" class="k-btn k-btn--icon k-btn--ghost k-btn--small" aria-pressed="false" aria-label="Align right"><span class="k-icon k-icon--align-right" aria-hidden="true"></span></button>
+          </div>
+        </div>
+
+        <p class="k-props__group">Spacing</p>
+        <div class="k-props__row">
+          <label for="p-pad">Padding</label>
+          <input id="p-pad" class="k-input--small" type="number" value="24">
+        </div>
+        <div class="k-props__row">
+          <label for="p-gap">Gap</label>
+          <input id="p-gap" class="k-input--small" type="number" value="16">
+        </div>
+
+        <p class="k-props__group">Content</p>
+        <div class="k-props__row">
+          <label for="p-heading">Heading</label>
+          <input id="p-heading" type="text" value="Software for slow mornings.">
+        </div>
+        <div class="k-props__row">
+          <label for="p-lead">Lead</label>
+          <textarea id="p-lead" rows="2">One quiet tool for notes, plans, and the odd good idea — nothing pings, nothing scrolls forever.</textarea>
+        </div>
+
+        <p class="k-props__group">Style</p>
+        <div class="k-props__row">
+          <label id="p-fill-label">Fill</label>
+          <div class="k-cluster" style="gap: var(--k-space-2)">
+            <button type="button" class="k-swatch" aria-labelledby="p-fill-label"
+                    style="--k-swatch-color: hsl(240 12% 8%); inline-size: 1.8rem; block-size: 1.8rem"></button>
+            <code>#121217</code>
+          </div>
+        </div>
+        <div class="k-props__row">
+          <label for="p-radius">Radius</label>
+          <input id="p-radius" type="range" min="0" max="24" value="8">
+        </div>
+        <div class="k-props__row">
+          <label for="p-glass">Glass</label>
+          <span class="k-switch"><input id="p-glass" type="checkbox"></span>
+        </div>
+        <div class="k-props__row">
+          <label id="p-visible-label">Visible</label>
+          <button type="button" class="k-tool" aria-labelledby="p-visible-label" aria-pressed="true"
+            onclick="this.setAttribute('aria-pressed', this.getAttribute('aria-pressed') !== 'true') /* demo wiring — a real builder is your JS */"><span class="k-icon k-icon--eye" aria-hidden="true"></span></button>
+        </div>
+
+        <p class="k-props__group">Actions</p>
+        <div class="k-cluster" style="gap: var(--k-space-2)">
+          <button type="button" class="k-btn k-btn--ghost k-btn--small"><span class="k-icon k-icon--copy" aria-hidden="true"></span> Duplicate</button>
+          <button type="button" class="k-btn k-btn--danger k-btn--small"><span class="k-icon k-icon--trash" aria-hidden="true"></span> Delete</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <footer class="k-app__foot">
+    <div class="k-statusbar">
+      <div class="k-toolbar__group">
+        <button type="button" class="k-tool" aria-label="Zoom out"><span class="k-icon k-icon--zoom-out" aria-hidden="true"></span></button>
+        <span class="k-mono">100%</span>
+        <button type="button" class="k-tool" aria-label="Zoom in"><span class="k-icon k-icon--zoom-in" aria-hidden="true"></span></button>
+      </div>
+      <span>Page / Hero</span>
+      <div class="k-statusbar__spring"></div>
+      <span><span class="k-icon k-icon--check" aria-hidden="true"></span> Saved just now</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  /* demo wiring only — selecting a layer moves the highlight. A real
+     builder brings its own JS; keel ships the chrome, not a runtime. */
+  document.querySelectorAll('.k-tree [data-target]').forEach(row => row.addEventListener('click', () => {
+    document.querySelectorAll('.k-tree [aria-selected]').forEach(r => r.removeAttribute('aria-selected'));
+    row.setAttribute('aria-selected', 'true');
+    document.querySelectorAll('.k-artboard .k-selected').forEach(n => n.classList.remove('k-selected'));
+    document.getElementById(row.dataset.target).classList.add('k-selected');
+  }));
+</script>
+</body>
+</html>

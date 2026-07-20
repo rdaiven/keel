@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paths — keel</title>
+<meta name="description" content="keel paths: optional stylesheets that steer the whole framework toward a design direction — clay, brutal, liquid glass, maximal. Link one after keel.css, or none at all.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+      <aside class="k-sticky docs-side k-sidebar--collapsible" id="docs-sidebar">
+        <button class="k-tool docs-sidebar-toggle" type="button" id="docs-sidebar-toggle"
+                aria-pressed="false" aria-label="Collapse sidebar to icons">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Documentation">
+          <details class="k-nav-group" open>
+            <summary>Getting started</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="start.html">Start</a></li>
+            <li><a href="frameworks.html">Framework guides</a></li>
+            <li><a href="concepts.html">Concepts</a></li>
+            <li><a href="changelog.html">Changelog</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Reference</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="tokens.html">Tokens</a></li>
+            <li><a href="base.html">Base</a></li>
+            <li><a href="typography.html">Typography</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="components.html">Components</a>
+            <ul class="k-list k-list--flush docs-sub">
+              <li><a href="components-actions.html">Actions</a></li>
+              <li><a href="components-forms.html">Forms</a></li>
+              <li><a href="components-surfaces.html">Surfaces &amp; data</a></li>
+              <li><a href="components-feedback.html">Feedback</a></li>
+              <li><a href="components-overlays.html">Overlays</a></li>
+              <li><a href="components-navigation.html">Navigation</a></li>
+              <li><a href="components-identity.html">Identity &amp; media</a></li>
+              <li><a href="components-motion.html">Motion</a></li>
+              <li><a href="components-extending.html">Extending</a></li>
+              <li><a href="components-app.html">Application</a></li>
+            </ul>
+          </li>
+            <li><a href="utilities.html">Utilities</a></li>
+            <li><a href="icons.html">Icons</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Build</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="sections.html">Sections</a></li>
+            <li><a href="../templates.html">Templates</a></li>
+            <li><a href="../design.html">Design system</a></li>
+            <li aria-current="page"><a href="paths.html">Paths</a></li>
+          </ul>
+          </details>
+        </nav>
+        <div id="docs-anchors"></div>
+      </aside>
+      <main id="main" class="docs-main">
+        <h1>Paths</h1>
+        <p class="k-text-soft">A path is a continuation of keel, not part
+        of the install. keel's defaults are deliberately quiet; a path
+        steers the whole framework toward a stronger design direction —
+        link one after <code>keel.css</code> if that's where your site is
+        heading, or link none at all. Think of it this way: your
+        <a href="tokens.html">tokens</a> decide the colors, type, and
+        spacing; a path decides the shape-and-decoration language they're
+        expressed in — inflated clay, hard brutalism, frosted glass, or
+        loud maximal.</p>
+
+        <h2>How a path works</h2>
+        <p>Each path is one optional stylesheet. It restyles keel's
+        surfaces, controls, and shape tokens — and because everything in
+        it derives from <em>your</em> tokens, a path follows your design
+        system, not a preset. Two things every path keeps intact:</p>
+        <ul>
+          <li><strong>Your contrast is guaranteed.</strong> A path restyles
+          shape, shadow, and decoration and keeps your text and background
+          colors exactly as keel set them — so the AA contrast holds right
+          through the makeover. That's the guardrail every path rides
+          along.</li>
+          <li><strong>Your CSS still wins.</strong> Path styles live in
+          <code>@layer path</code>, above keel's layers and below your own
+          unlayered CSS — overriding a path is just writing CSS.</li>
+        </ul>
+        <pre><code>&lt;link rel="stylesheet" href="keel.css"&gt;
+&lt;!-- one path, or none — your call --&gt;
+&lt;link rel="stylesheet" href="keel-path-clay.css"&gt;</code></pre>
+        <p>Paths are directions, so pick <strong>one</strong> — that
+        single direction is what gives a site its through-line.</p>
+
+        <h2 id="try">Try them</h2>
+        <p>The page below is one fixed piece of markup — a nav, cards,
+        controls, a table. Switch the path and watch the same HTML head a
+        different way. (The switcher is this website's JavaScript, not
+        keel's — a real site just links the file.)</p>
+        <div class="k-segmented" role="group" aria-label="Choose a path" style="margin-block-end: var(--k-space-3)">
+          <button type="button" data-path="" aria-pressed="true">Default</button>
+          <button type="button" data-path="clay" aria-pressed="false">Clay</button>
+          <button type="button" data-path="brutal" aria-pressed="false">Brutal</button>
+          <button type="button" data-path="liquid" aria-pressed="false">Liquid</button>
+          <button type="button" data-path="maximal" aria-pressed="false">Maximal</button>
+        </div>
+        <iframe id="path-frame" src="path-demo.html" title="Live demo of the selected path"
+                loading="lazy"
+                style="inline-size: 100%; block-size: 46rem; border: 1px solid var(--k-border); border-radius: var(--k-radius); background: var(--k-bg)"></iframe>
+        <p><a href="path-demo.html" target="_blank" rel="noopener">Open the
+        demo page on its own →</a> (add <code>?path=brutal</code> — the
+        page reads the query and links that stylesheet).</p>
+
+        <h2 id="add">Add a path to your site</h2>
+        <p>Three steps, no build, no configuration.</p>
+        <ol>
+          <li><strong>Get the file.</strong> Download the path you want —
+          <a href="../css/keel-path-clay.css" download>clay</a>,
+          <a href="../css/keel-path-brutal.css" download>brutal</a>,
+          <a href="../css/keel-path-liquid.css" download>liquid</a>, or
+          <a href="../css/keel-path-maximal.css" download>maximal</a> — and
+          put it next to your <code>keel.css</code>. (Each also ships as a
+          <code>.min.css</code>.)</li>
+          <li><strong>Link it after keel.</strong> Order matters — the
+          path continues keel, so it comes second:
+          <pre><code>&lt;link rel="stylesheet" href="keel.css"&gt;
+&lt;link rel="stylesheet" href="keel-path-clay.css"&gt;</code></pre></li>
+          <li><strong>That's it.</strong> Reload — every surface,
+          control, and shadow on the page takes the direction. Your own
+          tokens block (if you pasted one from the
+          <a href="../design.html">design page</a>) keeps working: paths
+          derive from whatever tokens are live, so the direction wears
+          <em>your</em> colors.</li>
+        </ol>
+        <p><strong>Tuning a path</strong> is the same as tuning keel —
+        write plain CSS after it. Your unlayered styles beat the path's
+        layer automatically:</p>
+        <pre><code>/* your stylesheet, linked last */
+.k-card { box-shadow: none; }        /* calm one component back down */
+:root { --k-radius: 12px; }          /* re-round a brutal corner */</code></pre>
+        <p><strong>Changing direction later</strong> is a one-line diff:
+        swap which path file the link points at, or delete the line to
+        return to keel's defaults. Markup never changes — that's the
+        point.</p>
+
+        <h2 id="directions"><span class="k-icon k-icon--path" aria-hidden="true"></span> The four directions</h2>
+        <p>Open one to see what it changes and the exact line to add. The
+        switcher above shows them side by side; each is a complete page in
+        <a href="../templates.html#path-templates">templates</a>.</p>
+        <div class="k-accordion">
+
+          <details id="p-clay">
+            <summary>clay — claymorphism</summary>
+            <p>Inflated, soft-shadowed surfaces with generous corners: pill
+            buttons that press, puffy cards, borderless fields. The colored
+            shadows derive from your accent, so the clay is always your
+            brand's clay — soft <em>and</em> readable, because the guardrail
+            rides along.</p>
+            <p><strong>Best for:</strong> friendly, tactile, approachable
+            products — bakeries, consumer apps, playful or warm brands.</p>
+            <p><strong>Changes:</strong> cards, panels, alerts and stats puff
+            up; buttons become pressable pills; inputs go borderless; corners
+            round up.</p>
+            <pre><code>&lt;link rel="stylesheet" href="keel.css"&gt;
+&lt;link rel="stylesheet" href="keel-path-clay.css"&gt;</code></pre>
+            <p><a href="../templates/clay.html">See it as a page — Sundough, a bakery →</a></p>
+          </details>
+
+          <details id="p-brutal">
+            <summary>brutal — brutalism</summary>
+            <p>Zero radius, thick ink borders, hard offset block shadows,
+            uppercase headings, and buttons that physically collapse their
+            shadow when pressed. It runs on your text/background pair — the
+            loudest direction, and a sturdy one.</p>
+            <p><strong>Best for:</strong> bold, editorial, confident work —
+            type foundries, portfolios, zines, statement sites.</p>
+            <p><strong>Changes:</strong> everything squares off; cards, dialogs
+            and menus get a 2px ink border + block shadow; <code>h1</code>/<code>h2</code>
+            go uppercase; buttons collapse on <code>:active</code>; tables get ruled.</p>
+            <pre><code>&lt;link rel="stylesheet" href="keel.css"&gt;
+&lt;link rel="stylesheet" href="keel-path-brutal.css"&gt;</code></pre>
+            <p><a href="../templates/brutal.html">See it as a page — Blunt Type Co., a foundry →</a></p>
+          </details>
+
+          <details id="p-liquid">
+            <summary>liquid — glass, everywhere</summary>
+            <p>The <code>.k-glass</code> treatment promoted to a direction:
+            cards, panels, menus, dialogs, and the nav become frosted panes
+            with a specular top edge, all in pure CSS. Fills stay near-opaque
+            behind text so contrast holds.</p>
+            <p><strong>Best for:</strong> sleek apps and product pages,
+            especially on dark or gradient backgrounds — music and media,
+            dashboards, modern SaaS.</p>
+            <p><strong>Changes:</strong> surfaces turn translucent with backdrop
+            blur; ghost and soft buttons frost too. Works best over a gradient or
+            image background; where <code>backdrop-filter</code> is available it
+            frosts, and everywhere else it renders as clean solid surfaces — so
+            the page looks intentional on every browser.</p>
+            <pre><code>&lt;link rel="stylesheet" href="keel.css"&gt;
+&lt;link rel="stylesheet" href="keel-path-liquid.css"&gt;</code></pre>
+            <p><a href="../templates/liquid.html">See it as a page — Glasswater, a music app →</a></p>
+          </details>
+
+          <details id="p-maximal">
+            <summary>maximal — maximalism</summary>
+            <p>The display end of the type ramp scaled up, gradient edges on
+            cards, gradient-filled primary buttons, mesh-washed alt sections,
+            heavier weights. Decoration turned up — but gradients decorate the
+            <em>furniture</em>, never the text color, so the guardrail holds.</p>
+            <p><strong>Best for:</strong> loud, expressive, high-energy sites —
+            festivals, launches, campaigns, entertainment.</p>
+            <p><strong>Changes:</strong> bigger, tighter display type; cards gain
+            a gradient top edge; primary buttons fill with the gradient;
+            <code>h2</code> gets a gradient underline; <code>--alt</code> bands get
+            a soft mesh wash.</p>
+            <pre><code>&lt;link rel="stylesheet" href="keel.css"&gt;
+&lt;link rel="stylesheet" href="keel-path-maximal.css"&gt;</code></pre>
+            <p><a href="../templates/maximal.html">See it as a page — Neon Harvest, a festival →</a></p>
+          </details>
+
+        </div>
+
+        <h2>What's already in core</h2>
+        <p>Two looks are built in — no path needed.
+        <strong>Minimalism</strong> is keel's <code>data-k-flat</code>
+        setting plus your own tokens: flip it on and surfaces go flat,
+        borders-only. And the <strong>bento grid</strong> is plain layout —
+        <code>.k-bento</code> with <code>__wide</code> / <code>__tall</code>
+        / <code>__hero</code> spans, documented on
+        <a href="layout.html">layout</a>.</p>
+      </main>
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+<script>
+  /* the path switcher — site chrome, not the framework */
+  (function () {
+    var frame = document.getElementById("path-frame");
+    var btns = document.querySelectorAll(".k-segmented [data-path]");
+    btns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        btns.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
+        frame.src = "path-demo.html" + (btn.dataset.path ? "?path=" + btn.dataset.path : "");
+      });
+    });
+  })();
+</script>
+</body>
+</html>

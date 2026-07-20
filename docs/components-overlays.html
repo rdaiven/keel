@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overlays — keel</title>
+<meta name="description" content="keel's overlay components: dropdown, tooltip, drawer — zero JavaScript, trade-offs stated.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<style>
+  .demo-box { background: var(--k-accent-soft); border: 1px dashed var(--k-accent);
+              border-radius: var(--k-radius-s); padding: var(--k-space-3);
+              font-size: var(--k-text-xs); font-family: var(--k-font-mono);
+              color: var(--k-accent-strong); text-align: center; }
+
+  /* page-local custom variants — demos for the "Your own variants"
+     and "Extending keel" sections below */
+  .btn-sale {
+    --k-btn-bg: var(--k-warn);
+    --k-btn-bg-hover: color-mix(in oklab, var(--k-warn), black 15%);
+  }
+  .btn-quiet {
+    --k-btn-bg: var(--k-accent-trans-10);
+    --k-btn-fg: var(--k-accent-strong);
+    --k-btn-bg-hover: var(--k-accent-trans-20);
+  }
+
+  .testimonial {
+    background: var(--k-surface);
+    border: 1px solid var(--k-border);
+    border-radius: var(--k-radius-l);
+    padding: var(--k-space-5);
+  }
+  .testimonial__quote {
+    font-size: var(--k-text-l);
+    color: var(--k-text-soft);
+    margin: 0 0 var(--k-space-3);
+  }
+  .testimonial__name {
+    font-family: var(--k-font-mono);
+    font-size: var(--k-text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--k-text-faint);
+  }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+
+      <aside class="k-sticky docs-side k-sidebar--collapsible" id="docs-sidebar">
+        <button class="k-tool docs-sidebar-toggle" type="button" id="docs-sidebar-toggle"
+                aria-pressed="false" aria-label="Collapse sidebar to icons">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Documentation">
+          <details class="k-nav-group" open>
+            <summary>Getting started</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="start.html">Start</a></li>
+            <li><a href="frameworks.html">Framework guides</a></li>
+            <li><a href="concepts.html">Concepts</a></li>
+            <li><a href="changelog.html">Changelog</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Reference</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="tokens.html">Tokens</a></li>
+            <li><a href="base.html">Base</a></li>
+            <li><a href="typography.html">Typography</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="components.html">Components</a>
+            <ul class="k-list k-list--flush docs-sub">
+              <li><a href="components-actions.html">Actions</a></li>
+              <li><a href="components-forms.html">Forms</a></li>
+              <li><a href="components-surfaces.html">Surfaces &amp; data</a></li>
+              <li><a href="components-feedback.html">Feedback</a></li>
+              <li aria-current="page"><a href="components-overlays.html">Overlays</a></li>
+              <li><a href="components-navigation.html">Navigation</a></li>
+              <li><a href="components-identity.html">Identity &amp; media</a></li>
+              <li><a href="components-motion.html">Motion</a></li>
+              <li><a href="components-extending.html">Extending</a></li>
+              <li><a href="components-app.html">Application</a></li>
+            </ul>
+          </li>
+            <li><a href="utilities.html">Utilities</a></li>
+            <li><a href="icons.html">Icons</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Build</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="sections.html">Sections</a></li>
+            <li><a href="../templates.html">Templates</a></li>
+            <li><a href="../design.html">Design system</a></li>
+            <li><a href="paths.html">Paths</a></li>
+          </ul>
+          </details>
+        </nav>
+        <div id="docs-anchors"></div>
+      </aside>
+
+      <main id="main" class="docs-main">
+
+      <h1>Overlays</h1>
+      <p class="k-text-soft">Things that float above the page — modal, dropdown, tooltip, drawer. Zero JavaScript, except the one honest line the modal and drawer need.</p>
+
+    <section id="c-modal">
+      <h2>Modal</h2>
+      <p>The native <code>dialog</code> <em>is</em> keel's modal —
+      there is no <code>.k-modal</code> class because none is needed.
+      The base layer styles the bare element: surface, radius, shadow,
+      padding, and a backdrop that fades in via
+      <code>@starting-style</code> (and degrades to a plain show in
+      browsers without it). The platform does the hard parts for free:
+      focus is trapped inside the dialog, Esc closes it, and a button
+      in a <code>form method="dialog"</code> closes it with no script
+      at all. Honestly: opening it is the one line of JavaScript
+      below — <code>showModal()</code>. For a modal that docks to the
+      screen edge instead of the middle, see the
+      <a href="#c-drawer">Drawer</a> — same element, one class.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="margin-bottom: var(--k-space-4)">
+          <button class="k-btn" type="button" onclick="document.getElementById('demo-modal').showModal()">Open modal</button>
+          <dialog id="demo-modal" aria-labelledby="demo-modal-title">
+            <h3 id="demo-modal-title">Delete this draft?</h3>
+            <p>The draft and its two attachments are removed. This
+            can't be undone.</p>
+            <form method="dialog" class="k-cluster">
+              <button class="k-btn" value="confirm">Delete draft</button>
+              <button class="k-btn k-btn--ghost" value="cancel">Cancel</button>
+            </form>
+          </dialog>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;button class="k-btn" type="button"
+        onclick="document.getElementById('confirm').showModal()"&gt;Open modal&lt;/button&gt;
+
+&lt;dialog id="confirm" aria-labelledby="confirm-title"&gt;
+  &lt;h3 id="confirm-title"&gt;Delete this draft?&lt;/h3&gt;
+  &lt;p&gt;The draft and its two attachments are removed.&lt;/p&gt;
+  &lt;form method="dialog" class="k-cluster"&gt;
+    &lt;button class="k-btn" value="confirm"&gt;Delete draft&lt;/button&gt;
+    &lt;button class="k-btn k-btn--ghost" value="cancel"&gt;Cancel&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/dialog&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-dropdown">
+      <h2>Dropdown</h2>
+      <p><code>.k-dropdown</code> is a <code>details</code> element
+      wearing a <code>.k-btn--ghost</code> styled <code>summary</code>,
+      with a <code>.k-menu</code> list that floats below when open.
+      It works with zero JavaScript. The honest trade-off: it closes
+      when you click the summary again or toggle it from the keyboard,
+      but it does <em>not</em> light-dismiss on an outside click —
+      that's what the missing script would buy you. Menu items are
+      links or real <code>button</code>s; an <code>hr</code> between
+      items draws a separator.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="margin-bottom: var(--k-space-4); min-height: 12rem">
+          <details class="k-dropdown">
+            <summary class="k-btn k-btn--ghost">Options ▾</summary>
+            <ul class="k-menu">
+              <li><a href="#">Rename</a></li>
+              <li><a href="#">Duplicate</a></li>
+              <li><hr></li>
+              <li><button type="button">Delete</button></li>
+            </ul>
+          </details>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;details class="k-dropdown"&gt;
+  &lt;summary class="k-btn k-btn--ghost"&gt;Options ▾&lt;/summary&gt;
+  &lt;ul class="k-menu"&gt;
+    &lt;li&gt;&lt;a href="rename.html"&gt;Rename&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="duplicate.html"&gt;Duplicate&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;hr&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button type="button"&gt;Delete&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/details&gt;</code></pre>
+      </details>
+
+      <h3 id="c-menu-items">Menu items</h3>
+      <p>A <code>.k-menu</code> item is more than a link. A
+      <code>.k-menu__label</code> is a small section header;
+      <code>.k-menu__hint</code> pushes a shortcut or a submenu
+      chevron to the trailing edge. A leading <code>.k-icon</code>
+      lines up like a letter. Mark the chosen item
+      <code>aria-current="true"</code> for a single choice or
+      <code>aria-checked="true"</code> for a checkable one — both tint
+      it in the accent, so a menu of <code>aria-checked</code> options
+      is a multi-select picker. <code>.is-danger</code> reddens a
+      destructive item; a real <code>[disabled]</code> button (or
+      <code>aria-disabled</code>) dims and blocks it. As ever, keel
+      styles the states — your JS toggles the attributes.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="margin-bottom: var(--k-space-4); max-inline-size: 16rem;
+                    background: var(--k-surface); border: 1px solid var(--k-border);
+                    border-radius: var(--k-radius); box-shadow: var(--k-shadow-l);
+                    padding: var(--k-space-1)">
+          <ul class="k-menu">
+            <li class="k-menu__label">Actions</li>
+            <li><button type="button"><span class="k-icon k-icon--edit" aria-hidden="true"></span> Edit <span class="k-menu__hint">⌘E</span></button></li>
+            <li><button type="button" aria-checked="true"><span class="k-icon k-icon--check" aria-hidden="true"></span> Pinned</button></li>
+            <li><button type="button"><span class="k-icon k-icon--list" aria-hidden="true"></span> More <span class="k-menu__hint">›</span></button></li>
+            <li><button type="button" disabled><span class="k-icon k-icon--share" aria-hidden="true"></span> Share (offline)</button></li>
+            <li><hr></li>
+            <li><button type="button" class="is-danger"><span class="k-icon k-icon--trash" aria-hidden="true"></span> Delete <span class="k-menu__hint">⌫</span></button></li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;ul class="k-menu"&gt;
+  &lt;li class="k-menu__label"&gt;Actions&lt;/li&gt;
+  &lt;li&gt;&lt;button type="button"&gt;
+    &lt;span class="k-icon k-icon--edit" aria-hidden="true"&gt;&lt;/span&gt; Edit
+    &lt;span class="k-menu__hint"&gt;⌘E&lt;/span&gt;
+  &lt;/button&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;button type="button" aria-checked="true"&gt;
+    &lt;span class="k-icon k-icon--check" aria-hidden="true"&gt;&lt;/span&gt; Pinned
+  &lt;/button&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;button type="button" disabled&gt;… Share (offline)&lt;/button&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;hr&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;button type="button" class="is-danger"&gt;
+    &lt;span class="k-icon k-icon--trash" aria-hidden="true"&gt;&lt;/span&gt; Delete
+    &lt;span class="k-menu__hint"&gt;⌫&lt;/span&gt;
+  &lt;/button&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-tooltip">
+      <h2>Tooltip</h2>
+      <p>Put text in a <code>data-k-tip</code> attribute and it shows
+      as a small dark bubble on hover <em>and</em> on
+      <code>:focus-visible</code>, so keyboard users see it too. It's
+      pure CSS — which also means the attribute content is not exposed
+      to assistive tech. If the tip carries meaning the visible text
+      doesn't, repeat it in an <code>aria-label</code>. For anything
+      richer than one short line, use a popover instead.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-cluster" style="margin-bottom: var(--k-space-4)">
+          <button class="k-btn k-btn--ghost" data-k-tip="Copies a share link to the clipboard">Copy link</button>
+          <button class="k-btn k-btn--ghost" data-k-tip="Download as PDF" aria-label="Download as PDF">⤓</button>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;!-- visible text already says what it does; the tip adds detail --&gt;
+&lt;button class="k-btn k-btn--ghost"
+        data-k-tip="Copies a share link to the clipboard"&gt;Copy link&lt;/button&gt;
+
+&lt;!-- icon-only: the tip is the label, so mirror it in aria-label --&gt;
+&lt;button class="k-btn k-btn--ghost"
+        data-k-tip="Download as PDF"
+        aria-label="Download as PDF"&gt;⤓&lt;/button&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-popover">
+      <h2>Popover</h2>
+      <p><code>.k-popover</code> is the tooltip's richer cousin: a
+      styled floating surface — border, radius, shadow, padding — built
+      on the native <code>popover</code> API. Where the
+      <a href="#c-tooltip">Tooltip</a> is one line of hover text, a
+      popover holds real content: a heading, a paragraph, links. A
+      trigger button carries <code>popovertarget</code> and the panel
+      carries the <code>popover</code> attribute, so opening it,
+      light-dismiss on an outside click, and Esc all come from the
+      platform — zero JavaScript. Honestly: keel ships the panel look,
+      not the tether. An un-anchored popover is centred in the top
+      layer by the browser; to pin it to its trigger, use CSS anchor
+      positioning where it's supported, or the one line of JS that does
+      the same. That placement is the trade-off you accept for the free
+      dismiss behaviour.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="margin-bottom: var(--k-space-4)">
+          <button class="k-btn k-btn--ghost" popovertarget="demo-popover">Details</button>
+          <div id="demo-popover" popover class="k-popover">
+            <strong>Export format</strong>
+            <p>Downloads a self-contained HTML file. Styles are inlined,
+            so it opens anywhere with no server.</p>
+            <p><a href="#c-popover">Read more about exports</a></p>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;button class="k-btn k-btn--ghost" popovertarget="pop"&gt;Details&lt;/button&gt;
+
+&lt;div id="pop" popover class="k-popover"&gt;
+  &lt;strong&gt;Export format&lt;/strong&gt;
+  &lt;p&gt;Downloads a self-contained HTML file.&lt;/p&gt;
+  &lt;p&gt;&lt;a href="exports.html"&gt;Read more about exports&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-drawer">
+      <h2>Drawer</h2>
+      <p><code>.k-drawer</code> is a <code>dialog</code> that slides
+      in from the edge instead of appearing in the middle — offcanvas
+      navigation, a settings panel, a cart. <code>--start</code> slides
+      it from the start edge instead of the end. Honestly: opening it
+      is the one line of JavaScript below —
+      <code>showModal()</code> — keel ships the look and the motion.
+      Because it's a real modal dialog, Esc closes it, focus is
+      trapped, and the backdrop comes free; a
+      <code>form method="dialog"</code> button closes it with no
+      script at all.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-segmented" role="group" aria-label="Drawer side" style="margin-bottom: var(--k-space-3)">
+          <button type="button" id="ov-drawer-side-right" aria-pressed="true"
+                  onclick="document.getElementById('demo-drawer').classList.remove('k-drawer--start'); document.getElementById('ov-drawer-side-right').setAttribute('aria-pressed','true'); document.getElementById('ov-drawer-side-left').setAttribute('aria-pressed','false');">Right</button>
+          <button type="button" id="ov-drawer-side-left" aria-pressed="false"
+                  onclick="document.getElementById('demo-drawer').classList.add('k-drawer--start'); document.getElementById('ov-drawer-side-left').setAttribute('aria-pressed','true'); document.getElementById('ov-drawer-side-right').setAttribute('aria-pressed','false');">Left</button>
+        </div>
+        <div style="margin-bottom: var(--k-space-4)">
+          <button class="k-btn k-btn--ghost" type="button" onclick="document.getElementById('demo-drawer').showModal()">Open drawer</button>
+          <dialog class="k-drawer" id="demo-drawer" aria-label="Demo drawer">
+            <div class="k-cluster k-justify-between">
+              <h4 class="k-mt-0 k-mb-0">Menu</h4>
+              <form method="dialog">
+                <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+                  <span class="k-icon k-icon--x" aria-hidden="true"></span>
+                </button>
+              </form>
+            </div>
+            <ul class="k-menu">
+              <li><a href="#c-dropdown" onclick="this.closest('dialog').close()">Dropdown</a></li>
+              <li><a href="#c-tooltip" onclick="this.closest('dialog').close()">Tooltip</a></li>
+              <li><a href="#c-drawer" onclick="this.closest('dialog').close()">Drawer</a></li>
+            </ul>
+          </dialog>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;button class="k-btn k-btn--ghost" type="button"
+        onclick="document.getElementById('drawer').showModal()"&gt;Open drawer&lt;/button&gt;
+
+&lt;dialog class="k-drawer" id="drawer" aria-label="Menu"&gt;
+  &lt;div class="k-cluster k-justify-between"&gt;
+    &lt;h4 class="k-mt-0 k-mb-0"&gt;Menu&lt;/h4&gt;
+    &lt;form method="dialog"&gt;
+      &lt;button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu"&gt;
+        &lt;span class="k-icon k-icon--x" aria-hidden="true"&gt;&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+  &lt;ul class="k-menu"&gt;
+    &lt;li&gt;&lt;a href="docs.html"&gt;Docs&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="pricing.html"&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/dialog&gt;
+
+&lt;!-- slide from the other edge --&gt;
+&lt;dialog class="k-drawer k-drawer--start"&gt;…&lt;/dialog&gt;</code></pre>
+      </details>
+    </section>
+
+      </main>
+
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

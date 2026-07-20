@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shiplog — a build-shipping log built with keel</title>
+<meta name="description" content="A fictional maker's shipping log built entirely with keel — track projects from idea to shipped, watch a real consecutive-day streak, and export your log as JSON. State is saved to this browser's local storage.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The theme. This block is the entire difference between this page
+     and keel's defaults — every derived shade follows from it. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(230 20% 97%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(230 18% 94%);
+      --k-border: hsl(230 14% 88%);
+      --k-border-strong: hsl(230 12% 76%);
+      --k-text: hsl(230 28% 14%);
+      --k-text-soft: hsl(230 12% 38%);
+      --k-text-faint: hsl(230 8% 54%);
+      --k-accent: hsl(258 70% 56%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(162 62% 34%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-radius: 9px;
+      --k-ok: hsl(150 55% 36%);
+      --k-warn: hsl(35 88% 45%);
+      --k-danger: hsl(4 74% 54%);
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local layout only */
+  .sl-stats { display: grid; gap: var(--k-space-4); grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); }
+  .sl-entry { display: grid; gap: var(--k-space-3); grid-template-columns: 1fr auto; align-items: start; }
+  .sl-entry__actions { display: flex; flex-direction: column; gap: var(--k-space-2); align-items: flex-end; }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — a genuinely working app
+    this time, not just chrome. <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Shiplog</a>
+      <ul class="k-nav__links">
+        <li><a href="#log">Log</a></li>
+        <li><a href="#add">Add build</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="k-container k-section" id="top">
+
+  <h1>Shiplog</h1>
+  <p class="k-text-soft" style="max-width: 40em">A maker's build-shipping
+  log — track projects from idea to shipped, keep a streak going, and
+  export the whole thing as JSON whenever you like.</p>
+
+  <div class="k-alert k-alert--soft k-mt-4">
+    Everything below is saved to <strong>this browser's local storage
+    only</strong> — nothing leaves your machine, and nothing syncs
+    between devices.
+  </div>
+
+  <!-- STATS -->
+  <div class="sl-stats k-mt-5">
+    <div class="k-card">
+      <p class="k-stat__label">Total shipped</p>
+      <span class="k-stat__value" id="sl-stat-shipped">0</span>
+    </div>
+    <div class="k-card">
+      <p class="k-stat__label">Current streak</p>
+      <span class="k-stat__value" id="sl-stat-streak">0</span>
+      <p class="k-text-xs k-text-faint" style="margin: 0">consecutive days logged</p>
+    </div>
+    <div class="k-card">
+      <p class="k-stat__label">Longest streak</p>
+      <span class="k-stat__value" id="sl-stat-longest">0</span>
+      <p class="k-text-xs k-text-faint" style="margin: 0">days, best ever</p>
+    </div>
+    <div class="k-card">
+      <p class="k-stat__label">In progress</p>
+      <span class="k-stat__value" id="sl-stat-building">0</span>
+    </div>
+  </div>
+
+  <!-- ADD FORM -->
+  <section class="k-card k-mt-5" id="add">
+    <p class="k-card__kicker">Log a build</p>
+    <form id="sl-form">
+      <div class="k-field">
+        <label for="sl-name">Project name</label>
+        <input id="sl-name" type="text" placeholder="e.g. Tide chart widget" required>
+      </div>
+      <div class="k-field">
+        <label for="sl-desc">One-line description</label>
+        <input id="sl-desc" type="text" placeholder="What is it, in a sentence?" required>
+      </div>
+      <div class="k-field">
+        <label for="sl-status">Status</label>
+        <select id="sl-status">
+          <option value="idea">Idea</option>
+          <option value="building" selected>Building</option>
+          <option value="shipped">Shipped</option>
+        </select>
+      </div>
+      <button class="k-btn" type="submit"><span class="k-icon k-icon--plus" aria-hidden="true"></span> Add entry</button>
+    </form>
+  </section>
+
+  <!-- LOG -->
+  <section class="k-mt-5" id="log">
+    <div class="k-cluster k-justify-between">
+      <p class="k-card__kicker" style="margin: 0">Build log</p>
+      <button class="k-btn k-btn--ghost k-btn--small" type="button" id="sl-export">
+        <span class="k-icon k-icon--download" aria-hidden="true"></span> Export JSON
+      </button>
+    </div>
+    <div id="sl-list" class="k-mt-3"></div>
+    <div id="sl-empty" class="k-empty" hidden>
+      <h4>No builds logged yet</h4>
+      <p>Add your first project above — idea, building, or shipped.</p>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>Shiplog — a fictional tool, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var STORE_KEY = 'kl-shiplog-v1';
+
+  /* ---------- seed data (only used when local storage is empty) ---------- */
+  function seedEntries () {
+    var now = Date.now();
+    var day = 24 * 60 * 60 * 1000;
+    return [
+      { id: 'sl-1', name: 'Tide chart widget', desc: 'A small embeddable SVG tide chart for the harbor site.', status: 'shipped', date: iso(now - 5 * day) },
+      { id: 'sl-2', name: 'Receipt scanner', desc: 'OCR a paper receipt into a spreadsheet row.', status: 'building', date: iso(now - 2 * day) },
+      { id: 'sl-3', name: 'Driftwood inventory', desc: 'A tiny stock-count app for the workshop.', status: 'shipped', date: iso(now - 1 * day) },
+      { id: 'sl-4', name: 'Newsletter digest bot', desc: 'Weekly digest of saved links, mailed automatically.', status: 'idea', date: iso(now) },
+      { id: 'sl-5', name: 'Camp stove timer', desc: 'A dead-simple boil timer with a loud alarm.', status: 'shipped', date: iso(now - 30 * day) }
+    ];
+  }
+
+  function iso (ms) {
+    // Local calendar date, not toISOString()'s UTC date — a streak
+    // tracker that rolled over at UTC midnight would misdate entries
+    // added in the evening for anyone west of UTC. en-CA formats as
+    // yyyy-mm-dd, so no manual assembly is needed.
+    return new Date(ms).toLocaleDateString('en-CA');
+  }
+
+  /* ---------- state ---------- */
+  function load () {
+    var raw;
+    try { raw = localStorage.getItem(STORE_KEY); } catch (e) { raw = null; }
+    if (!raw) {
+      var seeded = seedEntries();
+      save(seeded);
+      return seeded;
+    }
+    try {
+      var parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) throw new Error('bad shape');
+      return parsed;
+    } catch (e) {
+      var fallback = seedEntries();
+      save(fallback);
+      return fallback;
+    }
+  }
+
+  function save (entries) {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(entries)); } catch (e) { /* storage unavailable — app still works in-memory */ }
+  }
+
+  var entries = load();
+
+  /* ---------- streak math ---------- */
+  // Consecutive-day streak: count back from today, day by day, as long
+  // as each day has at least one entry dated on it. Uses distinct
+  // calendar dates (YYYY-MM-DD), not entry count.
+  function computeStreaks (list) {
+    if (!list.length) return { current: 0, longest: 0 };
+
+    var dateSet = {};
+    list.forEach(function (e) { dateSet[e.date] = true; });
+    var dates = Object.keys(dateSet).sort(); // ascending YYYY-MM-DD strings sort correctly
+
+    // longest streak: walk sorted dates, count consecutive-day runs
+    var longest = 1;
+    var run = 1;
+    for (var i = 1; i < dates.length; i++) {
+      if (daysBetween(dates[i - 1], dates[i]) === 1) {
+        run += 1;
+      } else {
+        run = 1;
+      }
+      if (run > longest) longest = run;
+    }
+
+    // current streak: walk back from today (or from most recent logged
+    // day if today has no entry, still counts as "current" as long as
+    // the most recent entry was today or yesterday)
+    var today = iso(Date.now());
+    var cursor = dateSet[today] ? today : prevDay(today);
+    if (!dateSet[cursor]) return { current: 0, longest: longest };
+
+    var current = 0;
+    while (dateSet[cursor]) {
+      current += 1;
+      cursor = prevDay(cursor);
+    }
+    return { current: current, longest: Math.max(longest, current) };
+  }
+
+  function daysBetween (a, b) {
+    // No 'Z' — parsed as local midnight, matching iso()'s local dates.
+    var ms = new Date(b + 'T00:00:00').getTime() - new Date(a + 'T00:00:00').getTime();
+    return Math.round(ms / (24 * 60 * 60 * 1000));
+  }
+
+  function prevDay (d) {
+    var ms = new Date(d + 'T00:00:00').getTime() - 24 * 60 * 60 * 1000;
+    return iso(ms);
+  }
+
+  /* ---------- rendering ---------- */
+  var listEl = document.getElementById('sl-list');
+  var emptyEl = document.getElementById('sl-empty');
+
+  var STATUS_LABEL = { idea: 'Idea', building: 'Building', shipped: 'Shipped' };
+  var STATUS_BADGE = { idea: 'k-badge--outline', building: 'k-badge--warn', shipped: 'k-badge--ok' };
+
+  function render () {
+    // preserve keyboard focus across the rebuild below (delete/status-change
+    // would otherwise drop the focused control and send focus to <body>)
+    var focused = document.activeElement;
+    var focusId = null, focusRole = null;
+    if (focused && listEl.contains(focused)) {
+      var focusedCard = focused.closest('[data-entry-id]');
+      if (focusedCard) {
+        focusId = focusedCard.dataset.entryId;
+        focusRole = focused.tagName === 'SELECT' ? 'select' : 'delete';
+      }
+    }
+
+    // stats
+    var shipped = entries.filter(function (e) { return e.status === 'shipped'; }).length;
+    var building = entries.filter(function (e) { return e.status === 'building'; }).length;
+    var streaks = computeStreaks(entries);
+    document.getElementById('sl-stat-shipped').textContent = shipped;
+    document.getElementById('sl-stat-building').textContent = building;
+    document.getElementById('sl-stat-streak').textContent = streaks.current;
+    document.getElementById('sl-stat-longest').textContent = streaks.longest;
+
+    // list, newest first
+    var sorted = entries.slice().sort(function (a, b) { return b.date < a.date ? -1 : b.date > a.date ? 1 : 0; });
+
+    listEl.innerHTML = '';
+    if (!sorted.length) {
+      emptyEl.hidden = false;
+      if (focusId) document.getElementById('sl-name').focus();
+      return;
+    }
+    emptyEl.hidden = true;
+
+    sorted.forEach(function (entry) {
+      var card = document.createElement('div');
+      card.className = 'k-card sl-entry k-mb-3';
+      card.dataset.entryId = entry.id;
+
+      var body = document.createElement('div');
+      var badge = document.createElement('span');
+      badge.className = 'k-badge ' + (STATUS_BADGE[entry.status] || 'k-badge--outline');
+      badge.textContent = STATUS_LABEL[entry.status] || entry.status;
+
+      var title = document.createElement('h3');
+      title.style.margin = '0.4em 0 0.1em';
+      title.textContent = entry.name;
+
+      var desc = document.createElement('p');
+      desc.className = 'k-text-soft k-text-s';
+      desc.style.margin = '0';
+      desc.textContent = entry.desc;
+
+      var date = document.createElement('p');
+      date.className = 'k-text-xs k-text-faint';
+      date.style.margin = '0.35em 0 0';
+      date.textContent = entry.date;
+
+      body.appendChild(badge);
+      body.appendChild(title);
+      body.appendChild(desc);
+      body.appendChild(date);
+
+      var actions = document.createElement('div');
+      actions.className = 'sl-entry__actions';
+
+      var statusSelect = document.createElement('select');
+      statusSelect.setAttribute('aria-label', 'Change status for ' + entry.name);
+      ['idea', 'building', 'shipped'].forEach(function (s) {
+        var opt = document.createElement('option');
+        opt.value = s;
+        opt.textContent = STATUS_LABEL[s];
+        if (s === entry.status) opt.selected = true;
+        statusSelect.appendChild(opt);
+      });
+      statusSelect.addEventListener('change', function () {
+        setStatus(entry.id, statusSelect.value);
+      });
+
+      var delBtn = document.createElement('button');
+      delBtn.type = 'button';
+      delBtn.className = 'k-btn k-btn--ghost k-btn--small';
+      delBtn.innerHTML = '<span class="k-icon k-icon--trash" aria-hidden="true"></span> Delete';
+      delBtn.addEventListener('click', function () { removeEntry(entry.id); });
+
+      actions.appendChild(statusSelect);
+      actions.appendChild(delBtn);
+
+      card.appendChild(body);
+      card.appendChild(actions);
+      listEl.appendChild(card);
+    });
+
+    if (focusId) {
+      var restoredCard = listEl.querySelector('[data-entry-id="' + focusId + '"]');
+      var target = restoredCard && (focusRole === 'select' ? restoredCard.querySelector('select') : restoredCard.querySelector('button'));
+      if (target) target.focus();
+      else document.getElementById('sl-name').focus();
+    }
+  }
+
+  /* ---------- mutations ---------- */
+  function addEntry (name, desc, status) {
+    entries.push({
+      id: 'sl-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7),
+      name: name,
+      desc: desc,
+      status: status,
+      date: iso(Date.now())
+    });
+    save(entries);
+    render();
+  }
+
+  function setStatus (id, status) {
+    var e = entries.find(function (e) { return e.id === id; });
+    if (!e) return;
+    e.status = status;
+    save(entries);
+    render();
+  }
+
+  function removeEntry (id) {
+    entries = entries.filter(function (e) { return e.id !== id; });
+    save(entries);
+    render();
+  }
+
+  /* ---------- wiring ---------- */
+  document.getElementById('sl-form').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var name = document.getElementById('sl-name').value.trim();
+    var desc = document.getElementById('sl-desc').value.trim();
+    var status = document.getElementById('sl-status').value;
+    if (!name || !desc) return;
+    addEntry(name, desc, status);
+    ev.target.reset();
+    document.getElementById('sl-status').value = 'building';
+    document.getElementById('sl-name').focus();
+  });
+
+  document.getElementById('sl-export').addEventListener('click', function () {
+    var blob = new Blob([JSON.stringify(entries, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'shiplog-export.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

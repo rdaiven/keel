@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concepts — keel</title>
+<meta name="description" content="The ideas keel is built on: five cascade layers, design-system-first tokens, fluid sizing, zero JavaScript, one grammar, and honest limits.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+      <aside class="k-sticky docs-side k-sidebar--collapsible" id="docs-sidebar">
+        <button class="k-tool docs-sidebar-toggle" type="button" id="docs-sidebar-toggle"
+                aria-pressed="false" aria-label="Collapse sidebar to icons">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Documentation">
+          <details class="k-nav-group" open>
+            <summary>Getting started</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="start.html">Start</a></li>
+            <li><a href="frameworks.html">Framework guides</a></li>
+            <li aria-current="page"><a href="concepts.html">Concepts</a></li>
+            <li><a href="changelog.html">Changelog</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Reference</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="tokens.html">Tokens</a></li>
+            <li><a href="base.html">Base</a></li>
+            <li><a href="typography.html">Typography</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="components.html">Components</a>
+            <ul class="k-list k-list--flush docs-sub">
+              <li><a href="components-actions.html">Actions</a></li>
+              <li><a href="components-forms.html">Forms</a></li>
+              <li><a href="components-surfaces.html">Surfaces &amp; data</a></li>
+              <li><a href="components-feedback.html">Feedback</a></li>
+              <li><a href="components-overlays.html">Overlays</a></li>
+              <li><a href="components-navigation.html">Navigation</a></li>
+              <li><a href="components-identity.html">Identity &amp; media</a></li>
+              <li><a href="components-motion.html">Motion</a></li>
+              <li><a href="components-extending.html">Extending</a></li>
+              <li><a href="components-app.html">Application</a></li>
+            </ul>
+          </li>
+            <li><a href="utilities.html">Utilities</a></li>
+            <li><a href="icons.html">Icons</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Build</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="sections.html">Sections</a></li>
+            <li><a href="../templates.html">Templates</a></li>
+            <li><a href="../design.html">Design system</a></li>
+            <li><a href="paths.html">Paths</a></li>
+          </ul>
+          </details>
+        </nav>
+        <div id="docs-anchors"></div>
+      </aside>
+      <main id="main" class="docs-main">
+        <h1>Concepts</h1>
+        <p class="k-text-soft">The ideas keel is built on. Everything
+        else in these docs assumes them; nothing else re-explains them.</p>
+
+        <h2><span class="k-icon k-icon--keel" aria-hidden="true"></span> Five layers, one job each</h2>
+        <p>keel is one stylesheet organized as five native cascade
+        layers, declared once at the top of the file:</p>
+        <pre><code>@layer tokens, base, layout, components, utilities;</code></pre>
+        <p>Each layer has exactly one job. <a href="tokens.html">tokens</a>
+        is the only place visual decisions live. <a href="base.html">base</a>
+        styles semantic HTML so classless content already looks designed.
+        <a href="layout.html">layout</a> arranges — full-bleed bands,
+        containers, structural classes, never positional.
+        <a href="components.html">components</a> are thin classes that
+        consume tokens. <a href="utilities.html">utilities</a> is a small,
+        token-bound escape hatch, deliberately last.</p>
+        <p>Because every keel rule is layered and your CSS is not,
+        <strong>your CSS always wins</strong>. Unlayered styles beat
+        layered ones regardless of specificity — no
+        <code>!important</code>, no selector arms races, structurally.
+        Overriding keel is just writing CSS.</p>
+
+        <h2><span class="k-icon k-icon--token" aria-hidden="true"></span> Design-system-first</h2>
+        <p>Most frameworks give you their look and a way to override it.
+        keel inverts that: the tokens layer <em>is</em> the product, and
+        the defaults you see are just its starting values. Seed a system
+        from your brand on the <a href="../design.html">design system
+        page</a> — a color, a mood, a font pairing — and every token
+        derives from the seed by math: neutrals, surfaces, status
+        colors, spacing density, corner radius.</p>
+        <p><span class="k-icon k-icon--derive k-text-accent" aria-hidden="true"></span> The same seed → derive principle runs inside the stylesheet.
+        Shades are <em>relationships</em>, not swatches: strong, light,
+        soft, and the transparencies are all <code>color-mix()</code>
+        expressions over the seed, so re-theming is often two lines:</p>
+        <pre><code>@layer tokens {
+  :root { --k-accent: hsl(160 84% 32%); }
+}</code></pre>
+        <p>Override <code>--k-accent</code> alone and every derived
+        variant follows. Only <code>--k-on-accent</code> stays explicit —
+        contrast is a judgment the math can't make safely. The full map
+        is on the <a href="tokens.html">tokens page</a>.</p>
+
+        <h2>Fluid by default</h2>
+        <p>Type and section spacing are <code>clamp()</code> expressions
+        that breathe with the viewport — every text step and the larger
+        space steps interpolate smoothly between a phone floor and a
+        desktop ceiling, with no breakpoint declarations at all.</p>
+        <p>Where layout genuinely has to snap — columns collapsing,
+        a sidebar stacking — keel uses three fixed, documented
+        breakpoints: <code>sm 640px</code>, <code>md 820px</code>,
+        <code>lg 1080px</code>. They are not tokens because they cannot
+        be: media queries can't read custom properties, so pretending
+        otherwise would be a lie in the API. Three honest constants
+        instead.</p>
+
+        <h2>Zero JavaScript</h2>
+        <p>keel ships no scripts, because the platform already ships the
+        behavior: <code>&lt;dialog&gt;</code> for modals and drawers,
+        <code>popover</code> for overlays, <code>&lt;details&gt;</code>
+        for accordions and dropdowns. keel styles these natives; it does
+        not reinvent them.</p>
+        <p>When you need more, climb the ladder one rung at a time:</p>
+        <ul>
+          <li><strong>Semantic HTML first.</strong> Links, forms,
+          <code>details</code>, <code>dialog</code>, <code>popover</code> —
+          most interactivity is already in the parser.</li>
+          <li><strong>Then CSS.</strong> States, tooltips, the scroll-snap
+          gallery, scroll-driven reveals — presentation logic stays in
+          the stylesheet.</li>
+          <li><strong>Then a few lines of your own JS.</strong> Tab
+          panels, a live filter — small, owned by you, styled by keel.</li>
+          <li><strong>Then a framework, if the app earns it.</strong>
+          keel still styles the output; the framework handles the runtime.</li>
+        </ul>
+        <p>The design-system tool and the search on this site are site
+        JavaScript, not framework JavaScript.</p>
+
+        <h2>The grammar</h2>
+        <p>Everything in keel is written in one grammar, and anything you
+        add should be too. Names are BEM with a prefix:
+        <code>k-block__element--modifier</code>. Values are tokens, never
+        raw numbers — if a value matters, it has a name in the tokens
+        layer. And every component reads local <strong>knobs</strong>
+        with token defaults, so a custom variant is plain CSS:</p>
+        <pre><code>.btn-sale {
+  --k-btn-bg: var(--k-warn);
+  --k-btn-bg-hover: color-mix(in oklab, var(--k-warn), black 15%);
+}</code></pre>
+        <p>That is keel's mixin system — native custom properties, no
+        build step, no plugin API. The
+        <a href="components-extending.html">components page</a> ends with
+        a worked recipe for building a new component in the same
+        grammar.</p>
+
+        <h2>Semantics &amp; SEO</h2>
+        <p>Stylesheets are invisible to search engines — but a CSS
+        framework decides what HTML people write, and <em>that</em> is
+        SEO. keel's base layer only rewards real elements: an
+        <code>&lt;h1&gt;</code>, a <code>&lt;p&gt;</code>, a
+        <code>&lt;table&gt;</code>, a <code>&lt;details&gt;</code> look
+        designed with zero classes, so semantic markup is the path of
+        least resistance instead of an afterthought. Semantic HTML is
+        keel's API.</p>
+        <p>The performance half is structural too: one small file, no
+        JavaScript runtime, no hydration shift, lazy self-hosted fonts
+        with <code>font-display: swap</code> — the things Core Web
+        Vitals measure. And clean, semantic, static HTML is what
+        generative engines read best, so the same choices serve GEO.</p>
+        <p>What a stylesheet honestly cannot do: meta and OG tags,
+        sitemaps, structured data, content. keel owns semantics and
+        performance; the rest of the SEO machinery belongs to the tool
+        that builds the pages.</p>
+
+        <h2>How keel compares</h2>
+        <p>keel is <em>plain to use</em> — one file, no build — but
+        <em>modern underneath</em>. It leans on native platform features
+        (<code>@layer</code>, <code>color-mix()</code>, <code>:has()</code>,
+        the popover API, scroll-driven animation, <code>field-sizing</code>)
+        that the established frameworks were built before. "Plain"
+        describes how you ship it, not how old the CSS is.</p>
+        <div class="k-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">&nbsp;</th>
+              <th scope="col">keel</th>
+              <th scope="col">Tailwind</th>
+              <th scope="col">Bootstrap</th>
+              <th scope="col">Bulma</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Build step to use</th><td>None</td><td>Required</td><td>Optional (Sass)</td><td>Optional (Sass)</td></tr>
+            <tr><th scope="row">Framework JavaScript</th><td>None</td><td>None</td><td>Ships JS</td><td>None</td></tr>
+            <tr><th scope="row">Theming</th><td>Native tokens, live</td><td>Config + rebuild</td><td>Sass rebuild</td><td>Sass rebuild</td></tr>
+            <tr><th scope="row">Styles semantic HTML</th><td>Yes — the base layer</td><td>No</td><td>Partly</td><td>Partly</td></tr>
+            <tr><th scope="row"><span class="k-icon k-icon--contrast" aria-hidden="true"></span> Contrast enforced in code</th><td>Yes — WCAG AA</td><td>No</td><td>No</td><td>No</td></tr>
+            <tr><th scope="row">Design-system generator</th><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+            <tr><th scope="row">Made for AI tools</th><td>MCP + llms.txt</td><td>No</td><td>No</td><td>No</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p>The honest trade: keel's floor is evergreen browsers from 2022
+        (it needs <code>@layer</code>, with no legacy fallback). Bootstrap
+        reaches further back. keel's bet is the opposite of legacy support
+        — use the platform as it is now.</p>
+        <p>And where each one wins, plainly: <strong>Tailwind</strong> for
+        a utility-first workflow and a huge ecosystem;
+        <strong>Bootstrap</strong> for broad legacy support and
+        batteries-included JS components; <strong>keel</strong> for a real
+        design system, accessible by default, with no toolchain — usable
+        by a person or an AI.</p>
+
+        <h2>Where keel draws the line</h2>
+        <ul>
+          <li><strong>Not 1.0 yet.</strong> Class names and tokens may
+          still tighten before 1.0; changes land in the
+          <a href="changelog.html">changelog</a>, not as surprises.</li>
+          <li><strong>Browser floor: <code>@layer</code>.</strong> Every
+          major browser since 2022. The layer model is the architecture,
+          not an enhancement.</li>
+          <li><strong>Tab-panel switching is yours.</strong>
+          <code>.k-tabs</code> is the visual bar; switching panels is
+          separate pages, a details accordion, or three lines of your
+          JS.</li>
+          <li><strong>Token-bound, on purpose:</strong> every value
+          spends a token, not an arbitrary one-off — utilities, colors,
+          spacing, and theming all move through the same design system
+          instead of overriding it.</li>
+        </ul>
+      </main>
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

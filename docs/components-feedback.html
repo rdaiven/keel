@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feedback — keel</title>
+<meta name="description" content="keel's feedback components: badges, alerts, banner, toast, spinner, skeleton.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<style>
+  .demo-box { background: var(--k-accent-soft); border: 1px dashed var(--k-accent);
+              border-radius: var(--k-radius-s); padding: var(--k-space-3);
+              font-size: var(--k-text-xs); font-family: var(--k-font-mono);
+              color: var(--k-accent-strong); text-align: center; }
+
+  /* page-local custom variants — demos for the "Your own variants"
+     and "Extending keel" sections below */
+  .btn-sale {
+    --k-btn-bg: var(--k-warn);
+    --k-btn-bg-hover: color-mix(in oklab, var(--k-warn), black 15%);
+  }
+  .btn-quiet {
+    --k-btn-bg: var(--k-accent-trans-10);
+    --k-btn-fg: var(--k-accent-strong);
+    --k-btn-bg-hover: var(--k-accent-trans-20);
+  }
+
+  .testimonial {
+    background: var(--k-surface);
+    border: 1px solid var(--k-border);
+    border-radius: var(--k-radius-l);
+    padding: var(--k-space-5);
+  }
+  .testimonial__quote {
+    font-size: var(--k-text-l);
+    color: var(--k-text-soft);
+    margin: 0 0 var(--k-space-3);
+  }
+  .testimonial__name {
+    font-family: var(--k-font-mono);
+    font-size: var(--k-text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--k-text-faint);
+  }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+
+      <aside class="k-sticky docs-side k-sidebar--collapsible" id="docs-sidebar">
+        <button class="k-tool docs-sidebar-toggle" type="button" id="docs-sidebar-toggle"
+                aria-pressed="false" aria-label="Collapse sidebar to icons">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Documentation">
+          <details class="k-nav-group" open>
+            <summary>Getting started</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="start.html">Start</a></li>
+            <li><a href="frameworks.html">Framework guides</a></li>
+            <li><a href="concepts.html">Concepts</a></li>
+            <li><a href="changelog.html">Changelog</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Reference</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="tokens.html">Tokens</a></li>
+            <li><a href="base.html">Base</a></li>
+            <li><a href="typography.html">Typography</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="components.html">Components</a>
+            <ul class="k-list k-list--flush docs-sub">
+              <li><a href="components-actions.html">Actions</a></li>
+              <li><a href="components-forms.html">Forms</a></li>
+              <li><a href="components-surfaces.html">Surfaces &amp; data</a></li>
+              <li aria-current="page"><a href="components-feedback.html">Feedback</a></li>
+              <li><a href="components-overlays.html">Overlays</a></li>
+              <li><a href="components-navigation.html">Navigation</a></li>
+              <li><a href="components-identity.html">Identity &amp; media</a></li>
+              <li><a href="components-motion.html">Motion</a></li>
+              <li><a href="components-extending.html">Extending</a></li>
+              <li><a href="components-app.html">Application</a></li>
+            </ul>
+          </li>
+            <li><a href="utilities.html">Utilities</a></li>
+            <li><a href="icons.html">Icons</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Build</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="sections.html">Sections</a></li>
+            <li><a href="../templates.html">Templates</a></li>
+            <li><a href="../design.html">Design system</a></li>
+            <li><a href="paths.html">Paths</a></li>
+          </ul>
+          </details>
+        </nav>
+        <div id="docs-anchors"></div>
+      </aside>
+
+      <main id="main" class="docs-main">
+
+      <h1>Feedback</h1>
+      <p class="k-text-soft">Status at a glance — pills, boxes, toasts, and loading states.</p>
+
+    <section id="c-badges">
+      <h2>Badges</h2>
+      <p><code>.k-badge</code> is a small pill. <code>--outline</code>
+      is quiet; <code>--secondary</code> uses the secondary color;
+      <code>--ok</code>, <code>--warn</code>, and
+      <code>--danger</code> use the status tokens.</p>
+      <p>Badges read two knobs, <code>--k-badge-bg</code> and
+      <code>--k-badge-fg</code> — the status modifiers are nothing but
+      knob-setters. This is the entire definition of
+      <code>.k-badge--ok</code>:</p>
+      <pre><code>.k-badge--ok { --k-badge-bg: var(--k-ok);
+               --k-badge-fg: hsl(0 0% 100%); }</code></pre>
+      <p><code>--solid</code> fills with the full accent and its
+      on-accent text; <code>--large</code> steps the type up to
+      text-s with a touch more padding; <code>--dot</code> sets a
+      small leading circle in the current color, for a status pill
+      like <code>● Live</code>. They stack — a large solid dot is
+      just the three together.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-cluster" style="margin-bottom: var(--k-space-4)">
+          <span class="k-badge">Default</span>
+          <span class="k-badge k-badge--outline">Outline</span>
+          <span class="k-badge k-badge--secondary">Secondary</span>
+          <span class="k-badge k-badge--ok">Ok</span>
+          <span class="k-badge k-badge--warn">Warn</span>
+          <span class="k-badge k-badge--danger">Danger</span>
+          <span class="k-badge k-badge--solid">Solid</span>
+          <span class="k-badge k-badge--large">Large</span>
+          <span class="k-badge k-badge--dot">Live</span>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;span class="k-badge"&gt;Default&lt;/span&gt;
+&lt;span class="k-badge k-badge--outline"&gt;Outline&lt;/span&gt;
+&lt;span class="k-badge k-badge--secondary"&gt;Secondary&lt;/span&gt;
+&lt;span class="k-badge k-badge--ok"&gt;Ok&lt;/span&gt;
+&lt;span class="k-badge k-badge--warn"&gt;Warn&lt;/span&gt;
+&lt;span class="k-badge k-badge--danger"&gt;Danger&lt;/span&gt;
+&lt;span class="k-badge k-badge--solid"&gt;Solid&lt;/span&gt;
+&lt;span class="k-badge k-badge--large"&gt;Large&lt;/span&gt;
+&lt;span class="k-badge k-badge--dot"&gt;Live&lt;/span&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-alerts">
+      <h2>Alerts</h2>
+      <p><code>.k-alert</code> is a bordered box with a colored start
+      edge; the status modifiers change only that edge. Alerts are
+      static markup — they are <em>not</em> live regions by default.
+      If you inject one dynamically and want screen readers to
+      announce it, add <code>role="status"</code> (or
+      <code>role="alert"</code> for urgent messages) yourself.
+      The edge color is the <code>--k-alert-edge</code> knob, so a
+      custom alert flavor is one line:
+      <code>.alert-tip { --k-alert-edge: var(--k-accent-2); }</code>.</p>
+      <p><code>--soft</code> tints the whole surface from that same
+      edge color and drops the border, for a softer fill. It combines
+      with the status modifiers — <code>k-alert--soft k-alert--ok</code>
+      tints from the ok color — and the fill is itself the
+      <code>--k-alert-bg</code> knob if you want to set it directly.
+      Content stacks by default; add <code>--row</code> when an alert
+      needs a leading icon or trailing action beside its text instead —
+      see the <a href="components-actions.html#c-close-button">dismissible
+      alert</a>.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-stack k-stack--tight" style="margin-bottom: var(--k-space-4)">
+          <div class="k-alert"><p>A neutral note. The default edge uses the accent.</p></div>
+          <div class="k-alert k-alert--ok"><p>Saved. Everything went as expected.</p></div>
+          <div class="k-alert k-alert--warn"><p>This draft has unsaved changes.</p></div>
+          <div class="k-alert k-alert--danger"><p>The upload failed. Try again.</p></div>
+          <div class="k-alert k-alert--soft k-alert--ok"><p>Saved — the soft variant, tinted from the ok color.</p></div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-alert"&gt;&lt;p&gt;A neutral note.&lt;/p&gt;&lt;/div&gt;
+&lt;div class="k-alert k-alert--ok"&gt;&lt;p&gt;Saved.&lt;/p&gt;&lt;/div&gt;
+&lt;div class="k-alert k-alert--warn"&gt;&lt;p&gt;Unsaved changes.&lt;/p&gt;&lt;/div&gt;
+&lt;div class="k-alert k-alert--danger"&gt;&lt;p&gt;The upload failed.&lt;/p&gt;&lt;/div&gt;
+&lt;div class="k-alert k-alert--soft k-alert--ok"&gt;&lt;p&gt;Saved.&lt;/p&gt;&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-banner">
+      <h2>Banner</h2>
+      <p><code>.k-banner</code> is the announcement strip — the
+      one-line note that sits above the header. Soft accent by
+      default; <code>--accent</code> flips it to the full accent with
+      the on-accent text. Links inside inherit the banner color. It
+      reads two knobs, <code>--k-banner-bg</code> and
+      <code>--k-banner-fg</code>, so a one-off flavor is one line of
+      CSS, the same trick as buttons and badges.</p>
+      <p><code>--sticky</code> pins the banner to the top of the
+      viewport as the page scrolls (<code>position: sticky; top: 0</code>,
+      above the header at <code>z-index: 20</code>) — for an
+      announcement bar that stays put. It's left out of the live
+      demos here, since a strip that follows the scroll would sit over
+      the rest of the page; the markup is below.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-stack k-stack--tight" style="margin-bottom: var(--k-space-4)">
+          <div class="k-banner">
+            <span>keel is pre-1.0 — names may still change.</span>
+            <a href="#">Read the notes</a>
+          </div>
+          <div class="k-banner k-banner--accent">
+            <span>The accent variant, for the one announcement that matters.</span>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-banner"&gt;
+  &lt;span&gt;keel is pre-1.0 — names may still change.&lt;/span&gt;
+  &lt;a href="notes.html"&gt;Read the notes&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div class="k-banner k-banner--accent"&gt;
+  &lt;span&gt;The accent variant.&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- sticky: stays at the top of the viewport on scroll --&gt;
+&lt;div class="k-banner k-banner--sticky"&gt;
+  &lt;span&gt;keel is pre-1.0 — names may still change.&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-toast">
+      <h2>Toast</h2>
+      <p><code>.k-toast</code> is a <code>[popover]</code> pinned to
+      the bottom end of the viewport, with the same colored start edge
+      as an alert. Because it's a native popover it sits in the top
+      layer, closes on Esc, and light-dismisses on an outside click —
+      all free. A button with <code>popovertarget</code> opens it with
+      no script, as below. Showing it from a timer or an event
+      (saved, uploaded, failed) is one line of your JavaScript —
+      <code>el.showPopover()</code> — keel only styles it.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="margin-bottom: var(--k-space-4)">
+          <button class="k-btn k-btn--ghost" popovertarget="demo-toast">Show toast</button>
+          <div class="k-toast" id="demo-toast" popover>
+            <p>Saved. Your changes are live.</p>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;button class="k-btn k-btn--ghost" popovertarget="saved-toast"&gt;Show toast&lt;/button&gt;
+
+&lt;div class="k-toast" id="saved-toast" popover&gt;
+  &lt;p&gt;Saved. Your changes are live.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- from your own code: --&gt;
+&lt;!-- document.getElementById("saved-toast").showPopover() --&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-spinner">
+      <h2>Spinner</h2>
+      <p><code>.k-spinner</code> is a small rotating ring, sized to
+      the surrounding text via <code>em</code> — it fits inline, in a
+      button, or scaled up with a font-size. The element itself is
+      empty; put the state in words next to it and hide the ring from
+      assistive tech, or a screen reader hears nothing at all.
+      Reduced-motion users see a static ring — the text carries the
+      meaning either way.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-cluster" style="margin-bottom: var(--k-space-4)">
+          <p role="status" style="margin: 0"><span class="k-spinner" aria-hidden="true"></span> Building…</p>
+          <button class="k-btn" disabled><span class="k-spinner" aria-hidden="true"></span> Saving</button>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;p role="status"&gt;&lt;span class="k-spinner" aria-hidden="true"&gt;&lt;/span&gt; Building…&lt;/p&gt;
+
+&lt;button class="k-btn" disabled&gt;
+  &lt;span class="k-spinner" aria-hidden="true"&gt;&lt;/span&gt; Saving
+&lt;/button&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-skeleton">
+      <h2>Skeleton</h2>
+      <p><code>.k-skeleton</code> is a shimmering placeholder line,
+      one text-line tall. Width is content-shaped, so set it inline
+      per line — a short one for the heading, longer ones for body
+      text. Hide the whole placeholder from assistive tech; it stands
+      for content, it isn't content.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-card" style="max-width: 20rem; margin-bottom: var(--k-space-4)" aria-hidden="true">
+          <span class="k-skeleton" style="width: 45%; margin-bottom: var(--k-space-3)"></span>
+          <span class="k-skeleton" style="width: 100%; margin-bottom: var(--k-space-2)"></span>
+          <span class="k-skeleton" style="width: 70%"></span>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-card" aria-hidden="true"&gt;
+  &lt;span class="k-skeleton" style="width: 45%; margin-bottom: var(--k-space-3)"&gt;&lt;/span&gt;
+  &lt;span class="k-skeleton" style="width: 100%; margin-bottom: var(--k-space-2)"&gt;&lt;/span&gt;
+  &lt;span class="k-skeleton" style="width: 70%"&gt;&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-progress">
+      <h2>Progress &amp; meter</h2>
+      <p>Both are base-styled — zero classes. A bare
+      <code>progress</code> renders as a slim rounded track with an
+      accent bar; give it a label, because the bar alone says nothing
+      to a screen reader. <code>meter</code> is for a measurement
+      within a known range, not for task progress — with
+      <code>low</code>/<code>high</code>/<code>optimum</code> set, the
+      bar colors itself from the status tokens: ok in the optimal
+      region, warn outside it, danger when it's far off. Honestly:
+      that coloring rides on the vendor
+      <code>::-webkit-meter-*</code> pseudo-elements, so it's
+      Chromium-first — Firefox keeps its own default bar (keel only
+      rounds it).</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-stack k-stack--tight" style="margin-bottom: var(--k-space-4)">
+          <div>
+            <label for="demo-progress">Uploading — 64%</label>
+            <progress id="demo-progress" value="64" max="100">64%</progress>
+          </div>
+          <div>
+            <label for="demo-meter-warn">Storage used (optimum 90)</label>
+            <meter id="demo-meter-warn" min="0" max="100" low="30" high="70" optimum="90" value="55">55</meter>
+          </div>
+          <div>
+            <label for="demo-meter-ok">Storage used (in the good range)</label>
+            <meter id="demo-meter-ok" min="0" max="100" low="30" high="70" optimum="90" value="85">85</meter>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;!-- progress: a task moving toward done --&gt;
+&lt;label for="upload"&gt;Uploading — 64%&lt;/label&gt;
+&lt;progress id="upload" value="64" max="100"&gt;64%&lt;/progress&gt;
+
+&lt;!-- meter: a value in a known range; the bar colors itself --&gt;
+&lt;label for="storage"&gt;Storage used&lt;/label&gt;
+&lt;meter id="storage" min="0" max="100"
+       low="30" high="70" optimum="90" value="55"&gt;55&lt;/meter&gt;</code></pre>
+      </details>
+    </section>
+
+      </main>
+
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

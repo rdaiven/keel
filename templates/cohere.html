@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vectorline — real-time analytics for product teams</title>
+<meta name="description" content="A fictional SaaS analytics landing page built entirely with keel: a bento feature grid, a monthly/annual pricing toggle driven by :has(), and an FAQ accordion. The whole cool-indigo theme is one tokens block.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Replace this block and the page becomes yours. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(220 24% 97.5%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(220 22% 93%);
+      --k-border: hsl(220 16% 86%);
+      --k-border-strong: hsl(220 16% 74%);
+      --k-text: hsl(224 32% 12%);
+      --k-text-soft: hsl(222 16% 34%);
+      --k-text-faint: hsl(222 10% 50%);
+      --k-accent: hsl(234 62% 52%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(258 40% 44%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-font-display: system-ui, "Segoe UI", sans-serif;
+      --k-font-body: system-ui, "Segoe UI", sans-serif;
+      --k-display-weight: 750;
+      --k-tracking: -0.02em;
+      --k-radius: 12px;
+      --k-density: 1.05;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local: bento feature grid — the second cell spans two columns */
+  .cs-bento { display: grid; gap: var(--k-space-4); grid-template-columns: 1fr; }
+  @media (min-width: 640px) {
+    .cs-bento { grid-template-columns: repeat(2, 1fr); }
+    .cs-bento > :nth-child(2) { grid-column: span 2; }
+  }
+  @media (min-width: 1080px) {
+    .cs-bento { grid-template-columns: repeat(4, 1fr); }
+    .cs-bento > :first-child { grid-column: span 2; grid-row: span 2; }
+    .cs-bento > :nth-child(2) { grid-column: span 2; grid-row: span 1; }
+  }
+  .cs-bento > * { min-inline-size: 0; }
+
+  /* page-local: monthly/annual price toggle, no JS — :has() reveals the
+     matching price span and hides the other, on the checkbox's state. */
+  .cs-price--annual { display: none; }
+  body:has(#cs-billing:checked) .cs-price--monthly { display: none; }
+  body:has(#cs-billing:checked) .cs-price--annual { display: inline; }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme. <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Vectorline</a>
+      <ul class="k-nav__links">
+        <li><a href="#product">Product</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="k-hero" id="top">
+  <div class="k-container">
+    <p class="k-hero__eyebrow">Product analytics · for teams that ship weekly</p>
+    <h1>See what shipped.<br>See what it changed.</h1>
+    <p class="k-hero__lead">
+      Vectorline joins your deploy log to your usage data automatically,
+      so every release shows up on the same chart as the metrics it
+      moved. No event-naming spec, no dashboard-building sprint.
+    </p>
+    <div class="k-cluster" style="margin-top: var(--k-space-5)">
+      <a class="k-btn" href="#pricing">Start free</a>
+      <a class="k-btn k-btn--ghost" href="#product">See the product</a>
+    </div>
+    <div class="k-cluster" style="margin-top: var(--k-space-5)">
+      <span class="k-badge k-badge--outline">14-day free trial</span>
+      <span class="k-badge k-badge--outline">No credit card</span>
+      <span class="k-badge k-badge--outline">SOC 2 in progress</span>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight k-section--alt">
+  <div class="k-container">
+    <div class="k-cols-4 k-center k-reveal">
+      <div><span class="k-stat__value">340ms</span><span class="k-stat__label">median dashboard load</span></div>
+      <div><span class="k-stat__value">1,900+</span><span class="k-stat__label">releases tracked weekly</span></div>
+      <div><span class="k-stat__value">18 min</span><span class="k-stat__label">average setup time</span></div>
+      <div><span class="k-stat__value">99.95%</span><span class="k-stat__label">ingest uptime, trailing year</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT — bento feature grid: hero cell spans 2x2, second cell spans wide -->
+<section class="k-section" id="product">
+  <div class="k-container">
+    <h2>One grid, every question answered</h2>
+    <p class="k-text-soft" style="max-width: 40em">Six panels, not sixty
+    dashboards. Each one answers a question a team actually asks after a
+    release.</p>
+    <div class="cs-bento k-mt-5">
+
+      <article class="k-card k-card--hover">
+        <p class="k-card__kicker">Release diff</p>
+        <h3>Every metric, before and after</h3>
+        <p>Deploys mark a vertical line on every chart automatically.
+        Click one to see exactly which metrics moved in the following
+        hour, day, and week — no manual annotation.</p>
+      </article>
+
+      <article class="k-card k-card--hover">
+        <p class="k-card__kicker">Funnels</p>
+        <h3>Where people actually stop</h3>
+        <p>Build a funnel from raw events in under a minute, then
+        segment it by plan, device, or release cohort without writing a
+        query.</p>
+      </article>
+
+      <article class="k-card k-card--hover">
+        <p class="k-card__kicker">Retention</p>
+        <h3>Cohorts, decaying honestly</h3>
+        <p>Weekly retention curves per cohort, with the release that
+        shipped that week labeled on the curve.</p>
+      </article>
+
+      <article class="k-card k-card--hover">
+        <p class="k-card__kicker">Alerts</p>
+        <h3>Told before you're asked</h3>
+        <p>A metric that breaks its usual range after a deploy pages the
+        on-call engineer directly — not a dashboard nobody's watching.</p>
+      </article>
+
+      <article class="k-card k-card--hover">
+        <p class="k-card__kicker">SQL escape hatch</p>
+        <h3>Ask anything, when the panels aren't enough</h3>
+        <p>Every chart has a "view as SQL" button. Edit the query, save
+        it back as a panel — the abstraction never traps you.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container">
+    <div class="k-split">
+      <div>
+        <h2>Ships from your CI, not a snippet</h2>
+        <p>Vectorline reads your deploy webhook — GitHub Actions,
+        CircleCI, or a plain <code>curl</code> — and lines it up against
+        an SDK that's already on your page for analytics. Nothing new to
+        instrument on day one.</p>
+        <ul class="k-checklist">
+          <li>Deploy markers appear on every chart within seconds</li>
+          <li>Release cohorts build themselves from the same events</li>
+          <li>Rollbacks are just another marker — the diff still works</li>
+        </ul>
+      </div>
+      <figure>
+        <svg viewBox="0 0 480 300" role="img"
+             aria-label="A line chart with a vertical deploy marker where the metric visibly changes slope"
+             style="width: 100%; height: auto; border-radius: var(--k-radius-l); border: 1px solid var(--k-border); background: var(--k-surface)">
+          <rect width="480" height="300" fill="var(--k-surface)"/>
+          <line x1="40" y1="40" x2="40" y2="260" stroke="var(--k-border)" stroke-width="1"/>
+          <line x1="40" y1="260" x2="450" y2="260" stroke="var(--k-border)" stroke-width="1"/>
+          <line x1="270" y1="40" x2="270" y2="260" stroke="var(--k-accent-2)" stroke-width="2" stroke-dasharray="4 4"/>
+          <path d="M40 220 L100 214 L160 218 L220 208 L270 200 L320 140 L370 108 L420 96 L450 90"
+                fill="none" stroke="var(--k-accent)" stroke-width="3"/>
+          <circle cx="270" cy="200" r="5" fill="var(--k-accent-2)"/>
+          <text x="278" y="60" font-family="system-ui, sans-serif" font-size="12" fill="var(--k-accent-2)">v2.14.0 deployed</text>
+        </svg>
+        <figcaption>Signups per hour, the week v2.14.0 shipped.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING — monthly/annual toggle via a real checkbox + :has(), no JS -->
+<section class="k-section" id="pricing">
+  <div class="k-container">
+    <h2>Pricing</h2>
+    <p class="k-text-soft" style="max-width: 40em">One price per seat.
+    Annual billing is exactly two months free — no separate negotiation.</p>
+
+    <p class="k-cluster" style="justify-content: center; margin-top: var(--k-space-5)">
+      <span>Monthly</span>
+      <label class="k-switch"><input type="checkbox" id="cs-billing"></label>
+      <span>Annual <span class="k-badge k-badge--secondary">2 months free</span></span>
+    </p>
+
+    <div class="k-thirds k-mt-5">
+      <article class="k-card k-card--hover">
+        <p class="k-card__kicker">Starter</p>
+        <h3><span class="cs-price--monthly">$0</span><span class="cs-price--annual">$0</span><small>/seat/mo</small></h3>
+        <p><small>For a single product, one dashboard at a time.</small></p>
+        <ul class="k-checklist">
+          <li>Up to 3 seats</li>
+          <li>30-day data retention</li>
+          <li>5 saved panels</li>
+        </ul>
+        <a class="k-btn k-btn--ghost" href="#faq">Start free</a>
+      </article>
+      <article class="k-card k-card--hover">
+        <p class="k-card__kicker">Growth</p>
+        <h3><span class="cs-price--monthly">$29</span><span class="cs-price--annual">$24</span><small>/seat/mo</small>
+        <span class="k-badge k-badge--secondary">most teams pick this</span></h3>
+        <p><small>Unlimited panels, alerting, and release diffing.</small></p>
+        <ul class="k-checklist">
+          <li>Up to 25 seats</li>
+          <li>2-year data retention</li>
+          <li>Unlimited panels and alerts</li>
+          <li>SQL escape hatch</li>
+        </ul>
+        <a class="k-btn" href="#faq">Start the trial</a>
+      </article>
+      <article class="k-card k-card--hover">
+        <p class="k-card__kicker">Scale</p>
+        <h3><span class="cs-price--monthly">$54</span><span class="cs-price--annual">$45</span><small>/seat/mo</small></h3>
+        <p><small>For orgs running more than one product line.</small></p>
+        <ul class="k-checklist">
+          <li>Unlimited seats</li>
+          <li>Unlimited retention</li>
+          <li>SSO and audit log</li>
+          <li>A named support engineer</li>
+        </ul>
+        <a class="k-btn k-btn--secondary" href="#faq">Talk to us</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ — native <details>, grouped so only one opens at a time -->
+<section class="k-section k-section--alt" id="faq">
+  <div class="k-container--narrow k-container">
+    <h2>Questions teams actually ask</h2>
+    <div class="k-accordion">
+      <details name="cs-faq">
+        <summary>Do we have to rewrite our event tracking?</summary>
+        <p>No. If you already send events to a common analytics SDK,
+        Vectorline reads the same stream. The deploy marker is the only
+        new piece, and it's one webhook call from CI.</p>
+      </details>
+      <details name="cs-faq">
+        <summary>What counts as a seat?</summary>
+        <p>Anyone who logs in to build or view a dashboard. Read-only
+        links shared with stakeholders outside your org don't count and
+        don't need an account.</p>
+      </details>
+      <details name="cs-faq">
+        <summary>Can we self-host the ingest pipeline?</summary>
+        <p>Scale plans can point the SDK at a regional ingest endpoint we
+        run for you, keeping raw events in-region. Full self-hosting
+        isn't offered — we'd rather run it well for everyone.</p>
+      </details>
+      <details name="cs-faq">
+        <summary>What happens to our data if we cancel?</summary>
+        <p>Every panel exports to CSV or a saved SQL query before you go.
+        Raw event data is retained for 30 days after cancellation in case
+        you change your mind, then deleted.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--accent">
+  <div class="k-container--narrow k-container k-center">
+    <h2>Ship it. Then know what happened.</h2>
+    <p style="max-width: 38em; margin-inline: auto">Connect your deploy
+    webhook and your existing analytics SDK — the first release marker
+    usually appears before the onboarding call ends.</p>
+    <a class="k-btn k-btn--ghost" style="color: inherit; border-color: currentColor" href="#pricing">Start free</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span><strong style="color: var(--k-text)">Vectorline</strong> — a fictional product, for demonstration.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

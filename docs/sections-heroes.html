@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sections · Heroes — keel</title>
+<meta name="description" content="Eight hero sections built with keel: product, centered, split, mesh, stats, app, animated-entry, and marquee-logo heroes. Each one is rendered live as a full-bleed band with its exact markup below.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+<main id="main">
+
+<section class="k-section">
+  <div class="k-container">
+    <h1>Heroes</h1>
+    <p class="k-hero__lead">Eight ways to open a page, rendered live as full-bleed bands with
+    their exact markup underneath. Copy the markup, keep your tokens —
+    the copy inside is placeholder, a fictional studio called
+    Harbor &amp; Pine.</p>
+    <div class="k-cluster" style="margin-top: var(--k-space-5)">
+      <a class="k-badge k-badge--outline" href="#product-hero">Product hero</a>
+      <a class="k-badge k-badge--outline" href="#centered-hero">Centered hero</a>
+      <a class="k-badge k-badge--outline" href="#split-hero">Split hero</a>
+      <a class="k-badge k-badge--outline" href="#mesh-hero">Mesh hero</a>
+      <a class="k-badge k-badge--outline" href="#stats-hero">Stats hero</a>
+      <a class="k-badge k-badge--outline" href="#app-hero">App hero</a>
+      <a class="k-badge k-badge--outline" href="#animated-hero">Animated hero</a>
+      <a class="k-badge k-badge--outline" href="#marquee-hero">Marquee hero</a>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="product-hero">Product hero</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Eyebrow, headline, lead, a button pair, and a row of quiet proof badges — the default opener.</p>
+  </div>
+</section>
+
+<section class="k-hero k-section--alt">
+  <div class="k-container">
+    <p class="k-hero__eyebrow">Harbor &amp; Pine · design studio</p>
+    <h1>Websites built slowly, on purpose.</h1>
+    <p class="k-hero__lead">A two-person studio in a harbor town. We take
+    four projects a year and stay with each one until it holds.</p>
+    <div class="k-cluster" style="margin-top: var(--k-space-5)">
+      <a class="k-btn" href="#">Start a project</a>
+      <a class="k-btn k-btn--ghost" href="#">See the work</a>
+    </div>
+    <div class="k-cluster" style="margin-top: var(--k-space-4)">
+      <span class="k-badge k-badge--outline">Est. 2019</span>
+      <span class="k-badge k-badge--outline">41 sites shipped</span>
+      <span class="k-badge k-badge--outline">38 still maintained</span>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — product hero</summary>
+      <pre><code>&lt;section class="k-hero k-section--alt"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;p class="k-hero__eyebrow"&gt;Harbor &amp;amp; Pine · design studio&lt;/p&gt;
+    &lt;h1&gt;Websites built slowly, on purpose.&lt;/h1&gt;
+    &lt;p class="k-hero__lead"&gt;A two-person studio in a harbor town. We take
+    four projects a year and stay with each one until it holds.&lt;/p&gt;
+    &lt;div class="k-cluster" style="margin-top: var(--k-space-5)"&gt;
+      &lt;a class="k-btn" href="#"&gt;Start a project&lt;/a&gt;
+      &lt;a class="k-btn k-btn--ghost" href="#"&gt;See the work&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="k-cluster" style="margin-top: var(--k-space-4)"&gt;
+      &lt;span class="k-badge k-badge--outline"&gt;Est. 2019&lt;/span&gt;
+      &lt;span class="k-badge k-badge--outline"&gt;41 sites shipped&lt;/span&gt;
+      &lt;span class="k-badge k-badge--outline"&gt;38 still maintained&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="centered-hero">Centered hero</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Everything centered in a narrow container, for pages with one idea and two ways in.</p>
+  </div>
+</section>
+
+<section class="k-hero k-section--tint">
+  <div class="k-container--narrow k-container k-center">
+    <p class="k-hero__eyebrow">Field notes</p>
+    <h1>A quieter way to publish</h1>
+    <p class="k-hero__lead" style="margin-inline: auto">Write in plain
+    text, press build, get a site. Nothing tracks, nothing loads late.</p>
+    <div class="k-cluster k-justify-center" style="margin-top: var(--k-space-5)">
+      <a class="k-btn" href="#">Read the guide</a>
+      <a class="k-btn k-btn--soft" href="#">Browse the archive</a>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — centered hero</summary>
+      <pre><code>&lt;section class="k-hero k-section--tint"&gt;
+  &lt;div class="k-container--narrow k-container k-center"&gt;
+    &lt;p class="k-hero__eyebrow"&gt;Field notes&lt;/p&gt;
+    &lt;h1&gt;A quieter way to publish&lt;/h1&gt;
+    &lt;p class="k-hero__lead" style="margin-inline: auto"&gt;Write in plain
+    text, press build, get a site. Nothing tracks, nothing loads late.&lt;/p&gt;
+    &lt;div class="k-cluster k-justify-center" style="margin-top: var(--k-space-5)"&gt;
+      &lt;a class="k-btn" href="#"&gt;Read the guide&lt;/a&gt;
+      &lt;a class="k-btn k-btn--soft" href="#"&gt;Browse the archive&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="split-hero">Split hero</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Copy on one side, a decorative token-colored figure on the other; stacks on small screens.</p>
+  </div>
+</section>
+
+<section class="k-hero">
+  <div class="k-container">
+    <div class="k-split">
+      <div>
+        <p class="k-hero__eyebrow">Ledger · by Harbor &amp; Pine</p>
+        <h1>Accounts you can read at a glance</h1>
+        <p class="k-hero__lead">One page per month. Income on the left,
+        spending on the right, and a line that says what changed.</p>
+        <div class="k-cluster" style="margin-top: var(--k-space-5)">
+          <a class="k-btn" href="#">Try the demo</a>
+          <a class="k-btn k-btn--ghost" href="#">How pricing works</a>
+        </div>
+      </div>
+      <svg viewBox="0 0 400 300" role="img"
+           aria-label="Decorative illustration: a simple bar chart"
+           style="width: 100%; height: auto">
+        <rect x="0" y="0" width="400" height="300" rx="12"
+              style="fill: var(--k-accent-soft)"/>
+        <rect x="44" y="168" width="52" height="92" rx="6"
+              style="fill: var(--k-accent-light)"/>
+        <rect x="120" y="128" width="52" height="132" rx="6"
+              style="fill: var(--k-accent)"/>
+        <rect x="196" y="92" width="52" height="168" rx="6"
+              style="fill: var(--k-accent-strong)"/>
+        <rect x="272" y="140" width="52" height="120" rx="6"
+              style="fill: var(--k-accent)"/>
+        <circle cx="336" cy="72" r="24"
+                style="fill: var(--k-accent-2-soft); stroke: var(--k-accent-2); stroke-width: 3"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — split hero with figure</summary>
+      <pre><code>&lt;section class="k-hero"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;div class="k-split"&gt;
+      &lt;div&gt;
+        &lt;p class="k-hero__eyebrow"&gt;Ledger · by Harbor &amp;amp; Pine&lt;/p&gt;
+        &lt;h1&gt;Accounts you can read at a glance&lt;/h1&gt;
+        &lt;p class="k-hero__lead"&gt;One page per month. Income on the left,
+        spending on the right, and a line that says what changed.&lt;/p&gt;
+        &lt;div class="k-cluster" style="margin-top: var(--k-space-5)"&gt;
+          &lt;a class="k-btn" href="#"&gt;Try the demo&lt;/a&gt;
+          &lt;a class="k-btn k-btn--ghost" href="#"&gt;How pricing works&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;svg viewBox="0 0 400 300" role="img"
+           aria-label="Decorative illustration: a simple bar chart"
+           style="width: 100%; height: auto"&gt;
+        &lt;rect x="0" y="0" width="400" height="300" rx="12"
+              style="fill: var(--k-accent-soft)"/&gt;
+        &lt;rect x="44" y="168" width="52" height="92" rx="6"
+              style="fill: var(--k-accent-light)"/&gt;
+        &lt;rect x="120" y="128" width="52" height="132" rx="6"
+              style="fill: var(--k-accent)"/&gt;
+        &lt;rect x="196" y="92" width="52" height="168" rx="6"
+              style="fill: var(--k-accent-strong)"/&gt;
+        &lt;rect x="272" y="140" width="52" height="120" rx="6"
+              style="fill: var(--k-accent)"/&gt;
+        &lt;circle cx="336" cy="72" r="24"
+                style="fill: var(--k-accent-2-soft); stroke: var(--k-accent-2); stroke-width: 3"/&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="mesh-hero">Mesh hero</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">A soft multi-point gradient band with a gradient headline and a row of glass badges.</p>
+  </div>
+</section>
+
+<section class="k-hero k-bg-mesh">
+  <div class="k-container--narrow k-container k-center">
+    <p class="k-hero__eyebrow">Harbor &amp; Pine · open studio</p>
+    <h1 class="k-text-gradient">A season of small things</h1>
+    <p class="k-hero__lead" style="margin-inline: auto">Prints, pages, and
+    a typeface we have been kerning since spring. Doors open Saturdays.</p>
+    <div class="k-cluster k-justify-center" style="margin-top: var(--k-space-5)">
+      <span class="k-badge k-glass">Letterpress</span>
+      <span class="k-badge k-glass">Small web</span>
+      <span class="k-badge k-glass">Bindery</span>
+      <span class="k-badge k-glass">Type</span>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — mesh hero</summary>
+      <pre><code>&lt;section class="k-hero k-bg-mesh"&gt;
+  &lt;div class="k-container--narrow k-container k-center"&gt;
+    &lt;p class="k-hero__eyebrow"&gt;Harbor &amp;amp; Pine · open studio&lt;/p&gt;
+    &lt;h1 class="k-text-gradient"&gt;A season of small things&lt;/h1&gt;
+    &lt;p class="k-hero__lead" style="margin-inline: auto"&gt;Prints, pages, and
+    a typeface we have been kerning since spring. Doors open Saturdays.&lt;/p&gt;
+    &lt;div class="k-cluster k-justify-center" style="margin-top: var(--k-space-5)"&gt;
+      &lt;span class="k-badge k-glass"&gt;Letterpress&lt;/span&gt;
+      &lt;span class="k-badge k-glass"&gt;Small web&lt;/span&gt;
+      &lt;span class="k-badge k-glass"&gt;Bindery&lt;/span&gt;
+      &lt;span class="k-badge k-glass"&gt;Type&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="stats-hero">Stats hero</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Headline and lead on the left, three auditable numbers on the right — proof as the figure.</p>
+  </div>
+</section>
+
+<section class="k-hero k-section--alt">
+  <div class="k-container">
+    <div class="k-split">
+      <div>
+        <p class="k-hero__eyebrow">Harbor &amp; Pine · year seven</p>
+        <h1>Small on purpose, steady by design</h1>
+        <p class="k-hero__lead">The studio in numbers — the ones we would
+        show a bank, not the ones that flatter us.</p>
+        <div class="k-cluster" style="margin-top: var(--k-space-5)">
+          <a class="k-btn" href="#">Read the annual note</a>
+        </div>
+      </div>
+      <div class="k-cols-3 k-center">
+        <div>
+          <span class="k-stat__value">41</span>
+          <span class="k-stat__label">Sites shipped</span>
+        </div>
+        <div>
+          <span class="k-stat__value">4</span>
+          <span class="k-stat__label">Projects a year</span>
+        </div>
+        <div>
+          <span class="k-stat__value">92%</span>
+          <span class="k-stat__label">Clients who stay</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — stats hero</summary>
+      <pre><code>&lt;section class="k-hero k-section--alt"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;div class="k-split"&gt;
+      &lt;div&gt;
+        &lt;p class="k-hero__eyebrow"&gt;Harbor &amp;amp; Pine · year seven&lt;/p&gt;
+        &lt;h1&gt;Small on purpose, steady by design&lt;/h1&gt;
+        &lt;p class="k-hero__lead"&gt;The studio in numbers — the ones we would
+        show a bank, not the ones that flatter us.&lt;/p&gt;
+        &lt;div class="k-cluster" style="margin-top: var(--k-space-5)"&gt;
+          &lt;a class="k-btn" href="#"&gt;Read the annual note&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="k-cols-3 k-center"&gt;
+        &lt;div&gt;
+          &lt;span class="k-stat__value"&gt;41&lt;/span&gt;
+          &lt;span class="k-stat__label"&gt;Sites shipped&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;span class="k-stat__value"&gt;4&lt;/span&gt;
+          &lt;span class="k-stat__label"&gt;Projects a year&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;span class="k-stat__value"&gt;92%&lt;/span&gt;
+          &lt;span class="k-stat__label"&gt;Clients who stay&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="app-hero">App hero</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Centered copy, two ghost store buttons, and a framed product placeholder underneath.</p>
+  </div>
+</section>
+
+<section class="k-hero k-section--tint">
+  <div class="k-container--narrow k-container k-center">
+    <p class="k-hero__eyebrow">Ledger · for phones</p>
+    <h1>The month, in your pocket</h1>
+    <p class="k-hero__lead" style="margin-inline: auto">The same one-page
+    ledger, sized for a thumb. It reads in a minute and syncs when it can.</p>
+    <div class="k-cluster k-justify-center" style="margin-top: var(--k-space-5)">
+      <a class="k-btn k-btn--ghost" href="#">Download for iOS
+        <span class="k-icon k-icon--arrow-right" aria-hidden="true"></span></a>
+      <a class="k-btn k-btn--ghost" href="#">Download for Android
+        <span class="k-icon k-icon--arrow-right" aria-hidden="true"></span></a>
+    </div>
+    <div class="k-frame k-mx-auto" style="margin-top: var(--k-space-6); max-width: 34rem">
+      <svg viewBox="0 0 640 360" role="img"
+           aria-label="Decorative illustration: an app screen"
+           preserveAspectRatio="xMidYMid slice"
+           style="width: 100%; height: 100%">
+        <rect x="0" y="0" width="640" height="360"
+              style="fill: var(--k-accent-soft)"/>
+        <rect x="240" y="36" width="160" height="324" rx="22"
+              style="fill: var(--k-accent-strong)"/>
+        <rect x="252" y="72" width="136" height="52" rx="8"
+              style="fill: var(--k-accent-light)"/>
+        <rect x="252" y="140" width="136" height="12" rx="6"
+              style="fill: var(--k-accent)"/>
+        <rect x="252" y="164" width="104" height="12" rx="6"
+              style="fill: var(--k-accent)"/>
+        <rect x="252" y="188" width="120" height="12" rx="6"
+              style="fill: var(--k-accent)"/>
+        <circle cx="320" cy="300" r="22"
+                style="fill: var(--k-accent-2-soft); stroke: var(--k-accent-2); stroke-width: 3"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — app hero</summary>
+      <pre><code>&lt;section class="k-hero k-section--tint"&gt;
+  &lt;div class="k-container--narrow k-container k-center"&gt;
+    &lt;p class="k-hero__eyebrow"&gt;Ledger · for phones&lt;/p&gt;
+    &lt;h1&gt;The month, in your pocket&lt;/h1&gt;
+    &lt;p class="k-hero__lead" style="margin-inline: auto"&gt;The same one-page
+    ledger, sized for a thumb. It reads in a minute and syncs when it can.&lt;/p&gt;
+    &lt;div class="k-cluster k-justify-center" style="margin-top: var(--k-space-5)"&gt;
+      &lt;a class="k-btn k-btn--ghost" href="#"&gt;Download for iOS
+        &lt;span class="k-icon k-icon--arrow-right" aria-hidden="true"&gt;&lt;/span&gt;&lt;/a&gt;
+      &lt;a class="k-btn k-btn--ghost" href="#"&gt;Download for Android
+        &lt;span class="k-icon k-icon--arrow-right" aria-hidden="true"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="k-frame k-mx-auto" style="margin-top: var(--k-space-6); max-width: 34rem"&gt;
+      &lt;svg viewBox="0 0 640 360" role="img"
+           aria-label="Decorative illustration: an app screen"
+           preserveAspectRatio="xMidYMid slice"
+           style="width: 100%; height: 100%"&gt;
+        &lt;rect x="0" y="0" width="640" height="360"
+              style="fill: var(--k-accent-soft)"/&gt;
+        &lt;rect x="240" y="36" width="160" height="324" rx="22"
+              style="fill: var(--k-accent-strong)"/&gt;
+        &lt;rect x="252" y="72" width="136" height="52" rx="8"
+              style="fill: var(--k-accent-light)"/&gt;
+        &lt;rect x="252" y="140" width="136" height="12" rx="6"
+              style="fill: var(--k-accent)"/&gt;
+        &lt;rect x="252" y="164" width="104" height="12" rx="6"
+              style="fill: var(--k-accent)"/&gt;
+        &lt;rect x="252" y="188" width="120" height="12" rx="6"
+              style="fill: var(--k-accent)"/&gt;
+        &lt;circle cx="320" cy="300" r="22"
+                style="fill: var(--k-accent-2-soft); stroke: var(--k-accent-2); stroke-width: 3"/&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="animated-hero">Animated hero</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Eyebrow, headline, and lead rise in on load with <code>.k-stagger</code> — off entirely under reduced motion.</p>
+  </div>
+</section>
+
+<section class="k-hero k-section--alt">
+  <div class="k-container">
+    <div class="k-stagger">
+      <p class="k-hero__eyebrow k-anim-up">Harbor &amp; Pine · now booking</p>
+      <h1 class="k-anim-up">A studio that shows up on time</h1>
+      <p class="k-hero__lead k-anim-up">Four projects a year, one team,
+      no handoffs. The site loads calm and settles in a beat behind it.</p>
+      <div class="k-cluster k-anim-up" style="margin-top: var(--k-space-5)">
+        <a class="k-btn" href="#">Start a project</a>
+        <a class="k-btn k-btn--ghost" href="#">See the work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — animated hero</summary>
+      <pre><code>&lt;section class="k-hero k-section--alt"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;div class="k-stagger"&gt;
+      &lt;p class="k-hero__eyebrow k-anim-up"&gt;Harbor &amp;amp; Pine · now booking&lt;/p&gt;
+      &lt;h1 class="k-anim-up"&gt;A studio that shows up on time&lt;/h1&gt;
+      &lt;p class="k-hero__lead k-anim-up"&gt;Four projects a year, one team,
+      no handoffs. The site loads calm and settles in a beat behind it.&lt;/p&gt;
+      &lt;div class="k-cluster k-anim-up" style="margin-top: var(--k-space-5)"&gt;
+        &lt;a class="k-btn" href="#"&gt;Start a project&lt;/a&gt;
+        &lt;a class="k-btn k-btn--ghost" href="#"&gt;See the work&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="marquee-hero">Marquee hero</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Centered hero copy over a continuous logo strip — <code>.k-marquee</code>, pauses on hover, off under reduced motion.</p>
+  </div>
+</section>
+
+<section class="k-hero k-section--tint">
+  <div class="k-container--narrow k-container k-center">
+    <p class="k-hero__eyebrow">Harbor &amp; Pine · studio partners</p>
+    <h1>Work you'd recognize</h1>
+    <p class="k-hero__lead" style="margin-inline: auto">A short list of the
+    people who trusted us with a launch this year.</p>
+  </div>
+  <div class="k-marquee" style="margin-top: var(--k-space-6)">
+    <div class="k-marquee__track">
+      <span class="k-text-soft k-mono">Northbound</span>
+      <span class="k-text-soft k-mono">Ledger Co.</span>
+      <span class="k-text-soft k-mono">Harbor Line</span>
+      <span class="k-text-soft k-mono">Field Notes</span>
+      <span class="k-text-soft k-mono">Openhouse</span>
+      <span class="k-text-soft k-mono" aria-hidden="true">Northbound</span>
+      <span class="k-text-soft k-mono" aria-hidden="true">Ledger Co.</span>
+      <span class="k-text-soft k-mono" aria-hidden="true">Harbor Line</span>
+      <span class="k-text-soft k-mono" aria-hidden="true">Field Notes</span>
+      <span class="k-text-soft k-mono" aria-hidden="true">Openhouse</span>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — marquee hero</summary>
+      <pre><code>&lt;section class="k-hero k-section--tint"&gt;
+  &lt;div class="k-container--narrow k-container k-center"&gt;
+    &lt;p class="k-hero__eyebrow"&gt;Harbor &amp;amp; Pine · studio partners&lt;/p&gt;
+    &lt;h1&gt;Work you'd recognize&lt;/h1&gt;
+    &lt;p class="k-hero__lead" style="margin-inline: auto"&gt;A short list of the
+    people who trusted us with a launch this year.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="k-marquee" style="margin-top: var(--k-space-6)"&gt;
+    &lt;div class="k-marquee__track"&gt;
+      &lt;span class="k-text-soft k-mono"&gt;Northbound&lt;/span&gt;
+      &lt;span class="k-text-soft k-mono"&gt;Ledger Co.&lt;/span&gt;
+      &lt;span class="k-text-soft k-mono"&gt;Harbor Line&lt;/span&gt;
+      &lt;span class="k-text-soft k-mono"&gt;Field Notes&lt;/span&gt;
+      &lt;span class="k-text-soft k-mono"&gt;Openhouse&lt;/span&gt;
+      &lt;span class="k-text-soft k-mono" aria-hidden="true"&gt;Northbound&lt;/span&gt;
+      &lt;span class="k-text-soft k-mono" aria-hidden="true"&gt;Ledger Co.&lt;/span&gt;
+      &lt;span class="k-text-soft k-mono" aria-hidden="true"&gt;Harbor Line&lt;/span&gt;
+      &lt;span class="k-text-soft k-mono" aria-hidden="true"&gt;Field Notes&lt;/span&gt;
+      &lt;span class="k-text-soft k-mono" aria-hidden="true"&gt;Openhouse&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+</main>
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

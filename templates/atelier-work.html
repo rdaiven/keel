@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Work — Northbank Atelier — a studio site template built with keel</title>
+<meta name="description" content="The project ledger for the Northbank Atelier keel template: a plain .k-list of every project, with a few entries expanding inline into a longer case-study blurb.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Byte-identical across all three atelier pages. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(160 8% 95%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(160 7% 91%);
+      --k-border: hsl(160 6% 84%);
+      --k-border-strong: hsl(160 6% 70%);
+      --k-text: hsl(160 10% 14%);
+      --k-text-soft: hsl(160 6% 34%);
+      --k-text-faint: hsl(160 5% 48%);
+      --k-accent: hsl(150 16% 34%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(30 10% 42%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-font-display: Georgia, "Times New Roman", serif;
+      --k-display-weight: 650;
+      --k-tracking: -0.01em;
+      --k-radius: 4px;
+      --k-density: 1.05;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local (prefix "at-"): identical on every atelier page */
+  .at-nav-current { color: var(--k-text); font-weight: 650; }
+  .at-hero { padding-block: var(--k-space-8) var(--k-space-6); }
+  .at-hero__mark { color: var(--k-accent); }
+  .at-teaser-row {
+    display: grid; gap: var(--k-space-5);
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 720px) { .at-teaser-row { grid-template-columns: 1fr; } }
+  .at-teaser {
+    border-top: 2px solid var(--k-border-strong);
+    padding-block-start: var(--k-space-3);
+  }
+  .at-teaser__year { color: var(--k-text-faint); font-family: var(--k-font-mono); font-size: var(--k-text-xs); }
+
+  /* ledger row layout, this page only, still "at-" prefix */
+  .at-row {
+    display: flex; align-items: baseline; gap: var(--k-space-4);
+    flex-wrap: wrap;
+  }
+  .at-row__name { font-weight: 650; flex: 1 1 14rem; }
+  .at-row__meta { color: var(--k-text-faint); font-family: var(--k-font-mono); font-size: var(--k-text-xs); }
+  .at-row__cat { color: var(--k-text-soft); flex: 0 0 9rem; }
+  .at-case { margin-block-start: var(--k-space-3); color: var(--k-text-soft); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme, shared across a linked three-page studio site.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="atelier-index.html">Northbank Atelier</a>
+      <ul class="k-nav__links">
+        <li><a href="atelier-index.html">Index</a></li>
+        <li><a class="at-nav-current" href="atelier-work.html" aria-current="page">Work</a></li>
+        <li><a href="atelier-studio.html">Studio</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="k-section k-section--tight">
+  <div class="k-container--narrow k-container">
+    <h1>Work</h1>
+    <p class="k-text-soft">Every project the studio has completed, oldest
+    to newest run in reverse. Three entries below open into a longer
+    case-study note — the row is a native <code>&lt;details&gt;</code>,
+    so it expands with no script.</p>
+
+    <ul class="k-list k-mt-6">
+
+      <li>
+        <details>
+          <summary class="at-row">
+            <span class="at-row__name">Kestrel Row</span>
+            <span class="at-row__cat">Housing</span>
+            <span class="at-row__meta">2025</span>
+          </summary>
+          <div class="at-case">
+            <p>Eight terraced units share one courtyard instead of eight
+            back gardens — the brief was density without the usual
+            density penalty of everyone facing a fence. Cross-ventilation
+            and deep eaves do most of the cooling; the mechanical plant
+            is one shared heat pump the size of a fridge.</p>
+            <p>The exterior is unfinished blockwork, left rough on
+            purpose — it weathers instead of ages, and the owners' body
+            corporate has never once asked us about repainting it.</p>
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <details>
+          <summary class="at-row">
+            <span class="at-row__name">The Coaling House</span>
+            <span class="at-row__cat">Hospitality</span>
+            <span class="at-row__meta">2024</span>
+          </summary>
+          <div class="at-case">
+            <p>A disused coal store on the river's working bank, converted
+            to a fourteen-room inn without pretending the building was
+            ever anything else. The original crane rail runs the full
+            length of the top floor — we kept it and hung the corridor
+            lighting from it instead of tearing it out.</p>
+            <p>Guests check in at a desk built from the same rail steel,
+            cut and re-forged by the same yard that used to service the
+            crane. The client wanted "no lobby energy," and we think the
+            grease-stained steel does that job better than any mood
+            board could.</p>
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <details>
+          <summary class="at-row">
+            <span class="at-row__name">Marrow Branch Library</span>
+            <span class="at-row__cat">Civic</span>
+            <span class="at-row__meta">2023</span>
+          </summary>
+          <div class="at-case">
+            <p>A single-room branch library lit almost entirely by one
+            large, carefully angled skylight — the reading room needs
+            artificial light for barely three months of the year. The
+            skylight well is lined in pale timber that bounces the light
+            rather than beaming it, so there's no glare on the tables
+            directly underneath.</p>
+            <p>The council's brief asked for "a quiet room that doesn't
+            feel like a waiting room." The skylight did most of that
+            work; we mostly stayed out of its way.</p>
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <span class="at-row">
+          <span class="at-row__name">Ferry Terminal Amenity Building</span>
+          <span class="at-row__cat">Civic</span>
+          <span class="at-row__meta">2022</span>
+        </span>
+      </li>
+
+      <li>
+        <span class="at-row">
+          <span class="at-row__name">Almond Court Infill</span>
+          <span class="at-row__cat">Housing</span>
+          <span class="at-row__meta">2021</span>
+        </span>
+      </li>
+
+      <li>
+        <span class="at-row">
+          <span class="at-row__name">Dray Lane Studios</span>
+          <span class="at-row__cat">Workspace</span>
+          <span class="at-row__meta">2020</span>
+        </span>
+      </li>
+
+      <li>
+        <span class="at-row">
+          <span class="at-row__name">Sable Point Boathouse</span>
+          <span class="at-row__cat">Hospitality</span>
+          <span class="at-row__meta">2018</span>
+        </span>
+      </li>
+
+      <li>
+        <span class="at-row">
+          <span class="at-row__name">Founders' House Renovation</span>
+          <span class="at-row__cat">Housing</span>
+          <span class="at-row__meta">2015</span>
+        </span>
+      </li>
+
+    </ul>
+
+    <p class="k-mt-6"><a class="k-btn" href="atelier-studio.html">Read about the studio</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>Northbank Atelier — a fictional studio, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

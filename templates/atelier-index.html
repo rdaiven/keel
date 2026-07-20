@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northbank Atelier — a studio site template built with keel</title>
+<meta name="description" content="A design/architecture studio site template built entirely with keel: three linked pages sharing one tokens block — a homepage, a project ledger, and a studio/contact page.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Byte-identical across all three atelier pages. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(160 8% 95%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(160 7% 91%);
+      --k-border: hsl(160 6% 84%);
+      --k-border-strong: hsl(160 6% 70%);
+      --k-text: hsl(160 10% 14%);
+      --k-text-soft: hsl(160 6% 34%);
+      --k-text-faint: hsl(160 5% 48%);
+      --k-accent: hsl(150 16% 34%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(30 10% 42%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-font-display: Georgia, "Times New Roman", serif;
+      --k-display-weight: 650;
+      --k-tracking: -0.01em;
+      --k-radius: 4px;
+      --k-density: 1.05;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local (prefix "at-"): identical on every atelier page */
+  .at-nav-current { color: var(--k-text); font-weight: 650; }
+  .at-hero { padding-block: var(--k-space-8) var(--k-space-6); }
+  .at-hero__mark { color: var(--k-accent); }
+  .at-teaser-row {
+    display: grid; gap: var(--k-space-5);
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 720px) { .at-teaser-row { grid-template-columns: 1fr; } }
+  .at-teaser {
+    border-top: 2px solid var(--k-border-strong);
+    padding-block-start: var(--k-space-3);
+  }
+  .at-teaser__year { color: var(--k-text-faint); font-family: var(--k-font-mono); font-size: var(--k-text-xs); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme, shared across a linked three-page studio site.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="atelier-index.html">Northbank Atelier</a>
+      <ul class="k-nav__links">
+        <li><a class="at-nav-current" href="atelier-index.html" aria-current="page">Index</a></li>
+        <li><a href="atelier-work.html">Work</a></li>
+        <li><a href="atelier-studio.html">Studio</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="k-section at-hero">
+  <div class="k-container">
+    <p class="k-hero__eyebrow">Architecture &amp; interiors · est. 2012</p>
+    <h1>We design for how a room<br>is actually used.</h1>
+    <p class="k-hero__lead">Northbank Atelier is a twelve-person studio
+    working across housing, hospitality, and civic space — quiet
+    material choices, load-bearing daylight, and drawings you can
+    still read after the crew has cut the plywood.</p>
+    <p class="k-cluster k-mt-5">
+      <a class="k-btn k-btn--large" href="atelier-work.html">See the work</a>
+      <a class="k-btn k-btn--ghost" href="atelier-studio.html">About the studio</a>
+    </p>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container">
+    <h2>Recent work</h2>
+    <p class="k-text-soft" style="max-width: 40em">A short teaser from the
+    ledger — every project the studio has completed, with year and
+    category, lives on the <a href="atelier-work.html">Work</a>
+    page.</p>
+    <div class="at-teaser-row k-mt-5">
+      <div class="at-teaser">
+        <p class="at-teaser__year">2025 · Housing</p>
+        <h3>Kestrel Row</h3>
+        <p>Eight terraced units around a shared courtyard, built to stay
+        cool without mechanical cooling.</p>
+      </div>
+      <div class="at-teaser">
+        <p class="at-teaser__year">2024 · Hospitality</p>
+        <h3>The Coaling House</h3>
+        <p>A disused coal store on the river became a fourteen-room inn;
+        the crane rail stayed, now a light track.</p>
+      </div>
+      <div class="at-teaser">
+        <p class="at-teaser__year">2023 · Civic</p>
+        <h3>Marrow Branch Library</h3>
+        <p>A reading room lit almost entirely by a single, very patient
+        skylight.</p>
+      </div>
+    </div>
+    <p class="k-mt-6"><a class="k-btn" href="atelier-work.html">View the full ledger</a></p>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container--narrow k-container">
+    <blockquote>
+      <p>Northbank doesn't decorate a plan — they find the plan the site
+      already wanted.</p>
+    </blockquote>
+    <p class="k-text-faint"><small>— a client, on the Kestrel Row handover</small></p>
+  </div>
+</section>
+
+<section class="k-section k-section--accent">
+  <div class="k-container k-center">
+    <h2>Start a project</h2>
+    <p style="max-width: 36em; margin-inline: auto">We take on six to
+    eight commissions a year. If the site is difficult, tell us first —
+    that's usually the interesting part.</p>
+    <p class="k-mt-5"><a class="k-btn" href="atelier-studio.html">Get in touch</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>Northbank Atelier — a fictional studio, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

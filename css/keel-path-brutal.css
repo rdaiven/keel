@@ -1,0 +1,65 @@
+/* keel path: brutal — brutalism.
+   A PATH is a continuation of keel, not part of the install: link it
+   after keel.css only if your design is heading this way. Hard edges,
+   thick borders, offset block shadows, shouting headings. Contrast is
+   untouched — brutalism runs on your text/background pair, which keel
+   already guarantees.
+
+     <link rel="stylesheet" href="keel.css">
+     <link rel="stylesheet" href="keel-path-brutal.css">
+
+   Styles live in @layer path — above keel's layers, below your own
+   unlayered CSS, which still always wins. */
+
+@layer path {
+  :root {
+    --k-radius: 0px;
+
+    /* the brutal shadow is a hard offset block in the ink color */
+    --k-brutal-ink: var(--k-text);
+    --k-shadow-s: 3px 3px 0 var(--k-brutal-ink);
+    --k-shadow: 5px 5px 0 var(--k-brutal-ink);
+    --k-shadow-l: 8px 8px 0 var(--k-brutal-ink);
+  }
+
+  h1, h2 {
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+
+  .k-card, .k-panel, .k-alert, .k-stat, dialog, .k-menu {
+    border: 2px solid var(--k-brutal-ink);
+    box-shadow: var(--k-shadow);
+  }
+  /* hover shifts the whole block — the shadow grows, the classic move */
+  .k-card--hover {
+    transition: translate 0.08s linear, box-shadow 0.08s linear;
+  }
+  .k-card--hover:hover {
+    translate: -3px -3px;
+    box-shadow: var(--k-shadow-l);
+  }
+
+  .k-btn {
+    border: 2px solid var(--k-brutal-ink);
+    box-shadow: var(--k-shadow-s);
+    font-weight: 750;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  /* pressing a button collapses the block — the classic move */
+  .k-btn:active { translate: 3px 3px; box-shadow: none; }
+
+  input, select, textarea {
+    border: 2px solid var(--k-brutal-ink);
+  }
+
+  .k-badge {
+    border: 2px solid var(--k-brutal-ink);
+    text-transform: uppercase;
+  }
+
+  a { text-decoration-thickness: 3px; text-underline-offset: 2px; }
+
+  table, th, td { border: 2px solid var(--k-brutal-ink); }
+}

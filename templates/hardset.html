@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hardset — a 12-week strength program</title>
+<meta name="description" content="A fictional sports-editorial landing page for a training program, built entirely with keel: a high-contrast black/lime theme, a 12-week timeline, a stat row, and a testimonial trio. The whole theme is one tokens block.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Replace this block and the page becomes yours. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(0 0% 6%);
+      --k-surface: hsl(0 0% 10%);
+      --k-surface-2: hsl(0 0% 15%);
+      --k-border: hsl(0 0% 24%);
+      --k-border-strong: hsl(0 0% 36%);
+      --k-text: hsl(0 0% 97%);
+      --k-text-soft: hsl(0 0% 76%);
+      --k-text-faint: hsl(0 0% 56%);
+      --k-accent: hsl(84 90% 52%);
+      --k-on-accent: hsl(0 0% 6%);
+      --k-accent-2: hsl(0 0% 97%);
+      --k-on-accent-2: hsl(0 0% 6%);
+      --k-font-display: system-ui, "Segoe UI", sans-serif;
+      --k-font-body: system-ui, "Segoe UI", sans-serif;
+      --k-display-weight: 900;
+      --k-tracking: -0.03em;
+      --k-radius: 2px;
+      --k-density: 1.1;
+    }
+  }
+  html { color-scheme: dark; }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local: h1 leans hard into the display weight for the editorial look */
+  .hs-hero h1 { text-transform: uppercase; line-height: 0.95; }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme. <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Hardset</a>
+      <ul class="k-nav__links">
+        <li><a href="#program">The program</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#athletes">Athletes</a></li>
+        <li><a href="#start">Start</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="k-hero hs-hero" id="top">
+  <div class="k-container">
+    <p class="k-hero__eyebrow">Hardset · 12 weeks · barbell strength</p>
+    <h1>Twelve weeks.<br>One number goes up.</h1>
+    <p class="k-hero__lead">
+      Hardset is a twelve-week strength block built around three lifts.
+      No accessory-work rabbit holes, no app that reprograms itself
+      overnight — one plan, written down, that you run to the end.
+    </p>
+    <div class="k-cluster" style="margin-top: var(--k-space-5)">
+      <a class="k-btn" href="#start">Start week 1</a>
+      <a class="k-btn k-btn--ghost" href="#program">See the program</a>
+    </div>
+  </div>
+</section>
+
+<!-- STAT ROW -->
+<section class="k-section k-section--tight k-section--alt" id="results">
+  <div class="k-container">
+    <div class="k-cols-4 k-center k-reveal">
+      <div><span class="k-stat__value">+38 kg</span><span class="k-stat__label">average squat gain</span></div>
+      <div><span class="k-stat__value">12</span><span class="k-stat__label">weeks, no deload skipped</span></div>
+      <div><span class="k-stat__value">3</span><span class="k-stat__label">lifts, no exceptions</span></div>
+      <div><span class="k-stat__value">4,100+</span><span class="k-stat__label">athletes who finished it</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM — 12-week timeline, using keel's existing .k-timeline convention -->
+<section class="k-section" id="program">
+  <div class="k-container--narrow k-container">
+    <h2>The block</h2>
+    <p class="k-text-soft">Four phases, three weeks each. Every phase
+    ends with a test set so the next one is loaded off real numbers, not
+    a guess.</p>
+    <ol class="k-timeline k-mt-5">
+      <li class="is-ok">
+        <time class="k-timeline__time">Weeks 1–3</time>
+        <p><strong>Base.</strong> Volume goes up, weight stays
+        conservative. The goal is groove, not a max — you'll want to add
+        weight early. Don't.</p>
+      </li>
+      <li class="is-ok">
+        <time class="k-timeline__time">Weeks 4–6</time>
+        <p><strong>Build.</strong> Sets drop, load climbs. This is where
+        the program starts to feel like work instead of practice.</p>
+      </li>
+      <li class="is-warn">
+        <time class="k-timeline__time">Weeks 7–9</time>
+        <p><strong>Peak.</strong> Singles and doubles at real weight. Sleep
+        and food matter more here than any set on the page.</p>
+      </li>
+      <li>
+        <time class="k-timeline__time">Weeks 10–12</time>
+        <p><strong>Test.</strong> A planned taper into a new max on all
+        three lifts, in week 12 — the number the whole block was for.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- RESULTS / TESTIMONIAL TRIO -->
+<section class="k-section k-section--alt" id="athletes">
+  <div class="k-container">
+    <h2>Finished, not just started</h2>
+    <p class="k-text-soft" style="max-width: 40em">Three lifters, three
+    different starting points, the same twelve weeks.</p>
+    <div class="k-thirds k-mt-5 k-stagger">
+      <article class="k-card k-anim-up">
+        <p>"I'd stalled on squat for two years. Hardset didn't have a
+        trick — it just made me do the boring sets I'd been skipping."</p>
+        <p class="k-text-faint k-mt-4"><small>— Renner O., +26 kg squat</small></p>
+      </article>
+      <article class="k-card k-anim-up">
+        <p>"First program I've ever actually finished to week 12 instead
+        of quietly stopping in week 7 like always."</p>
+        <p class="k-text-faint k-mt-4"><small>— Dade K., +41 kg deadlift</small></p>
+      </article>
+      <article class="k-card k-anim-up">
+        <p>"The peak week scared me and then the test day answered every
+        question. Numbers don't lie about twelve weeks of work."</p>
+        <p class="k-text-faint k-mt-4"><small>— Imre S., +19 kg bench</small></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--accent" id="start">
+  <div class="k-container--narrow k-container k-center">
+    <h2>Pick a start date. Then run it.</h2>
+    <p style="max-width: 36em; margin-inline: auto">Twelve weeks from
+    today, you either hit new numbers or you know exactly why not. Both
+    are useful. Neither happens by waiting.</p>
+    <a class="k-btn k-btn--ghost" style="color: inherit; border-color: currentColor" href="#program">Start week 1</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span><strong style="color: var(--k-text)">Hardset</strong> — a fictional program, for demonstration.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

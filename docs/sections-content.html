@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sections · Content — keel</title>
+<meta name="description" content="Copy-paste content sections built with keel: process steps, stat bands, FAQ, story timelines, gallery strips, prose splits with figures, accordion content, and a scroll-reveal stat band. Each section is rendered live with its markup below.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+<main id="main">
+
+<section class="k-section">
+  <div class="k-container">
+    <h1>Sections · Content</h1>
+    <p class="k-hero__lead">Content-heavy sections built from keel's
+    <a href="layout.html">layout</a> and
+    <a href="components.html">components</a>: processes, numbers,
+    questions, histories, and long-form prose. Every section below is
+    rendered as a real full-bleed band, with its exact markup
+    underneath. Copy the markup, keep your tokens — this page follows
+    whatever design system you generate on the
+    <a href="../design.html">design system page</a>.</p>
+    <p class="k-text-soft">Copy inside the sections is placeholder —
+    a fictional studio called Harbor &amp; Pine — so what you paste
+    reads like a page, not like a template.</p>
+    <div class="k-cluster" style="margin-top: var(--k-space-5)">
+      <a class="k-badge k-badge--outline" href="#steps">Steps</a>
+      <a class="k-badge k-badge--outline" href="#stats">Stats</a>
+      <a class="k-badge k-badge--outline" href="#faq">FAQ</a>
+      <a class="k-badge k-badge--outline" href="#timeline">Timeline</a>
+      <a class="k-badge k-badge--outline" href="#gallery">Gallery</a>
+      <a class="k-badge k-badge--outline" href="#split-figure">Split with figure</a>
+      <a class="k-badge k-badge--outline" href="#accordion">Accordion</a>
+      <a class="k-badge k-badge--outline" href="#reveal-stats">Scroll-reveal stats</a>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="steps">Steps</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">A process, in order. Intro on one side, the numbered list on the other.</p>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container">
+    <div class="k-split">
+      <div>
+        <h2>How a project runs</h2>
+        <p class="k-text-soft">Four stages, in order, every time. Most
+        projects take eight to twelve weeks end to end.</p>
+        <a class="k-btn k-btn--ghost" href="#">Ask about timing</a>
+      </div>
+      <ol class="k-steps">
+        <li><strong>Listen.</strong> A long first conversation about
+        what the site is for and who it serves.</li>
+        <li><strong>Draft.</strong> Real pages with real words — no
+        mockups of pages that do not exist yet.</li>
+        <li><strong>Build.</strong> The draft becomes the site. You
+        watch it happen and change your mind freely.</li>
+        <li><strong>Hand over.</strong> Keys, files, a walkthrough,
+        and a quiet exit.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — how it works</summary>
+      <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;div class="k-split"&gt;
+      &lt;div&gt;
+        &lt;h2&gt;How a project runs&lt;/h2&gt;
+        &lt;p class="k-text-soft"&gt;Four stages, in order, every time. Most
+        projects take eight to twelve weeks end to end.&lt;/p&gt;
+        &lt;a class="k-btn k-btn--ghost" href="#"&gt;Ask about timing&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;ol class="k-steps"&gt;
+        &lt;li&gt;&lt;strong&gt;Listen.&lt;/strong&gt; A long first conversation about
+        what the site is for and who it serves.&lt;/li&gt;
+        &lt;li&gt;&lt;strong&gt;Draft.&lt;/strong&gt; Real pages with real words — no
+        mockups of pages that do not exist yet.&lt;/li&gt;
+        &lt;li&gt;&lt;strong&gt;Build.&lt;/strong&gt; The draft becomes the site. You
+        watch it happen and change your mind freely.&lt;/li&gt;
+        &lt;li&gt;&lt;strong&gt;Hand over.&lt;/strong&gt; Keys, files, a walkthrough,
+        and a quiet exit.&lt;/li&gt;
+      &lt;/ol&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="stats">Stats</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">A few numbers that would survive an audit. If a number needs a paragraph, it belongs in prose instead.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--tint">
+  <div class="k-container">
+    <div class="k-cols-4 k-center">
+      <div>
+        <span class="k-stat__value">41</span>
+        <span class="k-stat__label">Sites shipped</span>
+      </div>
+      <div>
+        <span class="k-stat__value">7 yrs</span>
+        <span class="k-stat__label">Oldest site still live</span>
+      </div>
+      <div>
+        <span class="k-stat__value">2</span>
+        <span class="k-stat__label">People in the studio</span>
+      </div>
+      <div>
+        <span class="k-stat__value">0</span>
+        <span class="k-stat__label">Trackers installed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — stat band</summary>
+      <pre><code>&lt;section class="k-section k-section--tint"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;div class="k-cols-4 k-center"&gt;
+      &lt;div&gt;
+        &lt;span class="k-stat__value"&gt;41&lt;/span&gt;
+        &lt;span class="k-stat__label"&gt;Sites shipped&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;span class="k-stat__value"&gt;7 yrs&lt;/span&gt;
+        &lt;span class="k-stat__label"&gt;Oldest site still live&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;span class="k-stat__value"&gt;2&lt;/span&gt;
+        &lt;span class="k-stat__label"&gt;People in the studio&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;span class="k-stat__value"&gt;0&lt;/span&gt;
+        &lt;span class="k-stat__label"&gt;Trackers installed&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="faq">FAQ</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Native details/summary in a narrow container — no JavaScript, and every answer is findable in-page.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container--narrow k-container">
+    <h2>Questions we actually get</h2>
+    <details>
+      <summary>Do you work with clients outside the harbor?</summary>
+      <p>Yes — about half our projects run entirely over email and
+      calls. The pace is the same either way.</p>
+    </details>
+    <details>
+      <summary>Can you take over a site someone else built?</summary>
+      <p>Usually. We start with a paid one-day review so you know what
+      you have before deciding anything.</p>
+    </details>
+    <details>
+      <summary>Why only four projects a year?</summary>
+      <p>Because each one gets a whole season. That is the pace the
+      quality depends on, so we protect it.</p>
+    </details>
+    <details>
+      <summary>What if I just need a small change?</summary>
+      <p>Past clients: email us, it is probably covered by care. New
+      to us: small changes are how we usually meet people.</p>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — faq list</summary>
+      <pre><code>&lt;section class="k-section k-section--alt"&gt;
+  &lt;div class="k-container--narrow k-container"&gt;
+    &lt;h2&gt;Questions we actually get&lt;/h2&gt;
+    &lt;details&gt;
+      &lt;summary&gt;Do you work with clients outside the harbor?&lt;/summary&gt;
+      &lt;p&gt;Yes — about half our projects run entirely over email and
+      calls. The pace is the same either way.&lt;/p&gt;
+    &lt;/details&gt;
+    &lt;details&gt;
+      &lt;summary&gt;Can you take over a site someone else built?&lt;/summary&gt;
+      &lt;p&gt;Usually. We start with a paid one-day review so you know what
+      you have before deciding anything.&lt;/p&gt;
+    &lt;/details&gt;
+    &lt;details&gt;
+      &lt;summary&gt;Why only four projects a year?&lt;/summary&gt;
+      &lt;p&gt;Because each one gets a whole season. That is the pace the
+      quality depends on, so we protect it.&lt;/p&gt;
+    &lt;/details&gt;
+    &lt;details&gt;
+      &lt;summary&gt;What if I just need a small change?&lt;/summary&gt;
+      &lt;p&gt;Past clients: email us, it is probably covered by care. New
+      to us: small changes are how we usually meet people.&lt;/p&gt;
+    &lt;/details&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="timeline">Timeline</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">A history down a line, in a narrow container. Dates in the mono face, one short paragraph per milestone.</p>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container--narrow k-container">
+    <h2>Seven years, four milestones</h2>
+    <p class="k-text-soft">The short history of the studio, told in
+    the dates that mattered.</p>
+    <ol class="k-timeline" style="margin-top: var(--k-space-5)">
+      <li>
+        <time class="k-timeline__time" datetime="2019-04">April 2019</time>
+        <p>Two desks in a borrowed sail loft. The first site was for
+        the landlord, traded against three months of rent.</p>
+      </li>
+      <li>
+        <time class="k-timeline__time" datetime="2021-02">February 2021</time>
+        <p>The four-projects-a-year rule, written down after a winter
+        of saying yes too often.</p>
+      </li>
+      <li>
+        <time class="k-timeline__time" datetime="2023-09">September 2023</time>
+        <p>Ana joins to keep the books. The studio stops guessing and
+        starts planning a season ahead.</p>
+      </li>
+      <li>
+        <time class="k-timeline__time" datetime="2026-01">January 2026</time>
+        <p>Site number forty-one ships. Thirty-eight of the first
+        forty are still online, still looked after.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — story timeline</summary>
+      <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container--narrow k-container"&gt;
+    &lt;h2&gt;Seven years, four milestones&lt;/h2&gt;
+    &lt;p class="k-text-soft"&gt;The short history of the studio, told in
+    the dates that mattered.&lt;/p&gt;
+    &lt;ol class="k-timeline" style="margin-top: var(--k-space-5)"&gt;
+      &lt;li&gt;
+        &lt;time class="k-timeline__time" datetime="2019-04"&gt;April 2019&lt;/time&gt;
+        &lt;p&gt;Two desks in a borrowed sail loft. The first site was for
+        the landlord, traded against three months of rent.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;time class="k-timeline__time" datetime="2021-02"&gt;February 2021&lt;/time&gt;
+        &lt;p&gt;The four-projects-a-year rule, written down after a winter
+        of saying yes too often.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;time class="k-timeline__time" datetime="2023-09"&gt;September 2023&lt;/time&gt;
+        &lt;p&gt;Ana joins to keep the books. The studio stops guessing and
+        starts planning a season ahead.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;time class="k-timeline__time" datetime="2026-01"&gt;January 2026&lt;/time&gt;
+        &lt;p&gt;Site number forty-one ships. Thirty-eight of the first
+        forty are still online, still looked after.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="gallery">Gallery</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">A scroll-snap strip of framed images with captions. CSS only — swipe or scroll, and browsers that support scroll markers add the dots themselves.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container">
+    <h2>From the workbench</h2>
+    <p class="k-text-soft">Four recent projects, one frame each.
+    Scroll sideways; the strip snaps card by card.</p>
+    <div class="k-gallery" style="margin-top: var(--k-space-5)">
+      <figure class="k-mb-0">
+        <div class="k-frame">
+          <svg viewBox="0 0 400 225" role="img"
+               aria-label="Decorative illustration: a menu board of bars"
+               style="width: 100%; height: 100%; display: block">
+            <rect x="0" y="0" width="400" height="225"
+                  style="fill: var(--k-accent-soft)"/>
+            <rect x="48" y="44" width="180" height="18" rx="9"
+                  style="fill: var(--k-accent-strong)"/>
+            <rect x="48" y="84" width="304" height="12" rx="6"
+                  style="fill: var(--k-accent-light)"/>
+            <rect x="48" y="112" width="264" height="12" rx="6"
+                  style="fill: var(--k-accent-light)"/>
+            <rect x="48" y="140" width="288" height="12" rx="6"
+                  style="fill: var(--k-accent-light)"/>
+            <circle cx="332" cy="53" r="16"
+                    style="fill: var(--k-accent-2-soft); stroke: var(--k-accent-2); stroke-width: 3"/>
+          </svg>
+        </div>
+        <figcaption>Torres Bakehouse — a menu the owner edits herself.</figcaption>
+      </figure>
+      <figure class="k-mb-0">
+        <div class="k-frame">
+          <svg viewBox="0 0 400 225" role="img"
+               aria-label="Decorative illustration: a sun over water lines"
+               style="width: 100%; height: 100%; display: block">
+            <rect x="0" y="0" width="400" height="225"
+                  style="fill: var(--k-accent-2-soft)"/>
+            <circle cx="200" cy="88" r="42"
+                    style="fill: var(--k-accent)"/>
+            <rect x="60" y="150" width="280" height="10" rx="5"
+                  style="fill: var(--k-accent-light)"/>
+            <rect x="92" y="172" width="216" height="10" rx="5"
+                  style="fill: var(--k-accent-light)"/>
+          </svg>
+        </div>
+        <figcaption>Café Driftwood — opening hours, big enough to read
+        from the quay.</figcaption>
+      </figure>
+      <figure class="k-mb-0">
+        <div class="k-frame">
+          <svg viewBox="0 0 400 225" role="img"
+               aria-label="Decorative illustration: a boat hull profile"
+               style="width: 100%; height: 100%; display: block">
+            <rect x="0" y="0" width="400" height="225"
+                  style="fill: var(--k-accent-soft)"/>
+            <path d="M60 96h280l-52 64H124z"
+                  style="fill: var(--k-accent-strong)"/>
+            <rect x="188" y="40" width="10" height="56" rx="5"
+                  style="fill: var(--k-accent)"/>
+            <circle cx="316" cy="52" r="14"
+                    style="fill: var(--k-accent-2-soft); stroke: var(--k-accent-2); stroke-width: 3"/>
+          </svg>
+        </div>
+        <figcaption>Okafor Boatworks — one page per hull, drawings
+        included.</figcaption>
+      </figure>
+      <figure class="k-mb-0">
+        <div class="k-frame">
+          <svg viewBox="0 0 400 225" role="img"
+               aria-label="Decorative illustration: a wall of fabric swatches"
+               style="width: 100%; height: 100%; display: block">
+            <rect x="0" y="0" width="400" height="225"
+                  style="fill: var(--k-accent-soft)"/>
+            <rect x="56" y="44" width="80" height="60" rx="8"
+                  style="fill: var(--k-accent-light)"/>
+            <rect x="160" y="44" width="80" height="60" rx="8"
+                  style="fill: var(--k-accent)"/>
+            <rect x="264" y="44" width="80" height="60" rx="8"
+                  style="fill: var(--k-accent-strong)"/>
+            <rect x="56" y="124" width="80" height="60" rx="8"
+                  style="fill: var(--k-accent-2-soft)"/>
+            <rect x="160" y="124" width="80" height="60" rx="8"
+                  style="fill: var(--k-accent-2)"/>
+            <rect x="264" y="124" width="80" height="60" rx="8"
+                  style="fill: var(--k-accent-light)"/>
+          </svg>
+        </div>
+        <figcaption>Feld &amp; Daughter — a swatch library that loads
+        in under a second.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — gallery strip</summary>
+      <pre><code>&lt;section class="k-section k-section--alt"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;h2&gt;From the workbench&lt;/h2&gt;
+    &lt;p class="k-text-soft"&gt;Four recent projects, one frame each.
+    Scroll sideways; the strip snaps card by card.&lt;/p&gt;
+    &lt;div class="k-gallery" style="margin-top: var(--k-space-5)"&gt;
+      &lt;figure class="k-mb-0"&gt;
+        &lt;div class="k-frame"&gt;
+          &lt;svg viewBox="0 0 400 225" role="img"
+               aria-label="Decorative illustration: a menu board of bars"
+               style="width: 100%; height: 100%; display: block"&gt;
+            &lt;rect x="0" y="0" width="400" height="225"
+                  style="fill: var(--k-accent-soft)"/&gt;
+            &lt;rect x="48" y="44" width="180" height="18" rx="9"
+                  style="fill: var(--k-accent-strong)"/&gt;
+            &lt;rect x="48" y="84" width="304" height="12" rx="6"
+                  style="fill: var(--k-accent-light)"/&gt;
+            &lt;rect x="48" y="112" width="264" height="12" rx="6"
+                  style="fill: var(--k-accent-light)"/&gt;
+            &lt;rect x="48" y="140" width="288" height="12" rx="6"
+                  style="fill: var(--k-accent-light)"/&gt;
+            &lt;circle cx="332" cy="53" r="16"
+                    style="fill: var(--k-accent-2-soft); stroke: var(--k-accent-2); stroke-width: 3"/&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+        &lt;figcaption&gt;Torres Bakehouse — a menu the owner edits herself.&lt;/figcaption&gt;
+      &lt;/figure&gt;
+      &lt;figure class="k-mb-0"&gt;
+        &lt;div class="k-frame"&gt;
+          &lt;svg viewBox="0 0 400 225" role="img"
+               aria-label="Decorative illustration: a sun over water lines"
+               style="width: 100%; height: 100%; display: block"&gt;
+            &lt;rect x="0" y="0" width="400" height="225"
+                  style="fill: var(--k-accent-2-soft)"/&gt;
+            &lt;circle cx="200" cy="88" r="42"
+                    style="fill: var(--k-accent)"/&gt;
+            &lt;rect x="60" y="150" width="280" height="10" rx="5"
+                  style="fill: var(--k-accent-light)"/&gt;
+            &lt;rect x="92" y="172" width="216" height="10" rx="5"
+                  style="fill: var(--k-accent-light)"/&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+        &lt;figcaption&gt;Café Driftwood — opening hours, big enough to read
+        from the quay.&lt;/figcaption&gt;
+      &lt;/figure&gt;
+      &lt;figure class="k-mb-0"&gt;
+        &lt;div class="k-frame"&gt;
+          &lt;svg viewBox="0 0 400 225" role="img"
+               aria-label="Decorative illustration: a boat hull profile"
+               style="width: 100%; height: 100%; display: block"&gt;
+            &lt;rect x="0" y="0" width="400" height="225"
+                  style="fill: var(--k-accent-soft)"/&gt;
+            &lt;path d="M60 96h280l-52 64H124z"
+                  style="fill: var(--k-accent-strong)"/&gt;
+            &lt;rect x="188" y="40" width="10" height="56" rx="5"
+                  style="fill: var(--k-accent)"/&gt;
+            &lt;circle cx="316" cy="52" r="14"
+                    style="fill: var(--k-accent-2-soft); stroke: var(--k-accent-2); stroke-width: 3"/&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+        &lt;figcaption&gt;Okafor Boatworks — one page per hull, drawings
+        included.&lt;/figcaption&gt;
+      &lt;/figure&gt;
+      &lt;figure class="k-mb-0"&gt;
+        &lt;div class="k-frame"&gt;
+          &lt;svg viewBox="0 0 400 225" role="img"
+               aria-label="Decorative illustration: a wall of fabric swatches"
+               style="width: 100%; height: 100%; display: block"&gt;
+            &lt;rect x="0" y="0" width="400" height="225"
+                  style="fill: var(--k-accent-soft)"/&gt;
+            &lt;rect x="56" y="44" width="80" height="60" rx="8"
+                  style="fill: var(--k-accent-light)"/&gt;
+            &lt;rect x="160" y="44" width="80" height="60" rx="8"
+                  style="fill: var(--k-accent)"/&gt;
+            &lt;rect x="264" y="44" width="80" height="60" rx="8"
+                  style="fill: var(--k-accent-strong)"/&gt;
+            &lt;rect x="56" y="124" width="80" height="60" rx="8"
+                  style="fill: var(--k-accent-2-soft)"/&gt;
+            &lt;rect x="160" y="124" width="80" height="60" rx="8"
+                  style="fill: var(--k-accent-2)"/&gt;
+            &lt;rect x="264" y="124" width="80" height="60" rx="8"
+                  style="fill: var(--k-accent-light)"/&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+        &lt;figcaption&gt;Feld &amp;amp; Daughter — a swatch library that loads
+        in under a second.&lt;/figcaption&gt;
+      &lt;/figure&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="split-figure">Split with figure</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Long-form prose beside a captioned figure. The wide-start split gives the words the bigger column.</p>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container">
+    <div class="k-split k-split--wide-start">
+      <div>
+        <h2>Why we write before we design</h2>
+        <p>Every project here starts as a page of plain words: what
+        the site is for, who it serves, what it should say first.
+        There is no layout yet, and nothing to hide behind — if a
+        sentence is vague on that page, it will be vague on the
+        finished site too.</p>
+        <p>Only when the words hold do we open the design files. It
+        feels slow for the first two weeks and fast for every week
+        after, because nobody is designing around a gap.</p>
+        <blockquote>
+          <p>If the words stand up without the design, the design has
+          something to stand on.</p>
+        </blockquote>
+      </div>
+      <figure class="k-mb-0">
+        <div class="k-frame k-frame--4x3">
+          <svg viewBox="0 0 400 300" role="img"
+               aria-label="Decorative illustration: a page of draft lines"
+               style="width: 100%; height: 100%; display: block">
+            <rect x="0" y="0" width="400" height="300"
+                  style="fill: var(--k-accent-soft)"/>
+            <rect x="84" y="40" width="232" height="220" rx="10"
+                  style="fill: var(--k-accent-2-soft)"/>
+            <rect x="112" y="76" width="132" height="14" rx="7"
+                  style="fill: var(--k-accent-strong)"/>
+            <rect x="112" y="112" width="176" height="10" rx="5"
+                  style="fill: var(--k-accent-light)"/>
+            <rect x="112" y="136" width="156" height="10" rx="5"
+                  style="fill: var(--k-accent-light)"/>
+            <rect x="112" y="160" width="168" height="10" rx="5"
+                  style="fill: var(--k-accent-light)"/>
+            <rect x="112" y="196" width="100" height="10" rx="5"
+                  style="fill: var(--k-accent)"/>
+          </svg>
+        </div>
+        <figcaption>The first deliverable of every project: a page of
+        words, no layout yet.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — content split with figure</summary>
+      <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;div class="k-split k-split--wide-start"&gt;
+      &lt;div&gt;
+        &lt;h2&gt;Why we write before we design&lt;/h2&gt;
+        &lt;p&gt;Every project here starts as a page of plain words: what
+        the site is for, who it serves, what it should say first.
+        There is no layout yet, and nothing to hide behind — if a
+        sentence is vague on that page, it will be vague on the
+        finished site too.&lt;/p&gt;
+        &lt;p&gt;Only when the words hold do we open the design files. It
+        feels slow for the first two weeks and fast for every week
+        after, because nobody is designing around a gap.&lt;/p&gt;
+        &lt;blockquote&gt;
+          &lt;p&gt;If the words stand up without the design, the design has
+          something to stand on.&lt;/p&gt;
+        &lt;/blockquote&gt;
+      &lt;/div&gt;
+      &lt;figure class="k-mb-0"&gt;
+        &lt;div class="k-frame k-frame--4x3"&gt;
+          &lt;svg viewBox="0 0 400 300" role="img"
+               aria-label="Decorative illustration: a page of draft lines"
+               style="width: 100%; height: 100%; display: block"&gt;
+            &lt;rect x="0" y="0" width="400" height="300"
+                  style="fill: var(--k-accent-soft)"/&gt;
+            &lt;rect x="84" y="40" width="232" height="220" rx="10"
+                  style="fill: var(--k-accent-2-soft)"/&gt;
+            &lt;rect x="112" y="76" width="132" height="14" rx="7"
+                  style="fill: var(--k-accent-strong)"/&gt;
+            &lt;rect x="112" y="112" width="176" height="10" rx="5"
+                  style="fill: var(--k-accent-light)"/&gt;
+            &lt;rect x="112" y="136" width="156" height="10" rx="5"
+                  style="fill: var(--k-accent-light)"/&gt;
+            &lt;rect x="112" y="160" width="168" height="10" rx="5"
+                  style="fill: var(--k-accent-light)"/&gt;
+            &lt;rect x="112" y="196" width="100" height="10" rx="5"
+                  style="fill: var(--k-accent)"/&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+        &lt;figcaption&gt;The first deliverable of every project: a page of
+        words, no layout yet.&lt;/figcaption&gt;
+      &lt;/figure&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="accordion">Accordion</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Long-form content folded into one surface. Native details grouped by name, so opening one closes the rest — no JavaScript.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container--narrow k-container">
+    <h2>The longer answers</h2>
+    <p class="k-text-soft">Process notes that run long, folded so the
+    page stays short. The group shares a name, so one opens at a
+    time.</p>
+    <div class="k-accordion" style="margin-top: var(--k-space-5)">
+      <details name="studio-notes">
+        <summary>Why the studio stays at two people</summary>
+        <p>Every time we have been tempted to hire, the reason was a
+        backlog — and a backlog is a scheduling problem, not a
+        staffing one. Four projects a year fit two people exactly,
+        with room left to answer old clients the week they write.</p>
+        <p>Staying small also keeps the promise simple: the person
+        you meet in the first call is the person who builds the site
+        and the person who answers three years later.</p>
+      </details>
+      <details name="studio-notes">
+        <summary>What we mean by a site that holds</summary>
+        <p>A site holds when nothing about it depends on us. The
+        files are plain HTML and CSS, the hosting is in your name,
+        and the maintenance guide fits on one page. If the studio
+        vanished tomorrow, your site would not notice.</p>
+        <p>Thirty-eight of the forty-one sites we have shipped are
+        still online. The three that are not were retired on
+        purpose, by their owners, without needing our help.</p>
+      </details>
+      <details name="studio-notes">
+        <summary>How the seasonal calendar works</summary>
+        <p>Each project gets a season: roughly twelve weeks with a
+        beginning, a middle, and an agreed end. We book a season
+        ahead and never double-book, which is why the answer to
+        "can you start next week" is almost always no.</p>
+        <p>The trade is worth naming: you wait longer to start, and
+        in exchange the project has our whole attention while it
+        runs. Nobody here is context-switching between six sites.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — accordion content</summary>
+      <pre><code>&lt;section class="k-section k-section--alt"&gt;
+  &lt;div class="k-container--narrow k-container"&gt;
+    &lt;h2&gt;The longer answers&lt;/h2&gt;
+    &lt;p class="k-text-soft"&gt;Process notes that run long, folded so the
+    page stays short. The group shares a name, so one opens at a
+    time.&lt;/p&gt;
+    &lt;div class="k-accordion" style="margin-top: var(--k-space-5)"&gt;
+      &lt;details name="studio-notes"&gt;
+        &lt;summary&gt;Why the studio stays at two people&lt;/summary&gt;
+        &lt;p&gt;Every time we have been tempted to hire, the reason was a
+        backlog — and a backlog is a scheduling problem, not a
+        staffing one. Four projects a year fit two people exactly,
+        with room left to answer old clients the week they write.&lt;/p&gt;
+        &lt;p&gt;Staying small also keeps the promise simple: the person
+        you meet in the first call is the person who builds the site
+        and the person who answers three years later.&lt;/p&gt;
+      &lt;/details&gt;
+      &lt;details name="studio-notes"&gt;
+        &lt;summary&gt;What we mean by a site that holds&lt;/summary&gt;
+        &lt;p&gt;A site holds when nothing about it depends on us. The
+        files are plain HTML and CSS, the hosting is in your name,
+        and the maintenance guide fits on one page. If the studio
+        vanished tomorrow, your site would not notice.&lt;/p&gt;
+        &lt;p&gt;Thirty-eight of the forty-one sites we have shipped are
+        still online. The three that are not were retired on
+        purpose, by their owners, without needing our help.&lt;/p&gt;
+      &lt;/details&gt;
+      &lt;details name="studio-notes"&gt;
+        &lt;summary&gt;How the seasonal calendar works&lt;/summary&gt;
+        &lt;p&gt;Each project gets a season: roughly twelve weeks with a
+        beginning, a middle, and an agreed end. We book a season
+        ahead and never double-book, which is why the answer to
+        "can you start next week" is almost always no.&lt;/p&gt;
+        &lt;p&gt;The trade is worth naming: you wait longer to start, and
+        in exchange the project has our whole attention while it
+        runs. Nobody here is context-switching between six sites.&lt;/p&gt;
+      &lt;/details&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="reveal-stats">Scroll-reveal stats</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">The same four-number band as <a href="#stats">Stats</a> above, but each number fades and lifts in on scroll with <code>.k-reveal</code> instead of appearing on load — a motion variant, not a duplicate.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--tint">
+  <div class="k-container">
+    <div class="k-cols-4 k-center">
+      <div class="k-reveal">
+        <span class="k-stat__value">41</span>
+        <span class="k-stat__label">Sites shipped</span>
+      </div>
+      <div class="k-reveal">
+        <span class="k-stat__value">7 yrs</span>
+        <span class="k-stat__label">Oldest site still live</span>
+      </div>
+      <div class="k-reveal">
+        <span class="k-stat__value">2</span>
+        <span class="k-stat__label">People in the studio</span>
+      </div>
+      <div class="k-reveal">
+        <span class="k-stat__value">0</span>
+        <span class="k-stat__label">Trackers installed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — scroll-reveal stat band</summary>
+      <pre><code>&lt;section class="k-section k-section--tint"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;div class="k-cols-4 k-center"&gt;
+      &lt;div class="k-reveal"&gt;
+        &lt;span class="k-stat__value"&gt;41&lt;/span&gt;
+        &lt;span class="k-stat__label"&gt;Sites shipped&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="k-reveal"&gt;
+        &lt;span class="k-stat__value"&gt;7 yrs&lt;/span&gt;
+        &lt;span class="k-stat__label"&gt;Oldest site still live&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="k-reveal"&gt;
+        &lt;span class="k-stat__value"&gt;2&lt;/span&gt;
+        &lt;span class="k-stat__label"&gt;People in the studio&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="k-reveal"&gt;
+        &lt;span class="k-stat__value"&gt;0&lt;/span&gt;
+        &lt;span class="k-stat__label"&gt;Trackers installed&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container--narrow k-container">
+    <h2>Where next</h2>
+    <p>The full section library — heroes, social proof, features,
+    pricing, and the rest — is on <a href="sections.html">sections</a>.
+    Calls to action have their own page:
+    <a href="sections-cta.html">sections · calls to action</a>.</p>
+  </div>
+</section>
+
+</main>
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

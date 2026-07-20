@@ -1,0 +1,50 @@
+{
+  "count": 4,
+  "note": "Paths are optional design directions. Link ONE after keel.css (order: keel.css -> keel-icons.css -> keel-path-*.css). Each derives from the active design tokens and lives in @layer path, so the site's own unlayered CSS still wins and text/background contrast is preserved. Minimalism does not need a path (it is the core data-k-flat skin); the bento grid is core layout (.k-bento).",
+  "paths": [
+    {
+      "id": "clay",
+      "name": "Clay",
+      "morphism": "claymorphism",
+      "file": "keel-path-clay.css",
+      "min": "keel-path-clay.min.css",
+      "summary": "Inflated, soft-shadowed surfaces with generous corners: pill buttons that press, puffy cards, borderless fields. The colored shadows derive from the accent, so the clay wears the site's own brand color.",
+      "changes": "Cards, panels, alerts and stats puff up; buttons become pressable pills; inputs go borderless; corners round up.",
+      "whenToUse": "Friendly, tactile, approachable products — bakeries, consumer apps, playful or warm brands.",
+      "template": "templates/clay.html"
+    },
+    {
+      "id": "brutal",
+      "name": "Brutal",
+      "morphism": "brutalism",
+      "file": "keel-path-brutal.css",
+      "min": "keel-path-brutal.min.css",
+      "summary": "Zero radius, thick ink borders, hard offset block shadows, uppercase headings, and buttons that collapse their shadow when pressed.",
+      "changes": "Everything squares off; cards, dialogs and menus get a 2px ink border and a block shadow; h1/h2 go uppercase; buttons collapse on :active; tables get ruled.",
+      "whenToUse": "Bold, editorial, confident work — type foundries, portfolios, zines, statement sites.",
+      "template": "templates/brutal.html"
+    },
+    {
+      "id": "liquid",
+      "name": "Liquid",
+      "morphism": "glassmorphism",
+      "file": "keel-path-liquid.css",
+      "min": "keel-path-liquid.min.css",
+      "summary": "Surfaces become frosted glass panes with a specular top edge, in pure CSS. Fills stay near-opaque behind text so contrast holds; looks best over a gradient or image background.",
+      "changes": "Cards, panels, menus, dialogs and the nav turn translucent with backdrop blur; ghost and soft buttons frost too; solid fallback where backdrop-filter is unsupported.",
+      "whenToUse": "Sleek apps and product pages, especially on dark or gradient backgrounds — music and media, dashboards, modern SaaS.",
+      "template": "templates/liquid.html"
+    },
+    {
+      "id": "maximal",
+      "name": "Maximal",
+      "morphism": "maximalism",
+      "file": "keel-path-maximal.css",
+      "min": "keel-path-maximal.min.css",
+      "summary": "Bigger display type, gradient edges on cards, gradient-filled primary buttons, mesh-washed alt sections, heavier weights. Gradients decorate the furniture, not the text.",
+      "changes": "Larger, tighter display type; cards gain a gradient top edge; primary buttons fill with the gradient; h2 gets a gradient underline; alt bands get a soft mesh wash.",
+      "whenToUse": "Loud, expressive, high-energy sites — festivals, launches, campaigns, entertainment.",
+      "template": "templates/maximal.html"
+    }
+  ]
+}

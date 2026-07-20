@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Path demo — keel</title>
+<meta name="description" content="A small page rendered under a keel path. Pass ?path=clay|brutal|liquid|maximal to switch direction — same markup every time.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<script>
+  /* site chrome, not the framework: reads ?path= and links that path
+     stylesheet after keel.css — the demo the Paths page embeds. */
+  (function () {
+    var p = (new URLSearchParams(location.search).get("path") || "").replace(/[^a-z]/g, "");
+    if (["clay", "brutal", "liquid", "maximal"].indexOf(p) > -1) {
+      var l = document.createElement("link");
+      l.rel = "stylesheet";
+      l.href = "../css/keel-path-" + p + ".css";
+      document.head.appendChild(l);
+    }
+  })();
+</script>
+<!-- The liquid path brings its own backdrop; the other paths render on
+     keel's plain background — nothing to add here. -->
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Demo">
+      <a class="k-nav__brand" href="#">Driftwood&nbsp;Co.</a>
+      <ul class="k-nav__links">
+        <li><a href="#" aria-current="page">Shop</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2>Same markup, different direction</h2>
+    <p class="k-text-soft">Every element on this page is identical across
+    paths — only the linked stylesheet changes.</p>
+
+    <div class="k-cols-3" style="margin-block: var(--k-space-5)">
+      <div class="k-card">
+        <h4>A card</h4>
+        <p>Surfaces carry most of a direction — corners, borders, shadows.</p>
+        <span class="k-badge k-badge--ok">In stock</span>
+      </div>
+      <div class="k-card">
+        <h4>Controls</h4>
+        <p class="k-cluster">
+          <button class="k-btn" type="button">Add to cart</button>
+          <button class="k-btn k-btn--ghost" type="button">Details</button>
+        </p>
+        <label class="k-field">
+          <span>Email</span>
+          <input type="email" placeholder="you@example.com">
+        </label>
+      </div>
+      <div class="k-card">
+        <h4>Numbers</h4>
+        <span class="k-stat__value">4.9</span>
+        <span class="k-stat__label">average rating</span>
+        <p style="margin-block-start: var(--k-space-3)"><a href="#">Read the reviews</a></p>
+      </div>
+    </div>
+
+    <table>
+      <thead><tr><th>Item</th><th>Finish</th><th class="k-num">Price</th></tr></thead>
+      <tbody>
+        <tr><td>Tide chair</td><td>Oiled oak</td><td class="k-num">$480</td></tr>
+        <tr><td>Harbor bench</td><td>Painted pine</td><td class="k-num">$720</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>Driftwood Co. — a demo page for keel paths.</span>
+    <span><a href="paths.html">About paths</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

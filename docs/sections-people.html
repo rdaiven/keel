@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sections · People &amp; contact — keel</title>
+<meta name="description" content="A copy-paste library of people and contact sections built with keel: team grids, wide team rows, profile cards, open roles, and contact bands. Each section is rendered live with its markup below.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+<main id="main">
+
+<section class="k-section">
+  <div class="k-container">
+    <h1>Sections · People &amp; contact</h1>
+    <p class="k-hero__lead">The sections about the humans behind a
+    site — teams, profiles, open roles, and the ways to reach them.
+    Like the main <a href="sections.html">sections</a> page, every
+    pattern below is rendered as a real full-bleed band, with its
+    exact markup underneath.</p>
+    <p class="k-text-soft">Copy inside the sections is placeholder —
+    the same fictional studio, Harbor &amp; Pine — so what you paste
+    reads like a page, not like a template.</p>
+    <div class="k-cluster" style="margin-top: var(--k-space-5)">
+      <a class="k-badge k-badge--outline" href="#team">Team grid</a>
+      <a class="k-badge k-badge--outline" href="#team-large">Team, larger</a>
+      <a class="k-badge k-badge--outline" href="#profile">Profile card</a>
+      <a class="k-badge k-badge--outline" href="#openings">Openings</a>
+      <a class="k-badge k-badge--outline" href="#contact">Contact</a>
+      <a class="k-badge k-badge--outline" href="#contact-strip">Contact strip</a>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="team">Team</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Cards with initial avatars. Swap the span for an img inside k-avatar when you have photos.</p>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container">
+    <h2>The studio</h2>
+    <p class="k-text-soft">Two founders and a bookkeeper who keeps us
+    honest. Nobody here has a title that needs explaining.</p>
+    <div class="k-grid" style="margin-top: var(--k-space-5)">
+      <div class="k-card k-center">
+        <span class="k-avatar k-avatar--large" aria-hidden="true">RD</span>
+        <h3 class="k-text-l k-mt-3 k-mb-1">Rhea Dizon</h3>
+        <small>Design, words</small>
+      </div>
+      <div class="k-card k-center">
+        <span class="k-avatar k-avatar--large" aria-hidden="true">TL</span>
+        <h3 class="k-text-l k-mt-3 k-mb-1">Tomas Lind</h3>
+        <small>Build, hosting</small>
+      </div>
+      <div class="k-card k-center">
+        <span class="k-avatar k-avatar--large" aria-hidden="true">AV</span>
+        <h3 class="k-text-l k-mt-3 k-mb-1">Ana Varga</h3>
+        <small>Books, contracts</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — team grid</summary>
+      <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;h2&gt;The studio&lt;/h2&gt;
+    &lt;p class="k-text-soft"&gt;Two founders and a bookkeeper who keeps us
+    honest. Nobody here has a title that needs explaining.&lt;/p&gt;
+    &lt;div class="k-grid" style="margin-top: var(--k-space-5)"&gt;
+      &lt;div class="k-card k-center"&gt;
+        &lt;span class="k-avatar k-avatar--large" aria-hidden="true"&gt;RD&lt;/span&gt;
+        &lt;h3 class="k-text-l k-mt-3 k-mb-1"&gt;Rhea Dizon&lt;/h3&gt;
+        &lt;small&gt;Design, words&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card k-center"&gt;
+        &lt;span class="k-avatar k-avatar--large" aria-hidden="true"&gt;TL&lt;/span&gt;
+        &lt;h3 class="k-text-l k-mt-3 k-mb-1"&gt;Tomas Lind&lt;/h3&gt;
+        &lt;small&gt;Build, hosting&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card k-center"&gt;
+        &lt;span class="k-avatar k-avatar--large" aria-hidden="true"&gt;AV&lt;/span&gt;
+        &lt;h3 class="k-text-l k-mt-3 k-mb-1"&gt;Ana Varga&lt;/h3&gt;
+        &lt;small&gt;Books, contracts&lt;/small&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="team-large">Team, larger</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Wide media rows when a line of bio says more than a card. Two columns that stack on small screens.</p>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container">
+    <h2>Who you will work with</h2>
+    <p class="k-text-soft" style="max-width: 40em">The same crew, with
+    enough words to know who answers what.</p>
+    <div class="k-cols-2" style="margin-top: var(--k-space-5)">
+      <div class="k-media">
+        <span class="k-avatar k-avatar--large" aria-hidden="true">RD</span>
+        <div class="k-media__body">
+          <strong>Rhea Dizon</strong> · <small>Design, words</small>
+          <p class="k-text-s k-text-soft k-mt-1 k-mb-0">Started the
+          studio after a decade of fixing other people's redesigns.
+          Writes most of what you read on our sites.</p>
+        </div>
+      </div>
+      <div class="k-media">
+        <span class="k-avatar k-avatar--large" aria-hidden="true">TL</span>
+        <div class="k-media__body">
+          <strong>Tomas Lind</strong> · <small>Build, hosting</small>
+          <p class="k-text-s k-text-soft k-mt-1 k-mb-0">Builds every
+          page by hand and keeps the servers boring. The reason the
+          oldest site is still live.</p>
+        </div>
+      </div>
+      <div class="k-media">
+        <span class="k-avatar k-avatar--large" aria-hidden="true">AV</span>
+        <div class="k-media__body">
+          <strong>Ana Varga</strong> · <small>Books, contracts</small>
+          <p class="k-text-s k-text-soft k-mt-1 k-mb-0">Keeps the studio
+          solvent and the paperwork short. Reads every contract twice
+          so you only have to read it once.</p>
+        </div>
+      </div>
+      <div class="k-media">
+        <span class="k-avatar k-avatar--large" aria-hidden="true">NO</span>
+        <div class="k-media__body">
+          <strong>Noor Osei</strong> · <small>Apprentice</small>
+          <p class="k-text-s k-text-soft k-mt-1 k-mb-0">Joins for one
+          season a year from the trade school up the hill. Currently
+          learning why we say no to carousels.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — team large</summary>
+      <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;h2&gt;Who you will work with&lt;/h2&gt;
+    &lt;p class="k-text-soft" style="max-width: 40em"&gt;The same crew, with
+    enough words to know who answers what.&lt;/p&gt;
+    &lt;div class="k-cols-2" style="margin-top: var(--k-space-5)"&gt;
+      &lt;div class="k-media"&gt;
+        &lt;span class="k-avatar k-avatar--large" aria-hidden="true"&gt;RD&lt;/span&gt;
+        &lt;div class="k-media__body"&gt;
+          &lt;strong&gt;Rhea Dizon&lt;/strong&gt; · &lt;small&gt;Design, words&lt;/small&gt;
+          &lt;p class="k-text-s k-text-soft k-mt-1 k-mb-0"&gt;Started the
+          studio after a decade of fixing other people's redesigns.
+          Writes most of what you read on our sites.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="k-media"&gt;
+        &lt;span class="k-avatar k-avatar--large" aria-hidden="true"&gt;TL&lt;/span&gt;
+        &lt;div class="k-media__body"&gt;
+          &lt;strong&gt;Tomas Lind&lt;/strong&gt; · &lt;small&gt;Build, hosting&lt;/small&gt;
+          &lt;p class="k-text-s k-text-soft k-mt-1 k-mb-0"&gt;Builds every
+          page by hand and keeps the servers boring. The reason the
+          oldest site is still live.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="k-media"&gt;
+        &lt;span class="k-avatar k-avatar--large" aria-hidden="true"&gt;AV&lt;/span&gt;
+        &lt;div class="k-media__body"&gt;
+          &lt;strong&gt;Ana Varga&lt;/strong&gt; · &lt;small&gt;Books, contracts&lt;/small&gt;
+          &lt;p class="k-text-s k-text-soft k-mt-1 k-mb-0"&gt;Keeps the studio
+          solvent and the paperwork short. Reads every contract twice
+          so you only have to read it once.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="k-media"&gt;
+        &lt;span class="k-avatar k-avatar--large" aria-hidden="true"&gt;NO&lt;/span&gt;
+        &lt;div class="k-media__body"&gt;
+          &lt;strong&gt;Noor Osei&lt;/strong&gt; · &lt;small&gt;Apprentice&lt;/small&gt;
+          &lt;p class="k-text-s k-text-soft k-mt-1 k-mb-0"&gt;Joins for one
+          season a year from the trade school up the hill. Currently
+          learning why we say no to carousels.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="profile">Profile card</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">One person, centered — for a founder note or an about page. The icon buttons carry aria-labels.</p>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container">
+    <div class="k-card k-center k-mx-auto" style="max-width: 24rem">
+      <span class="k-avatar k-avatar--large" aria-hidden="true">PH</span>
+      <h3 class="k-text-l k-mt-3 k-mb-1">Petra Holm</h3>
+      <p class="k-mb-3"><span class="k-badge k-badge--outline">Studio manager</span></p>
+      <p class="k-text-s k-text-soft">The first voice you hear and the
+      last set of eyes before anything ships. Ask her anything — she
+      knows who knows.</p>
+      <div class="k-cluster k-justify-center">
+        <a class="k-btn k-btn--icon k-btn--ghost" href="mailto:petra@example.com"
+           aria-label="Email Petra Holm">
+          <span class="k-icon k-icon--mail" aria-hidden="true"></span>
+        </a>
+        <a class="k-btn k-btn--icon k-btn--ghost" href="tel:+15550142"
+           aria-label="Call Petra Holm">
+          <span class="k-icon k-icon--phone" aria-hidden="true"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — profile card</summary>
+      <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;div class="k-card k-center k-mx-auto" style="max-width: 24rem"&gt;
+      &lt;span class="k-avatar k-avatar--large" aria-hidden="true"&gt;PH&lt;/span&gt;
+      &lt;h3 class="k-text-l k-mt-3 k-mb-1"&gt;Petra Holm&lt;/h3&gt;
+      &lt;p class="k-mb-3"&gt;&lt;span class="k-badge k-badge--outline"&gt;Studio manager&lt;/span&gt;&lt;/p&gt;
+      &lt;p class="k-text-s k-text-soft"&gt;The first voice you hear and the
+      last set of eyes before anything ships. Ask her anything — she
+      knows who knows.&lt;/p&gt;
+      &lt;div class="k-cluster k-justify-center"&gt;
+        &lt;a class="k-btn k-btn--icon k-btn--ghost" href="mailto:petra@example.com"
+           aria-label="Email Petra Holm"&gt;
+          &lt;span class="k-icon k-icon--mail" aria-hidden="true"&gt;&lt;/span&gt;
+        &lt;/a&gt;
+        &lt;a class="k-btn k-btn--icon k-btn--ghost" href="tel:+15550142"
+           aria-label="Call Petra Holm"&gt;
+          &lt;span class="k-icon k-icon--phone" aria-hidden="true"&gt;&lt;/span&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="openings">Openings</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">A k-list of linked rows, one per role, each with a badge for location. The whole row is the link.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container--narrow k-container">
+    <h2>Open roles</h2>
+    <p class="k-text-soft">We hire rarely and slowly. Every role is
+    paid, and every application gets a reply.</p>
+    <ul class="k-list">
+      <li><a href="#" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--k-space-2)">
+        <span>Junior builder — HTML and CSS, no framework required</span>
+        <span class="k-badge k-badge--outline">Quay Lane studio</span></a></li>
+      <li><a href="#" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--k-space-2)">
+        <span>Seasonal apprentice — one school term, paid</span>
+        <span class="k-badge k-badge--outline">Quay Lane studio</span></a></li>
+      <li><a href="#" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--k-space-2)">
+        <span>Bookkeeper's assistant — two days a week</span>
+        <span class="k-badge k-badge--outline">Remote, harbor hours</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — openings list</summary>
+      <pre><code>&lt;section class="k-section k-section--alt"&gt;
+  &lt;div class="k-container--narrow k-container"&gt;
+    &lt;h2&gt;Open roles&lt;/h2&gt;
+    &lt;p class="k-text-soft"&gt;We hire rarely and slowly. Every role is
+    paid, and every application gets a reply.&lt;/p&gt;
+    &lt;ul class="k-list"&gt;
+      &lt;li&gt;&lt;a href="#" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--k-space-2)"&gt;
+        &lt;span&gt;Junior builder — HTML and CSS, no framework required&lt;/span&gt;
+        &lt;span class="k-badge k-badge--outline"&gt;Quay Lane studio&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--k-space-2)"&gt;
+        &lt;span&gt;Seasonal apprentice — one school term, paid&lt;/span&gt;
+        &lt;span class="k-badge k-badge--outline"&gt;Quay Lane studio&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--k-space-2)"&gt;
+        &lt;span&gt;Bookkeeper's assistant — two days a week&lt;/span&gt;
+        &lt;span class="k-badge k-badge--outline"&gt;Remote, harbor hours&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="contact">Contact</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Details on one side, a short form on the other. The form here has no action — wire it to your backend.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container">
+    <div class="k-split">
+      <div>
+        <h2>Write to us</h2>
+        <p class="k-text-soft">Tell us what you are making and when you
+        hope to launch. Plain words beat a brief.</p>
+        <dl>
+          <dt>Email</dt>
+          <dd><a href="mailto:studio@example.com">studio@example.com</a></dd>
+          <dt>Studio</dt>
+          <dd>12 Quay Lane, by the dry dock</dd>
+          <dt>Hours</dt>
+          <dd>Tuesday to Friday, 9–17</dd>
+        </dl>
+        <div class="k-alert k-alert--ok">
+          <p>We reply within two working days — usually sooner.</p>
+        </div>
+      </div>
+      <form class="k-card">
+        <div class="k-field">
+          <label for="ct-name">Name</label>
+          <input type="text" id="ct-name" name="name" autocomplete="name">
+        </div>
+        <div class="k-field">
+          <label for="ct-email">Email</label>
+          <input type="email" id="ct-email" name="email" autocomplete="email">
+          <p class="k-field__hint">Only used to reply.</p>
+        </div>
+        <div class="k-field">
+          <label for="ct-message">What are you making?</label>
+          <textarea id="ct-message" name="message" rows="5"></textarea>
+        </div>
+        <button class="k-btn" type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — contact split</summary>
+      <pre><code>&lt;section class="k-section k-section--alt"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;div class="k-split"&gt;
+      &lt;div&gt;
+        &lt;h2&gt;Write to us&lt;/h2&gt;
+        &lt;p class="k-text-soft"&gt;Tell us what you are making and when you
+        hope to launch. Plain words beat a brief.&lt;/p&gt;
+        &lt;dl&gt;
+          &lt;dt&gt;Email&lt;/dt&gt;
+          &lt;dd&gt;&lt;a href="mailto:studio@example.com"&gt;studio@example.com&lt;/a&gt;&lt;/dd&gt;
+          &lt;dt&gt;Studio&lt;/dt&gt;
+          &lt;dd&gt;12 Quay Lane, by the dry dock&lt;/dd&gt;
+          &lt;dt&gt;Hours&lt;/dt&gt;
+          &lt;dd&gt;Tuesday to Friday, 9–17&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;div class="k-alert k-alert--ok"&gt;
+          &lt;p&gt;We reply within two working days — usually sooner.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;form class="k-card"&gt;
+        &lt;div class="k-field"&gt;
+          &lt;label for="ct-name"&gt;Name&lt;/label&gt;
+          &lt;input type="text" id="ct-name" name="name" autocomplete="name"&gt;
+        &lt;/div&gt;
+        &lt;div class="k-field"&gt;
+          &lt;label for="ct-email"&gt;Email&lt;/label&gt;
+          &lt;input type="email" id="ct-email" name="email" autocomplete="email"&gt;
+          &lt;p class="k-field__hint"&gt;Only used to reply.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="k-field"&gt;
+          &lt;label for="ct-message"&gt;What are you making?&lt;/label&gt;
+          &lt;textarea id="ct-message" name="message" rows="5"&gt;&lt;/textarea&gt;
+        &lt;/div&gt;
+        &lt;button class="k-btn" type="submit"&gt;Send&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="contact-strip">Contact strip</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">A compact tinted band for the three details people actually look for. Works above a footer or under a hero.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--tight k-section--tint">
+  <div class="k-container">
+    <div class="k-cluster k-justify-between">
+      <div class="k-media k-items-center">
+        <span class="k-avatar k-avatar--square" aria-hidden="true"><span class="k-icon k-icon--mail"></span></span>
+        <div class="k-media__body">
+          <small>Email</small><br>
+          <a href="mailto:studio@example.com">studio@example.com</a>
+        </div>
+      </div>
+      <div class="k-media k-items-center">
+        <span class="k-avatar k-avatar--square" aria-hidden="true"><span class="k-icon k-icon--phone"></span></span>
+        <div class="k-media__body">
+          <small>Phone</small><br>
+          <a href="tel:+15550142">+1 555 0142</a>
+        </div>
+      </div>
+      <div class="k-media k-items-center">
+        <span class="k-avatar k-avatar--square" aria-hidden="true"><span class="k-icon k-icon--calendar"></span></span>
+        <div class="k-media__body">
+          <small>Hours</small><br>
+          Tuesday to Friday, 9–17
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — contact strip</summary>
+      <pre><code>&lt;section class="k-section k-section--tight k-section--tint"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;div class="k-cluster k-justify-between"&gt;
+      &lt;div class="k-media k-items-center"&gt;
+        &lt;span class="k-avatar k-avatar--square" aria-hidden="true"&gt;&lt;span class="k-icon k-icon--mail"&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;div class="k-media__body"&gt;
+          &lt;small&gt;Email&lt;/small&gt;&lt;br&gt;
+          &lt;a href="mailto:studio@example.com"&gt;studio@example.com&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="k-media k-items-center"&gt;
+        &lt;span class="k-avatar k-avatar--square" aria-hidden="true"&gt;&lt;span class="k-icon k-icon--phone"&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;div class="k-media__body"&gt;
+          &lt;small&gt;Phone&lt;/small&gt;&lt;br&gt;
+          &lt;a href="tel:+15550142"&gt;+1 555 0142&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="k-media k-items-center"&gt;
+        &lt;span class="k-avatar k-avatar--square" aria-hidden="true"&gt;&lt;span class="k-icon k-icon--calendar"&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;div class="k-media__body"&gt;
+          &lt;small&gt;Hours&lt;/small&gt;&lt;br&gt;
+          Tuesday to Friday, 9–17
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container--narrow k-container">
+    <h2>Where next</h2>
+    <p>The full section library — heroes, features, pricing, and the
+    rest — is on <a href="sections.html">sections</a>. Headers and
+    footers have their own page:
+    <a href="sections-chrome.html">headers &amp; footers</a>.</p>
+  </div>
+</section>
+
+</main>
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Actions — keel</title>
+<meta name="description" content="keel's action components: buttons and your own variants, button group, input group, close button, icon button.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<style>
+  .demo-box { background: var(--k-accent-soft); border: 1px dashed var(--k-accent);
+              border-radius: var(--k-radius-s); padding: var(--k-space-3);
+              font-size: var(--k-text-xs); font-family: var(--k-font-mono);
+              color: var(--k-accent-strong); text-align: center; }
+
+  /* page-local custom variants — demos for the "Your own variants"
+     and "Extending keel" sections below */
+  .btn-sale {
+    --k-btn-bg: var(--k-warn);
+    --k-btn-bg-hover: color-mix(in oklab, var(--k-warn), black 15%);
+  }
+  .btn-quiet {
+    --k-btn-bg: var(--k-accent-trans-10);
+    --k-btn-fg: var(--k-accent-strong);
+    --k-btn-bg-hover: var(--k-accent-trans-20);
+  }
+
+  .testimonial {
+    background: var(--k-surface);
+    border: 1px solid var(--k-border);
+    border-radius: var(--k-radius-l);
+    padding: var(--k-space-5);
+  }
+  .testimonial__quote {
+    font-size: var(--k-text-l);
+    color: var(--k-text-soft);
+    margin: 0 0 var(--k-space-3);
+  }
+  .testimonial__name {
+    font-family: var(--k-font-mono);
+    font-size: var(--k-text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--k-text-faint);
+  }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+
+      <aside class="k-sticky docs-side k-sidebar--collapsible" id="docs-sidebar">
+        <button class="k-tool docs-sidebar-toggle" type="button" id="docs-sidebar-toggle"
+                aria-pressed="false" aria-label="Collapse sidebar to icons">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Documentation">
+          <details class="k-nav-group" open>
+            <summary>Getting started</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="start.html">Start</a></li>
+            <li><a href="frameworks.html">Framework guides</a></li>
+            <li><a href="concepts.html">Concepts</a></li>
+            <li><a href="changelog.html">Changelog</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Reference</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="tokens.html">Tokens</a></li>
+            <li><a href="base.html">Base</a></li>
+            <li><a href="typography.html">Typography</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="components.html">Components</a>
+            <ul class="k-list k-list--flush docs-sub">
+              <li aria-current="page"><a href="components-actions.html">Actions</a></li>
+              <li><a href="components-forms.html">Forms</a></li>
+              <li><a href="components-surfaces.html">Surfaces &amp; data</a></li>
+              <li><a href="components-feedback.html">Feedback</a></li>
+              <li><a href="components-overlays.html">Overlays</a></li>
+              <li><a href="components-navigation.html">Navigation</a></li>
+              <li><a href="components-identity.html">Identity &amp; media</a></li>
+              <li><a href="components-motion.html">Motion</a></li>
+              <li><a href="components-extending.html">Extending</a></li>
+              <li><a href="components-app.html">Application</a></li>
+            </ul>
+          </li>
+            <li><a href="utilities.html">Utilities</a></li>
+            <li><a href="icons.html">Icons</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Build</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="sections.html">Sections</a></li>
+            <li><a href="../templates.html">Templates</a></li>
+            <li><a href="../design.html">Design system</a></li>
+            <li><a href="paths.html">Paths</a></li>
+          </ul>
+          </details>
+        </nav>
+        <div id="docs-anchors"></div>
+      </aside>
+
+      <main id="main" class="docs-main">
+
+      <h1>Actions</h1>
+      <p class="k-text-soft">Buttons and the pieces that join them into controls.</p>
+
+    <section id="c-buttons">
+      <h2>Buttons</h2>
+      <p><code>.k-btn</code> works on <code>a</code> and
+      <code>button</code> alike. <code>--ghost</code> is bordered and
+      transparent, <code>--soft</code> uses the soft accent,
+      <code>--secondary</code> uses the secondary color,
+      <code>--danger</code> uses the danger status color,
+      <code>--small</code> and <code>--large</code> step the padding
+      and type down or up. <code>--large</code> is for hero CTAs —
+      the one action a section is built around. <code>--pill</code>
+      rounds the corners fully into a capsule, and <code>--block</code>
+      spans the full width of its container, for a stacked mobile CTA or
+      a form submit. <code>--link</code>
+      strips the button back to underlined accent text, for when an
+      action must read as prose while staying a real
+      <code>button</code>. A disabled
+      <code>button[disabled]</code> dims and blocks the cursor —
+      note that only real <code>button</code> elements can be
+      disabled, not links. Keyboard focus gets its own ring: on
+      <code>:focus-visible</code> the button swaps its shadow for a
+      soft accent ring instead of the default outline.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-cluster" style="margin-bottom: var(--k-space-4)">
+          <button class="k-btn">Primary</button>
+          <button class="k-btn k-btn--ghost">Ghost</button>
+          <button class="k-btn k-btn--soft">Soft</button>
+          <button class="k-btn k-btn--secondary">Secondary</button>
+          <button class="k-btn k-btn--tertiary">Accent</button>
+          <button class="k-btn k-btn--danger">Danger</button>
+          <button class="k-btn k-btn--small">Small</button>
+          <button class="k-btn k-btn--large">Large</button>
+          <button class="k-btn k-btn--pill">Pill</button>
+          <button class="k-btn k-btn--link">Link</button>
+          <button class="k-btn" disabled>Disabled</button>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;button class="k-btn"&gt;Primary&lt;/button&gt;
+&lt;button class="k-btn k-btn--ghost"&gt;Ghost&lt;/button&gt;
+&lt;button class="k-btn k-btn--soft"&gt;Soft&lt;/button&gt;
+&lt;button class="k-btn k-btn--secondary"&gt;Secondary&lt;/button&gt;
+&lt;button class="k-btn k-btn--tertiary"&gt;Accent&lt;/button&gt;
+&lt;button class="k-btn k-btn--danger"&gt;Danger&lt;/button&gt;
+&lt;button class="k-btn k-btn--small"&gt;Small&lt;/button&gt;
+&lt;button class="k-btn k-btn--large"&gt;Large&lt;/button&gt;
+&lt;button class="k-btn k-btn--pill"&gt;Pill&lt;/button&gt;
+&lt;button class="k-btn k-btn--link"&gt;Link&lt;/button&gt;
+&lt;button class="k-btn" disabled&gt;Disabled&lt;/button&gt;
+
+&lt;!-- links take the same classes --&gt;
+&lt;a class="k-btn" href="…"&gt;Get started&lt;/a&gt;</code></pre>
+      </details>
+
+      <p><code>--block</code> is full-width, so it stands on its own
+      rather than sitting in a row. It fills whatever container holds it —
+      here a narrow box, but the same button spans a whole card or a
+      mobile screen.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 22rem; margin-bottom: var(--k-space-4)">
+          <button class="k-btn k-btn--block">Continue</button>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;button class="k-btn k-btn--block"&gt;Continue&lt;/button&gt;</code></pre>
+      </details>
+
+      <h3 id="c-btn-states">States</h3>
+      <p>Every variant carries the full set of states, all styled from
+      tokens — hover darkens toward the strong shade, keyboard focus
+      swaps the shadow for a soft accent ring, <code>:active</code>
+      presses the button down one pixel, <code>[disabled]</code> dims
+      and blocks the cursor, and <code>aria-busy="true"</code> dims and
+      blocks the pointer while a <code>.k-spinner</code> turns. Two of
+      these are browser-managed and can't be forced from a stylesheet:
+      <strong>Tab through and hover the row above to feel the real
+      focus ring and hover</strong>. In the matrix below those two
+      columns are honest fakes — static buttons wearing the actual ring
+      and press styles inline, each labeled <em>(simulated)</em>. The
+      disabled and busy columns are the real attributes.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-table-wrap" style="margin-bottom: var(--k-space-4)">
+        <table class="k-table--dense">
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>Resting</th>
+              <th>Focus ring <span class="k-text-faint">(simulated)</span></th>
+              <th>Active <span class="k-text-faint">(simulated)</span></th>
+              <th>Disabled <span class="k-text-faint">(real)</span></th>
+              <th>Busy <span class="k-text-faint">(real)</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>.k-btn</code></td>
+              <td><button class="k-btn" type="button">Primary</button></td>
+              <td><button class="k-btn" type="button" tabindex="-1" style="box-shadow: 0 0 0 3px var(--k-accent-trans-20), 0 1px 2px hsl(0 0% 0% / 0.08)">Primary</button></td>
+              <td><button class="k-btn" type="button" tabindex="-1" style="translate: 0 1px">Primary</button></td>
+              <td><button class="k-btn" type="button" disabled>Primary</button></td>
+              <td><button class="k-btn" type="button" aria-busy="true"><span class="k-spinner" aria-hidden="true"></span> Primary</button></td>
+            </tr>
+            <tr>
+              <td><code>--ghost</code></td>
+              <td><button class="k-btn k-btn--ghost" type="button">Ghost</button></td>
+              <td><button class="k-btn k-btn--ghost" type="button" tabindex="-1" style="box-shadow: 0 0 0 3px var(--k-accent-trans-20)">Ghost</button></td>
+              <td><button class="k-btn k-btn--ghost" type="button" tabindex="-1" style="translate: 0 1px">Ghost</button></td>
+              <td><button class="k-btn k-btn--ghost" type="button" disabled>Ghost</button></td>
+              <td><button class="k-btn k-btn--ghost" type="button" aria-busy="true"><span class="k-spinner" aria-hidden="true"></span> Ghost</button></td>
+            </tr>
+            <tr>
+              <td><code>--soft</code></td>
+              <td><button class="k-btn k-btn--soft" type="button">Soft</button></td>
+              <td><button class="k-btn k-btn--soft" type="button" tabindex="-1" style="box-shadow: 0 0 0 3px var(--k-accent-trans-20)">Soft</button></td>
+              <td><button class="k-btn k-btn--soft" type="button" tabindex="-1" style="translate: 0 1px">Soft</button></td>
+              <td><button class="k-btn k-btn--soft" type="button" disabled>Soft</button></td>
+              <td><button class="k-btn k-btn--soft" type="button" aria-busy="true"><span class="k-spinner" aria-hidden="true"></span> Soft</button></td>
+            </tr>
+            <tr>
+              <td><code>--secondary</code></td>
+              <td><button class="k-btn k-btn--secondary" type="button">Secondary</button></td>
+              <td><button class="k-btn k-btn--secondary" type="button" tabindex="-1" style="box-shadow: 0 0 0 3px var(--k-accent-trans-20), 0 1px 2px hsl(0 0% 0% / 0.08)">Secondary</button></td>
+              <td><button class="k-btn k-btn--secondary" type="button" tabindex="-1" style="translate: 0 1px">Secondary</button></td>
+              <td><button class="k-btn k-btn--secondary" type="button" disabled>Secondary</button></td>
+              <td><button class="k-btn k-btn--secondary" type="button" aria-busy="true"><span class="k-spinner" aria-hidden="true"></span> Secondary</button></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </details>
+      <p><small>The focus ring is always the accent ring —
+      <code>0 0 0 3px var(--k-accent-trans-20)</code> — on every
+      variant, so keyboard users get one consistent signal. Note the
+      ring stays accent-colored even on <code>--secondary</code> and
+      <code>--danger</code>.</small></p>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;!-- resting — hover, focus, and active need no markup at all --&gt;
+&lt;button class="k-btn"&gt;Primary&lt;/button&gt;
+
+&lt;!-- disabled — real attribute; buttons only, links can't be disabled --&gt;
+&lt;button class="k-btn" disabled&gt;Primary&lt;/button&gt;
+
+&lt;!-- busy — real attribute: dimmed, pointer blocked, announced --&gt;
+&lt;button class="k-btn" aria-busy="true"&gt;
+  &lt;span class="k-spinner" aria-hidden="true"&gt;&lt;/span&gt; Primary
+&lt;/button&gt;
+
+&lt;!-- the focus-ring and active cells above are simulated for display:
+     :focus-visible and :active belong to the browser and can't be
+     forced from CSS. The inline styles are the real state styles:
+     focus ring — box-shadow: 0 0 0 3px var(--k-accent-trans-20)
+     active    — translate: 0 1px --&gt;</code></pre>
+      </details>
+
+      <h2>Your own variants</h2>
+      <p>Every button reads local knobs with token defaults —
+      <code>--k-btn-bg</code>, <code>--k-btn-fg</code>,
+      <code>--k-btn-bg-hover</code>, <code>--k-btn-border</code>,
+      <code>--k-btn-radius</code>. The shipped modifiers
+      (<code>--ghost</code>, <code>--soft</code>, …) do nothing but set
+      those knobs, and a variant of your own is the same few lines of
+      plain CSS. This is keel's mixin system — native, no build step.
+      The naming grammar is BEM: <code>k-block__element--modifier</code>;
+      your variants join it as ordinary classes. Because every knob
+      defaults to a token, a custom variant stays on-system
+      automatically — retheme the tokens and it follows. The two extra
+      buttons below are defined in this page's own <code>style</code>
+      block:</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-cluster" style="margin-bottom: var(--k-space-4)">
+          <button class="k-btn">Primary</button>
+          <button class="k-btn btn-sale">On sale</button>
+          <button class="k-btn btn-quiet">Quiet</button>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;style&gt;
+  .btn-sale {
+    --k-btn-bg: var(--k-warn);
+    --k-btn-bg-hover: color-mix(in oklab, var(--k-warn), black 15%);
+  }
+  .btn-quiet {
+    --k-btn-bg: var(--k-accent-trans-10);
+    --k-btn-fg: var(--k-accent-strong);
+    --k-btn-bg-hover: var(--k-accent-trans-20);
+  }
+&lt;/style&gt;
+
+&lt;button class="k-btn btn-sale"&gt;On sale&lt;/button&gt;
+&lt;button class="k-btn btn-quiet"&gt;Quiet&lt;/button&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-button-group">
+      <h2>Button group</h2>
+      <p><code>.k-btn-group</code> joins buttons into one row — inner
+      corners lose their radius, only the ends keep it. Adjacent
+      <code>--ghost</code> buttons also collapse the doubled border
+      between them. Solid buttons read as segments of one control, so
+      group buttons that belong to one choice, not unrelated actions.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-cluster" style="margin-bottom: var(--k-space-4)">
+          <div class="k-btn-group">
+            <button class="k-btn k-btn--ghost">Day</button>
+            <button class="k-btn k-btn--ghost">Week</button>
+            <button class="k-btn k-btn--ghost">Month</button>
+          </div>
+          <div class="k-btn-group">
+            <button class="k-btn">Save</button>
+            <button class="k-btn k-btn--soft">Save as…</button>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-btn-group"&gt;
+  &lt;button class="k-btn k-btn--ghost"&gt;Day&lt;/button&gt;
+  &lt;button class="k-btn k-btn--ghost"&gt;Week&lt;/button&gt;
+  &lt;button class="k-btn k-btn--ghost"&gt;Month&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-input-group">
+      <h2>Input group</h2>
+      <p><code>.k-input-group</code> joins an input and a
+      <code>.k-btn</code> into one row — the shared corner loses its
+      radius on both sides. The classic use is an email-subscribe row.
+      Keep the label; <code>.k-visually-hidden</code> hides it without
+      taking it from screen readers.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 24rem; margin-bottom: var(--k-space-4)">
+          <div class="k-input-group">
+            <label class="k-visually-hidden" for="demo-subscribe">Email</label>
+            <input id="demo-subscribe" type="email" placeholder="you@example.com">
+            <button class="k-btn" type="button">Subscribe</button>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;form class="k-input-group" action="/subscribe" method="post"&gt;
+  &lt;label class="k-visually-hidden" for="subscribe"&gt;Email&lt;/label&gt;
+  &lt;input id="subscribe" name="email" type="email" placeholder="you@example.com"&gt;
+  &lt;button class="k-btn"&gt;Subscribe&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-close-button">
+      <h2>Close button</h2>
+      <p><code>.k-close</code> is a quiet square button for dismissing
+      things — toasts, dialogs, banners. It renders whatever character
+      you put in it (usually <code>×</code>). It's icon-only, so the
+      <code>aria-label</code> is not optional.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-cluster" style="margin-bottom: var(--k-space-4)">
+          <button class="k-close" type="button" aria-label="Close">×</button>
+          <div class="k-alert k-alert--row" style="flex: 1">
+            <p style="margin: 0">A dismissible alert.</p>
+            <button class="k-close" type="button" aria-label="Dismiss">×</button>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;button class="k-close" type="button" aria-label="Close"&gt;×&lt;/button&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-icon-button">
+      <h2>Icon button</h2>
+      <p><code>.k-btn--icon</code> squares a button off for a single
+      <code>.k-icon</code> — equal padding, a 1:1 aspect ratio, the
+      icon centered. It combines with the other button variants.
+      There's no visible text, so the <code>aria-label</code> is not
+      optional. A busy button takes <code>aria-busy="true"</code>:
+      keel dims it and blocks the pointer, and the attribute tells
+      assistive tech the same thing the dimming tells everyone else.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-cluster" style="margin-bottom: var(--k-space-4)">
+          <button class="k-btn k-btn--icon" type="button" aria-label="Search"><span class="k-icon k-icon--search" aria-hidden="true"></span></button>
+          <button class="k-btn k-btn--icon k-btn--ghost" type="button" aria-label="Menu"><span class="k-icon k-icon--menu" aria-hidden="true"></span></button>
+          <button class="k-btn k-btn--icon k-btn--soft" type="button" aria-label="Add"><span class="k-icon k-icon--plus" aria-hidden="true"></span></button>
+          <button class="k-btn" type="button" aria-busy="true"><span class="k-spinner" aria-hidden="true"></span> Saving…</button>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;button class="k-btn k-btn--icon" type="button" aria-label="Search"&gt;
+  &lt;span class="k-icon k-icon--search" aria-hidden="true"&gt;&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;!-- busy state — dimmed, pointer blocked, announced --&gt;
+&lt;button class="k-btn" type="button" aria-busy="true"&gt;
+  &lt;span class="k-spinner" aria-hidden="true"&gt;&lt;/span&gt; Saving…
+&lt;/button&gt;</code></pre>
+      </details>
+    </section>
+
+      </main>
+
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

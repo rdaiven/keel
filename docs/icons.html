@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Icons — keel</title>
+<meta name="description" content="Browse keel's icon set — including layout and builder icons. Search by name and click any icon to copy its markup. Mask-based, currentColor, zero external requests; ships as the optional keel-icons.css.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<style>
+  /* package builder */
+  .ib-modes { display: flex; align-items: center; gap: var(--k-space-2);
+              flex-wrap: wrap; margin-bottom: var(--k-space-4); }
+  .icon-cell { position: relative; }
+  .icon-cell.is-picked { border-color: var(--k-accent); background: var(--k-accent-soft); color: var(--k-text); }
+  .icon-cell.is-picked::after {
+    content: "\2713"; position: absolute; inset-block-start: 4px; inset-inline-end: 5px;
+    inline-size: 15px; block-size: 15px; border-radius: 50%;
+    background: var(--k-accent); color: var(--k-on-accent);
+    font-size: 10px; line-height: 15px; text-align: center;
+  }
+  body.ib-picking .icon-cell:hover { border-color: var(--k-accent); }
+  .ib-pack {
+    position: sticky; inset-block-end: var(--k-space-4); z-index: 40;
+    display: flex; align-items: center; gap: var(--k-space-3); flex-wrap: wrap;
+    margin-block-start: var(--k-space-5);
+    padding: var(--k-space-3) var(--k-space-4);
+    background: var(--k-surface); border: 1px solid var(--k-accent);
+    border-radius: var(--k-radius-l); box-shadow: var(--k-shadow-l);
+  }
+  .ib-pack[hidden] { display: none; }
+  .ib-pack__count { font-size: var(--k-text-s); }
+  .ib-pack__names { font-size: var(--k-text-xs); color: var(--k-text-faint);
+                    max-inline-size: 22rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* category chips + groups */
+  .ib-cats { display: flex; flex-wrap: wrap; gap: var(--k-space-1);
+             margin-bottom: var(--k-space-4); }
+  .ib-chip {
+    font: inherit; font-size: var(--k-text-xs); cursor: pointer;
+    padding: var(--k-space-1) var(--k-space-3); border-radius: 999px;
+    background: var(--k-surface); color: var(--k-text-soft);
+    border: 1px solid var(--k-border); transition: all var(--k-ease);
+  }
+  .ib-chip:hover { border-color: var(--k-border-strong); color: var(--k-text); }
+  .ib-chip[aria-pressed="true"] { background: var(--k-accent); color: var(--k-on-accent); border-color: var(--k-accent); }
+  .ib-group { margin-bottom: var(--k-space-5); }
+  .ib-group[hidden] { display: none; }
+  .ib-group__title { display: flex; align-items: baseline; gap: var(--k-space-2);
+                     margin: 0 0 var(--k-space-3); scroll-margin-top: var(--k-space-5); }
+  .ib-group__title h3 { margin: 0; font-size: var(--k-text-m); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html" aria-current="page">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html" aria-current="page">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section">
+  <div class="k-container">
+    <main id="main">
+        <h1>Icons</h1>
+        <p class="k-text-soft">A mask-based icon set painted with
+        <code>currentColor</code> — zero external requests, including
+        layout &amp; builder icons (align, flex, columns, sizing) and
+        app-chrome marks. Search by name; click any icon to copy its
+        markup.</p>
+
+        <h2>Browse</h2>
+        <p>The set ships as the optional
+        <a href="components-identity.html#c-icons">keel-icons.css</a>
+        (~101&nbsp;KB min) — link it after <code>keel.css</code> to use
+        <code>.k-icon--&lt;name&gt;</code>. Includes an opt-in set of
+        social brand marks (facebook, instagram, github, youtube, …)
+        for footers — treat them as a convenience starting point, and
+        keep an eye on them since brand marks change over time.</p>
+
+        <div class="icon-gallery-search">
+          <label class="k-visually-hidden" for="icon-q">Search icons</label>
+          <input id="icon-q" type="search" autocomplete="off" placeholder="Search icons…">
+          <span class="k-text-faint k-text-xs" id="icon-count" aria-live="polite"></span>
+        </div>
+
+        <div class="ib-modes">
+          <span class="k-text-xs k-text-faint">Clicking an icon:</span>
+          <div class="k-segmented" role="group" aria-label="Click action">
+            <button type="button" id="ib-mode-copy" aria-pressed="true">Copies markup</button>
+            <button type="button" id="ib-mode-pick" aria-pressed="false">Adds to a pack</button>
+          </div>
+          <span class="k-text-xs k-text-faint">— build a custom
+          <code>keel-icons.css</code> with only what you need.</span>
+        </div>
+
+        <div class="ib-cats" id="ib-cats" role="group" aria-label="Filter by category"></div>
+
+        <div id="icon-grid" class="icon-gallery"
+          data-icons="activity,align-bottom,align-center,align-justify,align-left,align-middle,align-right,align-top,ambulance,aperture,api,archive,arrow-down,arrow-left,arrow-right,arrow-up,arrows-h,arrows-v,asterisk,at-sign,atom,award,badge-check,badge-percent,ban,bar-chart,barcode,battery,bell,bell-fill,binary,blocks,bluetooth,bold,book,bookmark,bookmark-fill,bot,box,boxes,braces,brackets,brain,brain-circuit,briefcase,briefcase-2,brush,bug,building,bullet,cable,calendar,calendar-check,camera,cart,cart-plus,chat,check,check-circle,check-circle-fill,check-double,chevron-down,chevron-left,chevron-right,chevron-up,circle,circle-fill,clipboard,clock,cloud,cloud-download,cloud-fill,cloud-upload,code,coins,collapse,columns,command,comment,compass,component,container,contrast,copy,corner-radius,cpu,credit-card,crop,cross-medical,crown,dark,database,derive,desktop,discord,dna,dollar-sign,download,droplet,droplet-fill,edit,emdash,eraser,expand,external,eye,eye-fill,eye-off,facebook,file,file-text,filter,fingerprint,first-aid,flag,flag-fill,flame,flex-column,flex-row,flip-h,flip-v,folder,folder-open,function,gauge,gem,gift,gift-card,git-branch,git-commit,git-compare,git-fork,git-merge,git-pull-request,github,globe,gpu,graduation-cap,grid,h1,h2,h3,hand,hash,heading,headphones,heart,heart-fill,heart-pulse,help,hexagon,history,home,hospital,hourglass,image,inbox,indent,infinity,info,instagram,italic,keel,key,layers,layout,leaf,life-buoy,light,lightbulb,link,linkedin,list,list-ol,lock,login,logout,mail,map,margin,maximize,megaphone,memory,menu,message-bot,mic,minimize,minus,minus-circle,money-bag,moon,moon-fill,more-h,more-v,mouse-pointer,move,mute,navigation,network,newspaper,node,outdent,package,padding,palette,paperclip,paragraph,path,pause,pause-fill,percent,phone,pie-chart,pill,pin,pin-fill,pinterest,play,play-fill,plug,plus,plus-circle,power,presentation,printer,prompt,puzzle,qr-code,quote,radar,receipt,reddit,redo,refresh,regex,reply,return-box,rocket,rotate-ccw,rotate-cw,route,rows,rss,save,scale,scan,scissors,search,send,server,settings,share,shield,shield-check,shield-fill,shopping-bag,shopping-cart,sidebar,signature,sitemap,skip-back,skip-forward,sliders,smile,sort,sparkles,square,square-fill,star,star-fill,stethoscope,stop,store,strikethrough,sun,sun-fill,syringe,tablet,tag,tag-fill,target,telegram,terminal,thermometer,thumbs-down,thumbs-up,thumbs-up-fill,tiktok,timer,toggle-off,toggle-on,token,tooth,trash,trending-down,trending-up,triangle,truck,twitch,twitter,underline,undo,unlock,upload,user,user-fill,user-plus,users,variable,video,volume,wallet,wand,warn,waveform,webhook,whatsapp,wifi,window,workflow,x,x-circle,youtube,zap,zoom-in,zoom-out">
+          <noscript>Enable JavaScript to browse the grid, or view the
+          names in <a href="../css/keel-icons.css">keel-icons.css</a>.</noscript>
+        </div>
+
+        <div class="ib-pack" id="ib-pack" hidden aria-live="polite">
+          <span class="ib-pack__count"><strong id="ib-count">0</strong> selected · <span id="ib-size">~0 KB</span></span>
+          <span class="ib-pack__names" id="ib-names"></span>
+          <span style="flex: 1"></span>
+          <button type="button" class="k-btn k-btn--ghost k-btn--small" id="ib-copy-css"><span class="k-icon k-icon--code" aria-hidden="true"></span> Copy CSS</button>
+          <button type="button" class="k-btn k-btn--ghost k-btn--small" id="ib-copy-svg"><span class="k-icon k-icon--braces" aria-hidden="true"></span> Copy SVGs</button>
+          <button type="button" class="k-btn k-btn--ghost k-btn--small" id="ib-download"><span class="k-icon k-icon--download" aria-hidden="true"></span> Icons only</button>
+          <button type="button" class="k-btn k-btn--small" id="ib-kit"><span class="k-icon k-icon--package" aria-hidden="true"></span> Download kit</button>
+          <button type="button" class="k-btn k-btn--ghost k-btn--icon k-btn--small" id="ib-clear" aria-label="Clear selection"><span class="k-icon k-icon--x" aria-hidden="true"></span></button>
+        </div>
+
+        <h2>Using an icon</h2>
+        <p>An icon is a <code>span</code> with two classes — the base
+        <code>.k-icon</code> and a <code>--name</code> modifier. It
+        takes the surrounding text color and font-size, so it aligns
+        like a letter:</p>
+        <pre><code>&lt;p&gt;Saved &lt;span class="k-icon k-icon--check-circle"&gt;&lt;/span&gt;&lt;/p&gt;</code></pre>
+        <p>Decorative by default — add <code>aria-hidden="true"</code>.
+        If an icon carries meaning on its own (an icon-only button),
+        give it <code>role="img"</code> and an <code>aria-label</code>,
+        or label the button instead.</p>
+
+        <h2>Size &amp; color</h2>
+        <p>Both are inherited, so you style the parent, not the icon.
+        Here the same <code>k-icon--star</code> at three sizes and two
+        colors:</p>
+        <p class="k-cluster" style="align-items: baseline">
+          <span class="k-icon k-icon--star" aria-hidden="true"></span>
+          <span class="k-icon k-icon--star" style="font-size: 1.5rem" aria-hidden="true"></span>
+          <span class="k-icon k-icon--star" style="font-size: 2.2rem" aria-hidden="true"></span>
+          <span class="k-icon k-icon--star" style="font-size: 2.2rem; color: var(--k-accent)" aria-hidden="true"></span>
+          <span class="k-icon k-icon--star" style="font-size: 2.2rem; color: var(--k-warn)" aria-hidden="true"></span>
+        </p>
+        <pre><code>&lt;span class="k-icon k-icon--star" style="font-size: 2rem; color: var(--k-accent)"&gt;&lt;/span&gt;</code></pre>
+
+        <h2>Framing an icon</h2>
+        <p>The glyphs are bare on purpose. To give one a background,
+        border, or shape — the "feature icon" look — wrap it in a
+        <code>.k-icon-box</code>. Every part is a modifier, and they
+        compose: shape (<code>--circle</code>, <code>--soft</code>,
+        <code>--sharp</code>), fill (<code>--solid</code>,
+        <code>--outline</code>, <code>--ring</code>, <code>--flat</code>),
+        size (<code>--sm</code>/<code>--lg</code>/<code>--xl</code>), and
+        color (<code>--ok</code>, <code>--warn</code>,
+        <code>--danger</code>, <code>--secondary</code>,
+        <code>--neutral</code>). The corners follow your
+        <code>--k-radius</code>, so it stays on-system.</p>
+        <p class="k-cluster" style="align-items: center; gap: var(--k-space-3)">
+          <span class="k-icon-box"><span class="k-icon k-icon--rocket" aria-hidden="true"></span></span>
+          <span class="k-icon-box k-icon-box--circle"><span class="k-icon k-icon--sparkles" aria-hidden="true"></span></span>
+          <span class="k-icon-box k-icon-box--outline"><span class="k-icon k-icon--shield" aria-hidden="true"></span></span>
+          <span class="k-icon-box k-icon-box--flat"><span class="k-icon k-icon--settings" aria-hidden="true"></span></span>
+          <span class="k-icon-box k-icon-box--solid k-icon-box--circle"><span class="k-icon k-icon--heart" aria-hidden="true"></span></span>
+          <span class="k-icon-box k-icon-box--ok"><span class="k-icon k-icon--check" aria-hidden="true"></span></span>
+          <span class="k-icon-box k-icon-box--danger k-icon-box--lg"><span class="k-icon k-icon--trash" aria-hidden="true"></span></span>
+        </p>
+        <pre><code>&lt;span class="k-icon-box k-icon-box--circle k-icon-box--solid"&gt;
+  &lt;span class="k-icon k-icon--rocket" aria-hidden="true"&gt;&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;!-- outline + status color + large --&gt;
+&lt;span class="k-icon-box k-icon-box--outline k-icon-box--ok k-icon-box--lg"&gt;
+  &lt;span class="k-icon k-icon--check" aria-hidden="true"&gt;&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;!-- tune any one box with the knobs directly --&gt;
+&lt;span class="k-icon-box" style="--k-icon-box-size: 4rem; --k-icon-box-bg: var(--k-accent-2-soft)"&gt;…&lt;/span&gt;</code></pre>
+
+        <h2>In buttons</h2>
+        <p>Icon buttons pair <code>.k-btn--icon</code> with an icon and
+        an <code>aria-label</code>; text buttons just put an icon before
+        the label. See <a href="components-actions.html#c-icon-button">Actions</a>.</p>
+        <p class="k-cluster">
+          <button class="k-btn k-btn--icon k-btn--ghost" type="button" aria-label="Search">
+            <span class="k-icon k-icon--search" aria-hidden="true"></span>
+          </button>
+          <button class="k-btn" type="button">
+            <span class="k-icon k-icon--download" aria-hidden="true"></span> Download
+          </button>
+          <button class="k-btn k-btn--ghost" type="button">
+            <span class="k-icon k-icon--settings" aria-hidden="true"></span> Settings
+          </button>
+        </p>
+
+        <h2>Bring your own</h2>
+        <p>The <code>.k-icon</code> mechanism is in the core file — you
+        can point it at any SVG without the set. Set <code>--k-icon</code>
+        to a URL-encoded <code>data:</code> SVG (use <code>black</code>
+        as the fill/stroke; the mask ignores color and takes
+        <code>currentColor</code>):</p>
+        <pre><code>.k-icon--my-mark {
+  --k-icon: url("data:image/svg+xml,%3Csvg …%3E");
+}</code></pre>
+          </main>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+<script>
+/* icon gallery + package builder — page-local.
+   Grid with search and click-to-copy; a mode toggle turns clicks into
+   pack selection, and the pack bar downloads / copies a custom
+   keel-icons.css (or the raw SVGs) with only the chosen icons. */
+(function () {
+  var grid = document.getElementById("icon-grid");
+  var q = document.getElementById("icon-q");
+  var count = document.getElementById("icon-count");
+  if (!grid) return;
+
+  var RULES = {};                 // name -> full ".k-icon--name { … }" rule
+  var SVGS = {};                  // name -> raw currentColor SVG
+  var TAGS = {};                  // name -> [tags]
+  var SEL = [];                   // selected names, in click order
+  var mode = "copy";              // "copy" | "pick"
+  var catFilter = "";             // active category id ("" = all)
+  var cats = document.getElementById("ib-cats");
+
+  function cell(n) {
+    return '<button type="button" class="icon-cell" data-name="' + n + '" aria-label="' + n +
+      ' icon"><span class="k-icon k-icon--' + n + '" aria-hidden="true"></span>' +
+      '<span class="icon-cell__name">' + n + "</span></button>";
+  }
+  function buildGrouped(categories, icons) {
+    var by = {};
+    icons.forEach(function (ic) {
+      RULES[ic.name] = ic.css; SVGS[ic.name] = ic.svg; TAGS[ic.name] = ic.tags || [];
+      (by[ic.category] = by[ic.category] || []).push(ic.name);
+    });
+    var html = "";
+    categories.forEach(function (c) {
+      var list = (by[c.id] || []).slice().sort();
+      if (!list.length) return;
+      html += '<div class="ib-group" data-cat="' + c.id + '"><div class="ib-group__title">' +
+        '<h3 id="cat-' + c.id + '">' + c.label + '</h3>' +
+        '<span class="k-badge k-badge--outline">' + list.length + '</span></div>' +
+        '<div class="icon-gallery is-enhanced">' + list.map(cell).join("") + '</div></div>';
+    });
+    grid.innerHTML = html;
+    grid._total = icons.length;
+    if (count) count.textContent = icons.length + " icons";
+    // chips
+    var cHtml = '<button type="button" class="ib-chip" data-cat="" aria-pressed="true">All ' +
+      '<span class="k-text-faint">' + icons.length + '</span></button>';
+    categories.forEach(function (c) {
+      if (!(by[c.id] || []).length) return;
+      cHtml += '<button type="button" class="ib-chip" data-cat="' + c.id + '" aria-pressed="false">' + c.label + '</button>';
+    });
+    if (cats) cats.innerHTML = cHtml;
+  }
+  function buildFlat(names) {   // fallback (no icons.json)
+    grid.innerHTML = '<div class="icon-gallery is-enhanced">' + names.map(cell).join("") + "</div>";
+    grid._total = names.length;
+    if (count) count.textContent = names.length + " icons";
+  }
+
+  var fallback = (grid.dataset.icons || "").split(",").filter(Boolean);
+  fetch("../data/icons.json")
+    .then(function (r) { return r.json(); })
+    .then(function (data) { buildGrouped(data.categories, data.icons); })
+    .catch(function () {
+      // no manifest (e.g. file://) — parse the stylesheet, flat grid
+      fetch("../css/keel-icons.css").then(function (r) { return r.text(); }).then(function (css) {
+        var re = /\.k-icon--([a-z0-9-]+)\s*\{[^}]*\}/g, m, names = [];
+        while ((m = re.exec(css))) { RULES[m[1]] = m[0].trim(); names.push(m[1]); }
+        names = names.filter(function (n, i) { return names.indexOf(n) === i; });
+        buildFlat(names.length ? names : fallback);
+        if (cats) cats.hidden = true;
+      }).catch(function () { buildFlat(fallback); if (cats) cats.hidden = true; });
+    });
+
+  /* ---- toast + clipboard ---- */
+  var toast, toastTimer;
+  function flash(msg) {
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.className = "k-toast"; toast.setAttribute("popover", "");
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    try { toast.showPopover(); } catch (e) {}
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { try { toast.hidePopover(); } catch (e) {} }, 1600);
+  }
+  function copyText(t) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(t).catch(function () {});
+    } else {
+      var ta = document.createElement("textarea");
+      ta.value = t; document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  }
+
+  /* ---- mode toggle ---- */
+  var mCopy = document.getElementById("ib-mode-copy");
+  var mPick = document.getElementById("ib-mode-pick");
+  function setMode(m) {
+    mode = m;
+    mCopy.setAttribute("aria-pressed", String(m === "copy"));
+    mPick.setAttribute("aria-pressed", String(m === "pick"));
+    document.body.classList.toggle("ib-picking", m === "pick");
+  }
+  mCopy.addEventListener("click", function () { setMode("copy"); });
+  mPick.addEventListener("click", function () { setMode("pick"); });
+
+  /* ---- grid click: copy markup OR toggle selection ---- */
+  grid.addEventListener("click", function (e) {
+    var cell = e.target.closest(".icon-cell");
+    if (!cell) return;
+    var n = cell.dataset.name;
+    if (mode === "copy") {
+      copyText('<span class="k-icon k-icon--' + n + '" aria-hidden="true"></span>');
+      flash("Copied  k-icon--" + n);
+    } else {
+      var i = SEL.indexOf(n);
+      if (i > -1) { SEL.splice(i, 1); cell.classList.remove("is-picked"); }
+      else { SEL.push(n); cell.classList.add("is-picked"); }
+      updatePack();
+    }
+  });
+
+  /* ---- pack bar ---- */
+  var pack = document.getElementById("ib-pack");
+  var elCount = document.getElementById("ib-count");
+  var elSize = document.getElementById("ib-size");
+  var elNames = document.getElementById("ib-names");
+
+  function buildCss() {
+    var body = SEL.map(function (n) { return "  " + (RULES[n] || ""); }).join("\n");
+    return "/* keel-icons — custom pack: " + SEL.length + " icon" +
+      (SEL.length === 1 ? "" : "s") + ". Pairs with keel.css (the .k-icon" +
+      " base lives there). */\n@layer components {\n" + body + "\n}\n";
+  }
+  function svgOf(name) {
+    if (SVGS[name]) return SVGS[name];
+    var rule = RULES[name] || "", m = rule.match(/url\("data:image\/svg\+xml,([^"]*)"\)/);
+    return m ? decodeURIComponent(m[1]).replace(/black/g, "currentColor") : "";
+  }
+  function fmtSize(bytes) {
+    return bytes < 1024 ? bytes + " B" : (bytes / 1024).toFixed(1) + " KB";
+  }
+  function updatePack() {
+    if (!SEL.length) { pack.hidden = true; return; }
+    pack.hidden = false;
+    elCount.textContent = SEL.length;
+    elSize.textContent = "~" + fmtSize(buildCss().length);
+    elNames.textContent = SEL.join(", ");
+  }
+
+  document.getElementById("ib-copy-css").addEventListener("click", function () {
+    if (!SEL.length) return;
+    copyText(buildCss());
+    flash(SEL.length === 1 ? "Copied the rule — paste it into your keel-icons.css"
+                           : "Copied CSS for " + SEL.length + " icons");
+  });
+  document.getElementById("ib-copy-svg").addEventListener("click", function () {
+    if (!SEL.length) return;
+    copyText(SEL.map(function (n) { return "<!-- " + n + " -->\n" + svgOf(n); }).join("\n\n"));
+    flash("Copied " + SEL.length + " raw SVG" + (SEL.length === 1 ? "" : "s"));
+  });
+  document.getElementById("ib-download").addEventListener("click", function () {
+    if (!SEL.length) return;
+    var blob = new Blob([buildCss()], { type: "text/css" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "keel-icons-custom.css";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+    flash("Downloaded keel-icons-custom.css (" + SEL.length + " icons)");
+  });
+  document.getElementById("ib-clear").addEventListener("click", function () {
+    SEL = [];
+    grid.querySelectorAll(".icon-cell.is-picked").forEach(function (c) { c.classList.remove("is-picked"); });
+    updatePack();
+  });
+  /* the whole kit: framework + your design system + your icons, one file */
+  document.getElementById("ib-kit").addEventListener("click", function () {
+    if (!SEL.length) return;
+    var root = location.pathname.indexOf("/docs/") > -1 ? "../" : "";
+    var tokens = window.keelDesign ? window.keelDesign.tokensCss() : "";
+    fetch(root + "css/keel.min.css").then(function (r) { return r.text(); }).then(function (keel) {
+      var out =
+        "/* keel kit — the framework + your design system + your icons.\n" +
+        "   One self-contained file: link it and you're done. */\n\n" +
+        "/* 1 · framework */\n" + keel + "\n\n" +
+        (tokens ? "/* 2 · your design system — overrides the defaults above */\n" + tokens + "\n" : "") +
+        "/* " + (tokens ? "3" : "2") + " · your icons (" + SEL.length + ") */\n" + buildCss();
+      var blob = new Blob([out], { type: "text/css" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob); a.download = "keel-kit.css";
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+      flash("Downloaded keel-kit.css — framework + design + " + SEL.length + " icons");
+    });
+  });
+
+  /* ---- filter: text (name + tags) + category ---- */
+  function filter() {
+    var v = (q ? q.value : "").trim().toLowerCase();
+    var shown = 0;
+    grid.querySelectorAll(".ib-group").forEach(function (g) {
+      var gCat = g.dataset.cat, gShown = 0;
+      g.querySelectorAll(".icon-cell").forEach(function (c) {
+        var n = c.dataset.name;
+        var inCat = !catFilter || gCat === catFilter;
+        var hitText = !v || n.indexOf(v) > -1 ||
+          (TAGS[n] || []).some(function (t) { return t.indexOf(v) > -1; });
+        var hit = inCat && hitText;
+        c.hidden = !hit;
+        if (hit) { gShown++; shown++; }
+      });
+      g.hidden = gShown === 0;
+    });
+    if (count) count.textContent = (v || catFilter ? shown + " of " : "") + (grid._total || 0) + " icons";
+  }
+  if (q) q.addEventListener("input", filter);
+  if (cats) cats.addEventListener("click", function (e) {
+    var chip = e.target.closest(".ib-chip");
+    if (!chip) return;
+    catFilter = chip.dataset.cat;
+    cats.querySelectorAll(".ib-chip").forEach(function (c) {
+      c.setAttribute("aria-pressed", String(c.dataset.cat === catFilter));
+    });
+    filter();
+  });
+})();
+</script>
+</body>
+</html>

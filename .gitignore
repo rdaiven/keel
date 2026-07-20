@@ -1,0 +1,31 @@
+# keel is zero-dependency — this guards against accidental installs
+node_modules/
+
+# Secrets & local environment — never commit these
+.env
+.env.*
+*.local
+secrets.*
+*.pem
+*.key
+
+# OS & editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs & caches
+*.log
+npm-debug.log*
+.cache/
+
+# Local scratch / drafts not meant for the repo
+/scratch/
+/drafts/
+
+# Local AI working notes — kept out of the public repo
+CLAUDE.md

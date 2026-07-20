@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guide — Driftwood CLI docs — a docs site template built with keel</title>
+<meta name="description" content="A developer-tool documentation site template built entirely with keel: a sidebar-nav + main-content shell across three linked pages — a getting-started guide, a command reference, and a changelog.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Byte-identical across all three basecamp pages. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(240 8% 9%);
+      --k-surface: hsl(240 8% 13%);
+      --k-surface-2: hsl(240 8% 17%);
+      --k-border: hsl(240 6% 24%);
+      --k-border-strong: hsl(240 6% 32%);
+      --k-text: hsl(40 15% 92%);
+      --k-text-soft: hsl(240 6% 70%);
+      --k-text-faint: hsl(240 6% 50%);
+      --k-accent: hsl(38 90% 55%);
+      --k-on-accent: hsl(30 45% 10%);
+      --k-accent-2: hsl(205 12% 58%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-font-display: system-ui, "Segoe UI", sans-serif;
+      --k-display-weight: 650;
+      --k-tracking: -0.01em;
+      --k-radius: 6px;
+      --k-density: 1;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local (prefix "bc-"): identical on every basecamp page */
+  .bc-side-title { font-family: var(--k-font-mono); font-size: var(--k-text-xs);
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--k-text-faint);
+    margin-block: var(--k-space-4) var(--k-space-2); }
+  .bc-side-title:first-child { margin-block-start: 0; }
+  .bc-wordmark { font-family: var(--k-font-mono); }
+  .bc-wordmark strong { color: var(--k-accent); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme, shared across a linked three-page docs site.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand bc-wordmark" href="basecamp-guide.html">drift<strong>wood</strong></a>
+      <ul class="k-nav__links">
+        <li><a href="basecamp-guide.html" aria-current="page">Guide</a></li>
+        <li><a href="basecamp-reference.html">Reference</a></li>
+        <li><a href="basecamp-changelog.html">Changelog</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+      <aside class="k-sticky">
+        <nav aria-label="Documentation">
+          <p class="bc-side-title">Getting started</p>
+          <ul class="k-list k-list--flush">
+            <li aria-current="page"><a href="basecamp-guide.html">Guide</a></li>
+            <li><a href="basecamp-guide.html#bc-install">Install</a></li>
+            <li><a href="basecamp-guide.html#bc-deploy">First deploy</a></li>
+            <li><a href="basecamp-guide.html#bc-domains">Attach a domain</a></li>
+          </ul>
+          <p class="bc-side-title">Reference</p>
+          <ul class="k-list k-list--flush">
+            <li><a href="basecamp-reference.html">Commands</a></li>
+            <li><a href="basecamp-reference.html#bc-config">Config file</a></li>
+          </ul>
+          <p class="bc-side-title">Project</p>
+          <ul class="k-list k-list--flush">
+            <li><a href="basecamp-changelog.html">Changelog</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main id="main">
+        <h1>Guide</h1>
+        <p class="k-text-soft">Driftwood ships one binary. It builds a
+        function, signs it, and puts it on the edge network closest to
+        whoever calls it — no dashboard step required to go live.</p>
+
+        <h2 id="bc-install">Install</h2>
+        <p>Pick a method. Driftwood is a single static binary with no
+        runtime dependency.</p>
+        <div class="k-editor k-editor--dark">
+          <div class="k-editor__bar">
+            <span class="k-editor__dots"><span></span><span></span><span></span></span>
+            <span class="k-editor__name">terminal</span>
+          </div>
+          <div class="k-editor__body">
+            <pre><code>curl -fsSL https://get.driftwood.dev | sh
+driftwood --version
+# driftwood 4.2.0 (darwin/arm64)</code></pre>
+          </div>
+        </div>
+        <p>Package managers work too: <code>brew install driftwood</code>,
+        <code>scoop install driftwood</code>, or download a release
+        archive directly from the releases page.</p>
+
+        <h2 id="bc-deploy">Your first deploy</h2>
+        <p>Driftwood deploys whatever's in the current directory. A
+        function is just a folder with an entry file — no config is
+        required for a first deploy, though you'll usually add one once
+        you have more than one function.</p>
+        <div class="k-editor k-editor--dark">
+          <div class="k-editor__bar">
+            <span class="k-editor__dots"><span></span><span></span><span></span></span>
+            <span class="k-editor__name">terminal</span>
+          </div>
+          <div class="k-editor__body">
+            <pre><code>mkdir hello &amp;&amp; cd hello
+echo 'export default () =&gt; new Response("hi")' &gt; index.js
+driftwood deploy
+
+# ✓ built hello (1 route, 4.1kb)
+# ✓ signed
+# ✓ live at https://hello-7f2a.driftwood.app</code></pre>
+          </div>
+        </div>
+        <div class="k-alert k-alert--soft"><p>A deploy is content-addressed —
+        the URL above changes only when the code changes, so old links
+        stay valid until you explicitly retire them with
+        <code>driftwood retire</code>.</p></div>
+
+        <h2 id="bc-domains">Attach a domain</h2>
+        <p>Point a domain at the latest deploy, or pin it to a specific
+        deploy hash for a slower rollout:</p>
+        <pre><code>driftwood domains add app.example.com --project hello
+driftwood domains add app.example.com --project hello --pin 7f2a91c</code></pre>
+        <p>DNS is a single <code>CNAME</code> to
+        <code>edge.driftwood.app</code> — Driftwood issues and renews the
+        certificate automatically once the record resolves.</p>
+
+        <h2>Next</h2>
+        <p>The <a href="basecamp-reference.html">reference</a>
+        page documents every command and flag. The
+        <a href="basecamp-changelog.html">changelog</a> tracks
+        what shipped and when.</p>
+      </main>
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span class="bc-wordmark">driftwood — a fictional CLI, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

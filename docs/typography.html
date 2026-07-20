@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typography — keel</title>
+<meta name="description" content="The keel type reference: the fluid scale, headings, zero-class prose, the three font tokens, leading, and the text utilities.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+      <aside class="k-sticky docs-side k-sidebar--collapsible" id="docs-sidebar">
+        <button class="k-tool docs-sidebar-toggle" type="button" id="docs-sidebar-toggle"
+                aria-pressed="false" aria-label="Collapse sidebar to icons">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Documentation">
+          <details class="k-nav-group" open>
+            <summary>Getting started</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="start.html">Start</a></li>
+            <li><a href="frameworks.html">Framework guides</a></li>
+            <li><a href="concepts.html">Concepts</a></li>
+            <li><a href="changelog.html">Changelog</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Reference</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="tokens.html">Tokens</a></li>
+            <li><a href="base.html">Base</a></li>
+            <li aria-current="page"><a href="typography.html">Typography</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="components.html">Components</a>
+            <ul class="k-list k-list--flush docs-sub">
+              <li><a href="components-actions.html">Actions</a></li>
+              <li><a href="components-forms.html">Forms</a></li>
+              <li><a href="components-surfaces.html">Surfaces &amp; data</a></li>
+              <li><a href="components-feedback.html">Feedback</a></li>
+              <li><a href="components-overlays.html">Overlays</a></li>
+              <li><a href="components-navigation.html">Navigation</a></li>
+              <li><a href="components-identity.html">Identity &amp; media</a></li>
+              <li><a href="components-motion.html">Motion</a></li>
+              <li><a href="components-extending.html">Extending</a></li>
+              <li><a href="components-app.html">Application</a></li>
+            </ul>
+          </li>
+            <li><a href="utilities.html">Utilities</a></li>
+            <li><a href="icons.html">Icons</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Build</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="sections.html">Sections</a></li>
+            <li><a href="../templates.html">Templates</a></li>
+            <li><a href="../design.html">Design system</a></li>
+            <li><a href="paths.html">Paths</a></li>
+          </ul>
+          </details>
+        </nav>
+        <div id="docs-anchors"></div>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <h1>Typography</h1>
+        <p class="k-text-soft">Seven fluid sizes, three font tokens, and a base layer that makes plain HTML read as designed — no classes required.</p>
+
+        <h2>Scale</h2>
+        <p>The scale is fluid — every step is a <code>clamp()</code> that breathes with the viewport; resize the window and every specimen below resizes with it.</p>
+        <table>
+          <thead>
+            <tr><th>Token</th><th>Specimen</th><th>Default</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>--k-text-xs</code></td>
+              <td><span style="font-size: var(--k-text-xs)">The quick brown shipwright</span></td>
+              <td><code>clamp(0.78rem, 0.75rem + 0.15vw, 0.84rem)</code></td>
+            </tr>
+            <tr>
+              <td><code>--k-text-s</code></td>
+              <td><span style="font-size: var(--k-text-s)">The quick brown shipwright</span></td>
+              <td><code>clamp(0.88rem, 0.85rem + 0.18vw, 0.95rem)</code></td>
+            </tr>
+            <tr>
+              <td><code>--k-text-m</code></td>
+              <td><span style="font-size: var(--k-text-m)">The quick brown shipwright</span></td>
+              <td><code>clamp(1rem, 0.96rem + 0.22vw, 1.1rem)</code></td>
+            </tr>
+            <tr>
+              <td><code>--k-text-l</code></td>
+              <td><span style="font-size: var(--k-text-l)">The quick brown shipwright</span></td>
+              <td><code>clamp(1.15rem, 1.06rem + 0.45vw, 1.35rem)</code></td>
+            </tr>
+            <tr>
+              <td><code>--k-text-xl</code></td>
+              <td><span style="font-size: var(--k-text-xl)">The quick brown shipwright</span></td>
+              <td><code>clamp(1.4rem, 1.22rem + 0.9vw, 1.8rem)</code></td>
+            </tr>
+            <tr>
+              <td><code>--k-text-2xl</code></td>
+              <td><span style="font-size: var(--k-text-2xl)">The quick brown shipwright</span></td>
+              <td><code>clamp(1.8rem, 1.48rem + 1.6vw, 2.5rem)</code></td>
+            </tr>
+            <tr>
+              <td><code>--k-text-3xl</code></td>
+              <td><span style="font-size: var(--k-text-3xl)">The quick brown shipwright</span></td>
+              <td><code>clamp(2.4rem, 1.9rem + 2.6vw, 3.6rem)</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Headings</h2>
+        <p>Headings take the display font, weight, and tracking from
+        <code>--k-font-display</code>, <code>--k-display-weight</code>, and
+        <code>--k-tracking</code> — retune those three tokens and every
+        heading on the site follows. The <a href="../design.html">design
+        page</a> pairs them for you. Rendered live, h1 through h4:</p>
+        <div aria-hidden="true" style="background: var(--k-surface); border: 1px solid var(--k-border); border-radius: var(--k-radius); padding: var(--k-space-5); margin-bottom: var(--k-space-4)">
+          <h1>Heading one — the page opener</h1>
+          <h2 style="margin-top: 0">Heading two — a major section</h2>
+          <h3 style="margin-top: 0">Heading three — a subsection</h3>
+          <h4 style="margin-top: 0; margin-bottom: 0">Heading four — a small heading</h4>
+        </div>
+
+        <h2 id="t-weights">Weights &amp; styles</h2>
+        <p>The scale is one axis; weight and style are the other. keel
+        uses exactly two weights — <code>400</code> for reading and
+        <code>650</code> for emphasis and display — plus the italic,
+        underline, highlight, and mono treatments the base layer ships.
+        Every specimen below renders in the <em>current pairing</em>,
+        so this table is also how you audit a font choice: swap the
+        tokens on the <a href="../design.html">design page</a> and
+        re-read this page.</p>
+        <table>
+          <thead>
+            <tr><th>Specimen</th><th>The CSS that produces it</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span>Regular body — the reading weight</span></td>
+              <td><code>font-weight: 400</code> — the body default, no rule needed</td>
+            </tr>
+            <tr>
+              <td><strong>Strong — the emphasis weight</strong></td>
+              <td><code>strong { font-weight: 650 }</code> — dt, labels, and th share it</td>
+            </tr>
+            <tr>
+              <td><span style="font-family: var(--k-font-display); font-weight: var(--k-display-weight); letter-spacing: var(--k-tracking)">Display — headings and stat values</span></td>
+              <td><code>font-weight: var(--k-display-weight)</code> in <code>var(--k-font-display)</code> — one token, default <code>650</code></td>
+            </tr>
+            <tr>
+              <td><em>Italic — a voice change, not a weight change</em></td>
+              <td><code>em</code> — the browser's italic, untouched</td>
+            </tr>
+            <tr>
+              <td><a href="#t-weights">The link style — accent, thin underline</a></td>
+              <td><code>a { color: var(--k-accent); text-decoration-thickness: 1px; text-underline-offset: 0.2em }</code></td>
+            </tr>
+            <tr>
+              <td><small>Small — a size step down and a shade softer</small></td>
+              <td><code>small { font-size: var(--k-text-s); color: var(--k-text-soft) }</code></td>
+            </tr>
+            <tr>
+              <td><span>A sentence with a <mark>marked phrase</mark> in it</span></td>
+              <td><code>mark { background: var(--k-accent-soft) }</code> — derived, so always on-brand</td>
+            </tr>
+            <tr>
+              <td><span>Inline <code>code</code> sits in running text</span></td>
+              <td><code>code { font-family: var(--k-font-mono); background: var(--k-surface-2) }</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <p><small>Why 650 and not "bold"? The system stacks carry
+        <code>400</code> and <code>650–700</code> reliably on every OS,
+        and the six self-hosted faces ship exactly <code>400</code> +
+        <code>700</code> — so keel never asks for a weight a font can't
+        honestly render.</small></p>
+        <details>
+          <summary>Markup</summary>
+          <pre><code>&lt;p&gt;Regular body, &lt;strong&gt;strong&lt;/strong&gt;, &lt;em&gt;italic&lt;/em&gt;,
+&lt;a href="…"&gt;a link&lt;/a&gt;, &lt;small&gt;small print&lt;/small&gt;,
+a &lt;mark&gt;marked phrase&lt;/mark&gt;, and inline &lt;code&gt;code&lt;/code&gt;.&lt;/p&gt;
+
+&lt;!-- the display treatment is what every heading gets for free --&gt;
+&lt;span style="font-family: var(--k-font-display);
+             font-weight: var(--k-display-weight);
+             letter-spacing: var(--k-tracking)"&gt;…&lt;/span&gt;</code></pre>
+        </details>
+
+        <h2>Prose</h2>
+        <p>All of this is the base layer — plain HTML, zero classes. A
+        paragraph with a <a href="base.html">link</a>, <strong>strong</strong>
+        text, <em>emphasis</em>, <small>small print</small>, a
+        <mark>marked phrase</mark>, inline <code>code</code>, and a
+        <kbd>Ctrl</kbd> key.</p>
+        <blockquote>
+          <p>A blockquote gets the accent edge, softer text, and the large
+          step — quote something worth the room.</p>
+        </blockquote>
+        <ul>
+          <li>An unordered list</li>
+          <li>with sensible indentation</li>
+          <li>and hairline gaps between items</li>
+        </ul>
+        <ol>
+          <li>An ordered list</li>
+          <li>gets the same treatment</li>
+          <li>numbers included</li>
+        </ol>
+
+        <h2>Fonts</h2>
+        <table>
+          <thead>
+            <tr><th>Token</th><th>What it does</th><th>Default</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>--k-font-display</code></td>
+              <td>Headings and stat values.</td>
+              <td><code>system-ui, "Segoe UI", sans-serif</code></td>
+            </tr>
+            <tr>
+              <td><code>--k-font-body</code></td>
+              <td>Everything else.</td>
+              <td><code>system-ui, "Segoe UI", sans-serif</code></td>
+            </tr>
+            <tr>
+              <td><code>--k-font-mono</code></td>
+              <td>Code, kbd, kickers, eyebrows, the brand mark.</td>
+              <td><code>ui-monospace, Consolas, "Cascadia Mono", monospace</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>The <a href="../design.html">design page</a> ships twelve ready
+        pairings for these tokens. Six stay on system stacks — Grotesk,
+        Editorial, Humanist, Console, Rounded, Print — zero requests,
+        rendered with whatever the OS has. Six are real typefaces
+        self-hosted with this site as woff2 (SIL OFL licensed, ~300 KB
+        total, lazy-loaded per face): <span style="font-family:'Inter'">Inter</span>,
+        <span style="font-family:'Manrope'">Manrope</span>,
+        <span style="font-family:'Space Grotesk'">Space Grotesk</span>,
+        <span style="font-family:'Playfair Display'">Playfair Display</span>,
+        <span style="font-family:'Lora'">Lora</span>, and
+        <span style="font-family:'JetBrains Mono'">JetBrains Mono</span> —
+        identical on every OS. The framework itself ships no fonts; the
+        export tells you which woff2 files to copy, or gives a Google
+        Fonts link if you'd rather link than host.</p>
+
+        <h2>Leading &amp; rhythm</h2>
+        <p>Two tokens set the vertical feel: <code>--k-leading</code>
+        (<code>1.65</code>) is the body line-height, and
+        <code>--k-leading-tight</code> (<code>1.12</code>) is the heading
+        line-height. Vertical rhythm between blocks is automatic — a heading
+        that follows content gets room to breathe with no classes; the
+        <a href="base.html">base page</a> documents that smart content
+        spacing.</p>
+
+        <h2 id="t-context">Type in context</h2>
+        <p>Specimens prove the tokens; compositions prove the system.
+        Three small pieces of real typographic work, each built from
+        nothing but the scale, the color steps, and the mono token.</p>
+
+        <h3 id="t-context-lede">The lede</h3>
+        <p>An article opener: the heading does the display work, then
+        one paragraph steps up to <code>k-text-l</code> and softens to
+        <code>k-text-soft</code> — bigger but quieter, so it reads as
+        an invitation rather than a second heading.</p>
+        <div style="background: var(--k-surface); border: 1px solid var(--k-border); border-radius: var(--k-radius); padding: var(--k-space-5); margin-bottom: var(--k-space-4)">
+          <h3 style="margin-top: 0">The harbor rebuild, one year on</h3>
+          <p class="k-text-l k-text-soft" style="margin-bottom: 0">Twelve months after the storm,
+          the shipwrights have a working slipway, a new saw shed, and a
+          waiting list — this is how they did it.</p>
+        </div>
+        <details>
+          <summary>Markup</summary>
+          <pre><code>&lt;h3&gt;The harbor rebuild, one year on&lt;/h3&gt;
+&lt;p class="k-text-l k-text-soft"&gt;Twelve months after the storm, …&lt;/p&gt;</code></pre>
+        </details>
+
+        <h3 id="t-context-stat">The stat callout</h3>
+        <p>A big number with a small caption:
+        <code>.k-stat__value</code> takes the display font and weight,
+        <code>.k-stat__label</code> drops to the xs step, faint and
+        uppercase. There's no wrapper class — any element holds a pair,
+        and a <code>.k-cluster</code> rows several up.</p>
+        <div class="k-cluster" style="background: var(--k-surface); border: 1px solid var(--k-border); border-radius: var(--k-radius); padding: var(--k-space-5); margin-bottom: var(--k-space-4); gap: var(--k-space-6)">
+          <div><span class="k-stat__value">31</span><span class="k-stat__label">hulls restored</span></div>
+          <div><span class="k-stat__value">4.2t</span><span class="k-stat__label">oak reclaimed</span></div>
+          <div><span class="k-stat__value">0</span><span class="k-stat__label">days lost</span></div>
+        </div>
+        <details>
+          <summary>Markup</summary>
+          <pre><code>&lt;div class="k-cluster"&gt;
+  &lt;div&gt;&lt;span class="k-stat__value"&gt;31&lt;/span&gt;&lt;span class="k-stat__label"&gt;hulls restored&lt;/span&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;span class="k-stat__value"&gt;4.2t&lt;/span&gt;&lt;span class="k-stat__label"&gt;oak reclaimed&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </details>
+
+        <h3 id="t-context-meta">The meta row</h3>
+        <p>The dense caption under a title — byline, date, reading
+        time. Everything drops to <code>k-text-xs</code> and fades to
+        <code>k-text-faint</code>; the machine-readable parts
+        (<code>time</code>) take <code>k-mono</code> so figures line
+        up and read as data.</p>
+        <div style="background: var(--k-surface); border: 1px solid var(--k-border); border-radius: var(--k-radius); padding: var(--k-space-5); margin-bottom: var(--k-space-4)">
+          <h4 style="margin-top: 0; margin-bottom: var(--k-space-1)">Steam-bending white oak, safely</h4>
+          <p class="k-text-xs k-text-faint" style="margin-bottom: 0">By R. Daiven
+          · <time class="k-mono" datetime="2026-07-12">2026-07-12</time>
+          · 6 min read · in <a href="#t-context-meta">Workshop notes</a></p>
+        </div>
+        <details>
+          <summary>Markup</summary>
+          <pre><code>&lt;h4&gt;Steam-bending white oak, safely&lt;/h4&gt;
+&lt;p class="k-text-xs k-text-faint"&gt;By R. Daiven
+· &lt;time class="k-mono" datetime="2026-07-12"&gt;2026-07-12&lt;/time&gt;
+· 6 min read · in &lt;a href="…"&gt;Workshop notes&lt;/a&gt;&lt;/p&gt;</code></pre>
+        </details>
+
+        <h2>Text utilities</h2>
+        <p>For one-off adjustments, the <a href="utilities.html">utilities
+        page</a> documents the Text group — <code>k-text-*</code> for size,
+        color, and alignment, plus <code>k-bold</code>, <code>k-mono</code>,
+        <code>k-uppercase</code>, <code>k-truncate</code>, and
+        <code>k-balance</code> — every value a token, nothing arbitrary.</p>
+      </main>
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

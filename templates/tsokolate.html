@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tsokolate — a corner café for thick chocolate and slow mornings</title>
+<meta name="description" content="A fictional café landing page built entirely with keel: a warm cream-and-terracotta theme, a chalkboard-style menu, restrained inline-SVG line art, and an hours/location band. The whole theme is one tokens block.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Replace this block and the page becomes yours. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(36 42% 95%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(36 38% 90%);
+      --k-border: hsl(32 24% 82%);
+      --k-border-strong: hsl(32 22% 68%);
+      --k-text: hsl(20 35% 16%);
+      --k-text-soft: hsl(20 18% 36%);
+      --k-text-faint: hsl(20 12% 52%);
+      --k-accent: hsl(20 55% 34%);
+      --k-on-accent: hsl(36 42% 97%);
+      --k-accent-2: hsl(14 62% 52%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-font-display: Georgia, "Times New Roman", serif;
+      --k-display-weight: 700;
+      --k-tracking: -0.005em;
+      --k-radius: 14px;
+      --k-density: 1.05;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local: the menu card reads like a chalkboard — dark textured
+     surface via a solid token and a faint dot-grid gradient, no image */
+  .ts-board {
+    background: hsl(150 20% 12%);
+    background-image: radial-gradient(hsl(0 0% 100% / 0.035) 1px, transparent 1px);
+    background-size: 5px 5px;
+    color: hsl(40 30% 92%);
+    border-radius: var(--k-radius-l);
+    padding: var(--k-space-6);
+  }
+  .ts-board h3 { color: hsl(40 60% 72%); font-family: var(--k-font-display); }
+  .ts-board__row { display: flex; justify-content: space-between; gap: var(--k-space-3);
+                    border-block-end: 1px dashed hsl(0 0% 100% / 0.18); padding-block: var(--k-space-2); }
+  .ts-board__row:last-child { border-block-end: 0; }
+  .ts-board__price { font-family: var(--k-font-display); color: hsl(40 60% 72%); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme. <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Tsokolate</a>
+      <ul class="k-nav__links">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#visit">Hours &amp; location</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO — restrained inline-SVG steam lines over a cup, in the accent color -->
+<section class="k-hero" id="top">
+  <div class="k-container">
+    <div class="k-split k-split--wide-start">
+      <div>
+        <p class="k-hero__eyebrow">Tsokolate · corner café · est. 2021</p>
+        <h1>Thick chocolate.<br>Slow mornings.</h1>
+        <p class="k-hero__lead">
+          We stone-grind cacao the way our lola did — thick, slightly
+          bitter, cut with just enough sugar to let the bean still taste
+          like something. Come sit. Nobody will rush you.
+        </p>
+        <p class="k-cluster k-mt-5">
+          <a class="k-btn" href="#menu">See the menu</a>
+          <a class="k-btn k-btn--ghost" href="#visit">Find us</a>
+        </p>
+      </div>
+      <svg viewBox="0 0 220 220" role="img" aria-label="Line-art illustration of a cup of tsokolate with steam rising"
+           style="width: 100%; max-width: 16rem; margin-inline: auto; display: block">
+        <g fill="none" stroke="var(--k-accent-2)" stroke-width="4" stroke-linecap="round">
+          <path d="M70 60 Q64 40 74 24" />
+          <path d="M100 60 Q94 36 106 20" />
+          <path d="M130 60 Q124 40 134 24" />
+        </g>
+        <path d="M50 78 h100 v46 a50 50 0 0 1 -100 0 Z" fill="var(--k-surface)" stroke="var(--k-accent)" stroke-width="5"/>
+        <path d="M150 90 h14 a20 20 0 0 1 0 40 h-14" fill="none" stroke="var(--k-accent)" stroke-width="5"/>
+        <line x1="30" y1="176" x2="170" y2="176" stroke="var(--k-accent)" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- MENU — chalkboard-style card -->
+<section class="k-section k-section--alt" id="menu">
+  <div class="k-container--narrow k-container">
+    <h2>On the board today</h2>
+    <div class="ts-board k-mt-5">
+      <h3>Tsokolate</h3>
+      <div class="ts-board__row"><span>Tsokolate-eh, thick &amp; traditional</span><span class="ts-board__price">$4.75</span></div>
+      <div class="ts-board__row"><span>Tsokolate-ah, lighter, more water</span><span class="ts-board__price">$4.25</span></div>
+      <div class="ts-board__row"><span>Iced tsokolate, no dilution</span><span class="ts-board__price">$5.00</span></div>
+
+      <h3 style="margin-top: var(--k-space-5)">Pastries</h3>
+      <div class="ts-board__row"><span>Pan de sal, still warm</span><span class="ts-board__price">$1.50</span></div>
+      <div class="ts-board__row"><span>Ensaymada, cheese &amp; sugar</span><span class="ts-board__price">$3.75</span></div>
+      <div class="ts-board__row"><span>Bibingka, weekends only</span><span class="ts-board__price">$4.50</span></div>
+
+      <h3 style="margin-top: var(--k-space-5)">Also</h3>
+      <div class="ts-board__row"><span>Batirol, whipped tableside</span><span class="ts-board__price">$5.50</span></div>
+      <div class="ts-board__row"><span>Barako coffee, black</span><span class="ts-board__price">$3.25</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS / LOCATION BAND -->
+<section class="k-section" id="visit">
+  <div class="k-container">
+    <div class="k-split">
+      <div>
+        <h2>Hours</h2>
+        <ul class="k-checklist">
+          <li><span class="k-icon k-icon--clock" aria-hidden="true"></span>&nbsp; Tue–Fri, 7am – 3pm</li>
+          <li><span class="k-icon k-icon--clock" aria-hidden="true"></span>&nbsp; Sat–Sun, 8am – 2pm</li>
+          <li><span class="k-icon k-icon--x" aria-hidden="true"></span>&nbsp; Closed Mondays</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Find us</h2>
+        <p class="k-text-soft"><span class="k-icon k-icon--pin" aria-hidden="true"></span>
+        118 Aduana Street, corner of Real — three tables inside, four
+        more on the sidewalk when it's dry.</p>
+        <p class="k-text-soft"><span class="k-icon k-icon--phone" aria-hidden="true"></span>
+        (555) 019-2244 — call ahead for the last bibingka on Sundays.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="k-section k-section--accent">
+  <div class="k-container k-center">
+    <h2>Come before the pan de sal runs out</h2>
+    <p style="max-width: 34em; margin-inline: auto">We bake one batch a
+    morning. Most days it's gone by ten.</p>
+    <a class="k-btn k-btn--ghost" style="color: inherit; border-color: currentColor" href="#visit">Get directions</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span><strong style="color: var(--k-text)">Tsokolate</strong> — a fictional café, for demonstration.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sundough — a bakery template on keel's clay path</title>
+<meta name="description" content="A neighborhood bakery one-pager built with keel and the clay path: puffy cards, pill buttons, soft colored shadows. One tokens block plus one path link is the whole look.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-path-clay.css">
+<style>
+  /* The theme: one tokens block + the clay path linked above. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(32 60% 96%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(32 45% 91%);
+      --k-border: hsl(32 30% 84%);
+      --k-border-strong: hsl(32 30% 70%);
+      --k-text: hsl(20 35% 16%);
+      --k-text-soft: hsl(20 18% 36%);
+      --k-text-faint: hsl(20 12% 50%);
+      --k-accent: hsl(345 65% 42%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(28 80% 46%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-display-weight: 750;
+      --k-density: 1.05;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template on the <a href="../docs/paths.html">clay path</a> —
+    one tokens block + one path link is the whole look.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Sundough</a>
+      <ul class="k-nav__links">
+        <li><a href="#bakes">The bakes</a></li>
+        <li><a href="#hours">Hours</a></li>
+        <li><a href="#order">Order</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="k-section" id="top">
+  <div class="k-container">
+    <div class="k-split" style="align-items: center">
+      <div>
+        <p class="k-hero__eyebrow">A neighborhood bakery · Quezon City</p>
+        <h1>Soft inside.<br>Soft outside.</h1>
+        <p class="k-hero__lead">Sourdough, ensaymada, and one perfect
+        cinnamon knot — baked at 4 a.m., gone by noon.</p>
+        <p class="k-cluster k-mt-5">
+          <a class="k-btn k-btn--large" href="#order">Reserve a box</a>
+          <a class="k-btn k-btn--ghost k-btn--large" href="#bakes">Today's bakes</a>
+        </p>
+      </div>
+      <div class="k-card">
+        <span class="k-badge k-badge--ok k-badge--dot">Today's box</span>
+        <h3 class="k-mt-3">The morning three</h3>
+        <p class="k-text-soft">One of each, boxed warm.</p>
+        <ul class="k-list k-mt-3">
+          <li class="k-cluster" style="justify-content: space-between"><span>Country loaf</span><strong class="k-num">₱280</strong></li>
+          <li class="k-cluster" style="justify-content: space-between"><span>Brown-butter ensaymada</span><strong class="k-num">₱95</strong></li>
+          <li class="k-cluster" style="justify-content: space-between"><span>Cinnamon knot</span><strong class="k-num">₱120</strong></li>
+        </ul>
+        <p class="k-cluster k-mt-4" style="justify-content: space-between; align-items: center">
+          <span>Box price <strong class="k-num">₱450</strong></span>
+          <a class="k-btn" href="#order">Add the box</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section" id="bakes">
+  <div class="k-container">
+    <h2>The bakes</h2>
+    <div class="k-cols-3 k-mt-5">
+      <div class="k-card">
+        <span class="k-badge k-badge--ok k-badge--dot">Baking now</span>
+        <h3 class="k-mt-3">Country loaf</h3>
+        <p>48-hour sourdough, burnt just enough. The crumb photographs
+        itself.</p>
+        <p class="k-cluster k-justify-between">
+          <strong>₱280</strong><a class="k-btn" href="#order">Add</a>
+        </p>
+      </div>
+      <div class="k-card">
+        <span class="k-badge k-badge--warn k-badge--dot">Few left</span>
+        <h3 class="k-mt-3">Brown-butter ensaymada</h3>
+        <p>The soft one. Toasted milk sugar on top, a week of cravings
+        after.</p>
+        <p class="k-cluster k-justify-between">
+          <strong>₱95</strong><a class="k-btn" href="#order">Add</a>
+        </p>
+      </div>
+      <div class="k-card">
+        <span class="k-badge k-badge--dot">Weekends</span>
+        <h3 class="k-mt-3">Cinnamon knot</h3>
+        <p>Laminated, twisted, glazed while warm. Saturday and Sunday
+        only.</p>
+        <p class="k-cluster k-justify-between">
+          <strong>₱120</strong><a class="k-btn" href="#order">Add</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--alt" id="hours">
+  <div class="k-container">
+    <div class="k-split">
+      <div>
+        <h2>Small on purpose</h2>
+        <p>One oven, two bakers, forty loaves a day. When the shelf is
+        empty we flip the sign and go home proud. Reserve ahead if your
+        Saturday depends on it.</p>
+        <blockquote><p>The ensaymada made my lola emotional. Twice.</p></blockquote>
+        <p class="k-text-faint"><small>— a regular, box no. 1188</small></p>
+      </div>
+      <div class="k-card">
+        <h3>Hours</h3>
+        <table>
+          <tbody>
+            <tr><td>Tue – Fri</td><td class="k-num">7:00 – 12:00</td></tr>
+            <tr><td>Sat – Sun</td><td class="k-num">6:30 – 11:00</td></tr>
+            <tr><td>Mon</td><td class="k-num">oven rests</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--accent" id="order">
+  <div class="k-container k-center">
+    <h2>Reserve tomorrow's box</h2>
+    <p style="max-width: 36em; margin-inline: auto">Tell us your usual
+    and it's on the shelf with your name by 7 a.m.</p>
+    <form class="k-cluster k-mt-5" style="justify-content: center" action="#" method="get">
+      <label class="k-visually-hidden" for="sd-email">Email</label>
+      <input id="sd-email" type="email" placeholder="you@example.com" style="min-inline-size: 18rem">
+      <button class="k-btn" type="submit">Reserve</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>Sundough — a fictional bakery on the clay path.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../docs/paths.html">About paths</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

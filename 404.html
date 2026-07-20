@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Page not found — keel</title>
+<script>
+  /* Served by GitHub Pages for every missing path, at any depth, and on
+     either the project path (/keel/…) or a root domain — so the site
+     root is computed, not hardcoded. */
+  var parts = location.pathname.split("/");
+  var SITEROOT = parts[1] === "keel" ? "/keel/" : "/";
+
+  /* Template pages moved from the repo root into templates/ — redirect
+     the old URLs (template-saas.html → templates/saas.html). */
+  var m = location.pathname.match(/^(?:\/keel)?\/template-([a-z0-9-]+\.html)$/);
+  if (m) location.replace(SITEROOT + "templates/" + m[1]);
+
+  /* keel's own stylesheet, from the computed root */
+  document.write('<link rel="stylesheet" href="' + SITEROOT + 'css/keel.css">');
+</script>
+<noscript><link rel="stylesheet" href="/keel/css/keel.css"></noscript>
+</head>
+<body>
+<section class="k-hero">
+  <div class="k-container--narrow k-container">
+    <p class="k-card__kicker">404</p>
+    <h1>Page not found</h1>
+    <p class="k-hero__lead">This page doesn't exist — or it moved when
+    the site was reorganized.</p>
+    <p class="k-cluster">
+      <a class="k-btn" id="nf-home" href="/keel/">Go to the homepage</a>
+      <a class="k-btn k-btn--ghost" id="nf-docs" href="/keel/docs/start.html">Open the docs</a>
+    </p>
+  </div>
+</section>
+<script>
+  document.getElementById("nf-home").href = SITEROOT;
+  document.getElementById("nf-docs").href = SITEROOT + "docs/start.html";
+</script>
+</body>
+</html>

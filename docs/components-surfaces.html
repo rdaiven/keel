@@ -1,0 +1,1113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Surfaces &amp; data — keel</title>
+<meta name="description" content="keel's surface and data components: cards, surface effects, panel, calendar, list group, accordion, tables, stat, divider, empty state, timeline.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<style>
+  .demo-box { background: var(--k-accent-soft); border: 1px dashed var(--k-accent);
+              border-radius: var(--k-radius-s); padding: var(--k-space-3);
+              font-size: var(--k-text-xs); font-family: var(--k-font-mono);
+              color: var(--k-accent-strong); text-align: center; }
+
+  /* page-local custom variants — demos for the "Your own variants"
+     and "Extending keel" sections below */
+  .btn-sale {
+    --k-btn-bg: var(--k-warn);
+    --k-btn-bg-hover: color-mix(in oklab, var(--k-warn), black 15%);
+  }
+  .btn-quiet {
+    --k-btn-bg: var(--k-accent-trans-10);
+    --k-btn-fg: var(--k-accent-strong);
+    --k-btn-bg-hover: var(--k-accent-trans-20);
+  }
+
+  .testimonial {
+    background: var(--k-surface);
+    border: 1px solid var(--k-border);
+    border-radius: var(--k-radius-l);
+    padding: var(--k-space-5);
+  }
+  .testimonial__quote {
+    font-size: var(--k-text-l);
+    color: var(--k-text-soft);
+    margin: 0 0 var(--k-space-3);
+  }
+  .testimonial__name {
+    font-family: var(--k-font-mono);
+    font-size: var(--k-text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--k-text-faint);
+  }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+
+      <aside class="k-sticky docs-side k-sidebar--collapsible" id="docs-sidebar">
+        <button class="k-tool docs-sidebar-toggle" type="button" id="docs-sidebar-toggle"
+                aria-pressed="false" aria-label="Collapse sidebar to icons">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Documentation">
+          <details class="k-nav-group" open>
+            <summary>Getting started</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="start.html">Start</a></li>
+            <li><a href="frameworks.html">Framework guides</a></li>
+            <li><a href="concepts.html">Concepts</a></li>
+            <li><a href="changelog.html">Changelog</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Reference</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="tokens.html">Tokens</a></li>
+            <li><a href="base.html">Base</a></li>
+            <li><a href="typography.html">Typography</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="components.html">Components</a>
+            <ul class="k-list k-list--flush docs-sub">
+              <li><a href="components-actions.html">Actions</a></li>
+              <li><a href="components-forms.html">Forms</a></li>
+              <li aria-current="page"><a href="components-surfaces.html">Surfaces &amp; data</a></li>
+              <li><a href="components-feedback.html">Feedback</a></li>
+              <li><a href="components-overlays.html">Overlays</a></li>
+              <li><a href="components-navigation.html">Navigation</a></li>
+              <li><a href="components-identity.html">Identity &amp; media</a></li>
+              <li><a href="components-motion.html">Motion</a></li>
+              <li><a href="components-extending.html">Extending</a></li>
+              <li><a href="components-app.html">Application</a></li>
+            </ul>
+          </li>
+            <li><a href="utilities.html">Utilities</a></li>
+            <li><a href="icons.html">Icons</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Build</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="sections.html">Sections</a></li>
+            <li><a href="../templates.html">Templates</a></li>
+            <li><a href="../design.html">Design system</a></li>
+            <li><a href="paths.html">Paths</a></li>
+          </ul>
+          </details>
+        </nav>
+        <div id="docs-anchors"></div>
+      </aside>
+
+      <main id="main" class="docs-main">
+
+      <h1>Surfaces &amp; data</h1>
+      <p class="k-text-soft">Boxes and rows that hold content — cards, lists, tables, numbers.</p>
+
+    <section id="c-cards">
+      <h2>Cards</h2>
+      <p><code>.k-card</code> is a surface with border, radius, and
+      the token shadow. <code>.k-card__kicker</code> is a small
+      mono label above the heading. Two quieter variants:
+      <code>--flat</code> keeps the border but drops the shadow, and
+      <code>--tint</code> trades the surface for the soft accent —
+      no border, no shadow.</p>
+      <p>Padding has two presets: <code>--pad-sm</code> tightens it,
+      <code>--pad-lg</code> opens it up — both just set the
+      <code>--k-card-pad</code> knob for you. <code>--accent</code> adds
+      a 3px accent-colored top edge to flag one card without shouting.
+      And <code>--row</code> lays a card out horizontally — a figure or
+      icon beside the body, flexed with a gap — which folds back to a
+      vertical stack under 40rem.</p>
+      <p>Cards read knobs too — <code>--k-card-bg</code>,
+      <code>--k-card-border</code>, <code>--k-card-radius</code>, and
+      <code>--k-card-pad</code> — so a one-off compact card is a single
+      inline knob:
+      <code>&lt;div class="k-card" style="--k-card-pad: var(--k-space-3)"&gt;</code>.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-grid" style="margin-bottom: var(--k-space-4)">
+          <div class="k-card">
+            <p class="k-card__kicker">Kicker</p>
+            <h4>A card</h4>
+            <p><small>Body content is plain HTML; the card trims the
+            margin of its last child so padding stays even.</small></p>
+          </div>
+          <div class="k-card">
+            <h4>Without a kicker</h4>
+            <p><small>The kicker is optional. Cards are usually laid
+            out with <code>.k-grid</code>, as here.</small></p>
+          </div>
+          <div class="k-card k-card--hover">
+            <h4>Hover me</h4>
+            <p><small><code>.k-card--hover</code> — lifts on hover
+            (translate + a larger shadow). A pointer-only affordance for
+            a card that's also a link or button.</small></p>
+          </div>
+        </div>
+      </details>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-grid" style="margin-bottom: var(--k-space-4)">
+          <div class="k-card k-card--flat">
+            <h4>Flat</h4>
+            <p><small><code>.k-card--flat</code> — border only, no
+            shadow. For dense grids where elevation gets noisy.</small></p>
+          </div>
+          <div class="k-card k-card--tint">
+            <h4>Tint</h4>
+            <p><small><code>.k-card--tint</code> — the soft accent as
+            the surface. A quiet way to highlight one card.</small></p>
+          </div>
+        </div>
+      </details>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-grid" style="margin-bottom: var(--k-space-4)">
+          <div class="k-card k-card--pad-sm">
+            <h4>Compact</h4>
+            <p><small><code>.k-card--pad-sm</code> — tighter padding for
+            dense grids.</small></p>
+          </div>
+          <div class="k-card k-card--pad-lg">
+            <h4>Roomy</h4>
+            <p><small><code>.k-card--pad-lg</code> — more breathing room
+            when a card carries weight.</small></p>
+          </div>
+          <div class="k-card k-card--accent">
+            <h4>Accent edge</h4>
+            <p><small><code>.k-card--accent</code> — a 3px top edge in the
+            accent color.</small></p>
+          </div>
+        </div>
+      </details>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 28rem; margin-bottom: var(--k-space-4)">
+          <div class="k-card k-card--row">
+            <span class="k-icon k-icon--box" aria-hidden="true" style="font-size: 2rem; color: var(--k-accent-strong)"></span>
+            <div>
+              <h4>Horizontal layout</h4>
+              <p><small><code>.k-card--row</code> puts a figure or icon
+              beside the body; under 40rem it stacks vertically.</small></p>
+            </div>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-card"&gt;
+  &lt;p class="k-card__kicker"&gt;Kicker&lt;/p&gt;
+  &lt;h4&gt;A card&lt;/h4&gt;
+  &lt;p&gt;Body content.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- padding presets and an accent top edge --&gt;
+&lt;div class="k-card k-card--pad-sm"&gt;…&lt;/div&gt;
+&lt;div class="k-card k-card--pad-lg"&gt;…&lt;/div&gt;
+&lt;div class="k-card k-card--accent"&gt;…&lt;/div&gt;
+
+&lt;!-- horizontal: media beside body, stacks under 40rem --&gt;
+&lt;div class="k-card k-card--row"&gt;
+  &lt;span class="k-icon k-icon--box" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;div&gt;
+    &lt;h4&gt;Horizontal layout&lt;/h4&gt;
+    &lt;p&gt;Body content.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-effects">
+      <h2>Surface effects</h2>
+      <p>Glassmorphism and friends are not components — they're
+      <em>treatments</em> any surface can wear. <code>.k-glass</code>
+      frosts whatever it's on (real <code>backdrop-filter</code>, with
+      a solid-surface fallback where unsupported — it needs something
+      behind it to show); <code>.k-glow</code> is an accent halo;
+      <code>.k-bg-mesh</code> is a soft multi-point gradient built from
+      both your seeds. All derived from tokens, so every effect stays
+      on-brand automatically, and every one keeps text contrast intact.
+      Add <code>--live</code> to the mesh and its points drift slowly;
+      add <code>--pulse</code> to the glow and it breathes — both quiet,
+      continuous, and off entirely under reduced motion.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-bg-mesh k-bg-mesh--live" style="padding: var(--k-space-5); border-radius: var(--k-radius-l); margin-bottom: var(--k-space-4)">
+          <div class="k-split">
+            <div class="k-card k-glass">
+              <p class="k-card__kicker">Glass</p>
+              <h4>Frosted, on-system</h4>
+              <p><small>A <code>.k-card.k-glass</code> over
+              <code>.k-bg-mesh</code> — the blur is real.</small></p>
+            </div>
+            <div class="k-card k-glow k-glow--pulse">
+              <p class="k-card__kicker">Glow</p>
+              <h4>An accent halo</h4>
+              <p><small>Derived from your accent's transparencies —
+              retint and the glow follows. Watch the mesh behind this
+              card, and this card's own halo — both are <code>--live</code>/
+              <code>--pulse</code>.</small></p>
+            </div>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-bg-mesh k-bg-mesh--live"&gt;
+  &lt;div class="k-card k-glass"&gt;…&lt;/div&gt;
+  &lt;div class="k-card k-glow k-glow--pulse"&gt;…&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- a frosted sticky header --&gt;
+&lt;header class="k-glass k-sticky-top"&gt;…&lt;/header&gt;
+
+&lt;!-- blur amount is a knob --&gt;
+&lt;div class="k-card k-glass" style="--k-blur: 24px"&gt;…&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-panel">
+      <h2>Panel</h2>
+      <p><code>.k-panel</code> is a card with structural regions:
+      <code>__header</code>, <code>__body</code>, and
+      <code>__footer</code>. The difference from <code>.k-card</code>
+      is exactly that structure — a card is one padded box, while a
+      panel's header and footer are tinted strips with flush borders
+      that run edge to edge (the panel clips its own corners, so the
+      regions need no radius of their own). Use it when a surface has
+      a title bar or a row of actions that belong to the box, not the
+      content.</p>
+      <p>Two variants: <code>--pad-sm</code> tightens the section
+      padding (it sets the <code>--k-panel-pad</code> knob), and
+      <code>--accent</code> turns the header into an accent-colored bar
+      with on-accent text — for a panel that should read as the primary
+      one in a set.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 28rem; margin-bottom: var(--k-space-4)">
+          <div class="k-panel">
+            <div class="k-panel__header"><h4>Deploy settings</h4></div>
+            <div class="k-panel__body">
+              <p>Body content is plain HTML, padded like a card; the
+              panel trims its last child's margin so the spacing stays
+              even.</p>
+            </div>
+            <div class="k-panel__footer">
+              <button class="k-btn k-btn--small" type="button">Save</button>
+            </div>
+          </div>
+        </div>
+      </details>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 28rem; margin-bottom: var(--k-space-4)">
+          <div class="k-panel k-panel--accent k-panel--pad-sm">
+            <div class="k-panel__header"><h4>Primary plan</h4></div>
+            <div class="k-panel__body">
+              <p><code>.k-panel--accent</code> paints the header bar;
+              <code>.k-panel--pad-sm</code> tightens the padding.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-panel"&gt;
+  &lt;div class="k-panel__header"&gt;&lt;h4&gt;Deploy settings&lt;/h4&gt;&lt;/div&gt;
+  &lt;div class="k-panel__body"&gt;
+    &lt;p&gt;Body content.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="k-panel__footer"&gt;
+    &lt;button class="k-btn k-btn--small" type="button"&gt;Save&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- accent header bar, tighter padding --&gt;
+&lt;div class="k-panel k-panel--accent k-panel--pad-sm"&gt;
+  &lt;div class="k-panel__header"&gt;&lt;h4&gt;Primary plan&lt;/h4&gt;&lt;/div&gt;
+  &lt;div class="k-panel__body"&gt;&lt;p&gt;Body content.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-calendar">
+      <h2>Calendar</h2>
+      <p><code>.k-calendar</code> is a month grid:
+      <code>__head</code> holds the month name and a pair of
+      <code>.k-btn--icon .k-btn--ghost</code> buttons,
+      <code>__grid</code> is seven <code>abbr</code> weekday cells
+      followed by a <code>.k-calendar__day</code> button per day.
+      <code>--muted</code> fades the days that belong to the
+      neighboring months, <code>aria-current="date"</code> rings
+      today, and <code>aria-selected="true"</code> fills the selected
+      day with the accent — as everywhere in keel, the visual state is
+      the accessibility state. Honestly: this is a <em>display</em>
+      component. Marking dates is markup; <em>picking</em> dates is
+      <code>input type="date"</code> above, or your own JavaScript on
+      these buttons.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="margin-bottom: var(--k-space-4)">
+          <div class="k-calendar">
+            <div class="k-calendar__head">
+              <button class="k-btn k-btn--icon k-btn--ghost" type="button" aria-label="Previous month"><span class="k-icon k-icon--arrow-left" aria-hidden="true"></span></button>
+              <span>Quintilis 2026</span>
+              <button class="k-btn k-btn--icon k-btn--ghost" type="button" aria-label="Next month"><span class="k-icon k-icon--arrow-right" aria-hidden="true"></span></button>
+            </div>
+            <div class="k-calendar__grid">
+              <abbr title="Monday">Mo</abbr><abbr title="Tuesday">Tu</abbr><abbr title="Wednesday">We</abbr><abbr title="Thursday">Th</abbr><abbr title="Friday">Fr</abbr><abbr title="Saturday">Sa</abbr><abbr title="Sunday">Su</abbr>
+              <button class="k-calendar__day k-calendar__day--muted" type="button">29</button>
+              <button class="k-calendar__day k-calendar__day--muted" type="button">30</button>
+              <button class="k-calendar__day" type="button">1</button>
+              <button class="k-calendar__day" type="button">2</button>
+              <button class="k-calendar__day" type="button">3</button>
+              <button class="k-calendar__day" type="button">4</button>
+              <button class="k-calendar__day" type="button">5</button>
+              <button class="k-calendar__day" type="button">6</button>
+              <button class="k-calendar__day" type="button">7</button>
+              <button class="k-calendar__day" type="button">8</button>
+              <button class="k-calendar__day" type="button">9</button>
+              <button class="k-calendar__day" type="button">10</button>
+              <button class="k-calendar__day" type="button">11</button>
+              <button class="k-calendar__day" type="button">12</button>
+              <button class="k-calendar__day" type="button">13</button>
+              <button class="k-calendar__day" type="button" aria-current="date">14</button>
+              <button class="k-calendar__day" type="button">15</button>
+              <button class="k-calendar__day" type="button">16</button>
+              <button class="k-calendar__day" type="button">17</button>
+              <button class="k-calendar__day" type="button">18</button>
+              <button class="k-calendar__day" type="button">19</button>
+              <button class="k-calendar__day" type="button">20</button>
+              <button class="k-calendar__day" type="button" aria-selected="true">21</button>
+              <button class="k-calendar__day" type="button">22</button>
+              <button class="k-calendar__day" type="button">23</button>
+              <button class="k-calendar__day" type="button">24</button>
+              <button class="k-calendar__day" type="button">25</button>
+              <button class="k-calendar__day" type="button">26</button>
+              <button class="k-calendar__day" type="button">27</button>
+              <button class="k-calendar__day" type="button">28</button>
+              <button class="k-calendar__day" type="button">29</button>
+              <button class="k-calendar__day" type="button">30</button>
+              <button class="k-calendar__day" type="button">31</button>
+              <button class="k-calendar__day k-calendar__day--muted" type="button">1</button>
+              <button class="k-calendar__day k-calendar__day--muted" type="button">2</button>
+            </div>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-calendar"&gt;
+  &lt;div class="k-calendar__head"&gt;
+    &lt;button class="k-btn k-btn--icon k-btn--ghost" type="button" aria-label="Previous month"&gt;
+      &lt;span class="k-icon k-icon--arrow-left" aria-hidden="true"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;span&gt;Quintilis 2026&lt;/span&gt;
+    &lt;button class="k-btn k-btn--icon k-btn--ghost" type="button" aria-label="Next month"&gt;
+      &lt;span class="k-icon k-icon--arrow-right" aria-hidden="true"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="k-calendar__grid"&gt;
+    &lt;abbr title="Monday"&gt;Mo&lt;/abbr&gt; &lt;!-- … seven weekday cells --&gt;
+    &lt;button class="k-calendar__day k-calendar__day--muted" type="button"&gt;29&lt;/button&gt;
+    &lt;button class="k-calendar__day" type="button"&gt;1&lt;/button&gt;
+    &lt;!-- … one button per day … --&gt;
+    &lt;button class="k-calendar__day" type="button" aria-current="date"&gt;14&lt;/button&gt;
+    &lt;button class="k-calendar__day" type="button" aria-selected="true"&gt;21&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-list-group">
+      <h2>List group</h2>
+      <p><code>.k-list</code> is a bordered stack of rows. Plain
+      <code>li</code> items get padding; an <code>li</code> whose only
+      child is a link becomes fully clickable with a hover surface —
+      no extra class, the <code>a:only-child</code> is the signal.
+      Mark the active row with <code>aria-current</code> on the
+      <code>li</code> and it gets the soft accent plus an inset accent
+      bar at the start edge. Add <code>.k-list--flush</code> to drop
+      the border, radius, and background — just the rows and their
+      separators, for sitting inside a card or sidebar.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 24rem; margin-bottom: var(--k-space-4)">
+          <ul class="k-list">
+            <li><a href="#">Getting started</a></li>
+            <li aria-current="true">Components (you are here)</li>
+            <li><a href="#">Utilities</a></li>
+            <li>A plain item — no link, no hover.</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;ul class="k-list"&gt;
+  &lt;li&gt;&lt;a href="start.html"&gt;Getting started&lt;/a&gt;&lt;/li&gt;
+  &lt;li aria-current="true"&gt;Components (you are here)&lt;/li&gt;
+  &lt;li&gt;&lt;a href="utilities.html"&gt;Utilities&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;A plain item — no link, no hover.&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-accordion">
+      <h2>Accordion</h2>
+      <p><code>.k-accordion</code> wraps a group of native
+      <code>details</code> elements and draws them as one surface —
+      each loses its own box, a rule separates the rows. Give every
+      <code>details</code> the same <code>name</code> attribute and
+      the browser enforces one-open-at-a-time natively — opening one
+      closes the others, zero JavaScript. Leave the
+      <code>name</code> off and they open independently.</p>
+      <p><code>.k-accordion--flush</code> drops the card frame — no
+      border, no background — leaving just the rows and the rules
+      between them, so the group sits inline with the page rather than
+      as its own surface. Good inside a card or a sidebar that already
+      supplies the box.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="margin-bottom: var(--k-space-4)">
+          <div class="k-accordion">
+            <details name="demo-acc" open>
+              <summary>What is keel?</summary>
+              <p>A zero-dependency CSS framework — one file, five layers,
+              no build step.</p>
+            </details>
+            <details name="demo-acc">
+              <summary>Does it need JavaScript?</summary>
+              <p>No. This accordion is native <code>details</code>; the
+              exclusivity comes from the <code>name</code> attribute.</p>
+            </details>
+            <details name="demo-acc">
+              <summary>Can I retheme it?</summary>
+              <p>Yes — it reads the same tokens as everything else on
+              this page.</p>
+            </details>
+          </div>
+        </div>
+      </details>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="margin-bottom: var(--k-space-4)">
+          <div class="k-accordion k-accordion--flush">
+            <details name="demo-acc-flush" open>
+              <summary>Flush accordion</summary>
+              <p><code>.k-accordion--flush</code> — dividers only, no
+              frame or background.</p>
+            </details>
+            <details name="demo-acc-flush">
+              <summary>Sits inline with the page</summary>
+              <p>Useful when a surrounding card or sidebar already draws
+              the box.</p>
+            </details>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-accordion"&gt;
+  &lt;details name="faq" open&gt;
+    &lt;summary&gt;What is keel?&lt;/summary&gt;
+    &lt;p&gt;A zero-dependency CSS framework.&lt;/p&gt;
+  &lt;/details&gt;
+  &lt;details name="faq"&gt;
+    &lt;summary&gt;Does it need JavaScript?&lt;/summary&gt;
+    &lt;p&gt;No — the name attribute gives one-open-at-a-time natively.&lt;/p&gt;
+  &lt;/details&gt;
+&lt;/div&gt;
+
+&lt;!-- flush: dividers only, no card frame --&gt;
+&lt;div class="k-accordion k-accordion--flush"&gt;
+  &lt;details name="faq" open&gt;
+    &lt;summary&gt;Flush accordion&lt;/summary&gt;
+    &lt;p&gt;Sits inline with the page.&lt;/p&gt;
+  &lt;/details&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-tables">
+      <h2>Tables</h2>
+      <p>Tables are styled by the base layer already — including a
+      <code>caption</code>, a <code>tfoot</code>, and tabular figures.
+      <code>.k-table--striped</code> adds alternating row backgrounds
+      for longer tables. <code>.k-table--hover</code> tints the row
+      under the pointer with the soft accent — useful when rows are
+      links or lead somewhere. <code>.k-table--bordered</code> rules
+      every cell, for dense reference tables. The variants combine.
+      For a table wider than a small screen, wrap it in
+      <code>.k-table-wrap</code> — the table keeps its natural width
+      and scrolls sideways inside the wrapper instead of breaking the
+      page.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <table class="k-table--striped" style="margin-bottom: var(--k-space-4)">
+          <thead><tr><th>Class</th><th>Layer</th><th>Job</th></tr></thead>
+          <tbody>
+            <tr><td>.k-section</td><td>layout</td><td>full-width band</td></tr>
+            <tr><td>.k-container</td><td>layout</td><td>per-band content width</td></tr>
+            <tr><td>.k-btn</td><td>components</td><td>button</td></tr>
+            <tr><td>.k-card</td><td>components</td><td>surface</td></tr>
+          </tbody>
+        </table>
+      </details>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <table class="k-table--hover k-table--bordered" style="margin-bottom: var(--k-space-4)">
+          <thead><tr><th>Variant</th><th>Adds</th></tr></thead>
+          <tbody>
+            <tr><td>.k-table--hover</td><td>accent-soft row hover (try it)</td></tr>
+            <tr><td>.k-table--bordered</td><td>a rule around every cell</td></tr>
+          </tbody>
+        </table>
+      </details>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-table-wrap" style="margin-bottom: var(--k-space-4)">
+          <table class="k-table--striped">
+            <thead><tr><th>Breakpoint</th><th>Min width</th><th>What moves</th><th>Where it's declared</th><th>Notes on the wrapping demo</th></tr></thead>
+            <tbody>
+              <tr><td>sm</td><td>640px</td><td>columns split</td><td>layout layer</td><td>this wide table scrolls sideways in .k-table-wrap</td></tr>
+              <tr><td>md</td><td>820px</td><td>split &amp; sidebar engage</td><td>layout layer</td><td>the page itself never scrolls horizontally</td></tr>
+              <tr><td>lg</td><td>1080px</td><td>four columns</td><td>layout layer</td><td>narrow the window to see it</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;table class="k-table--striped"&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Class&lt;/th&gt;&lt;th&gt;Layer&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;.k-section&lt;/td&gt;&lt;td&gt;layout&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;.k-btn&lt;/td&gt;&lt;td&gt;components&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;!-- variants combine --&gt;
+&lt;table class="k-table--hover k-table--bordered"&gt;…&lt;/table&gt;
+
+&lt;!-- wide tables: wrap, don't squash --&gt;
+&lt;div class="k-table-wrap"&gt;
+  &lt;table class="k-table--striped"&gt;…&lt;/table&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+
+      <h3>Dense</h3>
+      <p><code>.k-table--dense</code> halves the cell padding — for
+      logs, admin screens, anywhere rows-per-screen beats breathing
+      room. It combines with the other variants like everything
+      else.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <table class="k-table--dense k-table--striped" style="margin-bottom: var(--k-space-4)">
+          <thead><tr><th>Order</th><th>Item</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>W-1041</td><td>Oak shelf, sanded</td><td>finishing</td></tr>
+            <tr><td>W-1042</td><td>Stool legs ×4</td><td>glue-up</td></tr>
+            <tr><td>W-1043</td><td>Drawer fronts</td><td>queued</td></tr>
+            <tr><td>W-1044</td><td>Picture frame</td><td>delivered</td></tr>
+          </tbody>
+        </table>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;table class="k-table--dense k-table--striped"&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Order&lt;/th&gt;&lt;th&gt;Item&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;W-1041&lt;/td&gt;&lt;td&gt;Oak shelf, sanded&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+      </details>
+
+      <h3>Sticky header</h3>
+      <p><code>.k-table--sticky</code> pins the header row while the
+      body scrolls under it. It only does something inside a scroll
+      container, so it's a <em>pair</em>: put the table in a
+      <code>.k-table-wrap.k-table-wrap--scroll</code>, which caps the
+      height and scrolls vertically. Scroll the log below — the
+      header stays.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-table-wrap k-table-wrap--scroll" style="max-block-size: 14rem">
+          <table class="k-table--sticky">
+            <thead><tr><th>Day</th><th>Vessel</th><th>Berth</th></tr></thead>
+            <tbody>
+              <tr><td>Mon</td><td>Grey Heron</td><td>2</td></tr>
+              <tr><td>Mon</td><td>Saltwind</td><td>5</td></tr>
+              <tr><td>Tue</td><td>Petrel</td><td>1</td></tr>
+              <tr><td>Tue</td><td>Low Tide</td><td>4</td></tr>
+              <tr><td>Wed</td><td>Cormorant</td><td>3</td></tr>
+              <tr><td>Wed</td><td>Grey Heron</td><td>2</td></tr>
+              <tr><td>Thu</td><td>Kittiwake</td><td>6</td></tr>
+              <tr><td>Thu</td><td>Saltwind</td><td>5</td></tr>
+              <tr><td>Fri</td><td>Petrel</td><td>1</td></tr>
+              <tr><td>Fri</td><td>Ballast Rose</td><td>4</td></tr>
+              <tr><td>Sat</td><td>Cormorant</td><td>3</td></tr>
+              <tr><td>Sat</td><td>Kittiwake</td><td>6</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;!-- the pair: --scroll gives the height cap,
+     --sticky pins the header inside it --&gt;
+&lt;div class="k-table-wrap k-table-wrap--scroll"&gt;
+  &lt;table class="k-table--sticky"&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Day&lt;/th&gt;&lt;th&gt;Vessel&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;…&lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+
+      <h3>Numbers, caption, footer</h3>
+      <p>Three things the base layer already handles: a
+      <code>caption</code> becomes the table's quiet title,
+      <code>tfoot</code> cells get a strong top rule and weight for a
+      totals row, and every table uses tabular figures — digits share
+      a width, so columns of numbers align without any class. The one
+      class here is <code>.k-num</code>, which right-aligns a numeric
+      column (put it on the <code>th</code> and its <code>td</code>s);
+      end-alignment plus tabular figures is what makes the totals
+      readable at a glance.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <table style="margin-bottom: var(--k-space-4)">
+          <caption>Berth 4 — outbound manifest</caption>
+          <thead><tr><th>Cargo</th><th class="k-num">Crates</th><th class="k-num">Weight (t)</th></tr></thead>
+          <tbody>
+            <tr><td>Rope, coiled</td><td class="k-num">140</td><td class="k-num">3.2</td></tr>
+            <tr><td>Lamp oil</td><td class="k-num">36</td><td class="k-num">7.9</td></tr>
+            <tr><td>Timber, sawn</td><td class="k-num">88</td><td class="k-num">21.4</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td>Total</td><td class="k-num">264</td><td class="k-num">32.5</td></tr>
+          </tfoot>
+        </table>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;table&gt;
+  &lt;caption&gt;Berth 4 — outbound manifest&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Cargo&lt;/th&gt;&lt;th class="k-num"&gt;Crates&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Rope, coiled&lt;/td&gt;&lt;td class="k-num"&gt;140&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;&lt;td&gt;Total&lt;/td&gt;&lt;td class="k-num"&gt;264&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;</code></pre>
+      </details>
+
+      <h3>Sortable affordance</h3>
+      <p>Give a header <code>aria-sort</code> and put a
+      <code>button</code> inside it; keel styles the state — an
+      unsorted column shows a faint ↕, the sorted one an accent ↑ or ↓.
+      Because the state lives in <code>aria-sort</code>, the same
+      attribute that draws the arrow announces the sort order to
+      assistive tech. Honestly, though: that's the whole of keel's
+      contribution. Cycling the attribute and reordering the rows is
+      your JavaScript — the ten lines wired into this demo (click a
+      header) are printed below the markup.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <table id="demo-sort" style="margin-bottom: var(--k-space-4)">
+          <thead>
+            <tr>
+              <th aria-sort="ascending"><button type="button">Vessel</button></th>
+              <th aria-sort="none"><button type="button">Cargo</button></th>
+              <th aria-sort="none"><button type="button">Crates</button></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Ballast Rose</td><td>Timber, sawn</td><td>88</td></tr>
+            <tr><td>Cormorant</td><td>Lamp oil</td><td>36</td></tr>
+            <tr><td>Grey Heron</td><td>Rope, coiled</td><td>140</td></tr>
+            <tr><td>Petrel</td><td>Salt, bagged</td><td>112</td></tr>
+            <tr><td>Saltwind</td><td>Barrel staves</td><td>64</td></tr>
+          </tbody>
+        </table>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;table id="cargo"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th aria-sort="ascending"&gt;&lt;button type="button"&gt;Vessel&lt;/button&gt;&lt;/th&gt;
+      &lt;th aria-sort="none"&gt;&lt;button type="button"&gt;Cargo&lt;/button&gt;&lt;/th&gt;
+      &lt;th aria-sort="none"&gt;&lt;button type="button"&gt;Crates&lt;/button&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;…&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;script&gt;
+  // keel ships the styles; the sort is yours — for example:
+  document.querySelectorAll('#cargo th[aria-sort] &gt; button').forEach(btn =&gt; {
+    btn.addEventListener('click', () =&gt; {
+      const th = btn.parentElement;
+      const dir = th.getAttribute('aria-sort') === 'ascending' ? 'descending' : 'ascending';
+      th.parentElement.querySelectorAll('th[aria-sort]')
+        .forEach(h =&gt; h.setAttribute('aria-sort', 'none'));
+      th.setAttribute('aria-sort', dir);
+      const col = th.cellIndex, tbody = th.closest('table').tBodies[0];
+      [...tbody.rows]
+        .sort((a, b) =&gt; a.cells[col].textContent.localeCompare(
+          b.cells[col].textContent, undefined, { numeric: true })
+          * (dir === 'ascending' ? 1 : -1))
+        .forEach(r =&gt; tbody.appendChild(r));
+    });
+  });
+&lt;/script&gt;</code></pre>
+      </details>
+      <script>
+        // page demo wiring — keel ships the styles, the sort is yours
+        document.querySelectorAll('#demo-sort th[aria-sort] > button').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const th = btn.parentElement;
+            const dir = th.getAttribute('aria-sort') === 'ascending' ? 'descending' : 'ascending';
+            th.parentElement.querySelectorAll('th[aria-sort]')
+              .forEach(h => h.setAttribute('aria-sort', 'none'));
+            th.setAttribute('aria-sort', dir);
+            const col = th.cellIndex, tbody = th.closest('table').tBodies[0];
+            [...tbody.rows]
+              .sort((a, b) => a.cells[col].textContent.localeCompare(
+                b.cells[col].textContent, undefined, { numeric: true })
+                * (dir === 'ascending' ? 1 : -1))
+              .forEach(r => tbody.appendChild(r));
+          });
+        });
+      </script>
+
+      <h3>Selected rows</h3>
+      <p>A row with <code>aria-selected="true"</code> gets the soft
+      accent and an inset accent bar at its start edge — the same
+      visual-state-is-accessibility-state rule as the calendar above.
+      Keel styles the state only: the checkboxes or click handlers
+      that <em>set</em> the attribute are your JavaScript.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <table style="margin-bottom: var(--k-space-4)">
+          <thead><tr><th>Order</th><th>Item</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>W-1041</td><td>Oak shelf, sanded</td><td>finishing</td></tr>
+            <tr aria-selected="true"><td>W-1042</td><td>Stool legs ×4</td><td>glue-up</td></tr>
+            <tr><td>W-1043</td><td>Drawer fronts</td><td>queued</td></tr>
+          </tbody>
+        </table>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;tbody&gt;
+  &lt;tr&gt;&lt;td&gt;W-1041&lt;/td&gt;&lt;td&gt;Oak shelf, sanded&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr aria-selected="true"&gt;&lt;td&gt;W-1042&lt;/td&gt;&lt;td&gt;Stool legs ×4&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;</code></pre>
+      </details>
+
+      <h3>Responsive stacking</h3>
+      <p><code>.k-table--stack</code> is the other answer to narrow
+      screens: instead of scrolling sideways, below 640px each row
+      becomes a small card, with every value labeled by its column
+      name — resize the window to watch it happen. The mechanism is
+      a <code>data-label</code> attribute on <em>every</em>
+      <code>td</code>, which CSS prints in front of the value; the
+      header row hides visually but stays in the accessibility tree.
+      The honest trade-off: duplicating each column name into its
+      cells is the cost of doing this with zero JavaScript. Skip the
+      labels and the stacked cards are just bare values.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <table class="k-table--stack" style="margin-bottom: var(--k-space-4)">
+          <thead><tr><th>Vessel</th><th>Berth</th><th>Cargo</th><th>Due</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="Vessel">Grey Heron</td>
+              <td data-label="Berth">2</td>
+              <td data-label="Cargo">Rope, coiled</td>
+              <td data-label="Due">Tue</td>
+            </tr>
+            <tr>
+              <td data-label="Vessel">Saltwind</td>
+              <td data-label="Berth">5</td>
+              <td data-label="Cargo">Barrel staves</td>
+              <td data-label="Due">Wed</td>
+            </tr>
+            <tr>
+              <td data-label="Vessel">Petrel</td>
+              <td data-label="Berth">1</td>
+              <td data-label="Cargo">Salt, bagged</td>
+              <td data-label="Due">Fri</td>
+            </tr>
+          </tbody>
+        </table>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;table class="k-table--stack"&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Vessel&lt;/th&gt;&lt;th&gt;Berth&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td data-label="Vessel"&gt;Grey Heron&lt;/td&gt;
+      &lt;td data-label="Berth"&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+      </details>
+
+      <p>And the boundary, plainly: filtering, pagination logic, and
+      virtual scrolling are application logic. Keel provides the
+      <a href="components-navigation.html">pagination component</a>
+      and the styles on this page; DataTables-style behavior belongs
+      to your JavaScript or a library, and keel will happily style
+      its output.</p>
+    </section>
+
+    <section id="c-stat">
+      <h2>Stat</h2>
+      <p><code>.k-stat__value</code> and <code>.k-stat__label</code>
+      make a big number with a small caption. There is no wrapper
+      class — any element holds the pair. Add <code>.k-stat--center</code>
+      to center-align the stat, and a <code>.k-stat__delta</code> line
+      under the value for a change indicator —
+      <code>--up</code> colors it success green,
+      <code>--down</code> danger red.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-thirds k-center" style="margin-bottom: var(--k-space-4)">
+          <div><span class="k-stat__value">1</span><span class="k-stat__label">css file</span></div>
+          <div><span class="k-stat__value">0</span><span class="k-stat__label">dependencies</span></div>
+          <div><span class="k-stat__value">~40</span><span class="k-stat__label">components</span></div>
+        </div>
+      </details>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-thirds" style="margin-bottom: var(--k-space-4)">
+          <div class="k-stat--center k-card">
+            <span class="k-stat__value">1,284</span>
+            <span class="k-stat__label">visitors</span>
+            <span class="k-stat__delta k-stat__delta--up">↑ 12%</span>
+          </div>
+          <div class="k-stat--center k-card">
+            <span class="k-stat__value">3.1%</span>
+            <span class="k-stat__label">bounce</span>
+            <span class="k-stat__delta k-stat__delta--down">↓ 0.4%</span>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-thirds k-center"&gt;
+  &lt;div&gt;
+    &lt;span class="k-stat__value"&gt;1&lt;/span&gt;
+    &lt;span class="k-stat__label"&gt;css file&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;!-- … --&gt;
+&lt;/div&gt;
+
+&lt;!-- centered, with a change indicator --&gt;
+&lt;div class="k-stat--center"&gt;
+  &lt;span class="k-stat__value"&gt;1,284&lt;/span&gt;
+  &lt;span class="k-stat__label"&gt;visitors&lt;/span&gt;
+  &lt;span class="k-stat__delta k-stat__delta--up"&gt;↑ 12%&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-divider">
+      <h2>Divider</h2>
+      <p><code>.k-divider</code> is a labeled rule — a line, a word,
+      a line. The usual job is "or" between two ways to do the same
+      thing (sign in with a password, or with a link). With no text
+      inside it's just two lines meeting; use a plain
+      <code>hr</code> for that.</p>
+      <p><code>--start</code> and <code>--end</code> shift the label
+      toward one edge instead of centering it. And
+      <code>.k-divider--y</code> is the vertical case — a short inline
+      rule, one line-height tall, for separating inline items like two
+      links in a row.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 24rem; margin-bottom: var(--k-space-4)">
+          <button class="k-btn k-btn--ghost" style="width: 100%; justify-content: center">Sign in with password</button>
+          <div class="k-divider">or</div>
+          <button class="k-btn k-btn--ghost" style="width: 100%; justify-content: center">Email me a link</button>
+        </div>
+      </details>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 24rem; margin-bottom: var(--k-space-4)">
+          <div class="k-divider k-divider--start">Section</div>
+          <div class="k-divider k-divider--end">Section</div>
+          <p style="margin-top: var(--k-space-3)">
+            <a href="#">Edit</a>
+            <span class="k-divider--y"></span>
+            <a href="#">Delete</a>
+          </p>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-divider"&gt;or&lt;/div&gt;
+
+&lt;!-- label shifted to one edge --&gt;
+&lt;div class="k-divider k-divider--start"&gt;Section&lt;/div&gt;
+&lt;div class="k-divider k-divider--end"&gt;Section&lt;/div&gt;
+
+&lt;!-- vertical rule between inline items --&gt;
+&lt;a href="#"&gt;Edit&lt;/a&gt;
+&lt;span class="k-divider--y"&gt;&lt;/span&gt;
+&lt;a href="#"&gt;Delete&lt;/a&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-empty-state">
+      <h2>Empty state</h2>
+      <p><code>.k-empty</code> is the nothing-here-yet box — a dashed
+      border, centered soft text, room to breathe. Say what's empty,
+      then offer the one action that fills it. It stands in for a
+      list, a table, a grid; swap it out when the first real item
+      arrives.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="margin-bottom: var(--k-space-4)">
+          <div class="k-empty">
+            <h4>No projects yet</h4>
+            <p>Projects you create will show up here.</p>
+            <button class="k-btn" type="button">New project</button>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-empty"&gt;
+  &lt;h4&gt;No projects yet&lt;/h4&gt;
+  &lt;p&gt;Projects you create will show up here.&lt;/p&gt;
+  &lt;button class="k-btn" type="button"&gt;New project&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-timeline">
+      <h2>Timeline</h2>
+      <p><code>.k-timeline</code> runs events down a line — each
+      <code>li</code> gets a dot and a rule to the next one; the line
+      stops at the last item. <code>.k-timeline__time</code> is the
+      small mono date above each event. Use a real
+      <code>time</code> element with a <code>datetime</code> attribute
+      so the date is machine-readable too.</p>
+      <p>Each dot can carry meaning: put <code>.is-ok</code>,
+      <code>.is-warn</code>, or <code>.is-muted</code> on a
+      <code>li</code> to color its dot green, amber, or grey — for a
+      done step, a warning, or one that's pending or skipped. For any
+      other color, set the <code>--k-timeline-dot</code> knob on the
+      item directly.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 28rem; margin-bottom: var(--k-space-4)">
+          <ol class="k-timeline">
+            <li class="is-ok">
+              <time class="k-timeline__time" datetime="2026-05-02">May 2026</time>
+              <p>First prototype — tokens and base layers only.</p>
+            </li>
+            <li>
+              <time class="k-timeline__time" datetime="2026-06-14">June 2026</time>
+              <p>Layout bands and the first components land.</p>
+            </li>
+            <li class="is-muted">
+              <time class="k-timeline__time" datetime="2026-07-10">July 2026</time>
+              <p>The component layer roughly doubles — this page grows
+              with it.</p>
+            </li>
+          </ol>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;ol class="k-timeline"&gt;
+  &lt;li class="is-ok"&gt;
+    &lt;time class="k-timeline__time" datetime="2026-05-02"&gt;May 2026&lt;/time&gt;
+    &lt;p&gt;First prototype.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;time class="k-timeline__time" datetime="2026-06-14"&gt;June 2026&lt;/time&gt;
+    &lt;p&gt;Layout bands land.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li class="is-muted"&gt;
+    &lt;time class="k-timeline__time" datetime="2026-07-10"&gt;July 2026&lt;/time&gt;
+    &lt;p&gt;Pending step.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!-- arbitrary dot color --&gt;
+&lt;li style="--k-timeline-dot: var(--k-accent)"&gt;…&lt;/li&gt;</code></pre>
+      </details>
+    </section>
+
+      </main>
+
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

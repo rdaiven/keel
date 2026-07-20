@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daiven Woodworks — a demo page built with keel</title>
+<meta name="description" content="A complete small-business page for a fictional furniture workshop in Quezon City, built entirely with keel — semantic HTML and one stylesheet, no custom CSS.">
+<link rel="stylesheet" href="css/keel.css">
+<link rel="stylesheet" href="css/keel-icons.css">
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+  /* The only custom CSS on this page: tighter padding for the demo notice. */
+  .demo-note { padding-block: var(--k-space-2); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — no custom CSS beyond
+    this notice. <a href="templates.html">All templates</a> ·
+    <a href="index.html">keel</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Daiven Woodworks</a>
+      <ul class="k-nav__links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="k-hero" id="top">
+  <div class="k-container">
+    <p class="k-hero__eyebrow">Custom furniture · Quezon City</p>
+    <h1>Furniture built to be kept.</h1>
+    <p class="k-hero__lead">
+      We are a three-person workshop making tables, chairs, and cabinets
+      to order — one piece at a time, in local hardwoods, joined so they
+      can be repaired instead of replaced.
+    </p>
+    <div class="k-cluster" style="margin-top: var(--k-space-5)">
+      <a class="k-btn" href="#contact">Ask about a commission</a>
+      <a class="k-btn k-btn--ghost" href="#work">See recent work</a>
+    </div>
+    <div class="k-cluster" style="margin-top: var(--k-space-5)">
+      <span class="k-badge k-badge--outline">Since 2011</span>
+      <span class="k-badge k-badge--outline">Made to order</span>
+      <button class="k-badge k-badge--outline" popovertarget="woods-note"
+        style="font: inherit; cursor: pointer">Local hardwoods ⓘ</button>
+      <div id="woods-note" popover>
+        <h4>Our woods</h4>
+        <p>Acacia, mahogany, and gmelina from legal, documented sources —
+        plus reclaimed hardwood when we can get it. Ask us for the papers;
+        we like being asked.</p>
+        <button class="k-btn k-btn--small k-btn--ghost" popovertarget="woods-note"
+          popovertargetaction="hide">Close</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section" id="work">
+  <div class="k-container">
+    <h2>Recent work</h2>
+    <p style="max-width: 40em; color: var(--k-text-soft)">
+      Three pieces that left the shop this year. Every commission starts
+      from a conversation, so no two are quite alike.
+    </p>
+    <div class="k-thirds" style="margin-top: var(--k-space-5)">
+      <article class="k-card k-card--hover k-reveal">
+        <img alt="" width="640" height="360"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%23d8c3a5'/%3E%3Crect x='60' y='150' width='520' height='26' rx='6' fill='%238e6e4b'/%3E%3Crect x='110' y='176' width='26' height='130' fill='%23755a3c'/%3E%3Crect x='504' y='176' width='26' height='130' fill='%23755a3c'/%3E%3C/svg%3E">
+        <p class="k-card__kicker">Dining table</p>
+        <h4>The Malaya table</h4>
+        <p><small>A ten-seater in acacia for a family in Marikina.
+        Breadboard ends, hand-planed top, finished with hardwax oil so
+        it can be spot-repaired at home.</small></p>
+      </article>
+      <article class="k-card k-card--hover k-reveal">
+        <img alt="" width="640" height="360"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%23cbb79b'/%3E%3Crect x='230' y='90' width='180' height='24' rx='8' fill='%23755a3c'/%3E%3Crect x='240' y='114' width='16' height='110' fill='%238e6e4b'/%3E%3Crect x='384' y='114' width='16' height='110' fill='%238e6e4b'/%3E%3Crect x='226' y='210' width='188' height='16' rx='5' fill='%23755a3c'/%3E%3Crect x='244' y='226' width='14' height='80' fill='%238e6e4b'/%3E%3Crect x='382' y='226' width='14' height='80' fill='%238e6e4b'/%3E%3C/svg%3E">
+        <p class="k-card__kicker">Seating</p>
+        <h4>Batangas ladder-back chairs</h4>
+        <p><small>A set of six, drawing on the provincial chairs we grew
+        up with. Mortise-and-tenon throughout — no screws in the frame,
+        nothing to work loose.</small></p>
+      </article>
+      <article class="k-card k-card--hover k-reveal">
+        <img alt="" width="640" height="360"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%23d8c3a5'/%3E%3Crect x='190' y='50' width='260' height='260' rx='8' fill='%238e6e4b'/%3E%3Crect x='206' y='66' width='108' height='228' rx='4' fill='%23a8875f'/%3E%3Crect x='326' y='66' width='108' height='228' rx='4' fill='%23a8875f'/%3E%3Crect x='306' y='160' width='6' height='40' rx='3' fill='%23755a3c'/%3E%3Crect x='328' y='160' width='6' height='40' rx='3' fill='%23755a3c'/%3E%3C/svg%3E">
+        <p class="k-card__kicker">Storage</p>
+        <h4>Aparador, revisited</h4>
+        <p><small>A two-door wardrobe in mahogany with dovetailed
+        drawers, sized for a condominium bedroom where every centimeter
+        counted.</small></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--alt" id="process">
+  <div class="k-container">
+    <div class="k-split">
+      <div>
+        <h2>How a commission works</h2>
+        <p>
+          Most people who write to us have never commissioned furniture
+          before, and that's fine. You don't need drawings or exact
+          measurements — a photo of the space and a sense of how you'll
+          use the piece is enough to start.
+        </p>
+        <p>
+          We take on a small number of commissions at a time, so the
+          person you talk to at the start is the same person cutting the
+          joinery. Expect honest lead times: a dining table is usually
+          six to eight weeks from approved drawing to delivery.
+        </p>
+        <blockquote>
+          <p>They asked more questions about how we eat dinner than
+          about the table itself. The piece fits our life, not the
+          other way around.</p>
+          <p><small>— A client in Katipunan, on their kitchen table</small></p>
+        </blockquote>
+      </div>
+      <div>
+        <h3>The four steps</h3>
+        <ol>
+          <li><strong>Conversation.</strong> You tell us about the space
+          and how the piece will be used. We reply within two working
+          days with questions and a rough range.</li>
+          <li><strong>Drawing and quote.</strong> We send a measured
+          drawing and a fixed price. Nothing is cut until you approve
+          both.</li>
+          <li><strong>The build.</strong> Wood is selected, acclimated,
+          and joined in the shop. We send photos at the milestones so
+          you see it take shape.</li>
+          <li><strong>Delivery and care.</strong> We deliver within
+          Metro Manila, install where needed, and leave you a one-page
+          care note for the finish.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container">
+    <div class="k-thirds k-center k-reveal">
+      <div>
+        <span class="k-stat__value">120+</span>
+        <span class="k-stat__label">pieces delivered</span>
+      </div>
+      <div>
+        <span class="k-stat__value">14</span>
+        <span class="k-stat__label">years in the shop</span>
+      </div>
+      <div>
+        <span class="k-stat__value">3</span>
+        <span class="k-stat__label">woodworkers</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--alt" id="pricing">
+  <div class="k-container">
+    <h2>What it costs</h2>
+    <p style="max-width: 40em; color: var(--k-text-soft)">
+      Every piece is quoted individually, but these starting points give
+      you an honest sense of scale before you write to us.
+    </p>
+    <div class="k-thirds" style="margin-top: var(--k-space-5)">
+      <article class="k-card k-card--hover k-reveal">
+        <p class="k-card__kicker">Restoration</p>
+        <h4>From ₱8,000</h4>
+        <p><small>For pieces worth keeping — an inherited aparador, a
+        wobbling heirloom chair.</small></p>
+        <ul>
+          <li>Assessment at the shop</li>
+          <li>Joint repair and re-gluing</li>
+          <li>Finish matched to the original</li>
+          <li>Pickup and return in Metro Manila</li>
+        </ul>
+        <a class="k-btn k-btn--ghost" href="#contact">Ask about a repair</a>
+      </article>
+      <article class="k-card k-card--hover k-reveal">
+        <p class="k-card__kicker">Commission</p>
+        <h4>From ₱35,000 <span class="k-badge k-badge--secondary">most requested</span></h4>
+        <p><small>A piece built to order, from first conversation to
+        delivery.</small></p>
+        <ul>
+          <li>Measured drawing and fixed quote</li>
+          <li>Wood selection with you</li>
+          <li>Progress photos during the build</li>
+          <li>Delivery, installation, and care note</li>
+        </ul>
+        <button class="k-btn" onclick="document.getElementById('commission-dialog').showModal()">Start a commission</button>
+      </article>
+      <article class="k-card k-card--hover k-reveal">
+        <p class="k-card__kicker">Consultation</p>
+        <h4>₱2,500 per visit</h4>
+        <p><small>An hour at your place or ours, for when you're not
+        sure what you need yet.</small></p>
+        <ul>
+          <li>On-site measurements</li>
+          <li>Wood and finish recommendations</li>
+          <li>Written summary afterwards</li>
+          <li>Credited toward any commission</li>
+        </ul>
+        <a class="k-btn k-btn--secondary" href="#contact">Book a visit</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<dialog id="commission-dialog">
+  <h3>Start a commission</h3>
+  <p><small>Tell us just enough to begin — we'll reply within two
+  working days with questions and a rough range.</small></p>
+  <form method="dialog">
+    <div class="k-field">
+      <label for="d-name">Your name</label>
+      <input id="d-name" type="text" autocomplete="name">
+    </div>
+    <div class="k-field">
+      <label for="d-piece">The piece</label>
+      <select id="d-piece">
+        <option>A table</option>
+        <option>Chairs or a bench</option>
+        <option>Storage — cabinet, aparador, shelves</option>
+        <option>Something else</option>
+      </select>
+    </div>
+    <div class="k-cluster">
+      <button class="k-btn" value="send">Send</button>
+      <button class="k-btn k-btn--ghost" value="cancel" formnovalidate>Cancel</button>
+    </div>
+    <p class="k-field__hint" style="margin-top: var(--k-space-2)">
+      A native <code>dialog</code> — the demo's one line of JavaScript
+      opens it; closing needs none.</p>
+  </form>
+</dialog>
+
+<section class="k-section">
+  <div class="k-container--narrow k-container">
+    <h2>Common questions</h2>
+    <details>
+      <summary>Do you deliver outside Metro Manila?</summary>
+      <p>Yes, by arrangement. We crate pieces for provincial delivery
+      and work with a courier we trust. The cost depends on the piece
+      and the destination — we'll include it in the quote so there are
+      no surprises.</p>
+    </details>
+    <details>
+      <summary>What woods do you work with?</summary>
+      <p>Mostly acacia, mahogany, and gmelina from legal, documented
+      sources, plus reclaimed hardwood when we can get it. If you have a
+      specific wood in mind, ask — we'll tell you honestly whether it
+      suits the piece.</p>
+    </details>
+    <details>
+      <summary>Can you copy a design I found online?</summary>
+      <p>We'd rather not copy another maker's work outright, but we're
+      glad to use it as a starting point. Bring the photo and we'll
+      design something in the same spirit, proportioned for your space.</p>
+    </details>
+    <details>
+      <summary>How do I care for the finish?</summary>
+      <p>Every piece leaves with a one-page care note. Most of our work
+      is finished in hardwax oil: wipe with a damp cloth, avoid silicone
+      polish, and re-oil high-wear surfaces once a year. Small scratches
+      can usually be repaired at home.</p>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--alt" id="contact">
+  <div class="k-container">
+    <div class="k-split">
+      <div>
+        <h2>Talk to us</h2>
+        <p>
+          Write, call, or drop by the shop — we're happy to talk through
+          an idea before you commit to anything.
+        </p>
+        <dl>
+          <dt>Workshop</dt>
+          <dd>Quezon City (address shared when you book a visit)</dd>
+          <dt>Phone</dt>
+          <dd>(02) 8000-0000</dd>
+          <dt>Email</dt>
+          <dd><a href="mailto:hello@example.com">hello@example.com</a></dd>
+          <dt>Hours</dt>
+          <dd>Tuesday to Saturday, 9am–5pm
+            <button class="k-btn k-btn--small k-btn--ghost" popovertarget="visit-note"
+              style="margin-inline-start: var(--k-space-2)">Visiting?</button>
+          </dd>
+        </dl>
+        <div id="visit-note" popover>
+          <h4>Before you drop by</h4>
+          <p>The shop is a working floor — sawdust, finishes curing,
+          machines running. Message us first and we'll make sure someone
+          can walk you through what's on the benches.</p>
+          <button class="k-btn k-btn--small k-btn--ghost" popovertarget="visit-note"
+            popovertargetaction="hide">Got it</button>
+        </div>
+        <div class="k-alert k-alert--ok">
+          <p>We reply to every inquiry within two working days. If you
+          don't hear back, check your spam folder or call the shop.</p>
+        </div>
+      </div>
+      <form>
+        <div class="k-field">
+          <label for="c-name">Your name</label>
+          <input id="c-name" name="name" type="text" autocomplete="name">
+        </div>
+        <div class="k-field">
+          <label for="c-email">Email</label>
+          <input id="c-email" name="email" type="email" autocomplete="email">
+          <p class="k-field__hint">We only use this to reply to you.</p>
+        </div>
+        <div class="k-field">
+          <label for="c-type">What are you thinking of?</label>
+          <select id="c-type" name="project">
+            <option>A new commission</option>
+            <option>Restoring an existing piece</option>
+            <option>A consultation visit</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="k-field">
+          <label for="c-msg">Tell us about it</label>
+          <textarea id="c-msg" name="message" rows="5"
+            placeholder="The space, the piece, how you'll use it — whatever you know so far."></textarea>
+        </div>
+        <div class="k-field">
+          <label class="k-cluster" style="font-weight: 600">
+            <span class="k-switch"><input type="checkbox" name="newsletter"></span>
+            Send me the shop letter (a few times a year, when a piece is finished)
+          </label>
+        </div>
+        <button class="k-btn" type="submit">Send inquiry</button>
+        <p class="k-field__hint" style="margin-top: var(--k-space-2)">
+          This form is part of a demo page and doesn't send anything.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--accent">
+  <div class="k-container--narrow k-container k-center">
+    <h2>Start with a conversation</h2>
+    <p>No drawings needed, no deposit to ask a question. Tell us about
+    the piece you have in mind and we'll tell you honestly what it
+    would take.</p>
+    <a class="k-btn k-btn--ghost" style="color: inherit; border-color: currentColor" href="#contact">Get in touch</a>
+  </div>
+</section>
+
+</main>
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span><strong style="color: var(--k-text)">Daiven Woodworks</strong> — Quezon City. A fictional business.</span>
+    <span>Built with keel — <a href="index.html">see how</a></span>
+  </div>
+</footer>
+
+<script src="assets/play.js"></script>
+</body>
+</html>

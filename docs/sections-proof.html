@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sections · Social proof — keel</title>
+<meta name="description" content="Six copy-paste social proof sections built with keel: a testimonial trio, a single big quote, a logo row, a case study card, a review wall, and an animated testimonial trio. Each section is rendered live with its markup below.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+<main id="main">
+
+<section class="k-section">
+  <div class="k-container">
+    <h1>Sections · Social proof</h1>
+    <p class="k-hero__lead">Six ways to let other people say it —
+    quotes, names, numbers. Same rules as the main
+    <a href="sections.html">sections</a> page: every pattern below is
+    rendered as a real full-bleed band, with its exact markup
+    underneath, and it re-renders in whatever tokens the
+    <a href="../design.html">design system page</a> gives you.</p>
+    <p class="k-text-soft">Copy inside the sections is placeholder —
+    the same fictional harbor-town businesses — so what you paste
+    reads like a page, not like a template.</p>
+    <div class="k-cluster" style="margin-top: var(--k-space-5)">
+      <a class="k-badge k-badge--outline" href="#testimonial-trio">Testimonial trio</a>
+      <a class="k-badge k-badge--outline" href="#single-big-quote">Single big quote</a>
+      <a class="k-badge k-badge--outline" href="#logo-row">Logo row</a>
+      <a class="k-badge k-badge--outline" href="#case-study-card">Case study card</a>
+      <a class="k-badge k-badge--outline" href="#review-wall">Review wall</a>
+      <a class="k-badge k-badge--outline" href="#animated-testimonial-trio">Animated testimonial trio</a>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="testimonial-trio">Testimonial trio</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Three quotes with names attached. Cards keep each voice separate; the avatar is initials until you have photos.</p>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container">
+    <h2 class="k-center">What clients say</h2>
+    <div class="k-thirds" style="margin-top: var(--k-space-5)">
+      <div class="k-card">
+        <p>“They asked what the site was for before asking what it
+        should look like. Nobody had done that before.”</p>
+        <div class="k-media k-items-center">
+          <span class="k-avatar" aria-hidden="true">MT</span>
+          <div class="k-media__body">
+            <strong>Mara Torres</strong><br>
+            <small>Owner, Torres Bakehouse</small>
+          </div>
+        </div>
+      </div>
+      <div class="k-card">
+        <p>“The handover folder was two pages. I have updated the menu
+        myself every week since, without calling anyone.”</p>
+        <div class="k-media k-items-center">
+          <span class="k-avatar" aria-hidden="true">IB</span>
+          <div class="k-media__body">
+            <strong>Iris Bakker</strong><br>
+            <small>Café Driftwood</small>
+          </div>
+        </div>
+      </div>
+      <div class="k-card">
+        <p>“Slow was the right call. The site we launched is the site
+        we still use, three years on.”</p>
+        <div class="k-media k-items-center">
+          <span class="k-avatar" aria-hidden="true">SO</span>
+          <div class="k-media__body">
+            <strong>Sam Okafor</strong><br>
+            <small>Okafor Boatworks</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — testimonial trio</summary>
+      <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;h2 class="k-center"&gt;What clients say&lt;/h2&gt;
+    &lt;div class="k-thirds" style="margin-top: var(--k-space-5)"&gt;
+      &lt;div class="k-card"&gt;
+        &lt;p&gt;“They asked what the site was for before asking what it
+        should look like. Nobody had done that before.”&lt;/p&gt;
+        &lt;div class="k-media k-items-center"&gt;
+          &lt;span class="k-avatar" aria-hidden="true"&gt;MT&lt;/span&gt;
+          &lt;div class="k-media__body"&gt;
+            &lt;strong&gt;Mara Torres&lt;/strong&gt;&lt;br&gt;
+            &lt;small&gt;Owner, Torres Bakehouse&lt;/small&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card"&gt;
+        &lt;p&gt;“The handover folder was two pages. I have updated the menu
+        myself every week since, without calling anyone.”&lt;/p&gt;
+        &lt;div class="k-media k-items-center"&gt;
+          &lt;span class="k-avatar" aria-hidden="true"&gt;IB&lt;/span&gt;
+          &lt;div class="k-media__body"&gt;
+            &lt;strong&gt;Iris Bakker&lt;/strong&gt;&lt;br&gt;
+            &lt;small&gt;Café Driftwood&lt;/small&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card"&gt;
+        &lt;p&gt;“Slow was the right call. The site we launched is the site
+        we still use, three years on.”&lt;/p&gt;
+        &lt;div class="k-media k-items-center"&gt;
+          &lt;span class="k-avatar" aria-hidden="true"&gt;SO&lt;/span&gt;
+          &lt;div class="k-media__body"&gt;
+            &lt;strong&gt;Sam Okafor&lt;/strong&gt;&lt;br&gt;
+            &lt;small&gt;Okafor Boatworks&lt;/small&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="single-big-quote">Single big quote</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">One line big enough to carry a band. Use it when a single sentence says more than three cards would.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container--narrow k-container k-center">
+    <blockquote class="k-text-xl" style="border: 0; padding: 0; margin: 0">
+      <p>“Six months in, the site still feels like ours.
+      That is the whole review.”</p>
+      <p class="k-text-s k-text-faint" style="margin-top: var(--k-space-3)">
+        — Jonas Feld, Feld &amp; Daughter Upholstery</p>
+    </blockquote>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — single big quote</summary>
+      <pre><code>&lt;section class="k-section k-section--alt"&gt;
+  &lt;div class="k-container--narrow k-container k-center"&gt;
+    &lt;blockquote class="k-text-xl" style="border: 0; padding: 0; margin: 0"&gt;
+      &lt;p&gt;“Six months in, the site still feels like ours.
+      That is the whole review.”&lt;/p&gt;
+      &lt;p class="k-text-s k-text-faint" style="margin-top: var(--k-space-3)"&gt;
+        — Jonas Feld, Feld &amp;amp; Daughter Upholstery&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="logo-row">Logo row</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Names instead of logo images — outline badges cost zero requests and re-theme with your tokens. Swap in imgs later if you must.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container k-center">
+    <p class="k-uppercase k-text-faint">Trusted by crews like</p>
+    <div class="k-cluster k-justify-center">
+      <span class="k-badge k-badge--outline">Torres Bakehouse</span>
+      <span class="k-badge k-badge--outline">Café Driftwood</span>
+      <span class="k-badge k-badge--outline">Okafor Boatworks</span>
+      <span class="k-badge k-badge--outline">Feld &amp; Daughter</span>
+      <span class="k-badge k-badge--outline">Quay Lane Books</span>
+      <span class="k-badge k-badge--outline">Mangrove Supply Co.</span>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — logo row</summary>
+      <pre><code>&lt;section class="k-section k-section--alt"&gt;
+  &lt;div class="k-container k-center"&gt;
+    &lt;p class="k-uppercase k-text-faint"&gt;Trusted by crews like&lt;/p&gt;
+    &lt;div class="k-cluster k-justify-center"&gt;
+      &lt;span class="k-badge k-badge--outline"&gt;Torres Bakehouse&lt;/span&gt;
+      &lt;span class="k-badge k-badge--outline"&gt;Café Driftwood&lt;/span&gt;
+      &lt;span class="k-badge k-badge--outline"&gt;Okafor Boatworks&lt;/span&gt;
+      &lt;span class="k-badge k-badge--outline"&gt;Feld &amp;amp; Daughter&lt;/span&gt;
+      &lt;span class="k-badge k-badge--outline"&gt;Quay Lane Books&lt;/span&gt;
+      &lt;span class="k-badge k-badge--outline"&gt;Mangrove Supply Co.&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="case-study-card">Case study card</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">A quote with a face on one side, the numbers it earned on the other. One story told twice: in words, then in results.</p>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container">
+    <div class="k-split">
+      <div>
+        <p class="k-hero__eyebrow">Case study · Mangrove Supply Co.</p>
+        <h2>A catalog the warehouse can update</h2>
+        <blockquote style="border: 0; padding: 0; margin: 0">
+          <p>“Orders used to arrive by text message, half of them
+          incomplete. Now the catalog is the order form, and the
+          warehouse keeps it current themselves.”</p>
+        </blockquote>
+        <div class="k-media k-items-center" style="margin-top: var(--k-space-4)">
+          <span class="k-avatar" aria-hidden="true">LM</span>
+          <div class="k-media__body">
+            <strong>Lena Madrigal</strong><br>
+            <small>Operations, Mangrove Supply Co.</small>
+          </div>
+        </div>
+      </div>
+      <div class="k-card k-card--tint">
+        <p class="k-uppercase k-text-faint">After one season</p>
+        <div class="k-cols-3 k-center">
+          <div>
+            <span class="k-stat__value">3×</span>
+            <span class="k-stat__label">Orders complete first try</span>
+          </div>
+          <div>
+            <span class="k-stat__value">₱41k</span>
+            <span class="k-stat__label">Saved on reprints yearly</span>
+          </div>
+          <div>
+            <span class="k-stat__value">2 hrs</span>
+            <span class="k-stat__label">Weekly admin, down from nine</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — case study card</summary>
+      <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;div class="k-split"&gt;
+      &lt;div&gt;
+        &lt;p class="k-hero__eyebrow"&gt;Case study · Mangrove Supply Co.&lt;/p&gt;
+        &lt;h2&gt;A catalog the warehouse can update&lt;/h2&gt;
+        &lt;blockquote style="border: 0; padding: 0; margin: 0"&gt;
+          &lt;p&gt;“Orders used to arrive by text message, half of them
+          incomplete. Now the catalog is the order form, and the
+          warehouse keeps it current themselves.”&lt;/p&gt;
+        &lt;/blockquote&gt;
+        &lt;div class="k-media k-items-center" style="margin-top: var(--k-space-4)"&gt;
+          &lt;span class="k-avatar" aria-hidden="true"&gt;LM&lt;/span&gt;
+          &lt;div class="k-media__body"&gt;
+            &lt;strong&gt;Lena Madrigal&lt;/strong&gt;&lt;br&gt;
+            &lt;small&gt;Operations, Mangrove Supply Co.&lt;/small&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card k-card--tint"&gt;
+        &lt;p class="k-uppercase k-text-faint"&gt;After one season&lt;/p&gt;
+        &lt;div class="k-cols-3 k-center"&gt;
+          &lt;div&gt;
+            &lt;span class="k-stat__value"&gt;3×&lt;/span&gt;
+            &lt;span class="k-stat__label"&gt;Orders complete first try&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;span class="k-stat__value"&gt;₱41k&lt;/span&gt;
+            &lt;span class="k-stat__label"&gt;Saved on reprints yearly&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;span class="k-stat__value"&gt;2 hrs&lt;/span&gt;
+            &lt;span class="k-stat__label"&gt;Weekly admin, down from nine&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="review-wall">Review wall</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">Six compact reviews in two rows. Star rows are built-in mask icons — no font, no sprite, no request.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--tint">
+  <div class="k-container">
+    <h2 class="k-center">Kind words, kept short</h2>
+    <div class="k-thirds" style="margin-top: var(--k-space-5)">
+      <div class="k-card">
+        <p class="k-text-accent k-mb-2" role="img" aria-label="Rated 5 out of 5"><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span></p>
+        <p class="k-text-s">“The invoice matched the quote. That was new.”</p>
+        <small>Prita Navarro, Quay Lane Books</small>
+      </div>
+      <div class="k-card">
+        <p class="k-text-accent k-mb-2" role="img" aria-label="Rated 5 out of 5"><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span></p>
+        <p class="k-text-s">“Loads before the kettle finishes boiling.”</p>
+        <small>Iris Bakker, Café Driftwood</small>
+      </div>
+      <div class="k-card">
+        <p class="k-text-accent k-mb-2" role="img" aria-label="Rated 5 out of 5"><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span></p>
+        <p class="k-text-s">“Nobody asks me for the wifi password to edit it.”</p>
+        <small>Mara Torres, Torres Bakehouse</small>
+      </div>
+    </div>
+    <div class="k-thirds" style="margin-top: var(--k-space-4)">
+      <div class="k-card">
+        <p class="k-text-accent k-mb-2" role="img" aria-label="Rated 5 out of 5"><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span></p>
+        <p class="k-text-s">“Three years, zero calls to fix anything.”</p>
+        <small>Sam Okafor, Okafor Boatworks</small>
+      </div>
+      <div class="k-card">
+        <p class="k-text-accent k-mb-2" role="img" aria-label="Rated 5 out of 5"><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span></p>
+        <p class="k-text-s">“They said no to half my ideas. Correctly.”</p>
+        <small>Jonas Feld, Feld &amp; Daughter</small>
+      </div>
+      <div class="k-card">
+        <p class="k-text-accent k-mb-2" role="img" aria-label="Rated 5 out of 5"><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span><span class="k-icon k-icon--star"></span></p>
+        <p class="k-text-s">“The handover guide fits on the fridge.”</p>
+        <small>Lena Madrigal, Mangrove Supply Co.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — review wall</summary>
+      <pre><code>&lt;section class="k-section k-section--tint"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;h2 class="k-center"&gt;Kind words, kept short&lt;/h2&gt;
+    &lt;div class="k-thirds" style="margin-top: var(--k-space-5)"&gt;
+      &lt;div class="k-card"&gt;
+        &lt;p class="k-text-accent k-mb-2" role="img" aria-label="Rated 5 out of 5"&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;/p&gt;
+        &lt;p class="k-text-s"&gt;“The invoice matched the quote. That was new.”&lt;/p&gt;
+        &lt;small&gt;Prita Navarro, Quay Lane Books&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card"&gt;
+        &lt;p class="k-text-accent k-mb-2" role="img" aria-label="Rated 5 out of 5"&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;/p&gt;
+        &lt;p class="k-text-s"&gt;“Loads before the kettle finishes boiling.”&lt;/p&gt;
+        &lt;small&gt;Iris Bakker, Café Driftwood&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card"&gt;
+        &lt;p class="k-text-accent k-mb-2" role="img" aria-label="Rated 5 out of 5"&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;/p&gt;
+        &lt;p class="k-text-s"&gt;“Nobody asks me for the wifi password to edit it.”&lt;/p&gt;
+        &lt;small&gt;Mara Torres, Torres Bakehouse&lt;/small&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="k-thirds" style="margin-top: var(--k-space-4)"&gt;
+      &lt;div class="k-card"&gt;
+        &lt;p class="k-text-accent k-mb-2" role="img" aria-label="Rated 5 out of 5"&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;/p&gt;
+        &lt;p class="k-text-s"&gt;“Three years, zero calls to fix anything.”&lt;/p&gt;
+        &lt;small&gt;Sam Okafor, Okafor Boatworks&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card"&gt;
+        &lt;p class="k-text-accent k-mb-2" role="img" aria-label="Rated 5 out of 5"&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;/p&gt;
+        &lt;p class="k-text-s"&gt;“They said no to half my ideas. Correctly.”&lt;/p&gt;
+        &lt;small&gt;Jonas Feld, Feld &amp;amp; Daughter&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card"&gt;
+        &lt;p class="k-text-accent k-mb-2" role="img" aria-label="Rated 5 out of 5"&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;span class="k-icon k-icon--star"&gt;&lt;/span&gt;&lt;/p&gt;
+        &lt;p class="k-text-s"&gt;“The handover guide fits on the fridge.”&lt;/p&gt;
+        &lt;small&gt;Lena Madrigal, Mangrove Supply Co.&lt;/small&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <h2 id="animated-testimonial-trio">Animated testimonial trio</h2>
+    <p class="k-text-soft k-mb-0" style="max-width: 44em">The same three-card shape as <a href="#testimonial-trio">Testimonial trio</a> above, but the cards rise in on load in sequence with <code>.k-stagger</code> + <code>.k-anim-up</code> — a motion variant, not a duplicate.</p>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container">
+    <h2 class="k-center">What clients say</h2>
+    <div class="k-thirds k-stagger" style="margin-top: var(--k-space-5)">
+      <div class="k-card k-anim-up">
+        <p>“They asked what the site was for before asking what it
+        should look like. Nobody had done that before.”</p>
+        <div class="k-media k-items-center">
+          <span class="k-avatar" aria-hidden="true">MT</span>
+          <div class="k-media__body">
+            <strong>Mara Torres</strong><br>
+            <small>Owner, Torres Bakehouse</small>
+          </div>
+        </div>
+      </div>
+      <div class="k-card k-anim-up">
+        <p>“The handover folder was two pages. I have updated the menu
+        myself every week since, without calling anyone.”</p>
+        <div class="k-media k-items-center">
+          <span class="k-avatar" aria-hidden="true">IB</span>
+          <div class="k-media__body">
+            <strong>Iris Bakker</strong><br>
+            <small>Café Driftwood</small>
+          </div>
+        </div>
+      </div>
+      <div class="k-card k-anim-up">
+        <p>“Slow was the right call. The site we launched is the site
+        we still use, three years on.”</p>
+        <div class="k-media k-items-center">
+          <span class="k-avatar" aria-hidden="true">SO</span>
+          <div class="k-media__body">
+            <strong>Sam Okafor</strong><br>
+            <small>Okafor Boatworks</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tight">
+  <div class="k-container">
+    <details>
+      <summary>Markup — animated testimonial trio</summary>
+      <pre><code>&lt;section class="k-section"&gt;
+  &lt;div class="k-container"&gt;
+    &lt;h2 class="k-center"&gt;What clients say&lt;/h2&gt;
+    &lt;div class="k-thirds k-stagger" style="margin-top: var(--k-space-5)"&gt;
+      &lt;div class="k-card k-anim-up"&gt;
+        &lt;p&gt;“They asked what the site was for before asking what it
+        should look like. Nobody had done that before.”&lt;/p&gt;
+        &lt;div class="k-media k-items-center"&gt;
+          &lt;span class="k-avatar" aria-hidden="true"&gt;MT&lt;/span&gt;
+          &lt;div class="k-media__body"&gt;
+            &lt;strong&gt;Mara Torres&lt;/strong&gt;&lt;br&gt;
+            &lt;small&gt;Owner, Torres Bakehouse&lt;/small&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card k-anim-up"&gt;
+        &lt;p&gt;“The handover folder was two pages. I have updated the menu
+        myself every week since, without calling anyone.”&lt;/p&gt;
+        &lt;div class="k-media k-items-center"&gt;
+          &lt;span class="k-avatar" aria-hidden="true"&gt;IB&lt;/span&gt;
+          &lt;div class="k-media__body"&gt;
+            &lt;strong&gt;Iris Bakker&lt;/strong&gt;&lt;br&gt;
+            &lt;small&gt;Café Driftwood&lt;/small&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="k-card k-anim-up"&gt;
+        &lt;p&gt;“Slow was the right call. The site we launched is the site
+        we still use, three years on.”&lt;/p&gt;
+        &lt;div class="k-media k-items-center"&gt;
+          &lt;span class="k-avatar" aria-hidden="true"&gt;SO&lt;/span&gt;
+          &lt;div class="k-media__body"&gt;
+            &lt;strong&gt;Sam Okafor&lt;/strong&gt;&lt;br&gt;
+            &lt;small&gt;Okafor Boatworks&lt;/small&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </details>
+  </div>
+</section>
+
+</main>
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

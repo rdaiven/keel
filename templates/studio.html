@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harbor &amp; Pine — a studio template built with keel</title>
+<meta name="description" content="A portfolio template for a small design studio, built entirely with keel. The whole theme is one tokens block in the head — bold light editorial, vermilion and deep blue.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Replace this block and the page becomes yours. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(40 25% 97.5%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(40 20% 93%);
+      --k-border: hsl(40 12% 85%);
+      --k-border-strong: hsl(40 12% 72%);
+      --k-text: hsl(30 15% 10%);
+      --k-text-soft: hsl(30 8% 34%);
+      --k-text-faint: hsl(30 6% 50%);
+      --k-accent: hsl(8 85% 52%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(222 60% 30%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-font-display: system-ui, "Segoe UI", sans-serif;
+      --k-font-body: system-ui, "Segoe UI", sans-serif;
+      --k-display-weight: 800;
+      --k-tracking: -0.03em;
+      --k-radius: 3px;
+      --k-density: 1.15;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme. <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Harbor &amp; Pine</a>
+      <ul class="k-nav__links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#studio">Studio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="k-hero" id="top">
+  <div class="k-container">
+    <p class="k-hero__eyebrow">Design studio · Two people · Est. 2019</p>
+    <h1>Good design is mostly<br>the courage to leave things out.</h1>
+    <p class="k-hero__lead">
+      We're a two-person studio working with small organizations that
+      have something worth saying — identities, print, and websites
+      built slowly, argued over, and kept simple on purpose.
+    </p>
+    <div class="k-cluster" style="margin-top: var(--k-space-5)">
+      <a class="k-btn" href="#contact">Start a project</a>
+      <a class="k-btn k-btn--ghost" href="#work">Selected work</a>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--alt" id="work">
+  <div class="k-container">
+    <h2>Selected work</h2>
+    <p style="max-width: 40em; color: var(--k-text-soft)">
+      Four projects from the last two years. We take on six or seven a
+      year, which is as many as two people can do honestly.
+    </p>
+    <div class="k-cols-2" style="margin-top: var(--k-space-5)">
+      <article class="k-card k-card--hover">
+        <svg viewBox="0 0 640 360" aria-hidden="true"
+          style="display: block; width: 100%; height: auto; background: var(--k-surface-2); border-radius: var(--k-radius-s); margin-bottom: var(--k-space-4)">
+          <rect x="0" y="250" width="640" height="110" style="fill: var(--k-accent-2)"/>
+          <circle cx="320" cy="250" r="120" style="fill: var(--k-accent)"/>
+          <rect x="0" y="244" width="640" height="8" style="fill: var(--k-bg)"/>
+        </svg>
+        <p class="k-card__kicker">Identity · Wayfinding</p>
+        <h4>Saltmarsh Ferry Co.</h4>
+        <p><small>A four-boat ferry line needed one voice across
+        timetables, hulls, and dock signage. We gave them a mark you can
+        read from the water.</small></p>
+      </article>
+      <article class="k-card k-card--hover">
+        <svg viewBox="0 0 640 360" aria-hidden="true"
+          style="display: block; width: 100%; height: auto; background: var(--k-surface-2); border-radius: var(--k-radius-s); margin-bottom: var(--k-space-4)">
+          <rect x="120" y="60" width="90" height="240" style="fill: var(--k-accent-2)"/>
+          <rect x="230" y="90" width="90" height="210" style="fill: var(--k-accent)"/>
+          <rect x="340" y="40" width="90" height="260" style="fill: var(--k-accent-2)"/>
+          <rect x="450" y="110" width="90" height="190" style="fill: var(--k-accent)"/>
+          <rect x="100" y="300" width="460" height="10" style="fill: var(--k-text)"/>
+        </svg>
+        <p class="k-card__kicker">Identity · Print</p>
+        <h4>Gullwing Books</h4>
+        <p><small>An independent bookshop with three staff and strong
+        opinions. Identity, shelf talkers, and a monthly broadsheet the
+        owners still typeset themselves.</small></p>
+      </article>
+      <article class="k-card k-card--hover">
+        <svg viewBox="0 0 640 360" aria-hidden="true"
+          style="display: block; width: 100%; height: auto; background: var(--k-surface-2); border-radius: var(--k-radius-s); margin-bottom: var(--k-space-4)">
+          <polygon points="320,50 540,310 100,310" style="fill: var(--k-accent)"/>
+          <polygon points="320,140 460,310 180,310" style="fill: var(--k-accent-2)"/>
+          <rect x="80" y="310" width="480" height="8" style="fill: var(--k-text)"/>
+        </svg>
+        <p class="k-card__kicker">Exhibition · Website</p>
+        <h4>Pinehold Maritime Museum</h4>
+        <p><small>A permanent exhibition on small-boat building, plus a
+        website that treats the collection catalogue as the main event,
+        not an afterthought.</small></p>
+      </article>
+      <article class="k-card k-card--hover">
+        <svg viewBox="0 0 640 360" aria-hidden="true"
+          style="display: block; width: 100%; height: auto; background: var(--k-surface-2); border-radius: var(--k-radius-s); margin-bottom: var(--k-space-4)">
+          <circle cx="200" cy="180" r="110" style="fill: var(--k-accent-2)"/>
+          <circle cx="380" cy="180" r="110" style="fill: var(--k-accent)"/>
+          <circle cx="380" cy="180" r="46" style="fill: var(--k-bg)"/>
+        </svg>
+        <p class="k-card__kicker">Packaging · Identity</p>
+        <h4>North Pier Roasters</h4>
+        <p><small>Coffee packaging that survives a wet dock and a dim
+        shelf. Two colors, one typeface, and a label system the roaster
+        can extend without calling us.</small></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="k-section" id="services">
+  <div class="k-container">
+    <h2>What we do</h2>
+    <p style="max-width: 40em; color: var(--k-text-soft)">
+      Three things, done thoroughly. If your project needs something
+      else — photography, copywriting, a larger team — we'll say so and
+      point you to people we trust.
+    </p>
+    <div class="k-thirds" style="margin-top: var(--k-space-5)">
+      <article class="k-card">
+        <p class="k-card__kicker">01</p>
+        <h4>Identity</h4>
+        <p><small>Naming, marks, type, and color — plus the plain-language
+        guidelines that let a small team use them without us. An identity
+        you need an agency to maintain isn't finished.</small></p>
+      </article>
+      <article class="k-card">
+        <p class="k-card__kicker">02</p>
+        <h4>Print</h4>
+        <p><small>Books, broadsheets, signage, packaging. We still do
+        press checks in person, and we'll argue for the cheaper paper
+        when the cheaper paper is right.</small></p>
+      </article>
+      <article class="k-card">
+        <p class="k-card__kicker">03</p>
+        <h4>Websites</h4>
+        <p><small>Small, fast sites that the client can edit. We design
+        in the browser, hand over clean HTML and CSS, and stay reachable
+        after launch.</small></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--alt" id="studio">
+  <div class="k-container">
+    <div class="k-split">
+      <div>
+        <h2>The studio</h2>
+        <p>
+          Harbor &amp; Pine is Iris Malone and Teo Reston, working out
+          of a former sail loft above a chandlery. We met at a print
+          shop, disagreed productively for four years, and decided that
+          was a business model.
+        </p>
+        <p>
+          We keep the studio small on purpose. Two people means the
+          person who sketched your mark is the person who checks it on
+          press, and nobody has to ask what the client actually said.
+        </p>
+      </div>
+      <div class="k-stack">
+        <div class="k-media">
+          <span class="k-avatar k-avatar--large" aria-hidden="true">IM</span>
+          <div class="k-media__body">
+            <h4 style="margin-bottom: var(--k-space-1)">Iris Malone</h4>
+            <p><small>Identity and type. Formerly of a book publisher's
+            design department; still letterpresses on weekends.</small></p>
+          </div>
+        </div>
+        <div class="k-media">
+          <span class="k-avatar k-avatar--large" aria-hidden="true">TR</span>
+          <div class="k-media__body">
+            <h4 style="margin-bottom: var(--k-space-1)">Teo Reston</h4>
+            <p><small>Print production and web. Ran a two-color press
+            for six years; writes CSS the way he set ink — sparingly.</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--accent">
+  <div class="k-container--narrow k-container">
+    <blockquote style="border-color: currentColor; color: inherit; margin-block: 0">
+      <p>They turned down half of what we asked for, and they were right
+      about all of it. The identity has outlasted two shop refits and a
+      new boat.</p>
+      <p><small>— Owner, Saltmarsh Ferry Co.</small></p>
+    </blockquote>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container">
+    <div class="k-split">
+      <div>
+        <h2>How a project runs</h2>
+        <p style="color: var(--k-text-soft)">
+          No discovery theater, no forty-page decks. Three stages, each
+          one ending with something real in your hands.
+        </p>
+      </div>
+      <ol class="k-steps">
+        <li><strong>Listen.</strong> A long first conversation, then a
+        short written brief in plain language. You correct it until it's
+        true — nothing is designed before that.</li>
+        <li><strong>Make.</strong> One direction, developed properly,
+        rather than three thin ones. You see honest work-in-progress at
+        set points, not a reveal at the end.</li>
+        <li><strong>Hand over.</strong> Files, guidelines, and a working
+        session with whoever maintains it. The goal is that you stop
+        needing us — and call anyway, for the next thing.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--tint" id="contact">
+  <div class="k-container--narrow k-container k-center">
+    <h2>Tell us what you're making</h2>
+    <p>We book two or three projects a season and reply to every
+    inquiry within a week — including the ones we can't take, with a
+    recommendation for who could.</p>
+    <div class="k-cluster" style="justify-content: center; margin-top: var(--k-space-4)">
+      <a class="k-btn" href="mailto:hello@example.com">hello@example.com</a>
+      <a class="k-btn k-btn--ghost" href="#work">See the work first</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span><strong style="color: var(--k-text)">Harbor &amp; Pine</strong> — a fictional studio, shown as a keel template.</span>
+    <span>Built with keel — <a href="../templates.html">all templates</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

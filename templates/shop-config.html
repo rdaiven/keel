@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Millhouse Coffee — a build-your-own configurator template built with keel</title>
+<meta name="description" content="A build-your-own product configurator template built entirely with keel: size, roast, grind and add-on options with a running order summary that updates live. The whole theme is one tokens block; the total is computed by one small inline script.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Replace this block and the page becomes yours. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(42 32% 95%);
+      --k-surface: hsl(45 40% 98%);
+      --k-surface-2: hsl(42 26% 90%);
+      --k-border: hsl(42 18% 82%);
+      --k-border-strong: hsl(42 16% 66%);
+      --k-text: hsl(90 18% 14%);
+      --k-text-soft: hsl(90 10% 32%);
+      --k-text-faint: hsl(90 8% 46%);
+      --k-accent: hsl(84 32% 30%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(20 55% 45%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-tracking: -0.005em;
+      --k-radius: 8px;
+      --k-density: 1;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local: option "swatch" buttons — a segmented control stretched
+     into a grid, so each option carries its own price as a data attr */
+  .cf-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)); gap: var(--k-space-2); }
+  .cf-option {
+    display: block; text-align: center; cursor: pointer;
+    background: var(--k-surface); border: 1px solid var(--k-border);
+    border-radius: var(--k-radius); padding: var(--k-space-3);
+    font-size: var(--k-text-s); transition: border-color var(--k-ease), background var(--k-ease);
+  }
+  .cf-option:hover { border-color: var(--k-border-strong); }
+  .cf-option[aria-pressed="true"] {
+    border-color: var(--k-accent); background: var(--k-accent-soft); color: var(--k-accent-strong);
+    font-weight: 650;
+  }
+  .cf-option__price { display: block; color: var(--k-text-faint); font-size: var(--k-text-xs); margin-top: 0.15em; }
+  .cf-option[aria-pressed="true"] .cf-option__price { color: inherit; }
+
+  .cf-summary__row { display: flex; justify-content: space-between; gap: var(--k-space-3); }
+  .cf-summary__row + .cf-summary__row { margin-block-start: var(--k-space-2); }
+  .cf-summary__total { border-block-start: 1px solid var(--k-border); margin-block-start: var(--k-space-4); padding-block-start: var(--k-space-4); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme; the running total is one small inline script, keel-styled
+    end to end. <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Millhouse Coffee</a>
+      <ul class="k-nav__links">
+        <li><a href="#build">Build a bag</a></li>
+        <li><a href="#how">How it ships</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="k-hero" id="top">
+  <div class="k-container">
+    <p class="k-hero__eyebrow">Roasted to order · small farm lots</p>
+    <h1>Build your bag.</h1>
+    <p class="k-hero__lead">Pick a size, a roast, a grind, and how often
+    it shows up. We roast it the morning it ships — nothing sits on a
+    shelf.</p>
+  </div>
+</section>
+
+<!-- BUILDER -->
+<section class="k-section k-section--tight" id="build">
+  <div class="k-container">
+    <div class="k-cols-2" style="align-items: start; gap: var(--k-space-6)">
+
+      <!-- OPTIONS -->
+      <div>
+        <fieldset class="k-field">
+          <legend>Size</legend>
+          <div class="cf-options" role="group" aria-label="Size" data-cf-group="size">
+            <button type="button" class="cf-option" aria-pressed="false" data-price="16" data-label="12oz bag">
+              12oz bag<span class="cf-option__price">$16</span>
+            </button>
+            <button type="button" class="cf-option" aria-pressed="true" data-price="42" data-label="2lb bag">
+              2lb bag<span class="cf-option__price">$42</span>
+            </button>
+            <button type="button" class="cf-option" aria-pressed="false" data-price="95" data-label="5lb bag">
+              5lb bag<span class="cf-option__price">$95</span>
+            </button>
+          </div>
+        </fieldset>
+
+        <fieldset class="k-field">
+          <legend>Roast</legend>
+          <div class="k-segmented" role="group" aria-label="Roast" data-cf-group="roast">
+            <button type="button" aria-pressed="false" data-label="Light">Light</button>
+            <button type="button" aria-pressed="true" data-label="Medium">Medium</button>
+            <button type="button" aria-pressed="false" data-label="Dark">Dark</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="k-field">
+          <legend>Grind</legend>
+          <div class="k-segmented" role="group" aria-label="Grind" data-cf-group="grind">
+            <button type="button" aria-pressed="true" data-label="Whole bean">Whole bean</button>
+            <button type="button" aria-pressed="false" data-label="Drip">Drip</button>
+            <button type="button" aria-pressed="false" data-label="Espresso">Espresso</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="k-field">
+          <legend>Add-ons</legend>
+          <div class="k-stack k-stack--tight">
+            <label class="k-switch" style="display: flex; align-items: center; gap: var(--k-space-3)" data-cf-addon>
+              <input type="checkbox" data-price="12" data-label="Reusable canister">
+              <span>Reusable steel canister <span class="k-text-faint">+$12</span></span>
+            </label>
+            <label class="k-switch" style="display: flex; align-items: center; gap: var(--k-space-3)" data-cf-addon>
+              <input type="checkbox" data-price="4" data-label="Gift wrap">
+              <span>Gift wrap the bag <span class="k-text-faint">+$4</span></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="k-field">
+          <label for="cf-frequency">Delivery</label>
+          <select id="cf-frequency">
+            <option value="0" data-label="One-time">One-time order</option>
+            <option value="0.1" data-label="Every 2 weeks" selected>Every 2 weeks (10% off)</option>
+            <option value="0.05" data-label="Every 4 weeks">Every 4 weeks (5% off)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- SUMMARY -->
+      <aside class="k-card k-sticky" aria-label="Order summary">
+        <p class="k-card__kicker">Your bag</p>
+        <h3>Order summary</h3>
+        <div class="k-stack k-stack--tight" id="cf-lines">
+          <p class="cf-summary__row"><span class="k-text-soft">Size</span> <strong id="cf-size-label">2lb bag</strong></p>
+          <p class="cf-summary__row"><span class="k-text-soft">Roast</span> <strong id="cf-roast-label">Medium</strong></p>
+          <p class="cf-summary__row"><span class="k-text-soft">Grind</span> <strong id="cf-grind-label">Whole bean</strong></p>
+          <p class="cf-summary__row"><span class="k-text-soft">Delivery</span> <strong id="cf-freq-label">Every 2 weeks</strong></p>
+        </div>
+        <p class="k-text-s k-text-faint k-mt-4" id="cf-addons-label">No add-ons selected.</p>
+
+        <div class="cf-summary__total">
+          <p class="cf-summary__row"><span class="k-text-soft">Subtotal</span> <span id="cf-subtotal">$42.00</span></p>
+          <p class="cf-summary__row"><span class="k-text-soft">Delivery discount</span> <span id="cf-discount">−$4.20</span></p>
+          <p class="cf-summary__row k-mt-2"><strong>Total</strong> <strong class="k-text-l" id="cf-total">$37.80</strong></p>
+        </div>
+
+        <a class="k-btn k-mt-5" style="display: block; text-align: center" href="#top">Add to cart</a>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT SHIPS -->
+<section class="k-section k-section--alt" id="how">
+  <div class="k-container">
+    <h2>How it ships</h2>
+    <div class="k-cols-3 k-mt-5">
+      <div>
+        <p class="k-card__kicker">01</p>
+        <h3>Roasted to order</h3>
+        <p>Every bag is roasted the morning your order goes out, in batches
+        small enough to taste the difference.</p>
+      </div>
+      <div>
+        <p class="k-card__kicker">02</p>
+        <h3>Ground your way</h3>
+        <p>Whole bean, drip, or espresso — the grinder is set per order,
+        never sitting pre-ground on a shelf.</p>
+      </div>
+      <div>
+        <p class="k-card__kicker">03</p>
+        <h3>On your schedule</h3>
+        <p>One-time or on a cycle — change the frequency or skip a delivery
+        any time, no call required.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>Millhouse Coffee — a fictional roaster, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+<script>
+  /* This template's one genuine interaction: recompute the running total
+     as options change. keel styles every control above; this is just
+     the arithmetic and the summary text. */
+  (function () {
+    var sizeGroup = document.querySelector('[data-cf-group="size"]');
+    var roastGroup = document.querySelector('[data-cf-group="roast"]');
+    var grindGroup = document.querySelector('[data-cf-group="grind"]');
+    var addons = document.querySelectorAll('[data-cf-addon] input[type="checkbox"]');
+    var freqSelect = document.getElementById('cf-frequency');
+
+    function wireGroup(group) {
+      group.querySelectorAll('button').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          group.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+          btn.setAttribute('aria-pressed', 'true');
+          recompute();
+        });
+      });
+    }
+    [sizeGroup, roastGroup, grindGroup].forEach(wireGroup);
+    addons.forEach(function (cb) { cb.addEventListener('change', recompute); });
+    freqSelect.addEventListener('change', recompute);
+
+    function pressed(group) { return group.querySelector('[aria-pressed="true"]'); }
+    function money(n) { return '$' + n.toFixed(2); }
+
+    function recompute() {
+      var size = pressed(sizeGroup);
+      var roast = pressed(roastGroup);
+      var grind = pressed(grindGroup);
+      var freqOpt = freqSelect.options[freqSelect.selectedIndex];
+
+      document.getElementById('cf-size-label').textContent = size.dataset.label;
+      document.getElementById('cf-roast-label').textContent = roast.dataset.label;
+      document.getElementById('cf-grind-label').textContent = grind.dataset.label;
+      document.getElementById('cf-freq-label').textContent = freqOpt.dataset.label;
+
+      var subtotal = parseFloat(size.dataset.price);
+      var chosenAddons = [];
+      addons.forEach(function (cb) {
+        if (cb.checked) {
+          subtotal += parseFloat(cb.dataset.price);
+          chosenAddons.push(cb.dataset.label);
+        }
+      });
+      document.getElementById('cf-addons-label').textContent =
+        chosenAddons.length ? ('Add-ons: ' + chosenAddons.join(', ') + '.') : 'No add-ons selected.';
+
+      var discountRate = parseFloat(freqSelect.value);
+      var discount = subtotal * discountRate;
+      var total = subtotal - discount;
+
+      document.getElementById('cf-subtotal').textContent = money(subtotal);
+      document.getElementById('cf-discount').textContent = discount > 0 ? ('−' + money(discount)) : money(0);
+      document.getElementById('cf-total').textContent = money(total);
+    }
+
+    recompute();
+  })();
+</script>
+</body>
+</html>

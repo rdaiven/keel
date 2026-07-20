@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Isla Sonora — a music-festival template on keel's maximal path</title>
+<meta name="description" content="A dark, high-saturation music-festival one-pager built with keel and the maximal path: hot pink-to-orange gradient type over a near-black stage, a bold lineup grid, and a schedule by day. One tokens block plus one path link is the whole look.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-path-maximal.css">
+<style>
+  /* The theme: one tokens block + the maximal path linked above. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(260 45% 8%);
+      --k-surface: hsl(260 38% 12%);
+      --k-surface-2: hsl(260 32% 17%);
+      --k-border: hsl(260 25% 26%);
+      --k-border-strong: hsl(260 25% 38%);
+      --k-text: hsl(40 40% 96%);
+      --k-text-soft: hsl(40 20% 80%);
+      --k-text-faint: hsl(40 12% 62%);
+      --k-accent: hsl(332 90% 58%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(28 95% 56%);
+      --k-on-accent-2: hsl(260 45% 8%);
+      --k-density: 1.1;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+  .is-lineup { font-size: var(--k-text-xl); font-weight: 750; }
+
+  /* page-local: hero background — a dark radial glow instead of .k-bg-mesh,
+     so this reads distinct from the pale-violet mesh hero elsewhere */
+  .is-glow {
+    background:
+      radial-gradient(60% 60% at 20% 15%, hsl(332 90% 58% / 0.35), transparent 60%),
+      radial-gradient(55% 55% at 85% 25%, hsl(28 95% 56% / 0.3), transparent 60%),
+      radial-gradient(70% 70% at 50% 100%, hsl(48 95% 60% / 0.18), transparent 65%);
+  }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template on the <a href="../docs/paths.html">maximal path</a> —
+    one tokens block + one path link is the whole look.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">ISLA SONORA</a>
+      <ul class="k-nav__links">
+        <li><a href="#lineup">Lineup</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#tickets">Tickets</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="k-hero is-glow" id="top">
+  <div class="k-container k-center">
+    <p class="k-hero__eyebrow">March 13 – 15 · Boracay foreshore</p>
+    <h1><span class="k-text-gradient">Sundown to sunrise.</span><br>Three stages.<br>One island.</h1>
+    <p class="k-hero__lead" style="margin-inline: auto">Isla Sonora is
+    the dry-season festival built for dancing barefoot — house, disco,
+    and bass on sand, until the tide comes back in.</p>
+    <p class="k-cluster k-mt-5" style="justify-content: center">
+      <a class="k-btn k-btn--large" href="#tickets">Get tickets</a>
+      <a class="k-btn k-btn--ghost k-btn--large" href="#lineup">Full lineup</a>
+    </p>
+    <div class="k-cols-3 k-mt-7">
+      <div class="k-card k-center">
+        <span class="k-stat__value">3</span>
+        <span class="k-stat__label">nights on the sand</span>
+      </div>
+      <div class="k-card k-center">
+        <span class="k-stat__value">54</span>
+        <span class="k-stat__label">acts across three stages</span>
+      </div>
+      <div class="k-card k-center">
+        <span class="k-stat__value">1</span>
+        <span class="k-stat__label">island, zero shuttles needed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LINEUP -->
+<section class="k-section" id="lineup">
+  <div class="k-container">
+    <h2>Headliners</h2>
+    <div class="k-split k-mt-5">
+      <ul class="k-list k-list--flush is-lineup">
+        <li>Kalayo Disco Club</li>
+        <li>Marea (live)</li>
+        <li>DJ Salakot</li>
+        <li>Neon Sampaguita</li>
+        <li>The Reef Break Collective</li>
+      </ul>
+      <div class="k-card">
+        <p class="k-card__kicker">Plus</p>
+        <h3>49 more across three stages</h3>
+        <p>The Foreshore main stage, the Coral Room (indoor, all bass),
+        and the Sunrise Deck for the closing sets. Full set times drop
+        two weeks out.</p>
+        <p><a href="#tickets">See every act →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE BY DAY -->
+<section class="k-section k-section--alt" id="schedule">
+  <div class="k-container">
+    <h2>Three nights, three moods</h2>
+    <div class="k-cols-3 k-mt-5">
+      <div class="k-card k-card--hover">
+        <p class="k-card__kicker">Friday</p>
+        <h3>Arrival</h3>
+        <p>Sunset sets on the Foreshore while the island fills in.</p>
+      </div>
+      <div class="k-card k-card--hover">
+        <p class="k-card__kicker">Saturday</p>
+        <h3>Peak night</h3>
+        <p>All three stages running until the Coral Room speakers beg for mercy.</p>
+      </div>
+      <div class="k-card k-card--hover">
+        <p class="k-card__kicker">Sunday</p>
+        <h3>Sunrise Deck</h3>
+        <p>Downtempo sets facing east, breakfast served on the sand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKET TIERS / CTA -->
+<section class="k-section k-section--accent" id="tickets">
+  <div class="k-container k-center">
+    <h2>Passes from ₱3,200</h2>
+    <div class="k-cols-3 k-mt-5">
+      <div class="k-card">
+        <p class="k-card__kicker">General</p>
+        <p class="k-stat__value">₱3,200</p>
+        <p>Full three-night access, camping not included.</p>
+        <p class="k-mt-4"><a class="k-btn k-btn--ghost" href="#top">Buy General</a></p>
+      </div>
+      <div class="k-card" style="border-color: var(--k-accent); border-width: 2px">
+        <p class="k-badge k-badge--solid">Most popular</p>
+        <p class="k-card__kicker">Beachfront</p>
+        <p class="k-stat__value">₱5,900</p>
+        <p>Access plus beachfront tent camping and priority stage rail.</p>
+        <p class="k-mt-4"><a class="k-btn k-btn--large" href="#top">Buy Beachfront</a></p>
+      </div>
+      <div class="k-card">
+        <p class="k-card__kicker">Sunrise VIP</p>
+        <p class="k-stat__value">₱9,500</p>
+        <p>Everything, plus the Sunrise Deck lounge and boat transfer.</p>
+        <p class="k-mt-4"><a class="k-btn k-btn--ghost" href="#top">Buy VIP</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>ISLA SONORA — a fictional festival on the maximal path.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../docs/paths.html">About paths</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Patience of Adobo — La Mesa — a magazine template built with keel</title>
+<meta name="description" content="The long-form article page of the La Mesa keel template: a narrow centered serif column, byline and dek, and a pull-quote — genuine food-writing prose about a slow-braised adobo.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Byte-identical across all three La Mesa pages. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(90 20% 95%);
+      --k-surface: hsl(60 30% 98%);
+      --k-surface-2: hsl(90 16% 91%);
+      --k-border: hsl(90 12% 84%);
+      --k-border-strong: hsl(90 12% 70%);
+      --k-text: hsl(150 15% 16%);
+      --k-text-soft: hsl(150 8% 34%);
+      --k-text-faint: hsl(150 6% 48%);
+      --k-accent: hsl(110 25% 32%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(30 35% 45%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-font-display: Georgia, "Times New Roman", serif;
+      --k-display-weight: 700;
+      --k-tracking: -0.005em;
+      --k-radius: 6px;
+      --k-density: 1.05;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local (prefix "lm-"): identical on every La Mesa page */
+  .lm-masthead__wordmark { font-family: var(--k-font-display); font-size: var(--k-text-2xl);
+    font-weight: 700; letter-spacing: -0.01em; }
+  .lm-masthead__kicker { font-family: var(--k-font-mono); text-transform: uppercase;
+    letter-spacing: 0.1em; font-size: var(--k-text-xs); color: var(--k-text-faint); }
+  .lm-cover { display: block; border-radius: var(--k-radius); aspect-ratio: 3/4;
+    display: flex; align-items: flex-end; padding: var(--k-space-4); color: #fff; }
+  .lm-cover__num { font-family: var(--k-font-mono); font-size: var(--k-text-xs); opacity: 0.85; }
+  .lm-cover__season { font-family: var(--k-font-display); font-weight: 700; font-size: var(--k-text-xl); }
+
+  /* article reading column, this page only, still "lm-" prefix */
+  .lm-article { font-family: var(--k-font-display); }
+  .lm-article p { font-size: var(--k-text-l); line-height: 1.75; }
+  .lm-dek { font-size: var(--k-text-l); color: var(--k-text-soft); font-style: italic; }
+  .lm-byline { font-family: var(--k-font-body); font-size: var(--k-text-xs);
+    color: var(--k-text-faint); text-transform: uppercase; letter-spacing: 0.06em; }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme, shared across a linked three-page magazine site.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand lm-masthead__wordmark" href="lamesa-issue.html">La Mesa</a>
+      <ul class="k-nav__links">
+        <li><a href="lamesa-issue.html">Current Issue</a></li>
+        <li><a href="lamesa-archive.html">Archive</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<article class="k-section lm-article">
+  <div class="k-container--narrow k-container">
+    <p class="lm-masthead__kicker">Issue No. 14 · Braise</p>
+    <h1>The Patience of Adobo</h1>
+    <p class="lm-dek">Vinegar, garlic, and a covered pot, left alone
+    longer than most recipes admit — three cooks make the same braise
+    differently, and agree on almost nothing except the lid.</p>
+    <p class="lm-byline">By Marisol Feliciano · 14 min read</p>
+
+    <p>The first time I asked Ligaya Tuazon how long her adobo cooks,
+    she looked at me the way you'd look at someone who'd asked how long
+    a marriage takes. "Until it's ready," she said, and went back to
+    turning the pork with a pair of tongs worn smooth at the hinge. I
+    had come with a notebook and a plan to time everything. I left with
+    neither, and a container of adobo that I ate cold, standing over
+    her sink, twenty minutes after it came off the stove — because she
+    told me it tastes better once it's stopped fighting you.</p>
+
+    <p>Adobo is, on paper, an unglamorous dish: pork or chicken, soy
+    sauce, cane vinegar, garlic smashed rather than minced, a fistful of
+    peppercorns, two or three bay leaves if you're generous with the
+    garden. It gets called the national dish of the Philippines with a
+    frequency that suggests a single recipe, when in fact it names a
+    method more than a formula — meat, acid, salt, patience — and every
+    cook I visited for this story treated the patience as the one
+    ingredient you can't substitute.</p>
+
+    <p>At Ligaya's stove in a narrow kitchen above a hardware store, the
+    pork goes in whole slabs, skin still on, browned hard in its own
+    fat before the vinegar ever touches the pan. "You want the outside
+    to have already decided what it is," she told me, "before you make
+    it sit in acid for two hours." The vinegar goes in cold and
+    unstirred at first — she says stirring too early scares it, and I
+    have decided not to argue with forty years of Tuesday adobo. The pot
+    goes on the lowest flame her stove allows, lid askew by exactly the
+    width of two fingers, and then she leaves the room. Not near the
+    room — the room. She irons in the next apartment over while it
+    cooks, and comes back only when the smell changes from sharp to
+    round, which she can apparently do from two walls away.</p>
+
+    <blockquote>
+      <p>"The vinegar isn't the point. The vinegar is what convinces the
+      meat to give up its secrets. The point is what happens after it
+      stops being sour and starts being everything at once."</p>
+    </blockquote>
+
+    <p>Across town, at a sixteen-seat restaurant with a wait list that
+    stretches into next month, chef Bo Alcantara does something Ligaya
+    would consider heresy: he pulls the meat out of its braise entirely,
+    reduces the liquid separately until it coats a spoon like lacquer,
+    and only reunites the two at the very end, off heat, so the sauce
+    clings instead of pools. His version arrives glossy, almost black,
+    with a crackling disc of crisped pork fat balanced on top like a
+    coin. It is, by any measure, a more photogenic plate than Ligaya's.
+    It is also, he told me without a trace of false modesty, "not
+    better. Just louder."</p>
+
+    <p>The third cook, a home cook named Perla Reyes who has never
+    charged anyone a peso for a meal in her life, does neither. She
+    cooks hers in a claypot that her mother used, on a stove that runs
+    hot no matter what she does to the dial, for exactly as long as it
+    takes to watch one telenovela episode plus the ads. "I don't check
+    it," she said. "I trust the pot more than I trust my eyes." Her
+    adobo, when I finally tasted it, had a mineral undertone none of the
+    others carried — something she attributes entirely to the claypot
+    and refuses to test any other way, because testing it would mean
+    risking that it isn't true.</p>
+
+    <p>What struck me across three kitchens and three very different
+    results was how little any of them cared about consistency, in the
+    industrial sense of the word. None of them had ever measured the
+    vinegar. None of them cooked it for a fixed number of minutes. Each
+    one described the same moment — a shift in smell, a change in how
+    the sauce moved when the pot was tilted, a texture under the tongs
+    that told them the meat had stopped resisting — and each one trusted
+    that moment over any timer. It is the opposite of a recipe you can
+    hand a stranger and expect the same result from twice. It is,
+    perhaps, exactly why the dish has survived this long: it asks to be
+    learned by a body standing at a stove, not read off a card.</p>
+
+    <p>I made my own attempt the following week, in my own kitchen,
+    with none of their instincts and all of their notes. I browned the
+    pork too fast, added the vinegar too early, and stirred when I
+    shouldn't have. It was, by their standards, a mess. I ate two
+    bowls of it anyway, alone, standing at my own counter, and
+    understood — a little late, the way you understand most useful
+    things — that the whole essay I'd set out to write about technique
+    was actually about trust: in the pot, in the smell, in the two
+    fingers of gap under a lid, in the twenty minutes you let it rest
+    before you eat it standing over the sink.</p>
+
+    <hr>
+    <p><small>Marisol Feliciano is a contributing writer at La Mesa. She
+    last wrote about the salt works of Issue No. 11.</small></p>
+  </div>
+</article>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>La Mesa — a fictional magazine, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

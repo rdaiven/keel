@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ledgerly — a monthly budget tracker built with keel</title>
+<meta name="description" content="A fictional monthly budget tracker built entirely with keel — log income and expenses, watch totals and an overspend warning update live, and see a per-category breakdown. State is saved to this browser's local storage.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The theme. This block is the entire difference between this page
+     and keel's defaults — every derived shade follows from it. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(150 20% 97%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(150 16% 94%);
+      --k-border: hsl(150 12% 87%);
+      --k-border-strong: hsl(150 10% 74%);
+      --k-text: hsl(150 26% 12%);
+      --k-text-soft: hsl(150 12% 36%);
+      --k-text-faint: hsl(150 8% 52%);
+      --k-accent: hsl(160 60% 32%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(28 82% 46%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-radius: 9px;
+      --k-ok: hsl(150 55% 34%);
+      --k-warn: hsl(35 88% 45%);
+      --k-danger: hsl(4 74% 52%);
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local: a plain percentage bar for the category breakdown —
+     keel doesn't ship a progress-bar component, so this is two divs. */
+  .lg-bar { block-size: 0.5rem; border-radius: 999px; background: var(--k-surface-2);
+            overflow: hidden; margin-block: 0.35em 0.1em; }
+  .lg-bar__fill { block-size: 100%; background: var(--k-accent-2); border-radius: 999px; }
+  .lg-cat-row + .lg-cat-row { margin-block-start: var(--k-space-3); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — a genuinely working app
+    this time, not just chrome. <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Ledgerly</a>
+      <ul class="k-nav__links">
+        <li><a href="#entries">Entries</a></li>
+        <li><a href="#add">Add entry</a></li>
+        <li><a href="#breakdown">Breakdown</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="k-container k-section" id="top">
+
+  <h1>Ledgerly</h1>
+  <p class="k-text-soft" style="max-width: 40em">A monthly budget
+  tracker — log income and expenses as they happen, and watch your
+  balance and category totals update as you go.</p>
+
+  <div class="k-alert k-alert--soft k-mt-4">
+    Everything below is saved to <strong>this browser's local storage
+    only</strong> — nothing leaves your machine, and nothing syncs
+    between devices.
+  </div>
+
+  <!-- TOTALS -->
+  <div class="k-cols-3 k-mt-5">
+    <div class="k-card">
+      <p class="k-stat__label">Income</p>
+      <span class="k-stat__value" id="lg-total-income">$0.00</span>
+    </div>
+    <div class="k-card">
+      <p class="k-stat__label">Expenses</p>
+      <span class="k-stat__value" id="lg-total-expenses">$0.00</span>
+    </div>
+    <div class="k-card">
+      <p class="k-stat__label">Remaining</p>
+      <span class="k-stat__value" id="lg-total-remaining">$0.00</span>
+    </div>
+  </div>
+
+  <div id="lg-warning" class="k-alert k-alert--danger k-mt-4" hidden>
+    <strong>You're over budget.</strong> <span id="lg-warning-text"></span>
+  </div>
+
+  <!-- ADD FORM -->
+  <section class="k-card k-mt-5" id="add">
+    <p class="k-card__kicker">Add an entry</p>
+    <form id="lg-form">
+      <div class="k-field">
+        <label id="lg-kind-label">Type</label>
+        <div class="k-btn-group" role="group" aria-labelledby="lg-kind-label">
+          <button type="button" class="k-btn k-btn--ghost k-btn--small" data-kind="income" aria-pressed="false">Income</button>
+          <button type="button" class="k-btn k-btn--ghost k-btn--small" data-kind="expense" aria-pressed="true">Expense</button>
+        </div>
+      </div>
+      <div class="k-field">
+        <label for="lg-desc">Description</label>
+        <input id="lg-desc" type="text" placeholder="e.g. Groceries, Freelance payment" required>
+      </div>
+      <div class="k-field--split k-field">
+        <div>
+          <label for="lg-amount">Amount</label>
+          <input id="lg-amount" type="number" min="0.01" step="0.01" placeholder="0.00" required>
+        </div>
+        <div>
+          <label for="lg-category">Category</label>
+          <input id="lg-category" type="text" list="lg-category-list" placeholder="e.g. Rent, Groceries, Freelance" required>
+          <datalist id="lg-category-list">
+            <option value="Rent">
+            <option value="Groceries">
+            <option value="Utilities">
+            <option value="Transport">
+            <option value="Subscriptions">
+            <option value="Freelance">
+            <option value="Salary">
+          </datalist>
+        </div>
+      </div>
+      <button class="k-btn" type="submit"><span class="k-icon k-icon--plus" aria-hidden="true"></span> Add entry</button>
+    </form>
+  </section>
+
+  <div class="k-cols-2 k-mt-5" style="align-items: start">
+
+    <!-- ENTRIES -->
+    <section id="entries">
+      <p class="k-card__kicker">This month's entries</p>
+      <div class="k-table-wrap">
+        <table class="k-table--dense k-table--hover">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Category</th>
+              <th aria-sort="none">Amount</th>
+              <th><span class="k-visually-hidden">Delete</span></th>
+            </tr>
+          </thead>
+          <tbody id="lg-rows"></tbody>
+        </table>
+      </div>
+      <div id="lg-empty" class="k-empty" hidden>
+        <h4>No entries yet</h4>
+        <p>Add your first income or expense above.</p>
+      </div>
+    </section>
+
+    <!-- BREAKDOWN -->
+    <section class="k-card" id="breakdown">
+      <p class="k-card__kicker">By category</p>
+      <div id="lg-breakdown"></div>
+      <p id="lg-breakdown-empty" class="k-text-soft k-text-s" hidden>No expenses logged yet.</p>
+    </section>
+
+  </div>
+
+</div>
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>Ledgerly — a fictional tool, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var STORE_KEY = 'kl-ledgerly-v1';
+
+  /* ---------- seed data ---------- */
+  function seedEntries () {
+    return [
+      { id: 'lg-1', kind: 'income', desc: 'Freelance payment — Harbor Co', category: 'Freelance', amount: 1450 },
+      { id: 'lg-2', kind: 'income', desc: 'Part-time salary', category: 'Salary', amount: 900 },
+      { id: 'lg-3', kind: 'expense', desc: 'Rent', category: 'Rent', amount: 1100 },
+      { id: 'lg-4', kind: 'expense', desc: 'Groceries — week 1', category: 'Groceries', amount: 96.4 },
+      { id: 'lg-5', kind: 'expense', desc: 'Internet + phone', category: 'Utilities', amount: 74.2 },
+      { id: 'lg-6', kind: 'expense', desc: 'Bus pass', category: 'Transport', amount: 60 }
+    ];
+  }
+
+  /* ---------- state ---------- */
+  function load () {
+    var raw;
+    try { raw = localStorage.getItem(STORE_KEY); } catch (e) { raw = null; }
+    if (!raw) {
+      var seeded = seedEntries();
+      save(seeded);
+      return seeded;
+    }
+    try {
+      var parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) throw new Error('bad shape');
+      return parsed;
+    } catch (e) {
+      var fallback = seedEntries();
+      save(fallback);
+      return fallback;
+    }
+  }
+
+  function save (entries) {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(entries)); } catch (e) { /* storage unavailable — app still works in-memory */ }
+  }
+
+  var entries = load();
+  var currentKind = 'expense';
+
+  /* ---------- helpers ---------- */
+  function money (n) {
+    var sign = n < 0 ? '-' : '';
+    return sign + '$' + Math.abs(n).toFixed(2);
+  }
+
+  /* ---------- rendering ---------- */
+  var rowsEl = document.getElementById('lg-rows');
+  var emptyEl = document.getElementById('lg-empty');
+  var breakdownEl = document.getElementById('lg-breakdown');
+  var breakdownEmptyEl = document.getElementById('lg-breakdown-empty');
+  var warningEl = document.getElementById('lg-warning');
+  var warningTextEl = document.getElementById('lg-warning-text');
+
+  function render () {
+    // preserve keyboard focus across the rebuild below (deleting a row would
+    // otherwise drop the focused delete button and send focus to <body>)
+    var focused = document.activeElement;
+    var focusId = null;
+    if (focused && rowsEl.contains(focused)) {
+      var focusedRow = focused.closest('[data-entry-id]');
+      if (focusedRow) focusId = focusedRow.dataset.entryId;
+    }
+
+    var income = 0, expenses = 0;
+    entries.forEach(function (e) {
+      if (e.kind === 'income') income += e.amount; else expenses += e.amount;
+    });
+    var remaining = income - expenses;
+
+    document.getElementById('lg-total-income').textContent = money(income);
+    document.getElementById('lg-total-expenses').textContent = money(expenses);
+    var remainingEl = document.getElementById('lg-total-remaining');
+    remainingEl.textContent = money(remaining);
+    remainingEl.style.color = remaining < 0 ? 'var(--k-danger)' : '';
+
+    if (expenses > income) {
+      warningEl.hidden = false;
+      warningTextEl.textContent = 'Expenses (' + money(expenses) + ') exceed income (' + money(income) + ') by ' + money(expenses - income) + '.';
+    } else {
+      warningEl.hidden = true;
+    }
+
+    // table rows, newest first (array order = insertion order; reverse for display)
+    rowsEl.innerHTML = '';
+    if (!entries.length) {
+      emptyEl.hidden = false;
+    } else {
+      emptyEl.hidden = true;
+      entries.slice().reverse().forEach(function (entry) {
+        var tr = document.createElement('tr');
+        tr.dataset.entryId = entry.id;
+
+        var tdDesc = document.createElement('td');
+        var kindBadge = document.createElement('span');
+        kindBadge.className = 'k-badge ' + (entry.kind === 'income' ? 'k-badge--ok' : 'k-badge--outline');
+        kindBadge.style.marginInlineEnd = '0.5em';
+        kindBadge.textContent = entry.kind === 'income' ? 'Income' : 'Expense';
+        tdDesc.appendChild(kindBadge);
+        tdDesc.appendChild(document.createTextNode(entry.desc));
+
+        var tdCat = document.createElement('td');
+        tdCat.className = 'k-text-soft';
+        tdCat.textContent = entry.category;
+
+        var tdAmount = document.createElement('td');
+        tdAmount.className = 'k-num';
+        tdAmount.style.color = entry.kind === 'income' ? 'var(--k-ok)' : 'var(--k-danger)';
+        tdAmount.textContent = (entry.kind === 'income' ? '+' : '-') + money(entry.amount).replace('-', '');
+
+        var tdDel = document.createElement('td');
+        var delBtn = document.createElement('button');
+        delBtn.type = 'button';
+        delBtn.className = 'k-tool';
+        delBtn.setAttribute('aria-label', 'Delete entry: ' + entry.desc);
+        delBtn.innerHTML = '<span class="k-icon k-icon--trash" aria-hidden="true"></span>';
+        delBtn.addEventListener('click', function () { removeEntry(entry.id); });
+        tdDel.appendChild(delBtn);
+
+        tr.appendChild(tdDesc);
+        tr.appendChild(tdCat);
+        tr.appendChild(tdAmount);
+        tr.appendChild(tdDel);
+        rowsEl.appendChild(tr);
+      });
+    }
+
+    if (focusId) {
+      var restoredRow = rowsEl.querySelector('[data-entry-id="' + focusId + '"]');
+      var target = restoredRow && restoredRow.querySelector('button');
+      if (target) target.focus();
+      else document.getElementById('lg-desc').focus();
+    }
+
+    // category breakdown — expenses only
+    var byCategory = {};
+    entries.forEach(function (e) {
+      if (e.kind !== 'expense') return;
+      byCategory[e.category] = (byCategory[e.category] || 0) + e.amount;
+    });
+    var cats = Object.keys(byCategory).sort(function (a, b) { return byCategory[b] - byCategory[a]; });
+
+    breakdownEl.innerHTML = '';
+    if (!cats.length) {
+      breakdownEmptyEl.hidden = false;
+    } else {
+      breakdownEmptyEl.hidden = true;
+      var maxVal = byCategory[cats[0]] || 1;
+      cats.forEach(function (cat) {
+        var row = document.createElement('div');
+        row.className = 'lg-cat-row';
+
+        var label = document.createElement('div');
+        label.className = 'k-cluster';
+        label.style.justifyContent = 'space-between';
+        var name = document.createElement('span');
+        name.className = 'k-text-s';
+        name.textContent = cat;
+        var val = document.createElement('span');
+        val.className = 'k-text-s k-text-soft';
+        val.textContent = money(byCategory[cat]);
+        label.appendChild(name);
+        label.appendChild(val);
+
+        var bar = document.createElement('div');
+        bar.className = 'lg-bar';
+        var fill = document.createElement('div');
+        fill.className = 'lg-bar__fill';
+        var pct = Math.max(4, Math.round((byCategory[cat] / maxVal) * 100));
+        fill.style.width = pct + '%';
+        bar.appendChild(fill);
+
+        row.appendChild(label);
+        row.appendChild(bar);
+        breakdownEl.appendChild(row);
+      });
+    }
+  }
+
+  /* ---------- mutations ---------- */
+  function addEntry (kind, desc, category, amount) {
+    entries.push({
+      id: 'lg-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7),
+      kind: kind,
+      desc: desc,
+      category: category,
+      amount: amount
+    });
+    save(entries);
+    render();
+  }
+
+  function removeEntry (id) {
+    entries = entries.filter(function (e) { return e.id !== id; });
+    save(entries);
+    render();
+  }
+
+  /* ---------- wiring ---------- */
+  var kindButtons = document.querySelectorAll('[data-kind]');
+  kindButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      currentKind = btn.dataset.kind;
+      kindButtons.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+    });
+  });
+
+  document.getElementById('lg-form').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var desc = document.getElementById('lg-desc').value.trim();
+    var category = document.getElementById('lg-category').value.trim();
+    var amount = parseFloat(document.getElementById('lg-amount').value);
+    if (!desc || !category || !isFinite(amount) || amount <= 0) return;
+    addEntry(currentKind, desc, category, amount);
+    ev.target.reset();
+    kindButtons.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.kind === 'expense' ? 'true' : 'false'); });
+    currentKind = 'expense';
+    document.getElementById('lg-desc').focus();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

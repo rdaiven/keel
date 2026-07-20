@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motion &amp; interactions — keel</title>
+<meta name="description" content="keel's motion and interaction layer: entry animations, stagger, hover lift, scroll progress, scroll reveal, animated disclosure, auto-growing fields, overlay choreography, and view transitions — all CSS, off for reduced-motion users.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<style>
+  .demo-box { background: var(--k-accent-soft); border: 1px dashed var(--k-accent);
+              border-radius: var(--k-radius-s); padding: var(--k-space-3);
+              font-size: var(--k-text-xs); font-family: var(--k-font-mono);
+              color: var(--k-accent-strong); text-align: center; }
+
+  /* page-local custom variants — demos for the "Your own variants"
+     and "Extending keel" sections below */
+  .btn-sale {
+    --k-btn-bg: var(--k-warn);
+    --k-btn-bg-hover: color-mix(in oklab, var(--k-warn), black 15%);
+  }
+  .btn-quiet {
+    --k-btn-bg: var(--k-accent-trans-10);
+    --k-btn-fg: var(--k-accent-strong);
+    --k-btn-bg-hover: var(--k-accent-trans-20);
+  }
+
+  .testimonial {
+    background: var(--k-surface);
+    border: 1px solid var(--k-border);
+    border-radius: var(--k-radius-l);
+    padding: var(--k-space-5);
+  }
+  .testimonial__quote {
+    font-size: var(--k-text-l);
+    color: var(--k-text-soft);
+    margin: 0 0 var(--k-space-3);
+  }
+  .testimonial__name {
+    font-family: var(--k-font-mono);
+    font-size: var(--k-text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--k-text-faint);
+  }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+
+      <aside class="k-sticky docs-side k-sidebar--collapsible" id="docs-sidebar">
+        <button class="k-tool docs-sidebar-toggle" type="button" id="docs-sidebar-toggle"
+                aria-pressed="false" aria-label="Collapse sidebar to icons">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Documentation">
+          <details class="k-nav-group" open>
+            <summary>Getting started</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="start.html">Start</a></li>
+            <li><a href="frameworks.html">Framework guides</a></li>
+            <li><a href="concepts.html">Concepts</a></li>
+            <li><a href="changelog.html">Changelog</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Reference</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="tokens.html">Tokens</a></li>
+            <li><a href="base.html">Base</a></li>
+            <li><a href="typography.html">Typography</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="components.html">Components</a>
+            <ul class="k-list k-list--flush docs-sub">
+              <li><a href="components-actions.html">Actions</a></li>
+              <li><a href="components-forms.html">Forms</a></li>
+              <li><a href="components-surfaces.html">Surfaces &amp; data</a></li>
+              <li><a href="components-feedback.html">Feedback</a></li>
+              <li><a href="components-overlays.html">Overlays</a></li>
+              <li><a href="components-navigation.html">Navigation</a></li>
+              <li><a href="components-identity.html">Identity &amp; media</a></li>
+              <li aria-current="page"><a href="components-motion.html">Motion</a></li>
+              <li><a href="components-extending.html">Extending</a></li>
+              <li><a href="components-app.html">Application</a></li>
+            </ul>
+          </li>
+            <li><a href="utilities.html">Utilities</a></li>
+            <li><a href="icons.html">Icons</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Build</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="sections.html">Sections</a></li>
+            <li><a href="../templates.html">Templates</a></li>
+            <li><a href="../design.html">Design system</a></li>
+            <li><a href="paths.html">Paths</a></li>
+          </ul>
+          </details>
+        </nav>
+        <div id="docs-anchors"></div>
+      </aside>
+
+      <main id="main" class="docs-main">
+
+      <h1>Motion &amp; interactions</h1>
+      <p class="k-text-soft">The movement keel ships and the modern interactions it wires up — all CSS, all token-timed, all off for reduced-motion users.</p>
+
+    <section id="c-entry-animations">
+      <h2>Entry animations</h2>
+      <p><code>.k-anim-fade</code>, <code>.k-anim-up</code>,
+      <code>.k-anim-pop</code>, and <code>.k-anim-slide</code> are
+      one-shot entry animations: they run once when the element mounts
+      — on page load, or the moment your script inserts it — and then
+      they're done. Users with <code>prefers-reduced-motion</code> set
+      simply see the content, no animation. They fire on mount, not on
+      scroll — for scroll-triggered reveals use <code>.k-reveal</code>
+      below. Duration and delay are knobs: every animation reads
+      <code>--k-anim-duration</code> (450ms by default) and
+      <code>--k-anim-delay</code> (0ms), so retiming one element is a
+      single inline custom property — no new class. Reload the page to
+      watch these four again:</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-grid" style="margin-bottom: var(--k-space-4)">
+          <div class="k-card k-card--flat k-anim-fade"><h4>Fade</h4><p><small><code>.k-anim-fade</code> — opacity only.</small></p></div>
+          <div class="k-card k-card--flat k-anim-up"><h4>Up</h4><p><small><code>.k-anim-up</code> — fades in while rising.</small></p></div>
+          <div class="k-card k-card--flat k-anim-pop"><h4>Pop</h4><p><small><code>.k-anim-pop</code> — fades in while scaling up.</small></p></div>
+          <div class="k-card k-card--flat k-anim-slide"><h4>Slide</h4><p><small><code>.k-anim-slide</code> — fades in from the side.</small></p></div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-card k-anim-fade"&gt;…&lt;/div&gt;
+&lt;div class="k-card k-anim-up"&gt;…&lt;/div&gt;
+&lt;div class="k-card k-anim-pop"&gt;…&lt;/div&gt;
+&lt;div class="k-card k-anim-slide"&gt;…&lt;/div&gt;
+
+&lt;!-- retime one element with the knobs — no new class --&gt;
+&lt;div class="k-card k-anim-up"
+     style="--k-anim-duration: 800ms; --k-anim-delay: 200ms"&gt;…&lt;/div&gt;
+
+&lt;!-- also runs when your script mounts something --&gt;
+&lt;!-- list.append(Object.assign(document.createElement("div"),
+     { className: "k-card k-anim-pop" })) --&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-stagger">
+      <h2>Stagger</h2>
+      <p>Wrap any group of entry-animated children in
+      <code>.k-stagger</code> and they animate in sequence — the
+      wrapper hands each child a growing <code>--k-anim-delay</code>
+      (80ms per step). It works with any <code>k-anim-*</code>, on any
+      layout container. Reload to watch these three arrive one after
+      another:</p>
+      <p class="k-text-soft">Where <code>sibling-index()</code> is
+      supported, the step is computed per child instead of hardcoded, so
+      a list of any length staggers all the way through; elsewhere it
+      falls back to six fixed steps, with everything past the sixth
+      child sharing the last one.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-thirds k-stagger" style="margin-bottom: var(--k-space-4)">
+          <div class="k-card k-card--flat k-anim-up"><h4>First</h4><p><small>0ms delay.</small></p></div>
+          <div class="k-card k-card--flat k-anim-up"><h4>Second</h4><p><small>80ms delay.</small></p></div>
+          <div class="k-card k-card--flat k-anim-up"><h4>Third</h4><p><small>160ms delay.</small></p></div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-thirds k-stagger"&gt;
+  &lt;div class="k-card k-anim-up"&gt;…&lt;/div&gt;
+  &lt;div class="k-card k-anim-up"&gt;…&lt;/div&gt;
+  &lt;div class="k-card k-anim-up"&gt;…&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- manual control: set the delay knob yourself instead --&gt;
+&lt;div class="k-card k-anim-up" style="--k-anim-delay: 350ms"&gt;…&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-lift">
+      <h2>Hover lift</h2>
+      <p><code>.k-lift</code> is the generic hover lift: any element
+      wearing it rises 3px and gains the large shadow on hover. It's
+      the same gesture <code>.k-card--hover</code> makes, minus the
+      card-specific styling — <code>.k-card--hover</code> also
+      strengthens the border and tunes its shadow to the card, so
+      prefer it on cards; reach for <code>.k-lift</code> everywhere
+      else. Hover these:</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-cluster" style="margin-bottom: var(--k-space-4); align-items: stretch">
+          <div class="k-card k-card--flat k-lift" style="max-width: 16rem"><h4>Lifted card</h4><p><small><code>.k-lift</code> on a plain card.</small></p></div>
+          <button class="k-btn k-lift">Lifted button</button>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-card k-lift"&gt;…&lt;/div&gt;
+&lt;button class="k-btn k-lift"&gt;Lifted button&lt;/button&gt;
+
+&lt;!-- on cards, prefer the tuned variant --&gt;
+&lt;div class="k-card k-card--hover"&gt;…&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-scroll-progress">
+      <h2>Scroll progress</h2>
+      <p><code>.k-progress-scroll</code> is a fixed 3px bar across the
+      top of the viewport, painted with <code>--k-gradient</code>,
+      that fills from left to right as the page scrolls — a pure CSS
+      scroll-driven animation (<code>animation-timeline:
+      scroll()</code>), no scroll listener, no JavaScript. Because
+      it's <code>position: fixed</code> against the page scroller,
+      there's no honest way to demo it inside a box on this page —
+      and adding it to the docs chrome itself would be noisy. It's one
+      line, live on any page you drop it into:</p>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;body&gt;
+  &lt;div class="k-progress-scroll"&gt;&lt;/div&gt;
+  …rest of the page…</code></pre>
+      </details>
+      <p><small>Support: scroll-driven animations are Chromium today.
+      Elsewhere the bar is simply absent — nothing breaks, nothing to
+      polyfill. Reduced-motion users never see it.</small></p>
+    </section>
+
+    <section id="c-scroll-reveal">
+      <h2>Scroll reveal</h2>
+      <p><code>.k-reveal</code> fades and lifts content in as it
+      scrolls into view — no observer, no script; it's a CSS
+      scroll-driven animation (<code>animation-timeline: view()</code>)
+      that plays across the first stretch of the element's entry, so
+      it's progressive rather than a switch. It degrades honestly:
+      browsers without scroll-driven animations, and every
+      reduced-motion user, simply see the content, already in place.
+      The card below wears it — scroll it out of view and back:</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="margin-bottom: var(--k-space-4)">
+          <div class="k-card k-reveal" style="max-width: 24rem">
+            <h4>Revealed on scroll</h4>
+            <p><small>This card animates as it enters the viewport,
+            driven by scroll position alone.</small></p>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-card k-reveal"&gt;
+  &lt;h4&gt;Revealed on scroll&lt;/h4&gt;
+  &lt;p&gt;No JavaScript — a scroll-driven CSS animation.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-details-anim">
+      <h2>Animated disclosure</h2>
+      <p>Every keel <code>&lt;details&gt;</code> — including the
+      accordion, and the Markup blocks on this very page — now
+      animates open and closed. Modern CSS does it without a wrapper
+      or a script: <code>interpolate-size: allow-keywords</code> lets
+      <code>block-size: auto</code> transition, and the
+      <code>::details-content</code> pseudo-element is what grows.
+      You write nothing; it's free on the base element. Try it:</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <details style="margin-bottom: var(--k-space-4)">
+          <summary>Watch the height ease open</summary>
+          <p>The content doesn't snap into place — its height
+          transitions on the same <code>--k-ease</code> token every
+          other keel transition rides.</p>
+          <p><small>Add <code>name="…"</code> to a group of details for
+          native one-open-at-a-time, and the closing one animates
+          shut as the next opens.</small></p>
+        </details>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;details&gt;
+  &lt;summary&gt;Watch the height ease open&lt;/summary&gt;
+  &lt;p&gt;Nothing extra — every keel details animates.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+      </details>
+      <p><small>Support: <code>interpolate-size</code> and
+      <code>::details-content</code> are Chromium today, behind an
+      <code>@supports</code> guard — elsewhere details opens
+      instantly, exactly as it always has.</small></p>
+    </section>
+
+    <section id="c-field-sizing">
+      <h2>Auto-growing textarea</h2>
+      <p>Every keel textarea grows with its content —
+      <code>field-sizing: content</code> in the base layer, capped at
+      <code>24rem</code> so a pasted essay can't swallow the page.
+      No autosize script, no keystroke listener. Type a few lines
+      into this one and watch it stretch:</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-field" style="max-width: 28rem">
+          <label for="demo-autogrow">Notes</label>
+          <textarea id="demo-autogrow" placeholder="Type a few lines — the field grows with you."></textarea>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;!-- nothing to add — every textarea auto-grows --&gt;
+&lt;textarea placeholder="Type a few lines…"&gt;&lt;/textarea&gt;</code></pre>
+      </details>
+      <p><small>Support: <code>field-sizing</code> is Chromium today,
+      behind <code>@supports</code> — older browsers keep the normal
+      fixed-height textarea with its resize handle. More on form
+      controls in <a href="components-forms.html">Forms</a>.</small></p>
+    </section>
+
+    <section id="c-overlay-motion">
+      <h2>Overlay choreography</h2>
+      <p>No class to learn here — every keel
+      <code>&lt;dialog&gt;</code>, <code>[popover]</code>, and
+      <code>.k-drawer</code> already animates in <em>and out</em>:
+      entries via <code>@starting-style</code>, exits via
+      <code>transition-behavior: allow-discrete</code> on
+      <code>display</code> and <code>overlay</code>, so the element
+      stays visible while it fades away. The backdrop dims on the same
+      timing. Browsers without <code>@starting-style</code> get a
+      plain instant show/hide. The overlays themselves — with live
+      demos — are on the
+      <a href="components-overlays.html">Overlays</a> page; here's how
+      you retune the tempo, since all of it rides one token:</p>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;style&gt;
+  /* slow every overlay (and every keel transition) at once… */
+  :root { --k-ease: 260ms ease; }
+
+  /* …or retune one dialog without touching the token */
+  .my-slow-dialog {
+    transition-duration: 400ms;
+  }
+&lt;/style&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-view-transitions">
+      <h2>View transitions</h2>
+      <p>The modern page-to-page cross-fade is a two-line opt-in —
+      but it's <em>your</em> opt-in, in your site's CSS, not keel's.
+      Navigation behavior belongs to the site, not the framework, so
+      keel doesn't ship it enabled. Add this and same-origin
+      navigations fade instead of flashing white:</p>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;style&gt;
+  /* in YOUR site css — opts every same-origin navigation in */
+  @view-transition { navigation: auto; }
+
+  /* optional: choreograph it yourself */
+  ::view-transition-old(root) { animation-duration: 200ms; }
+  ::view-transition-new(root) { animation-duration: 200ms; }
+&lt;/style&gt;</code></pre>
+      </details>
+      <p><small>Support: cross-document view transitions are Chromium
+      today; other browsers simply navigate normally. Name elements
+      with <code>view-transition-name</code> and target
+      <code>::view-transition-old()</code> /
+      <code>::view-transition-new()</code> for custom
+      choreography.</small></p>
+    </section>
+
+    <section id="c-the-rule">
+      <h2>The rule</h2>
+      <p>Every piece of motion on this page respects
+      <code>prefers-reduced-motion</code> — reduced-motion users see
+      content in place, instantly, always. Timing rides the tokens:
+      transitions on <code>--k-ease</code>, animations on
+      <code>--k-anim-duration</code> and <code>--k-anim-delay</code> —
+      so the design system controls the tempo of the whole site from
+      three knobs. And nothing here needs JavaScript: entry, stagger,
+      reveal, progress, disclosure, auto-grow, overlays, view
+      transitions — all of it is CSS, degrading honestly where the
+      platform hasn't caught up.</p>
+    </section>
+
+      </main>
+
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

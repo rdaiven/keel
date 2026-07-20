@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>keel — the CSS framework that starts with your design system</title>
+<meta name="description" content="keel is a zero-dependency CSS framework on native cascade layers. a full component library with no JavaScript, a large icon set, a design-system generator with WCAG AA enforced in code, plus a CLI and an MCP server for AI tools.">
+<link rel="canonical" href="https://rdaiven.github.io/keel/">
+
+<!-- Open Graph / Twitter — controls how the link unfurls when shared -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="keel">
+<meta property="og:title" content="keel — the CSS framework that starts with your design system">
+<meta property="og:description" content="A zero-dependency CSS framework on native cascade layers. A full component library with no JavaScript, a design-system generator with WCAG AA enforced in code, a CLI, and an MCP server for AI tools. MIT licensed.">
+<meta property="og:url" content="https://rdaiven.github.io/keel/">
+<meta property="og:image" content="https://rdaiven.github.io/keel/assets/og.png">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta property="og:image:alt" content="keel — the CSS framework that starts with your design system">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="keel — the CSS framework that starts with your design system">
+<meta name="twitter:description" content="A zero-dependency CSS framework. A full component library with no JavaScript, a design-system generator with WCAG AA enforced in code, a CLI, and an MCP server for AI tools. MIT licensed.">
+<meta name="twitter:image" content="https://rdaiven.github.io/keel/assets/og.png">
+
+<!-- Structured data — lets search engines and AI crawlers classify keel
+     as a free, MIT-licensed developer tool (a CSS framework). -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "keel",
+  "applicationCategory": "DeveloperApplication",
+  "applicationSubCategory": "CSS framework",
+  "operatingSystem": "Any (web browser)",
+  "url": "https://rdaiven.github.io/keel/",
+  "description": "A zero-dependency CSS framework that starts with your design system. Five native cascade layers, a full component library with no JavaScript, a design-system generator with WCAG AA enforced in code, a CLI, and an MCP server for AI tools.",
+  "author": { "@type": "Person", "name": "Daiven Reyes" },
+  "license": "https://opensource.org/licenses/MIT",
+  "programmingLanguage": "CSS",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<link rel="stylesheet" href="css/keel.css">
+<link rel="stylesheet" href="css/keel-icons.css">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/docs.css">
+<style>
+  .home-compare { display: grid; gap: var(--k-space-4); }
+  @media (min-width: 820px) { .home-compare { grid-template-columns: 1fr 1fr; align-items: stretch; } }
+  .home-compare pre { margin: 0; height: 100%; }
+  .home-render { background: var(--k-surface); border: 1px solid var(--k-border);
+                 border-radius: var(--k-radius); padding: var(--k-space-5); }
+  .home-render > :last-child { margin-bottom: 0; }
+  .home-not li { margin-bottom: var(--k-space-2); }
+  .home-thumb { width: 100%; height: auto; border-radius: var(--k-radius);
+                border: 1px solid var(--k-border); }
+  .home-tcard { display: block; text-decoration: none; color: inherit; }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="docs/start.html">Docs</a></li>
+        <li><a href="templates.html">Templates</a></li>
+        <li><a href="docs/sections.html">Sections</a></li>
+        <li><a href="docs/icons.html">Icons</a></li>
+        <li><a href="design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="docs/start.html">Docs</a></li>
+        <li><a href="templates.html">Templates</a></li>
+        <li><a href="docs/sections.html">Sections</a></li>
+        <li><a href="docs/icons.html">Icons</a></li>
+        <li><a href="design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+<main id="main">
+
+<section class="k-hero k-bg-mesh k-bg-mesh--live">
+  <div class="k-container">
+    <div class="k-stagger">
+    <p class="k-hero__eyebrow k-anim-up"><span class="k-icon k-icon--keel" aria-hidden="true"></span> keel · a css framework</p>
+    <h1 class="k-anim-up"><span class="k-text-gradient">The first timber.</span><br>Everything is built on it.</h1>
+    <p class="k-hero__lead k-anim-up">
+      keel starts with <mark>your design system, not ours</mark>. One
+      file, zero dependencies, five native cascade layers. Semantic HTML
+      looks <mark class="k-mark--line">designed before you write a
+      single class</mark> — and every color the generator produces has
+      already <mark class="k-mark--ok">passed WCAG&nbsp;AA</mark>.
+    </p>
+    <div class="k-cluster k-mt-5 k-anim-up">
+      <a class="k-btn k-glow k-glow--pulse" href="docs/start.html">Read the docs</a>
+      <a class="k-btn k-btn--soft" href="design.html">Make it yours</a>
+      <a class="k-btn k-btn--ghost" href="css/keel.css" download>Download keel.css</a>
+    </div>
+    </div>
+    <p class="k-mt-4">Link one CSS file — that's the whole install. Then
+    write plain HTML and keel designs it. For terminals and AI agents,
+    there's a CLI and an <abbr title="Model Context Protocol">MCP</abbr>
+    server too.</p>
+    <p class="k-mt-3"><small>
+      No build step · no JavaScript runtime · MIT licensed
+    </small></p>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container">
+    <div class="k-split">
+      <div>
+        <h2>This page is the demo</h2>
+        <p class="k-text-soft">
+          Everything you're looking at is keel with its default tokens.
+          The floating button in the bottom-right corner opens the
+          design-system page: seed it with your own colors and fonts,
+          and this whole site — docs, templates, this sentence —
+          re-renders in your system as you browse.
+        </p>
+        <p class="k-text-soft">
+          Nothing here is a screenshot — <mark>the components below are live</mark>.
+        </p>
+      </div>
+      <div class="k-card">
+        <div class="k-cluster">
+          <button class="k-btn" type="button">Primary</button>
+          <button class="k-btn k-btn--secondary" type="button">Secondary</button>
+          <button class="k-btn k-btn--ghost" type="button">Ghost</button>
+        </div>
+        <div class="k-cluster k-mt-4" style="align-items: center">
+          <span class="k-badge">Badge</span>
+          <span class="k-badge k-badge--ok">Passing</span>
+          <label class="k-switch" style="display: flex; align-items: center; gap: var(--k-space-2)">
+            <input type="checkbox" checked> <small>A switch — a real checkbox underneath</small>
+          </label>
+          <span class="k-text-faint k-text-xs" style="display: inline-flex; align-items: center; gap: var(--k-space-2)">
+            <span class="k-spinner" role="status" aria-label="Loading"></span> a live spinner
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container k-stack k-stack--loose">
+    <div>
+      <h2>Four things keel holds to</h2>
+      <p class="k-text-soft" style="max-width: 40em">
+        Not features — commitments. Each one shapes what the framework
+        is.
+      </p>
+    </div>
+    <div class="k-grid">
+      <div class="k-card k-reveal">
+        <p class="k-card__kicker">01</p>
+        <h4>Design-system-first</h4>
+        <p><small>You seed a system — colors, mood, fonts — and 61
+        tokens derive from it by math: neutrals, surfaces, shades,
+        status colors. <mark>Override one token and everything follows.</mark></small></p>
+        <p><a href="docs/tokens.html">Read about tokens →</a></p>
+      </div>
+      <div class="k-card k-reveal">
+        <p class="k-card__kicker">02</p>
+        <h4>Zero JavaScript</h4>
+        <p><small>A full component library, no scripts. Interactivity starts with
+        what the platform already ships — native <code>dialog</code>,
+        <code>popover</code>, <code>details</code> — and stops there.</small></p>
+        <p><a href="docs/components.html">Browse the components →</a></p>
+      </div>
+      <div class="k-card k-reveal">
+        <p class="k-card__kicker">03</p>
+        <h4>Fluid by default</h4>
+        <p><small>Type and spacing scale with the viewport through
+        <code>clamp()</code>. There are <mark class="k-mark--line">no breakpoints to manage</mark>,
+        because there are almost none in the file.</small></p>
+        <p><a href="docs/typography.html">See the type scale →</a></p>
+      </div>
+      <div class="k-card k-reveal">
+        <p class="k-card__kicker">04</p>
+        <h4>Honest by design</h4>
+        <p><small>The generator <mark class="k-mark--ok">enforces WCAG AA in code</mark> — an
+        unreadable palette never reaches your screen, and the docs stay
+        just as plain about every trade-off.</small></p>
+        <p><a href="docs/concepts.html">How keel thinks →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container">
+    <div class="k-cols-4 k-center">
+      <div class="k-reveal"><span class="k-stat__value" data-keel-count="icons">326</span><span class="k-stat__label">icons</span></div>
+      <div class="k-reveal"><span class="k-stat__value">5</span><span class="k-stat__label">cascade layers</span></div>
+      <div class="k-reveal"><span class="k-stat__value">0</span><span class="k-stat__label">dependencies</span></div>
+      <div class="k-reveal"><span class="k-stat__value">0</span><span class="k-stat__label">javascript</span></div>
+    </div>
+    <p class="k-center k-text-faint k-text-xs k-mt-3">A full component
+    library, a design-system generator, templates, a CLI, and an MCP
+    server for AI tools — the core is one small CSS file. MIT.</p>
+  </div>
+</section>
+
+<section class="k-section k-section--tint">
+  <div class="k-container k-stack">
+    <div>
+      <h2>Write HTML. It's already designed.</h2>
+      <p class="k-text-soft" style="max-width: 40em">
+        The markup on the left renders as the result on the right —
+        no classes, no wrappers. This is what makes keel a natural fit
+        for markdown-generated sites: content needs nothing added.
+      </p>
+    </div>
+    <div class="home-compare">
+      <pre><code>&lt;h3&gt;Shipping update&lt;/h3&gt;
+&lt;p&gt;Orders placed before &lt;strong&gt;2pm&lt;/strong&gt;
+ship the same day. Track them with your
+&lt;a href="#"&gt;order number&lt;/a&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;No classes were written for this.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;table&gt;
+  &lt;tr&gt;&lt;th&gt;Zone&lt;/th&gt;&lt;th&gt;Time&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Metro&lt;/td&gt;&lt;td&gt;1–2 days&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+      <div class="home-render">
+        <h3>Shipping update</h3>
+        <p>Orders placed before <strong>2pm</strong> ship the same day.
+        Track them with your <a href="#">order number</a>.</p>
+        <blockquote><p>No classes were written for this.</p></blockquote>
+        <table>
+          <thead><tr><th>Zone</th><th>Time</th></tr></thead>
+          <tbody><tr><td>Metro</td><td>1–2 days</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container k-stack k-stack--loose">
+    <div>
+      <h2>The framework an AI can actually use</h2>
+      <p class="k-text-soft" style="max-width: 44em">
+        Ask an assistant to build you a website and it writes HTML and
+        CSS — the two things keel already is. Nothing to install, no
+        component API to learn, no build to run. What comes back is
+        <mark class="k-mark--ok">accessible and on-brand by default</mark>,
+        because keel derives a whole design system from one seed and
+        enforces contrast in code.
+      </p>
+    </div>
+    <div class="k-grid">
+      <div class="k-card k-reveal">
+        <p class="k-card__kicker">01</p>
+        <h4>It's just HTML &amp; CSS</h4>
+        <p><small>An assistant already knows how to write semantic HTML.
+        keel styles that — no framework idioms to get wrong, no toolchain
+        to configure.</small></p>
+      </div>
+      <div class="k-card k-reveal">
+        <p class="k-card__kicker">02</p>
+        <h4>Hands-off with MCP</h4>
+        <p><small>The <a href="docs/start.html">keel MCP server</a> lets
+        an agent generate a themed system, add icons, and drop in whole
+        sections on its own — the person configures nothing.</small></p>
+      </div>
+      <div class="k-card k-reveal">
+        <p class="k-card__kicker">03</p>
+        <h4>Written to be read</h4>
+        <p><small>An <a href="llms.txt">llms.txt</a> map, plus
+        machine-readable icons and sections, let a tool learn keel
+        without scraping the docs.</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container k-stack k-stack--loose">
+    <div>
+      <h2>One framework, many products</h2>
+      <p class="k-text-soft" style="max-width: 40em">
+        The same file reads as a dark SaaS product, a bold studio, a
+        warm magazine, a quiet local business, a page-builder, or an
+        analytics dashboard — because each template is just a different
+        <mark><code>@layer tokens</code> block</mark> in its head.
+      </p>
+    </div>
+    <div class="k-cols-2">
+
+      <a class="k-card k-card--hover home-tcard k-reveal" href="templates/saas.html">
+        <svg class="home-thumb" viewBox="0 0 320 180" role="img" aria-label="Thumbnail of the Nautical Ledger template: a dark navy page with a teal button">
+          <rect width="320" height="180" fill="#0d1726"/>
+          <rect x="0" y="0" width="320" height="26" fill="#13202f"/>
+          <rect x="14" y="10" width="52" height="6" rx="3" fill="#2fd3bd"/>
+          <rect x="220" y="10" width="24" height="6" rx="3" fill="#55708c"/>
+          <rect x="252" y="10" width="24" height="6" rx="3" fill="#55708c"/>
+          <rect x="284" y="10" width="24" height="6" rx="3" fill="#55708c"/>
+          <rect x="14" y="48" width="60" height="6" rx="3" fill="#2fd3bd"/>
+          <rect x="14" y="62" width="190" height="12" rx="4" fill="#dbe6f0"/>
+          <rect x="14" y="80" width="150" height="12" rx="4" fill="#dbe6f0"/>
+          <rect x="14" y="102" width="170" height="6" rx="3" fill="#55708c"/>
+          <rect x="14" y="122" width="64" height="18" rx="6" fill="#2fd3bd"/>
+          <rect x="86" y="122" width="64" height="18" rx="6" fill="none" stroke="#26364a" stroke-width="2"/>
+          <rect x="222" y="52" width="84" height="96" rx="8" fill="#13202f" stroke="#26364a"/>
+          <rect x="234" y="66" width="40" height="5" rx="2.5" fill="#2fd3bd"/>
+          <rect x="234" y="80" width="60" height="5" rx="2.5" fill="#dbe6f0"/>
+          <rect x="234" y="92" width="52" height="5" rx="2.5" fill="#55708c"/>
+          <rect x="234" y="104" width="56" height="5" rx="2.5" fill="#55708c"/>
+          <rect x="234" y="124" width="34" height="10" rx="4" fill="#2fd3bd"/>
+        </svg>
+        <h4 class="k-mt-4">Nautical Ledger</h4>
+        <p class="k-text-s k-text-soft">A dark SaaS landing —
+        hero, proof row, features, pricing, FAQ.</p>
+      </a>
+
+      <a class="k-card k-card--hover home-tcard k-reveal" href="templates/studio.html">
+        <svg class="home-thumb" viewBox="0 0 320 180" role="img" aria-label="Thumbnail of the Harbor &amp; Pine template: a bold light page with oversized headlines">
+          <rect width="320" height="180" fill="#fbfaf7"/>
+          <rect x="0" y="0" width="320" height="24" fill="#ffffff"/>
+          <rect x="0" y="24" width="320" height="1" fill="#e3e0d8"/>
+          <rect x="14" y="9" width="46" height="6" rx="3" fill="#1c2420"/>
+          <rect x="240" y="9" width="20" height="6" rx="3" fill="#8a867c"/>
+          <rect x="268" y="9" width="20" height="6" rx="3" fill="#8a867c"/>
+          <rect x="14" y="48" width="250" height="22" rx="4" fill="#1c2420"/>
+          <rect x="14" y="76" width="180" height="22" rx="4" fill="#1e5b45"/>
+          <rect x="14" y="112" width="150" height="6" rx="3" fill="#8a867c"/>
+          <rect x="14" y="138" width="90" height="28" rx="4" fill="#e9e6dd"/>
+          <rect x="112" y="138" width="90" height="28" rx="4" fill="#1e5b45"/>
+          <rect x="210" y="138" width="90" height="28" rx="4" fill="#c97b2d"/>
+        </svg>
+        <h4 class="k-mt-4">Harbor &amp; Pine</h4>
+        <p class="k-text-s k-text-soft">A bold studio site —
+        editorial type at full size, work as plain confident blocks.</p>
+      </a>
+
+      <a class="k-card k-card--hover home-tcard k-reveal" href="templates/article.html">
+        <svg class="home-thumb" viewBox="0 0 320 180" role="img" aria-label="Thumbnail of The Long Form template: a warm paper reading page with a centered text column">
+          <rect width="320" height="180" fill="#f6efe2"/>
+          <rect x="96" y="26" width="128" height="12" rx="4" fill="#33291f"/>
+          <rect x="118" y="44" width="84" height="6" rx="3" fill="#8c7f6d"/>
+          <rect x="82" y="66" width="18" height="24" rx="2" fill="#b1552b"/>
+          <rect x="106" y="68" width="132" height="5" rx="2.5" fill="#4a3f31"/>
+          <rect x="106" y="79" width="132" height="5" rx="2.5" fill="#4a3f31"/>
+          <rect x="82" y="94" width="156" height="5" rx="2.5" fill="#4a3f31"/>
+          <rect x="82" y="105" width="156" height="5" rx="2.5" fill="#4a3f31"/>
+          <rect x="82" y="116" width="120" height="5" rx="2.5" fill="#4a3f31"/>
+          <rect x="82" y="134" width="2" height="24" fill="#b1552b"/>
+          <rect x="94" y="138" width="130" height="5" rx="2.5" fill="#8c7f6d"/>
+          <rect x="94" y="149" width="104" height="5" rx="2.5" fill="#8c7f6d"/>
+        </svg>
+        <h4 class="k-mt-4">The Long Form</h4>
+        <p class="k-text-s k-text-soft">A warm magazine article —
+        serif display, one narrow column, nothing competing with it.</p>
+      </a>
+
+      <a class="k-card k-card--hover home-tcard k-reveal" href="templates/builder.html">
+        <svg class="home-thumb" viewBox="0 0 320 180" role="img" aria-label="Thumbnail of the Helm template: a dark builder interface with a top bar, left rail, canvas with an artboard, and right panel">
+          <rect width="320" height="180" fill="#121217"/>
+          <rect x="0" y="0" width="320" height="22" fill="#1a1a22"/>
+          <rect x="10" y="8" width="34" height="6" rx="3" fill="#997bf4"/>
+          <rect x="120" y="7" width="22" height="8" rx="4" fill="#2a2a35"/>
+          <rect x="146" y="7" width="22" height="8" rx="4" fill="#2a2a35"/>
+          <rect x="172" y="7" width="22" height="8" rx="4" fill="#2a2a35"/>
+          <rect x="276" y="7" width="34" height="9" rx="4" fill="#997bf4"/>
+          <rect x="0" y="22" width="56" height="150" fill="#17171d"/>
+          <rect x="8" y="32" width="18" height="14" rx="3" fill="#22222b"/>
+          <rect x="30" y="32" width="18" height="14" rx="3" fill="#22222b"/>
+          <rect x="8" y="50" width="18" height="14" rx="3" fill="#22222b"/>
+          <rect x="30" y="50" width="18" height="14" rx="3" fill="#22222b"/>
+          <rect x="8" y="76" width="40" height="6" rx="3" fill="#997bf4"/>
+          <rect x="14" y="88" width="34" height="5" rx="2.5" fill="#5c5c6e"/>
+          <rect x="8" y="100" width="36" height="5" rx="2.5" fill="#5c5c6e"/>
+          <rect x="256" y="22" width="64" height="150" fill="#17171d"/>
+          <rect x="264" y="34" width="40" height="6" rx="3" fill="#c9c9d6"/>
+          <rect x="264" y="50" width="48" height="7" rx="3" fill="#22222b"/>
+          <rect x="264" y="66" width="12" height="12" rx="3" fill="#47ddeb"/>
+          <rect x="282" y="69" width="28" height="5" rx="2.5" fill="#5c5c6e"/>
+          <rect x="80" y="38" width="152" height="112" rx="5" fill="#1a1a22" stroke="#2a2a35"/>
+          <rect x="86" y="44" width="140" height="52" rx="3" fill="none" stroke="#997bf4" stroke-width="2"/>
+          <rect x="94" y="52" width="28" height="4" rx="2" fill="#997bf4"/>
+          <rect x="94" y="61" width="96" height="8" rx="3" fill="#e6e6f0"/>
+          <rect x="94" y="74" width="76" height="4" rx="2" fill="#5c5c6e"/>
+          <rect x="94" y="84" width="26" height="7" rx="3" fill="#997bf4"/>
+          <rect x="124" y="84" width="26" height="7" rx="3" fill="#47ddeb"/>
+          <rect x="86" y="104" width="43" height="26" rx="3" fill="#22222b"/>
+          <rect x="134" y="104" width="43" height="26" rx="3" fill="#22222b"/>
+          <rect x="182" y="104" width="43" height="26" rx="3" fill="#22222b"/>
+          <rect x="0" y="172" width="320" height="8" fill="#1a1a22"/>
+        </svg>
+        <h4 class="k-mt-4">Helm</h4>
+        <p class="k-text-s k-text-soft"><strong>Helm</strong> — a
+        page-builder app UI: toolbar, layers, artboard, inspector.</p>
+      </a>
+
+    </div>
+    <p><a class="k-btn k-btn--ghost" href="templates.html">See all templates</a></p>
+  </div>
+</section>
+
+<section class="k-section" id="paths">
+  <div class="k-container">
+    <h2>Pick a direction</h2>
+    <p class="k-text-soft" style="max-width: 44em">
+      keel's defaults are quiet on purpose. A <strong>path</strong> is one
+      optional stylesheet that steers the whole framework toward a stronger
+      look — clay, brutal, liquid glass, maximal. <mark>Same markup, one
+      extra <code>&lt;link&gt;</code></mark> — watch the page below change
+      direction.
+    </p>
+    <div class="k-segmented k-mt-5" role="group" aria-label="Choose a path" style="margin-block-end: var(--k-space-3)">
+      <button type="button" data-path="" aria-pressed="true">Default</button>
+      <button type="button" data-path="clay" aria-pressed="false">Clay</button>
+      <button type="button" data-path="brutal" aria-pressed="false">Brutal</button>
+      <button type="button" data-path="liquid" aria-pressed="false">Liquid</button>
+      <button type="button" data-path="maximal" aria-pressed="false">Maximal</button>
+    </div>
+    <iframe id="path-frame" src="docs/path-demo.html" title="Live demo of the selected path"
+            loading="lazy"
+            style="inline-size: 100%; block-size: 42rem; border: 1px solid var(--k-border); border-radius: var(--k-radius); background: var(--k-bg)"></iframe>
+    <p class="k-mt-3"><a href="docs/paths.html">How paths work →</a></p>
+  </div>
+</section>
+
+<section class="k-section k-section--tint">
+  <div class="k-container">
+    <h2>Don't start from scratch</h2>
+    <p class="k-text-soft" style="max-width: 42em">
+      Beyond components, keel ships two libraries you build with —
+      <mark>complete sections you can copy</mark>, and a large icon set.
+    </p>
+    <div class="k-cols-2 k-mt-5">
+      <div class="k-card k-reveal">
+        <p class="k-card__kicker">Sections</p>
+        <h4>A running pattern library</h4>
+        <p><small><span data-keel-count="sections">53</span> complete
+        page sections — heroes, features, pricing, calls to action,
+        footers and more. <mark>Click any one to preview it full-width</mark>
+        in your own design system, arrow through the rest, and copy the
+        exact markup. Every section is <em>live</em>, not a screenshot —
+        it re-themes with your tokens.</small></p>
+        <p><a class="k-btn k-btn--soft k-btn--small" href="docs/sections.html">Browse the sections →</a></p>
+      </div>
+      <div class="k-card k-reveal">
+        <p class="k-card__kicker">Icons</p>
+        <h4>Icons that weigh nothing</h4>
+        <p><small><span data-keel-count="icons">326</span> mask-based
+        icons in <code>currentColor</code> — zero requests, categorized
+        and searchable. <mark>Add just the ones you use</mark> and build
+        a custom file a few KB in size, from the page, the CLI, or the
+        MCP server.</small></p>
+        <p><a class="k-btn k-btn--soft k-btn--small" href="docs/icons.html">Browse the icons →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--alt">
+  <div class="k-container--narrow k-container">
+    <h2>The workflow</h2>
+    <p class="k-text-soft">From seed to shipped, no toolchain in between.</p>
+    <ol class="k-timeline k-mt-5">
+      <li>
+        <span class="k-timeline__time">step 1</span>
+        <p><strong>Seed your system</strong> on the
+        <a href="design.html">design page</a> — a primary and secondary
+        color, a mood, a font pairing. Every shade derives from it.</p>
+      </li>
+      <li>
+        <span class="k-timeline__time">step 2</span>
+        <p><strong>Copy the tokens</strong> when it looks right — as a
+        CSS <a href="docs/tokens.html">tokens block</a> or as DTCG JSON
+        for your other tools.</p>
+      </li>
+      <li>
+        <span class="k-timeline__time">step 3</span>
+        <p><strong>Build the page</strong> from
+        <a href="docs/sections.html">complete sections</a> — heroes,
+        pricing, FAQs, footers — and semantic HTML that's already
+        designed.</p>
+      </li>
+      <li>
+        <span class="k-timeline__time">step 4</span>
+        <p><strong>Ship flat files.</strong> One stylesheet, your HTML,
+        nothing to compile and nothing to run.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="k-section">
+  <div class="k-container--narrow k-container">
+    <h2>What keel is not</h2>
+    <p class="k-text-soft">Knowing the edges is part of trusting a tool.</p>
+    <ul class="home-not">
+      <li><strong>Not a utility-first framework.</strong> There is a
+      small <a href="docs/utilities.html">utility layer</a>, but every value
+      is a token and there are no arbitrary values or responsive
+      prefixes. Structure gets a class; content is semantic HTML;
+      utilities are the escape hatch, not the language.</li>
+      <li><strong>Not a component library with JavaScript.</strong>
+      keel ships zero scripts. Interactivity starts with what HTML and
+      CSS already do — <code>details</code>, <code>dialog</code>,
+      states — and anything beyond that is your call, not ours.</li>
+      <li><strong>Not themable by override.</strong> You don't fight
+      defaults with more CSS; you replace the tokens layer. That is the
+      whole theming story, and it's ~30 lines.</li>
+      <li><strong>Not 1.0 yet.</strong> keel is young. What ships today
+      works today, and the contract — layers, tokens, class names — is
+      meant to hold; but pre-1.0, small things may still tighten. When
+      that happens it lands in the <a href="docs/changelog.html">changelog</a>, not as a surprise.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="k-section k-section--accent">
+  <div class="k-container--narrow k-container k-center">
+    <h2>Lay the keel.</h2>
+    <p>Download one file, seed your design system, and build on it.</p>
+    <div class="k-cluster k-mt-4" style="justify-content: center">
+      <a class="k-btn k-btn--ghost" style="color: inherit; border-color: currentColor" href="docs/start.html">Read the docs</a>
+      <a class="k-btn k-btn--ghost" style="color: inherit; border-color: currentColor" href="templates.html">See the templates</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="k-footer">
+  <div class="k-container">
+    <div class="k-cols-2">
+      <div>
+        <p class="k-uppercase k-text-faint">Marketing</p>
+        <p>
+          <a href="templates.html">Templates</a> ·
+          <a href="design.html">Design system</a>
+        </p>
+      </div>
+      <div>
+        <p class="k-uppercase k-text-faint">Documentation</p>
+        <p>
+          <a href="docs/start.html">Start</a> ·
+          <a href="docs/concepts.html">Concepts</a> ·
+          <a href="docs/components.html">Components</a> ·
+          <a href="docs/sections.html">Sections</a>
+        </p>
+      </div>
+    </div>
+    <p class="k-mt-4">
+      keel — a standalone, zero-dependency CSS framework by Daiven Reyes,
+      MIT licensed. ·
+      <a href="https://rdaiven.github.io">rdaiven.github.io</a>
+    </p>
+  </div>
+</footer>
+
+<script src="assets/play.js"></script>
+<script src="assets/docs.js"></script>
+<script>
+  /* the path switcher — site chrome, not the framework */
+  (function () {
+    var frame = document.getElementById("path-frame");
+    if (!frame) return;
+    var btns = document.querySelectorAll(".k-segmented [data-path]");
+    btns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        btns.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
+        frame.src = "docs/path-demo.html" + (btn.dataset.path ? "?path=" + btn.dataset.path : "");
+      });
+    });
+  })();
+</script>
+</body>
+</html>

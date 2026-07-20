@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reference — Driftwood CLI docs — a docs site template built with keel</title>
+<meta name="description" content="The dense command-and-config reference page of the Driftwood CLI keel docs template: a .k-table of commands and options, plus code blocks for config and usage.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Byte-identical across all three basecamp pages. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(240 8% 9%);
+      --k-surface: hsl(240 8% 13%);
+      --k-surface-2: hsl(240 8% 17%);
+      --k-border: hsl(240 6% 24%);
+      --k-border-strong: hsl(240 6% 32%);
+      --k-text: hsl(40 15% 92%);
+      --k-text-soft: hsl(240 6% 70%);
+      --k-text-faint: hsl(240 6% 50%);
+      --k-accent: hsl(38 90% 55%);
+      --k-on-accent: hsl(30 45% 10%);
+      --k-accent-2: hsl(205 12% 58%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-font-display: system-ui, "Segoe UI", sans-serif;
+      --k-display-weight: 650;
+      --k-tracking: -0.01em;
+      --k-radius: 6px;
+      --k-density: 1;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local (prefix "bc-"): identical on every basecamp page */
+  .bc-side-title { font-family: var(--k-font-mono); font-size: var(--k-text-xs);
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--k-text-faint);
+    margin-block: var(--k-space-4) var(--k-space-2); }
+  .bc-side-title:first-child { margin-block-start: 0; }
+  .bc-wordmark { font-family: var(--k-font-mono); }
+  .bc-wordmark strong { color: var(--k-accent); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme, shared across a linked three-page docs site.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand bc-wordmark" href="basecamp-guide.html">drift<strong>wood</strong></a>
+      <ul class="k-nav__links">
+        <li><a href="basecamp-guide.html">Guide</a></li>
+        <li><a href="basecamp-reference.html" aria-current="page">Reference</a></li>
+        <li><a href="basecamp-changelog.html">Changelog</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+      <aside class="k-sticky">
+        <nav aria-label="Documentation">
+          <p class="bc-side-title">Getting started</p>
+          <ul class="k-list k-list--flush">
+            <li><a href="basecamp-guide.html">Guide</a></li>
+            <li><a href="basecamp-guide.html#bc-install">Install</a></li>
+            <li><a href="basecamp-guide.html#bc-deploy">First deploy</a></li>
+            <li><a href="basecamp-guide.html#bc-domains">Attach a domain</a></li>
+          </ul>
+          <p class="bc-side-title">Reference</p>
+          <ul class="k-list k-list--flush">
+            <li aria-current="page"><a href="basecamp-reference.html">Commands</a></li>
+            <li><a href="basecamp-reference.html#bc-config">Config file</a></li>
+          </ul>
+          <p class="bc-side-title">Project</p>
+          <ul class="k-list k-list--flush">
+            <li><a href="basecamp-changelog.html">Changelog</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main id="main">
+        <h1>Reference</h1>
+        <p class="k-text-soft">Every command, its flags, and the config
+        file schema. Run <code>driftwood help &lt;command&gt;</code> for
+        the same text in your terminal.</p>
+
+        <h2 id="bc-commands">Commands</h2>
+        <table>
+          <thead>
+            <tr><th>Command</th><th>What it does</th><th>Common flags</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>driftwood deploy</code></td>
+              <td>Builds and ships the current directory as a new deploy.</td>
+              <td><code>--prod</code>, <code>--project &lt;name&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>driftwood dev</code></td>
+              <td>Runs the function locally with the same routing rules as production.</td>
+              <td><code>--port &lt;n&gt;</code>, <code>--watch</code></td>
+            </tr>
+            <tr>
+              <td><code>driftwood domains add</code></td>
+              <td>Attaches a domain to a project, optionally pinned to a deploy.</td>
+              <td><code>--project &lt;name&gt;</code>, <code>--pin &lt;hash&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>driftwood domains rm</code></td>
+              <td>Detaches a domain.</td>
+              <td><code>--project &lt;name&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>driftwood logs</code></td>
+              <td>Streams live request logs for a project.</td>
+              <td><code>--project &lt;name&gt;</code>, <code>--since &lt;dur&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>driftwood retire</code></td>
+              <td>Marks a deploy hash as retired; its URL stops resolving.</td>
+              <td><code>&lt;hash&gt;</code>, <code>--force</code></td>
+            </tr>
+            <tr>
+              <td><code>driftwood env</code></td>
+              <td>Lists, sets, or removes environment variables for a project.</td>
+              <td><code>set</code>, <code>rm</code>, <code>--secret</code></td>
+            </tr>
+            <tr>
+              <td><code>driftwood whoami</code></td>
+              <td>Prints the authenticated account and active team.</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="bc-config">Config file</h2>
+        <p>An optional <code>driftwood.json</code> at the project root
+        overrides defaults. Without one, Driftwood infers the entry file
+        and route from the folder contents.</p>
+        <pre><code>{
+  "project": "hello",
+  "entry": "index.js",
+  "routes": ["/*"],
+  "regions": ["auto"],
+  "env": {
+    "LOG_LEVEL": "info"
+  }
+}</code></pre>
+
+        <h3>Config fields</h3>
+        <table>
+          <thead>
+            <tr><th>Field</th><th>Type</th><th>Default</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>project</code></td><td>string</td><td>directory name</td></tr>
+            <tr><td><code>entry</code></td><td>string</td><td><code>index.js</code></td></tr>
+            <tr><td><code>routes</code></td><td>string[]</td><td><code>["/*"]</code></td></tr>
+            <tr><td><code>regions</code></td><td>string[]</td><td><code>["auto"]</code></td></tr>
+            <tr><td><code>env</code></td><td>object</td><td><code>{}</code></td></tr>
+          </tbody>
+        </table>
+
+        <h2>Exit codes</h2>
+        <table>
+          <thead>
+            <tr><th>Code</th><th>Meaning</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>0</code></td><td>Success</td></tr>
+            <tr><td><code>1</code></td><td>Build failed</td></tr>
+            <tr><td><code>2</code></td><td>Not authenticated — run <code>driftwood login</code></td></tr>
+            <tr><td><code>3</code></td><td>Deploy rejected (over plan limits)</td></tr>
+          </tbody>
+        </table>
+      </main>
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span class="bc-wordmark">driftwood — a fictional CLI, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

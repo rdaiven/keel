@@ -1,0 +1,179 @@
+/* keel docs shell — site chrome for the documentation pages.
+   Not part of the framework. */
+
+.docs-side { font-size: var(--k-text-s); }
+/* the "On this page" TOC label injected into #docs-anchors by docs.js —
+   sidebar GROUP headers are .k-nav-group > summary now, not .k-uppercase */
+.docs-side #docs-anchors .k-uppercase { margin: 0 0 var(--k-space-1); }
+.docs-sidebar-toggle { margin-bottom: var(--k-space-3); }
+/* below the 1280px three-column breakpoint the anchor list lives inside
+   the collapsible sidebar (see docs.js) and has no icons to reduce to —
+   hide it in icon-rail mode rather than let it wrap unreadably */
+.k-sidebar--collapsible.is-collapsed #docs-anchors { display: none; }
+.docs-side .k-list > li > a:only-child { padding-block: calc(var(--k-space-1) * 1.2); }
+.docs-side .k-list > li[aria-current="page"] > a { color: var(--k-accent); font-weight: 650; }
+
+/* a parent li holding a sub-list shouldn't paint the whole block */
+.docs-side .k-list > li[aria-current="page"]:has(.docs-sub) {
+  background: none; box-shadow: none;
+}
+
+/* nested category list (e.g. under Components) */
+.docs-sub { border: 0 !important; background: none !important; border-radius: 0;
+            margin: 0 0 0 var(--k-space-3) !important; }
+.docs-sub > li { border: 0 !important; padding: 0; }
+.docs-sub > li > a {
+  display: block; padding: calc(var(--k-space-1) * 0.9) var(--k-space-2);
+  font-size: var(--k-text-xs); color: var(--k-text-faint);
+  text-decoration: none; border-inline-start: 1px solid var(--k-border);
+}
+.docs-sub > li > a:hover { color: var(--k-text); }
+.docs-sub > li[aria-current="page"] > a {
+  color: var(--k-accent); font-weight: 650;
+  border-inline-start-color: var(--k-accent);
+}
+
+/* nav icons — injected by docs.js; muted, aligned, they follow the
+   link's text color (so the active item's icon highlights too) */
+.nav-ico { flex: none; font-size: 0.95em; opacity: 0.7; }
+.k-nav__links a { display: inline-flex; align-items: center; gap: 0.4em; }
+.docs-side .k-list > li > a:only-child { display: flex; align-items: center; gap: 0.55em; }
+.docs-side .k-list > li[aria-current="page"] > a .nav-ico,
+.docs-side .docs-sub > li[aria-current="page"] > a .nav-ico { opacity: 1; }
+.docs-side .k-nav-group > summary { display: flex; align-items: center; gap: 0.45em; }
+.docs-side .k-nav-group > summary .nav-ico { font-size: 0.8em; opacity: 0.5; }
+.k-footer .nav-ico { font-size: 0.82em; opacity: 0.6; }
+
+/* icon gallery — searchable, click-to-copy (enhanced by docs.js) */
+.icon-gallery.is-enhanced {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+  gap: var(--k-space-2);
+}
+.icon-gallery-search {
+  display: flex; align-items: center; gap: var(--k-space-3);
+  max-inline-size: 26rem; margin-bottom: var(--k-space-3);
+}
+.icon-gallery-search input { flex: 1; }
+.icon-cell {
+  display: grid; place-items: center; gap: var(--k-space-1);
+  padding: var(--k-space-3) var(--k-space-1);
+  background: none; border: 1px solid var(--k-border);
+  border-radius: var(--k-radius); cursor: pointer; font: inherit;
+  color: var(--k-text-soft);
+  transition: border-color var(--k-ease), background var(--k-ease), color var(--k-ease);
+}
+.icon-cell:hover { border-color: var(--k-accent); background: var(--k-surface-2); color: var(--k-text); }
+.icon-cell:focus-visible { outline: none; border-color: var(--k-accent); box-shadow: 0 0 0 3px var(--k-accent-trans-20); }
+.icon-cell .k-icon { font-size: 1.7rem; color: var(--k-text); }
+.icon-cell__name {
+  font-size: 0.68rem; font-family: var(--k-font-mono); color: var(--k-text-faint);
+  max-inline-size: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.docs-anchors a { color: var(--k-text-faint); font-size: var(--k-text-xs); }
+.docs-anchors a[aria-current] { color: var(--k-accent); font-weight: 650; }
+
+.docs-main { min-inline-size: 0; }
+
+@media (min-width: 1280px) {
+  .docs-3col { grid-template-columns: 13rem minmax(0, 1fr) 13rem; }
+}
+
+.docs-pager {
+  display: flex; justify-content: space-between; gap: var(--k-space-3);
+  margin-top: var(--k-space-7);
+  padding-top: var(--k-space-5);
+  border-top: 1px solid var(--k-border);
+}
+.docs-main > h1:first-child { margin-top: 0; }
+.docs-main h2 { margin-top: var(--k-space-6); }
+.docs-main h2:first-of-type { margin-top: var(--k-space-5); }
+
+.docs-search {
+  inline-size: min(92vw, 36rem);
+  inset-block-start: 10vh; inset-block-end: auto;
+  margin-inline: auto;
+}
+.docs-search__results {
+  margin: var(--k-space-3) 0 0;
+  max-block-size: 50vh; overflow-y: auto;
+}
+.docs-search__results a { text-decoration: none; color: var(--k-text); }
+.docs-search__results small { color: var(--k-text-soft); }
+
+.docs-search-btn {
+  display: inline-flex; align-items: center; gap: var(--k-space-2);
+  font: inherit; font-size: var(--k-text-xs);
+  color: var(--k-text-soft); background: var(--k-surface);
+  border: 1px solid var(--k-border); border-radius: var(--k-radius);
+  padding: calc(var(--k-space-1) * 1.2) var(--k-space-3);
+  cursor: pointer;
+  transition: border-color var(--k-ease), color var(--k-ease);
+}
+.docs-search-btn:hover { color: var(--k-text); border-color: var(--k-border-strong); }
+.docs-search-btn kbd { background: none; border-color: var(--k-border); }
+
+/* floating design-system panel (opened by the k-fab) */
+.kf-panel {
+  inset: auto var(--k-space-5) calc(var(--k-space-5) + 4rem) auto;
+  inline-size: min(92vw, 19.5rem);
+  max-block-size: min(75vh, 34rem);
+  overflow-y: auto;
+}
+.kf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--k-space-1); }
+.kf-grid button {
+  font: inherit; font-size: var(--k-text-xs); font-weight: 600;
+  color: var(--k-text-soft); background: var(--k-surface);
+  border: 1px solid var(--k-border-strong); border-radius: var(--k-radius-s);
+  padding: var(--k-space-1) var(--k-space-2); cursor: pointer;
+}
+.kf-grid button[aria-pressed="true"] {
+  color: var(--k-accent); border-color: var(--k-accent);
+  box-shadow: 0 0 0 2px var(--k-accent-trans-20);
+}
+.kf-slider { display: grid; grid-template-columns: 5.5rem 1fr; gap: var(--k-space-2);
+             align-items: center; font-size: var(--k-text-xs); }
+.kf-hex { font-family: var(--k-font-mono); max-inline-size: 7em; }
+.kf-color-row { display: flex; gap: var(--k-space-2); align-items: center; min-inline-size: 0; }
+.kf-color-row .k-swatch { inline-size: 1.9rem; block-size: 1.9rem; }
+.kf-color-row .k-picker__label {
+  min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.kf-more-toggle {
+  flex: none; display: inline-flex; align-items: center; justify-content: center;
+  inline-size: 1.6rem; block-size: 1.6rem; padding: 0;
+  border: 0; background: none; color: var(--k-text-faint);
+  border-radius: var(--k-radius-s); cursor: pointer;
+}
+.kf-more-toggle:hover { color: var(--k-text); background: var(--k-surface-2); }
+.kf-more-toggle .k-icon { transition: rotate var(--k-ease); }
+.kf-more-toggle[aria-expanded="true"] .k-icon { rotate: 90deg; }
+.kf-more { margin-top: var(--k-space-2); }
+.kf-more-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--k-space-2) var(--k-space-3); }
+/* .k-picker is a grid, so its direct-child controls (segmented, buttons)
+   stretch full-width by default — keep genuinely inline ones hugging
+   their own content instead */
+.kf-panel > .k-segmented, .kf-panel > .k-cluster { justify-self: start; }
+
+/* Copy button injected onto every code block (see play.js).
+   Sits top-right of the <pre>, quiet until the block is hovered. */
+/* reserve a right gutter so the button never overlays code — matters on
+   touch (where it stays visible) and short blocks alike. */
+pre.has-copy { position: relative; padding-inline-end: 4.25rem; }
+.code-copy {
+  position: absolute; inset-block-start: 0.5rem; inset-inline-end: 0.5rem;
+  font-family: var(--k-font-body, system-ui, sans-serif);
+  font-size: var(--k-text-xs); font-weight: 550; line-height: 1;
+  cursor: pointer; padding: 0.3rem 0.6rem;
+  color: var(--k-text-soft); background: var(--k-surface);
+  border: 1px solid var(--k-border); border-radius: var(--k-radius-s);
+  -webkit-user-select: none; user-select: none;
+  opacity: 0; transition: opacity var(--k-ease), color var(--k-ease), border-color var(--k-ease);
+}
+pre.has-copy:hover .code-copy,
+.code-copy:focus-visible { opacity: 1; }
+.code-copy:hover { color: var(--k-text); border-color: var(--k-border-strong); }
+.code-copy:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--k-accent-trans-20); }
+.code-copy.is-done { color: var(--k-ok, var(--k-accent)); border-color: currentColor; opacity: 1; }
+@media (hover: none) { .code-copy { opacity: 1; } }

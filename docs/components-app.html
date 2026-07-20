@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Application — keel</title>
+<meta name="description" content="keel's application tier: app shell, toolbar, tool, tree, property rows, canvas &amp; artboard, selection, status bar — builder chrome with zero JavaScript.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<style>
+  .demo-box { background: var(--k-accent-soft); border: 1px dashed var(--k-accent);
+              border-radius: var(--k-radius-s); padding: var(--k-space-3);
+              font-size: var(--k-text-xs); font-family: var(--k-font-mono);
+              color: var(--k-accent-strong); text-align: center; }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+
+      <aside class="k-sticky docs-side k-sidebar--collapsible" id="docs-sidebar">
+        <button class="k-tool docs-sidebar-toggle" type="button" id="docs-sidebar-toggle"
+                aria-pressed="false" aria-label="Collapse sidebar to icons">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Documentation">
+          <details class="k-nav-group" open>
+            <summary>Getting started</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="start.html">Start</a></li>
+            <li><a href="frameworks.html">Framework guides</a></li>
+            <li><a href="concepts.html">Concepts</a></li>
+            <li><a href="changelog.html">Changelog</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Reference</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="tokens.html">Tokens</a></li>
+            <li><a href="base.html">Base</a></li>
+            <li><a href="typography.html">Typography</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="components.html">Components</a>
+            <ul class="k-list k-list--flush docs-sub">
+              <li><a href="components-actions.html">Actions</a></li>
+              <li><a href="components-forms.html">Forms</a></li>
+              <li><a href="components-surfaces.html">Surfaces &amp; data</a></li>
+              <li><a href="components-feedback.html">Feedback</a></li>
+              <li><a href="components-overlays.html">Overlays</a></li>
+              <li><a href="components-navigation.html">Navigation</a></li>
+              <li><a href="components-identity.html">Identity &amp; media</a></li>
+              <li><a href="components-motion.html">Motion</a></li>
+              <li><a href="components-extending.html">Extending</a></li>
+              <li aria-current="page"><a href="components-app.html">Application</a></li>
+            </ul>
+          </li>
+            <li><a href="utilities.html">Utilities</a></li>
+            <li><a href="icons.html">Icons</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Build</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="sections.html">Sections</a></li>
+            <li><a href="../templates.html">Templates</a></li>
+            <li><a href="../design.html">Design system</a></li>
+            <li><a href="paths.html">Paths</a></li>
+          </ul>
+          </details>
+        </nav>
+        <div id="docs-anchors"></div>
+      </aside>
+
+      <main id="main" class="docs-main">
+
+      <h1>Application</h1>
+      <p class="k-text-soft">Builder and app chrome — the components a
+      page-builder, dashboard, or editor UI needs. Zero JavaScript;
+      states ride ARIA.</p>
+
+    <section id="c-app">
+      <h2>App shell</h2>
+      <p><code>.k-app</code> is the frame: a grid of
+      <code>__head</code>, <code>__rail</code>, <code>__work</code>,
+      <code>__side</code>, and <code>__foot</code> that fills the
+      viewport (<code>min-block-size: 100dvh</code>). The demo below is
+      scaled down inside a box so it can live on this page — in real
+      use the shell <em>is</em> the page. Honestly: the rail and side
+      panels only show at ≥1080px; below that they're hidden and the
+      shell is header, work, footer. A builder on a phone needs its own
+      pattern — put the panels in a
+      <a href="components-overlays.html#c-drawer">drawer</a>.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="height: 22rem; display: flex; border: 1px solid var(--k-border); border-radius: var(--k-radius); overflow: hidden; margin-bottom: var(--k-space-4)">
+          <div class="k-app" style="min-block-size: 100%; flex: 1">
+            <div class="k-app__head">
+              <div class="k-toolbar">
+                <div class="k-toolbar__group">
+                  <button class="k-tool" type="button" aria-pressed="true" aria-label="Select"><span class="k-icon k-icon--plus"></span></button>
+                  <button class="k-tool" type="button" aria-pressed="false" aria-label="Search"><span class="k-icon k-icon--search"></span></button>
+                </div>
+                <span class="k-toolbar__spring"></span>
+                <button class="k-btn k-btn--small" type="button">Publish</button>
+              </div>
+            </div>
+            <div class="k-app__rail">
+              <ul class="k-tree" style="padding: var(--k-space-2)">
+                <li><button class="k-tree__row" type="button">Page</button></li>
+                <li><button class="k-tree__row" type="button" aria-selected="true">Hero</button></li>
+                <li><button class="k-tree__row" type="button">Section</button></li>
+              </ul>
+            </div>
+            <div class="k-app__work">
+              <div class="k-canvas">
+                <div class="k-artboard" style="inline-size: min(100%, 18rem); padding: var(--k-space-4)">
+                  <h4>A page</h4>
+                  <p class="k-text-s k-text-soft k-mb-0">On the canvas.</p>
+                </div>
+              </div>
+            </div>
+            <div class="k-app__side">
+              <div class="k-props" style="padding: var(--k-space-3)">
+                <div class="k-props__group">Layout</div>
+                <div class="k-props__row">
+                  <label for="shell-width">Width</label>
+                  <select id="shell-width"><option>Fill</option><option>Fixed</option></select>
+                </div>
+                <div class="k-props__row">
+                  <label for="shell-radius">Radius</label>
+                  <input type="range" id="shell-radius" min="0" max="24" value="8">
+                </div>
+              </div>
+            </div>
+            <div class="k-app__foot">
+              <div class="k-statusbar">
+                <span>100%</span>
+                <span class="k-statusbar__spring"></span>
+                <span>Saved</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;body class="k-app"&gt;
+  &lt;header class="k-app__head"&gt;
+    &lt;div class="k-toolbar"&gt;…&lt;/div&gt;
+  &lt;/header&gt;
+  &lt;nav class="k-app__rail" aria-label="Layers"&gt;
+    &lt;ul class="k-tree"&gt;…&lt;/ul&gt;
+  &lt;/nav&gt;
+  &lt;main class="k-app__work"&gt;
+    &lt;div class="k-canvas"&gt;
+      &lt;div class="k-artboard"&gt;…&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+  &lt;aside class="k-app__side" aria-label="Inspector"&gt;
+    &lt;div class="k-props"&gt;…&lt;/div&gt;
+  &lt;/aside&gt;
+  &lt;footer class="k-app__foot"&gt;
+    &lt;div class="k-statusbar"&gt;…&lt;/div&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-toolbar">
+      <h2>Toolbar</h2>
+      <p><code>.k-toolbar</code> is the strip along the top:
+      <code>__group</code> clusters related tools,
+      <code>__sep</code> draws a hairline between clusters, and
+      <code>__spring</code> pushes whatever follows to the far end.
+      Tools are toggles — press state lives in
+      <code>aria-pressed</code>, and keel styles it. The segmented
+      switch is a plain <code>.k-btn-group</code>; inside a group,
+      <code>aria-pressed="true"</code> gets the same soft-accent
+      treatment. Moving the attribute between buttons is your JS — the
+      one-line handlers below are page-demo wiring, not part of keel.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-toolbar" style="border: 1px solid var(--k-border); border-radius: var(--k-radius); margin-bottom: var(--k-space-4)">
+          <div class="k-toolbar__group">
+            <button class="k-tool" type="button" aria-pressed="false" aria-label="Menu"><span class="k-icon k-icon--menu"></span></button>
+            <button class="k-tool" type="button" aria-pressed="true" aria-label="Search"><span class="k-icon k-icon--search"></span></button>
+            <button class="k-tool" type="button" aria-pressed="false" aria-label="Insert"><span class="k-icon k-icon--plus"></span></button>
+          </div>
+          <span class="k-toolbar__sep"></span>
+          <div class="k-btn-group">
+            <!-- demo wiring: one line that moves aria-pressed among siblings -->
+            <button class="k-btn k-btn--small k-btn--ghost" type="button" aria-pressed="false" onclick="for (const b of this.parentElement.children) b.setAttribute('aria-pressed', b === this)">Desktop</button>
+            <button class="k-btn k-btn--small k-btn--ghost" type="button" aria-pressed="true" onclick="for (const b of this.parentElement.children) b.setAttribute('aria-pressed', b === this)">Tablet</button>
+            <button class="k-btn k-btn--small k-btn--ghost" type="button" aria-pressed="false" onclick="for (const b of this.parentElement.children) b.setAttribute('aria-pressed', b === this)">Mobile</button>
+          </div>
+          <span class="k-toolbar__spring"></span>
+          <button class="k-btn k-btn--small" type="button">Publish</button>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-toolbar"&gt;
+  &lt;div class="k-toolbar__group"&gt;
+    &lt;button class="k-tool" type="button" aria-pressed="false" aria-label="Menu"&gt;
+      &lt;span class="k-icon k-icon--menu"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;button class="k-tool" type="button" aria-pressed="true" aria-label="Search"&gt;
+      &lt;span class="k-icon k-icon--search"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+  &lt;span class="k-toolbar__sep"&gt;&lt;/span&gt;
+  &lt;div class="k-btn-group"&gt;
+    &lt;button class="k-btn k-btn--small k-btn--ghost" aria-pressed="false"&gt;Desktop&lt;/button&gt;
+    &lt;button class="k-btn k-btn--small k-btn--ghost" aria-pressed="true"&gt;Tablet&lt;/button&gt;
+    &lt;button class="k-btn k-btn--small k-btn--ghost" aria-pressed="false"&gt;Mobile&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;span class="k-toolbar__spring"&gt;&lt;/span&gt;
+  &lt;button class="k-btn k-btn--small" type="button"&gt;Publish&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-tool">
+      <h2>Tool</h2>
+      <p><code>.k-tool</code> is the icon toggle on its own — a square
+      quiet button whose pressed state is
+      <code>aria-pressed="true"</code>: soft accent fill, accent text.
+      Because it's icon-only, an <code>aria-label</code> is required,
+      not polite. Flipping the attribute on click is your JS; keel only
+      draws the two states.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-cluster" style="margin-bottom: var(--k-space-4)">
+          <button class="k-tool" type="button" aria-pressed="true" aria-label="Search (pressed)"><span class="k-icon k-icon--search"></span></button>
+          <button class="k-tool" type="button" aria-pressed="false" aria-label="Insert"><span class="k-icon k-icon--plus"></span></button>
+          <button class="k-tool" type="button" aria-pressed="false" aria-label="Menu" disabled style="opacity: 0.45; cursor: not-allowed"><span class="k-icon k-icon--menu"></span></button>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;!-- pressed --&gt;
+&lt;button class="k-tool" type="button" aria-pressed="true" aria-label="Search"&gt;
+  &lt;span class="k-icon k-icon--search"&gt;&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;!-- unpressed --&gt;
+&lt;button class="k-tool" type="button" aria-pressed="false" aria-label="Insert"&gt;
+  &lt;span class="k-icon k-icon--plus"&gt;&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-tree">
+      <h2>Tree</h2>
+      <p><code>.k-tree</code> is the layers panel: a nested list where
+      branches are native <code>details</code> — open and close work
+      with no script — and every clickable line is a
+      <code>__row</code>. The chevron is a <code>__twist</code> span
+      that rotates when its branch opens. The selected row carries
+      <code>aria-selected="true"</code> and gets the soft-accent fill
+      with an inset accent edge. Honestly: expanding is native, but
+      selection, drag-to-reorder, and rename are your application's
+      JS — keel draws the rows.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <ul class="k-tree" style="max-inline-size: 16rem; margin-bottom: var(--k-space-4)">
+          <li>
+            <details open>
+              <summary class="k-tree__row"><span class="k-tree__twist"><span class="k-icon k-icon--chevron-right"></span></span>Page</summary>
+              <ul>
+                <li>
+                  <details open>
+                    <summary class="k-tree__row" aria-selected="true"><span class="k-tree__twist"><span class="k-icon k-icon--chevron-right"></span></span>Hero</summary>
+                    <ul>
+                      <li><button class="k-tree__row" type="button">Heading</button></li>
+                      <li><button class="k-tree__row" type="button">Buttons</button></li>
+                    </ul>
+                  </details>
+                </li>
+                <li>
+                  <details>
+                    <summary class="k-tree__row"><span class="k-tree__twist"><span class="k-icon k-icon--chevron-right"></span></span>Section</summary>
+                    <ul>
+                      <li><button class="k-tree__row" type="button">Cards</button></li>
+                    </ul>
+                  </details>
+                </li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;ul class="k-tree"&gt;
+  &lt;li&gt;
+    &lt;details open&gt;
+      &lt;summary class="k-tree__row"&gt;
+        &lt;span class="k-tree__twist"&gt;&lt;span class="k-icon k-icon--chevron-right"&gt;&lt;/span&gt;&lt;/span&gt;
+        Page
+      &lt;/summary&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;details open&gt;
+            &lt;summary class="k-tree__row" aria-selected="true"&gt;
+              &lt;span class="k-tree__twist"&gt;&lt;span class="k-icon k-icon--chevron-right"&gt;&lt;/span&gt;&lt;/span&gt;
+              Hero
+            &lt;/summary&gt;
+            &lt;ul&gt;
+              &lt;li&gt;&lt;button class="k-tree__row" type="button"&gt;Heading&lt;/button&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;button class="k-tree__row" type="button"&gt;Buttons&lt;/button&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/details&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/details&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-props">
+      <h2>Property rows</h2>
+      <p><code>.k-props</code> is the inspector: a stack of
+      <code>__row</code>s, each an aligned label-and-control pair, with
+      <code>__group</code> headings ruling off sections. Controls are
+      the ordinary form elements — select, range, switch, swatch — just
+      drawn compact inside a row. It's built to live in
+      <code>.k-app__side</code>, but it works anywhere a settings
+      column does.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-props" style="max-inline-size: 19rem; margin-bottom: var(--k-space-4)">
+          <div class="k-props__group">Layout</div>
+          <div class="k-props__row">
+            <label for="prop-width">Width</label>
+            <select id="prop-width"><option>Fill container</option><option>Fixed</option><option>Hug contents</option></select>
+          </div>
+          <div class="k-props__row">
+            <label id="prop-align-label">Align</label>
+            <div class="k-btn-group" role="group" aria-labelledby="prop-align-label">
+              <!-- demo wiring: one line that moves aria-pressed among siblings -->
+              <button class="k-btn k-btn--small k-btn--ghost" type="button" aria-pressed="true" onclick="for (const b of this.parentElement.children) b.setAttribute('aria-pressed', b === this)">Start</button>
+              <button class="k-btn k-btn--small k-btn--ghost" type="button" aria-pressed="false" onclick="for (const b of this.parentElement.children) b.setAttribute('aria-pressed', b === this)">Center</button>
+              <button class="k-btn k-btn--small k-btn--ghost" type="button" aria-pressed="false" onclick="for (const b of this.parentElement.children) b.setAttribute('aria-pressed', b === this)">End</button>
+            </div>
+          </div>
+          <div class="k-props__group">Style</div>
+          <div class="k-props__row">
+            <label>Fill</label>
+            <span class="k-cluster" style="gap: var(--k-space-2)">
+              <button class="k-swatch" type="button" aria-label="Fill color" style="--k-swatch-color: var(--k-accent); inline-size: 1.6rem; block-size: 1.6rem"></button>
+              <code>var(--k-accent)</code>
+            </span>
+          </div>
+          <div class="k-props__row">
+            <label for="prop-radius">Radius</label>
+            <input type="range" id="prop-radius" min="0" max="24" value="8">
+          </div>
+          <div class="k-props__row">
+            <label for="prop-shadow">Shadow</label>
+            <span class="k-switch"><input type="checkbox" id="prop-shadow" checked></span>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-props"&gt;
+  &lt;div class="k-props__group"&gt;Layout&lt;/div&gt;
+  &lt;div class="k-props__row"&gt;
+    &lt;label for="width"&gt;Width&lt;/label&gt;
+    &lt;select id="width"&gt;&lt;option&gt;Fill container&lt;/option&gt;&lt;/select&gt;
+  &lt;/div&gt;
+  &lt;div class="k-props__group"&gt;Style&lt;/div&gt;
+  &lt;div class="k-props__row"&gt;
+    &lt;label for="radius"&gt;Radius&lt;/label&gt;
+    &lt;input type="range" id="radius" min="0" max="24" value="8"&gt;
+  &lt;/div&gt;
+  &lt;div class="k-props__row"&gt;
+    &lt;label for="shadow"&gt;Shadow&lt;/label&gt;
+    &lt;span class="k-switch"&gt;&lt;input type="checkbox" id="shadow" checked&gt;&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-canvas">
+      <h2>Canvas &amp; artboard</h2>
+      <p><code>.k-canvas</code> is the workspace surface — the dotted
+      grid your page floats on. <code>.k-artboard</code> is the page
+      itself: an ordinary surface with a page shadow, and whatever's
+      inside it is real keel markup rendered with real tokens.
+      <code>.k-selected</code> is the builder outline — the accent ring
+      that says "this block is selected." The canvas is just the
+      surface; scrolling and zooming it is layout, not behavior.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-canvas" style="block-size: 14rem; border: 1px solid var(--k-border); border-radius: var(--k-radius); margin-bottom: var(--k-space-4)">
+          <div class="k-artboard" style="inline-size: min(100%, 26rem)">
+            <div class="k-selected" style="padding: var(--k-space-4)">
+              <h3>Ship the page</h3>
+              <p class="k-text-s k-text-soft">A hero, on an artboard, on the canvas.</p>
+              <a class="k-btn k-btn--small" href="#c-canvas">Get started</a>
+            </div>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-canvas"&gt;
+  &lt;div class="k-artboard"&gt;
+    &lt;!-- the page being built — real keel markup --&gt;
+    &lt;div class="k-selected"&gt;
+      &lt;h3&gt;Ship the page&lt;/h3&gt;
+      &lt;p&gt;A hero, on an artboard, on the canvas.&lt;/p&gt;
+      &lt;a class="k-btn k-btn--small" href="#"&gt;Get started&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-statusbar">
+      <h2>Status bar</h2>
+      <p><code>.k-statusbar</code> is the thin strip along the bottom —
+      zoom level, where you are, whether the work is saved.
+      <code>__spring</code> pushes the two ends apart, same as in the
+      toolbar. Everything in it is plain text and icons; it states, it
+      doesn't act.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-statusbar" style="border: 1px solid var(--k-border); border-radius: var(--k-radius); margin-bottom: var(--k-space-4)">
+          <span>100%</span>
+          <span class="k-statusbar__spring"></span>
+          <span>Page / Hero / Heading</span>
+          <span><span class="k-icon k-icon--check"></span> Saved</span>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-statusbar"&gt;
+  &lt;span&gt;100%&lt;/span&gt;
+  &lt;span class="k-statusbar__spring"&gt;&lt;/span&gt;
+  &lt;span&gt;Page / Hero / Heading&lt;/span&gt;
+  &lt;span&gt;&lt;span class="k-icon k-icon--check"&gt;&lt;/span&gt; Saved&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+      <p>That's the whole tier: keel draws the chrome — shell, strips,
+      rows, surfaces, states. Selecting a block, dragging a layer,
+      undoing an edit — that's your application's JavaScript, and it
+      always was going to be. The split is the point: see
+      <a href="concepts.html">Zero JavaScript</a> in concepts.</p>
+
+      </main>
+
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

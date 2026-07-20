@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STACK/MNL — a developer-conference template on keel's brutal path</title>
+<meta name="description" content="A developer-conference one-pager built with keel and the brutal path: stark white, pure black, one electric accent. One tokens block plus one path link is the whole look.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-path-brutal.css">
+<style>
+  /* The theme: one tokens block + the brutal path linked above. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(0 0% 100%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(0 0% 95%);
+      --k-border: hsl(0 0% 10%);
+      --k-border-strong: hsl(0 0% 0%);
+      --k-text: hsl(0 0% 6%);
+      --k-text-soft: hsl(0 0% 26%);
+      --k-text-faint: hsl(0 0% 42%);
+      --k-accent: hsl(112 100% 40%);
+      --k-on-accent: hsl(0 0% 6%);
+      --k-accent-2: hsl(0 0% 6%);
+      --k-on-accent-2: hsl(112 100% 40%);
+      --k-font-display: ui-monospace, Consolas, "Cascadia Mono", monospace;
+      --k-display-weight: 800;
+      --k-tracking: -0.02em;
+      --k-density: 1.05;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* SPEAKER avatars: initials on a flat circle — page-local layout only */
+  .sm-avatar {
+    inline-size: 4.5rem; block-size: 4.5rem; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--k-font-display); font-weight: 800; font-size: var(--k-text-l);
+    background: var(--k-accent); color: var(--k-on-accent);
+    border: 3px solid var(--k-border-strong); margin-block-end: var(--k-space-3);
+  }
+  .sm-avatar--alt { background: var(--k-text); color: var(--k-accent); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template on the <a href="../docs/paths.html">brutal path</a> —
+    one tokens block + one path link is the whole look.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">STACK/MNL</a>
+      <ul class="k-nav__links">
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#speakers">Speakers</a></li>
+        <li><a href="#sponsors">Sponsors</a></li>
+        <li><a href="#tickets">Tickets</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="k-section" id="top">
+  <div class="k-container">
+    <div class="k-split" style="align-items: center">
+      <div>
+        <p class="k-hero__eyebrow">Oct 22–23 · Mandaluyong, Metro Manila</p>
+        <h1>Two days. One stack. No slides about culture.</h1>
+        <p class="k-hero__lead">STACK/MNL is where backend engineers argue
+        about queues, frontend engineers argue about builds, and everyone
+        agrees the coffee line is too long.</p>
+        <p class="k-cluster k-mt-5">
+          <a class="k-btn k-btn--large" href="#tickets">Get a ticket</a>
+          <a class="k-btn k-btn--ghost k-btn--large" href="#schedule">See the schedule</a>
+        </p>
+      </div>
+      <div class="k-card">
+        <p class="k-num" style="font-family: var(--k-font-display); font-size: var(--k-text-2xl); font-weight: 800; margin: 0;">$ whoami</p>
+        <p class="k-num k-text-soft" style="margin-block-start: var(--k-space-2)">
+          2 days<br>4 tracks<br>38 talks<br>1 afterparty
+        </p>
+        <p class="k-cluster k-mt-4" style="justify-content: space-between; align-items: center">
+          <strong>₱3,500</strong>
+          <a class="k-btn" href="#tickets">Register</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF STRIP -->
+<section class="k-section k-section--tight k-section--alt">
+  <div class="k-container">
+    <div class="k-cols-4 k-center">
+      <div><span class="k-stat__value">38</span><span class="k-stat__label">talks, no keynote fluff</span></div>
+      <div><span class="k-stat__value">4</span><span class="k-stat__label">tracks running parallel</span></div>
+      <div><span class="k-stat__value">900+</span><span class="k-stat__label">engineers, year six</span></div>
+      <div><span class="k-stat__value">0</span><span class="k-stat__label">vendor keynotes</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE — accordion grouped by day, single-open, no JS -->
+<section class="k-section" id="schedule">
+  <div class="k-container">
+    <h2>Schedule</h2>
+    <p class="k-text-soft" style="max-width: 40em">Two days, one track
+    expanded at a time. Tap a day to open it.</p>
+    <div class="k-accordion k-mt-5">
+      <details name="stack-day" open>
+        <summary>Day 1 — Oct 22 · Systems &amp; Infra</summary>
+        <table class="k-table">
+          <tbody>
+            <tr><td>09:30</td><td>Registration &amp; coffee</td><td class="k-text-faint">Lobby</td></tr>
+            <tr><td>10:00</td><td>Queues at 40k msgs/sec: what breaks first</td><td class="k-text-faint">Reyes, Airfleet</td></tr>
+            <tr><td>11:00</td><td>Postgres partitioning without the pain</td><td class="k-text-faint">Cruz, Ledger Labs</td></tr>
+            <tr><td>13:30</td><td>Rewriting a monolith while it's on fire</td><td class="k-text-faint">Ong, Baryo Systems</td></tr>
+            <tr><td>15:00</td><td>Panel: on-call that doesn't burn people out</td><td class="k-text-faint">4 speakers</td></tr>
+          </tbody>
+        </table>
+      </details>
+      <details name="stack-day">
+        <summary>Day 2 — Oct 23 · Product &amp; Frontend</summary>
+        <table class="k-table">
+          <tbody>
+            <tr><td>09:30</td><td>Doors open</td><td class="k-text-faint">Lobby</td></tr>
+            <tr><td>10:00</td><td>Shipping design systems nobody rewrites</td><td class="k-text-faint">Santos, keel</td></tr>
+            <tr><td>11:00</td><td>State management is a people problem</td><td class="k-text-faint">Dela Cruz, Formwork</td></tr>
+            <tr><td>13:30</td><td>Build times: a five-year case study</td><td class="k-text-faint">Bautista, Northgate</td></tr>
+            <tr><td>15:00</td><td>Closing talk: what we'd build again</td><td class="k-text-faint">Reyes &amp; Ong</td></tr>
+          </tbody>
+        </table>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- SPEAKERS -->
+<section class="k-section k-section--alt" id="speakers">
+  <div class="k-container">
+    <h2>Speakers</h2>
+    <div class="k-cols-4 k-mt-5">
+      <div class="k-card k-center">
+        <div class="sm-avatar" aria-hidden="true">MR</div>
+        <h3>Mika Reyes</h3>
+        <p class="k-text-soft">Staff Eng, Airfleet</p>
+      </div>
+      <div class="k-card k-center">
+        <div class="sm-avatar sm-avatar--alt" aria-hidden="true">JC</div>
+        <h3>Jed Cruz</h3>
+        <p class="k-text-soft">DBA, Ledger Labs</p>
+      </div>
+      <div class="k-card k-center">
+        <div class="sm-avatar" aria-hidden="true">AO</div>
+        <h3>Alex Ong</h3>
+        <p class="k-text-soft">Principal, Baryo Systems</p>
+      </div>
+      <div class="k-card k-center">
+        <div class="sm-avatar sm-avatar--alt" aria-hidden="true">LS</div>
+        <h3>Lia Santos</h3>
+        <p class="k-text-soft">Design Eng, keel</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPONSORS — marquee logo strip -->
+<section class="k-section k-section--tight" id="sponsors">
+  <div class="k-container k-center">
+    <p class="k-text-soft k-mono">Backed by</p>
+  </div>
+  <div class="k-marquee" style="margin-top: var(--k-space-4)">
+    <div class="k-marquee__track">
+      <span class="k-text-soft k-mono">AIRFLEET</span>
+      <span class="k-text-soft k-mono">LEDGER LABS</span>
+      <span class="k-text-soft k-mono">BARYO SYSTEMS</span>
+      <span class="k-text-soft k-mono">FORMWORK</span>
+      <span class="k-text-soft k-mono">NORTHGATE</span>
+      <span class="k-text-soft k-mono" aria-hidden="true">AIRFLEET</span>
+      <span class="k-text-soft k-mono" aria-hidden="true">LEDGER LABS</span>
+      <span class="k-text-soft k-mono" aria-hidden="true">BARYO SYSTEMS</span>
+      <span class="k-text-soft k-mono" aria-hidden="true">FORMWORK</span>
+      <span class="k-text-soft k-mono" aria-hidden="true">NORTHGATE</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="k-section k-section--accent" id="tickets">
+  <div class="k-container k-center">
+    <h2>Early bird ends Aug 31.</h2>
+    <p style="max-width: 36em; margin-inline: auto">₱3,500 before, ₱4,800
+    after. Students get in for ₱1,200 with a valid ID at the door.</p>
+    <p class="k-cluster k-mt-5" style="justify-content: center">
+      <a class="k-btn k-btn--large" href="#top">Register now</a>
+      <a class="k-btn k-btn--ghost" href="#top">Sponsor us instead</a>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>STACK/MNL — a fictional conference on the brutal path.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../docs/paths.html">About paths</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

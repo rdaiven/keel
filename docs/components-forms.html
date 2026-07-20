@@ -1,0 +1,1312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forms — keel</title>
+<meta name="description" content="keel's form components: fields, form validation, switch, file input, range, color and date inputs, and a color picker.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<style>
+  .demo-box { background: var(--k-accent-soft); border: 1px dashed var(--k-accent);
+              border-radius: var(--k-radius-s); padding: var(--k-space-3);
+              font-size: var(--k-text-xs); font-family: var(--k-font-mono);
+              color: var(--k-accent-strong); text-align: center; }
+
+  /* page-local custom variants — demos for the "Your own variants"
+     and "Extending keel" sections below */
+  .btn-sale {
+    --k-btn-bg: var(--k-warn);
+    --k-btn-bg-hover: color-mix(in oklab, var(--k-warn), black 15%);
+  }
+  .btn-quiet {
+    --k-btn-bg: var(--k-accent-trans-10);
+    --k-btn-fg: var(--k-accent-strong);
+    --k-btn-bg-hover: var(--k-accent-trans-20);
+  }
+
+  .testimonial {
+    background: var(--k-surface);
+    border: 1px solid var(--k-border);
+    border-radius: var(--k-radius-l);
+    padding: var(--k-space-5);
+  }
+  .testimonial__quote {
+    font-size: var(--k-text-l);
+    color: var(--k-text-soft);
+    margin: 0 0 var(--k-space-3);
+  }
+  .testimonial__name {
+    font-family: var(--k-font-mono);
+    font-size: var(--k-text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--k-text-faint);
+  }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html" aria-current="page">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+
+      <aside class="k-sticky docs-side k-sidebar--collapsible" id="docs-sidebar">
+        <button class="k-tool docs-sidebar-toggle" type="button" id="docs-sidebar-toggle"
+                aria-pressed="false" aria-label="Collapse sidebar to icons">
+          <span class="k-icon k-icon--sidebar" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Documentation">
+          <details class="k-nav-group" open>
+            <summary>Getting started</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="start.html">Start</a></li>
+            <li><a href="frameworks.html">Framework guides</a></li>
+            <li><a href="concepts.html">Concepts</a></li>
+            <li><a href="changelog.html">Changelog</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Reference</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="tokens.html">Tokens</a></li>
+            <li><a href="base.html">Base</a></li>
+            <li><a href="typography.html">Typography</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="components.html">Components</a>
+            <ul class="k-list k-list--flush docs-sub">
+              <li><a href="components-actions.html">Actions</a></li>
+              <li aria-current="page"><a href="components-forms.html">Forms</a></li>
+              <li><a href="components-surfaces.html">Surfaces &amp; data</a></li>
+              <li><a href="components-feedback.html">Feedback</a></li>
+              <li><a href="components-overlays.html">Overlays</a></li>
+              <li><a href="components-navigation.html">Navigation</a></li>
+              <li><a href="components-identity.html">Identity &amp; media</a></li>
+              <li><a href="components-motion.html">Motion</a></li>
+              <li><a href="components-extending.html">Extending</a></li>
+              <li><a href="components-app.html">Application</a></li>
+            </ul>
+          </li>
+            <li><a href="utilities.html">Utilities</a></li>
+            <li><a href="icons.html">Icons</a></li>
+          </ul>
+          </details>
+          <details class="k-nav-group" open>
+            <summary>Build</summary>
+          <ul class="k-list k-list--flush">
+            <li><a href="sections.html">Sections</a></li>
+            <li><a href="../templates.html">Templates</a></li>
+            <li><a href="../design.html">Design system</a></li>
+            <li><a href="paths.html">Paths</a></li>
+          </ul>
+          </details>
+        </nav>
+        <div id="docs-anchors"></div>
+      </aside>
+
+      <main id="main" class="docs-main">
+
+      <h1>Forms</h1>
+      <p class="k-text-soft">Every control, every state — the base layer styles the natives with zero classes, and a handful of thin classes handle labels, sizes, and layout.</p>
+
+    <section id="f-text">
+      <h2>Text inputs</h2>
+      <p>Every text-like input is styled by the base layer with no
+      classes at all — <code>text</code>, <code>email</code>,
+      <code>password</code>, <code>search</code>, <code>number</code>,
+      <code>tel</code>, and <code>url</code> all come out identical:
+      the same surface, border, radius, and soft accent focus ring.
+      <code>.k-field</code> just spaces a label/input group, and
+      <code>.k-field__hint</code> is small helper text under the
+      input. Connect the hint with <code>aria-describedby</code> so
+      screen readers read it with the field.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-form-row k-form-row--2" style="margin-bottom: var(--k-space-4)">
+          <div class="k-field">
+            <label for="demo-text">Name <span class="k-text-faint">(text)</span></label>
+            <input id="demo-text" type="text" placeholder="Ada Lovelace">
+          </div>
+          <div class="k-field">
+            <label for="demo-email">Email <span class="k-text-faint">(email)</span></label>
+            <input id="demo-email" type="email" placeholder="you@example.com" aria-describedby="demo-email-hint">
+            <p class="k-field__hint" id="demo-email-hint">We only use this to send the invoice.</p>
+          </div>
+          <div class="k-field">
+            <label for="demo-password">Password <span class="k-text-faint">(password)</span></label>
+            <input id="demo-password" type="password" placeholder="••••••••" aria-describedby="demo-password-hint">
+            <p class="k-field__hint" id="demo-password-hint">At least 12 characters.</p>
+          </div>
+          <div class="k-field">
+            <label for="demo-search">Search <span class="k-text-faint">(search)</span></label>
+            <input id="demo-search" type="search" placeholder="Search the docs…">
+          </div>
+          <div class="k-field">
+            <label for="demo-number">Seats <span class="k-text-faint">(number)</span></label>
+            <input id="demo-number" type="number" min="1" max="99" value="4">
+          </div>
+          <div class="k-field">
+            <label for="demo-tel">Phone <span class="k-text-faint">(tel)</span></label>
+            <input id="demo-tel" type="tel" placeholder="+63 900 000 0000">
+          </div>
+          <div class="k-field">
+            <label for="demo-url">Website <span class="k-text-faint">(url)</span></label>
+            <input id="demo-url" type="url" placeholder="https://example.com">
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-field"&gt;
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input id="email" type="email" aria-describedby="email-hint"&gt;
+  &lt;p class="k-field__hint" id="email-hint"&gt;We only use this to send the invoice.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- every text-like type is styled identically, no classes:
+     text · email · password · search · number · tel · url --&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="f-select">
+      <h2>Textarea &amp; select</h2>
+      <p>Also base-layer, also classless. <code>textarea</code> gets
+      the field treatment plus <code>resize: vertical</code> and a
+      sensible <code>min-height</code> — users can make it taller,
+      never break the layout sideways. <code>select</code> is
+      de-natived (<code>appearance: none</code>) and drawn with keel's
+      own chevron, so it matches the other fields in every browser.
+      <code>select[multiple]</code> keeps its list open and gets
+      padded, rounded option rows.</p>
+      <div class="k-alert k-alert--soft k-mb-4">
+      <p class="k-bold" style="margin-bottom: var(--k-space-1)">The dropdown popup is themed too, where supported</p>
+      <p style="margin-bottom: 0">Behind <code>@supports (appearance:
+      base-select)</code>, keel opts <code>select</code> into the
+      customizable-select API — the popup panel becomes
+      <code>::picker(select)</code> and each <code>option</code> is a
+      real styleable element, so the open dropdown picks up
+      <code>--k-surface</code>, <code>--k-radius</code>, and
+      <code>--k-shadow-l</code> instead of raw OS chrome. Nothing to
+      opt into; browsers without support just keep today's
+      native-popup select from above.</p>
+      </div>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 24rem; margin-bottom: var(--k-space-4)">
+          <div class="k-field">
+            <label for="demo-textarea">Message</label>
+            <textarea id="demo-textarea" placeholder="Tell us what you're building…"></textarea>
+          </div>
+          <div class="k-field">
+            <label for="demo-select">Plan</label>
+            <select id="demo-select">
+              <option>Starter</option>
+              <option selected>Studio</option>
+              <option>Fleet</option>
+            </select>
+          </div>
+          <div class="k-field">
+            <label for="demo-multi">Channels <span class="k-text-faint">(multiple)</span></label>
+            <select id="demo-multi" multiple size="4" aria-describedby="demo-multi-hint">
+              <option selected>Email</option>
+              <option>SMS</option>
+              <option selected>Push</option>
+              <option>RSS</option>
+            </select>
+            <p class="k-field__hint" id="demo-multi-hint">Hold Ctrl (or Cmd) to pick more than one.</p>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-field"&gt;
+  &lt;label for="message"&gt;Message&lt;/label&gt;
+  &lt;textarea id="message"&gt;&lt;/textarea&gt;
+&lt;/div&gt;
+
+&lt;div class="k-field"&gt;
+  &lt;label for="plan"&gt;Plan&lt;/label&gt;
+  &lt;select id="plan"&gt;
+    &lt;option&gt;Starter&lt;/option&gt;
+    &lt;option selected&gt;Studio&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;
+
+&lt;select multiple size="4"&gt;
+  &lt;option selected&gt;Email&lt;/option&gt;
+  &lt;option&gt;SMS&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="f-tokens">
+      <h2>Token multi-select</h2>
+      <p>Native <code>select[multiple]</code> works, but the pattern
+      real apps reach for is a field of removable chips with a text
+      entry that grows to fill the row — <code>.k-tokens</code> is that
+      field, a <code>.k-token</code> is each chip, and
+      <code>.k-token__remove</code> is its <code>×</code> button. The
+      whole field lights up on <code>:focus-within</code>, so the inner
+      <code>input</code> reads as one control with the chips. This is
+      chrome only: keel draws the field, your JS adds and removes
+      tokens and opens the picker. It pairs naturally with a
+      <a href="components-overlays.html#c-menu-items">checkable
+      <code>.k-menu</code></a> — a dropdown of
+      <code>aria-checked</code> options — as the "add" surface. Give
+      each remove button an <code>aria-label</code>, and mirror the
+      current tokens into a real hidden field so the form submits.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 30rem; margin-bottom: var(--k-space-4)">
+          <div class="k-field">
+            <label for="demo-tokens">Topics</label>
+            <label class="k-tokens" for="demo-tokens">
+              <span class="k-token">Design <button type="button" class="k-token__remove" aria-label="Remove Design">×</button></span>
+              <span class="k-token">Research <button type="button" class="k-token__remove" aria-label="Remove Research">×</button></span>
+              <span class="k-token">Frontend <button type="button" class="k-token__remove" aria-label="Remove Frontend">×</button></span>
+              <input type="text" id="demo-tokens" placeholder="Add topic…">
+            </label>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;label class="k-tokens"&gt;
+  &lt;span class="k-token"&gt;Design
+    &lt;button type="button" class="k-token__remove" aria-label="Remove Design"&gt;×&lt;/button&gt;
+  &lt;/span&gt;
+  &lt;span class="k-token"&gt;Research
+    &lt;button type="button" class="k-token__remove" aria-label="Remove Research"&gt;×&lt;/button&gt;
+  &lt;/span&gt;
+  &lt;input type="text" placeholder="Add topic…"&gt;
+&lt;/label&gt;
+
+&lt;!-- token color is a knob: --k-token-bg / --k-token-fg --&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="f-unit">
+      <h2>Value + unit</h2>
+      <p>The control every inspector needs: a number with a unit picker
+      beside it, drawn as one field. <code>.k-unit</code> is the
+      wrapper — it holds a borderless <code>input</code> that fills the
+      row and a trailing unit, set off by a hairline, and the whole
+      thing lights up on <code>:focus-within</code>. The unit can be a
+      real <code>select</code> (native list, no JS), a
+      <code>.k-unit__btn</code> that opens a
+      <a href="components-overlays.html#c-menu-items"><code>.k-menu</code></a>
+      when you need custom units, or a static
+      <code>.k-unit__affix</code> for a fixed <code>$</code>,
+      <code>%</code>, or <code>px</code> — put the affix first for a
+      leading symbol, last for a trailing one. It drops straight into a
+      <a href="components-app.html#c-props"><code>.k-props__row</code></a>,
+      which is where a design tool's inspector uses it.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 30rem; margin-bottom: var(--k-space-4);
+                    display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--k-space-4)">
+          <div class="k-field" style="margin: 0">
+            <label for="u-size">Size</label>
+            <div class="k-unit">
+              <input type="number" id="u-size" value="12">
+              <select aria-label="Size unit">
+                <option>px</option><option>rem</option><option>em</option>
+                <option>%</option><option>vw</option>
+              </select>
+            </div>
+          </div>
+          <div class="k-field" style="margin: 0">
+            <label for="u-amount">Amount</label>
+            <div class="k-unit">
+              <span class="k-unit__affix">$</span>
+              <input type="number" id="u-amount" value="40.00">
+            </div>
+          </div>
+          <div class="k-field" style="margin: 0">
+            <label for="u-opacity">Opacity</label>
+            <div class="k-unit">
+              <input type="number" id="u-opacity" value="100">
+              <span class="k-unit__affix">%</span>
+            </div>
+          </div>
+          <div class="k-field" style="margin: 0">
+            <label for="u-lh">Line height</label>
+            <div class="k-unit">
+              <input type="number" id="u-lh" value="1.5" step="0.1">
+              <button type="button" class="k-unit__btn">rem <span class="k-icon k-icon--chevron-down" aria-hidden="true"></span></button>
+            </div>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;!-- value + unit dropdown --&gt;
+&lt;div class="k-unit"&gt;
+  &lt;input type="number" value="12" aria-label="Size"&gt;
+  &lt;select aria-label="Unit"&gt;
+    &lt;option&gt;px&lt;/option&gt;&lt;option&gt;rem&lt;/option&gt;&lt;option&gt;%&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;
+
+&lt;!-- leading affix --&gt;
+&lt;div class="k-unit"&gt;
+  &lt;span class="k-unit__affix"&gt;$&lt;/span&gt;
+  &lt;input type="number" value="40.00"&gt;
+&lt;/div&gt;
+
+&lt;!-- trailing affix --&gt;
+&lt;div class="k-unit"&gt;
+  &lt;input type="number" value="100"&gt;
+  &lt;span class="k-unit__affix"&gt;%&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- unit as a button that opens a .k-menu (your JS) --&gt;
+&lt;div class="k-unit"&gt;
+  &lt;input type="number" value="1.5"&gt;
+  &lt;button type="button" class="k-unit__btn"&gt;rem
+    &lt;span class="k-icon k-icon--chevron-down"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="f-rating">
+      <h2>Rating</h2>
+      <p>A row of stars for showing a score. <code>.k-rating</code> is
+      the row; each star is a filled-star
+      <a href="icons.html"><code>k-icon--star-fill</code></a>, and the
+      earned ones get <code>.is-on</code> — gold from the
+      <code>--k-rating-on</code> knob (default <code>--k-warn</code>) —
+      while the rest sit in <code>--k-rating-off</code> (default
+      <code>--k-border-strong</code>). <code>.k-rating__score</code> is
+      a quiet numeric label after the stars. This is the
+      <em>display</em> look: give the wrapper <code>role="img"</code>
+      and an <code>aria-label</code> like "4 out of 5" so the whole
+      thing reads as one value. For an <em>input</em> rating you'd wrap
+      radio buttons instead; keel draws the read-only face.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="margin-bottom: var(--k-space-4)">
+          <span class="k-rating" role="img" aria-label="4 out of 5">
+            <span class="k-icon k-icon--star-fill is-on" aria-hidden="true"></span>
+            <span class="k-icon k-icon--star-fill is-on" aria-hidden="true"></span>
+            <span class="k-icon k-icon--star-fill is-on" aria-hidden="true"></span>
+            <span class="k-icon k-icon--star-fill is-on" aria-hidden="true"></span>
+            <span class="k-icon k-icon--star-fill" aria-hidden="true"></span>
+            <span class="k-rating__score">4.0</span>
+          </span>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;span class="k-rating" role="img" aria-label="4 out of 5"&gt;
+  &lt;span class="k-icon k-icon--star-fill is-on" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;span class="k-icon k-icon--star-fill is-on" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;span class="k-icon k-icon--star-fill is-on" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;span class="k-icon k-icon--star-fill is-on" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;span class="k-icon k-icon--star-fill" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;span class="k-rating__score"&gt;4.0&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;!-- colors are knobs: --k-rating-on / --k-rating-off --&gt;
+&lt;!-- for an input rating, wrap radio buttons instead --&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="f-combobox">
+      <h2>Combobox</h2>
+      <p>A searchable single-select: an <code>input</code> you type into
+      above a list you filter as you go. <code>.k-combobox</code> is the
+      wrapper, and <code>.k-combobox__list</code> is the floating
+      listbox below it — it's also a
+      <a href="components-overlays.html#c-menu-items"><code>.k-menu</code></a>,
+      so the option rows come styled. Mark the active option with
+      <code>aria-selected="true"</code> and it highlights. This is
+      chrome only: keel draws the field and the list; your JS filters
+      the options as the user types and toggles <code>hidden</code> on
+      the list to open and close it. The demo below leaves the list
+      open so you can see it.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 24rem; margin-bottom: var(--k-space-4)">
+          <div class="k-field">
+            <label for="demo-combobox">Assignee</label>
+            <div class="k-combobox">
+              <input type="text" id="demo-combobox" value="Grace" placeholder="Search people…" aria-label="Assignee">
+              <ul class="k-combobox__list k-menu">
+                <li><button type="button">Ada Lovelace</button></li>
+                <li><button type="button" aria-selected="true">Grace Hopper</button></li>
+                <li><button type="button">Katherine Johnson</button></li>
+                <li><button type="button">Radia Perlman</button></li>
+              </ul>
+            </div>
+          </div>
+          <div style="height: 9rem" aria-hidden="true"></div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-combobox"&gt;
+  &lt;input type="text" placeholder="Search people…" aria-label="Assignee"&gt;
+  &lt;ul class="k-combobox__list k-menu"&gt;
+    &lt;li&gt;&lt;button type="button"&gt;Ada Lovelace&lt;/button&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button type="button" aria-selected="true"&gt;Grace Hopper&lt;/button&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button type="button"&gt;Katherine Johnson&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;!-- your JS filters the options and toggles [hidden] on the list --&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="f-stepper">
+      <h2>Number stepper</h2>
+      <p>A number input with joined − / + buttons, drawn as one
+      control. <code>.k-stepper</code> is the wrapper — it holds a
+      button, the native <code>input type="number"</code> (its own
+      spinners hidden), and a second button, all set off by hairlines,
+      and the whole thing lights up on <code>:focus-within</code> like
+      the other joined fields. The buttons are chrome: your JS
+      increments and decrements the value. Label the input, and give
+      each button an <code>aria-label</code> so the control is clear to
+      screen readers.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="margin-bottom: var(--k-space-4)">
+          <div class="k-stepper">
+            <button type="button" aria-label="Decrease">−</button>
+            <input type="number" value="1" aria-label="Quantity">
+            <button type="button" aria-label="Increase">+</button>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-stepper"&gt;
+  &lt;button type="button" aria-label="Decrease"&gt;−&lt;/button&gt;
+  &lt;input type="number" value="1" aria-label="Quantity"&gt;
+  &lt;button type="button" aria-label="Increase"&gt;+&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- the buttons are chrome; your JS does the +/− --&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="f-checks">
+      <h2>Checkboxes &amp; radios</h2>
+      <p>keel keeps the native controls and paints them with
+      <code>accent-color</code> — the check and the dot take the
+      accent token, and everything else (keyboard, forms, screen
+      readers) is untouched browser behavior. Group related options in
+      a <code>fieldset</code> with a <code>legend</code>; that's the
+      accessible name for the whole group. Base labels are block, so
+      for a control-plus-text row give the label an inline-flex — the
+      same pattern <a href="#c-switch">Switch</a> uses.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-form-row k-form-row--2" style="margin-bottom: var(--k-space-4)">
+          <fieldset>
+            <legend>Notify me about</legend>
+            <div class="k-stack k-stack--tight">
+              <label style="display: flex; align-items: center; gap: var(--k-space-2); margin: 0">
+                <input type="checkbox" checked> <span>Deploys</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: var(--k-space-2); margin: 0">
+                <input type="checkbox"> <span>Failed builds</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: var(--k-space-2); margin: 0">
+                <input type="checkbox"> <span>Weekly summary</span>
+              </label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Billing cycle</legend>
+            <div class="k-stack k-stack--tight">
+              <label style="display: flex; align-items: center; gap: var(--k-space-2); margin: 0">
+                <input type="radio" name="demo-cycle" checked> <span>Monthly</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: var(--k-space-2); margin: 0">
+                <input type="radio" name="demo-cycle"> <span>Yearly</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: var(--k-space-2); margin: 0">
+                <input type="radio" name="demo-cycle"> <span>Invoice me</span>
+              </label>
+            </div>
+          </fieldset>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Notify me about&lt;/legend&gt;
+  &lt;label style="display: flex; align-items: center; gap: var(--k-space-2)"&gt;
+    &lt;input type="checkbox" checked&gt; &lt;span&gt;Deploys&lt;/span&gt;
+  &lt;/label&gt;
+  …
+&lt;/fieldset&gt;
+
+&lt;fieldset&gt;
+  &lt;legend&gt;Billing cycle&lt;/legend&gt;
+  &lt;label style="display: flex; align-items: center; gap: var(--k-space-2)"&gt;
+    &lt;input type="radio" name="cycle" checked&gt; &lt;span&gt;Monthly&lt;/span&gt;
+  &lt;/label&gt;
+  …
+&lt;/fieldset&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-switch">
+      <h2>Switch</h2>
+      <p><code>.k-switch</code> restyles a real
+      <code>input type="checkbox"</code> into a toggle — it must be a
+      real checkbox, wrapped in a <code>label</code>, so keyboard,
+      forms, and screen readers all work untouched. Always pair it
+      with visible text; a toggle with no label is a guess.</p>
+      <p>Two size modifiers scale the track and knob together, on the
+      label: <code>.k-switch--small</code> and
+      <code>.k-switch--large</code>; the default needs no class.
+      <code>.k-switch--ok</code> turns the on state green (the
+      <code>--k-ok</code> token) instead of accent — for a toggle whose
+      "on" reads as active or healthy. It's just the
+      <code>--k-switch-on</code> knob, so you can set that property
+      inline to any color you need.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-stack k-stack--tight" style="margin-bottom: var(--k-space-4)">
+          <label class="k-switch" style="display: flex; align-items: center; gap: var(--k-space-3)">
+            <input type="checkbox" checked>
+            <span>Email me when a build finishes</span>
+          </label>
+          <label class="k-switch" style="display: flex; align-items: center; gap: var(--k-space-3)">
+            <input type="checkbox">
+            <span>Weekly digest</span>
+          </label>
+        </div>
+      </details>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-cluster" style="gap: var(--k-space-4); margin-bottom: var(--k-space-4)">
+          <label class="k-switch k-switch--small" style="display: flex; align-items: center; gap: var(--k-space-2)">
+            <input type="checkbox" checked>
+            <span>Small</span>
+          </label>
+          <label class="k-switch" style="display: flex; align-items: center; gap: var(--k-space-2)">
+            <input type="checkbox" checked>
+            <span>Default</span>
+          </label>
+          <label class="k-switch k-switch--large" style="display: flex; align-items: center; gap: var(--k-space-2)">
+            <input type="checkbox" checked>
+            <span>Large</span>
+          </label>
+          <label class="k-switch k-switch--ok" style="display: flex; align-items: center; gap: var(--k-space-2)">
+            <input type="checkbox" checked>
+            <span>Active <span class="k-text-faint">(--ok)</span></span>
+          </label>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;label class="k-switch" style="display: flex; align-items: center; gap: var(--k-space-3)"&gt;
+  &lt;input type="checkbox" checked&gt;
+  &lt;span&gt;Email me when a build finishes&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;label class="k-switch k-switch--small"&gt;…&lt;/label&gt;
+&lt;label class="k-switch"&gt;…&lt;/label&gt;               &lt;!-- default --&gt;
+&lt;label class="k-switch k-switch--large"&gt;…&lt;/label&gt;
+
+&lt;!-- green when on; or set the knob to any color --&gt;
+&lt;label class="k-switch k-switch--ok"&gt;…&lt;/label&gt;
+&lt;label class="k-switch" style="--k-switch-on: var(--k-warn)"&gt;…&lt;/label&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-range">
+      <h2>Range</h2>
+      <p>keel styles <em>all</em> <code>input type="range"</code>
+      elements from the base layer — no class needed. The thumb and
+      track are fully themed: an accent thumb with a surface ring, a
+      quiet pill track, and the usual soft accent ring on keyboard
+      focus. The track color is the <code>--k-range-track</code> knob,
+      so a tool (or you) can paint a gradient into it — the second
+      slider below does exactly that with one inline knob.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 24rem; margin-bottom: var(--k-space-4)">
+          <div class="k-field">
+            <label for="demo-range">Volume</label>
+            <input id="demo-range" type="range" min="0" max="100" value="60">
+          </div>
+          <div class="k-field">
+            <label for="demo-range-track">Warmth — a painted track</label>
+            <input id="demo-range-track" type="range" min="0" max="100" value="35"
+                   style="--k-range-track: linear-gradient(90deg, var(--k-accent-soft), var(--k-accent))">
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-field"&gt;
+  &lt;label for="volume"&gt;Volume&lt;/label&gt;
+  &lt;input id="volume" type="range" min="0" max="100" value="60"&gt;
+&lt;/div&gt;
+
+&lt;!-- the track is a knob — paint it --&gt;
+&lt;input type="range"
+       style="--k-range-track: linear-gradient(90deg, var(--k-accent-soft), var(--k-accent))"&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-file-input">
+      <h2>File input</h2>
+      <p>A plain <code>input type="file"</code> needs no class at all —
+      the base layer styles the native
+      <code>::file-selector-button</code> as a soft-accent button and
+      quiets the filename text beside it. It's still the real control:
+      keyboard, forms, and the picker dialog all untouched.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 24rem; margin-bottom: var(--k-space-4)">
+          <div class="k-field">
+            <label for="demo-file">Attachment</label>
+            <input id="demo-file" type="file">
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-field"&gt;
+  &lt;label for="attachment"&gt;Attachment&lt;/label&gt;
+  &lt;input id="attachment" type="file"&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="f-color">
+      <h2>Color</h2>
+      <p><code>input type="color"</code> is styled from the base layer
+      with no class — keel draws the well, its border, and its radius,
+      so the swatch sits comfortably next to other fields. Honestly:
+      the popup color wheel belongs to the OS and cannot be styled
+      from CSS. That's the trade for a real, accessible control for
+      free. When the design needs its own panel — shade area, rails,
+      saved swatches — that's the <a href="#c-picker">color picker</a>
+      below.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 24rem; margin-bottom: var(--k-space-4)">
+          <div class="k-field">
+            <label for="demo-color">Accent color</label>
+            <input id="demo-color" type="color" value="#4353e8">
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-field"&gt;
+  &lt;label for="accent"&gt;Accent color&lt;/label&gt;
+  &lt;input id="accent" type="color" value="#4353e8"&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-picker">
+      <h2>Color picker</h2>
+      <p>When the native color well isn't enough: <code>.k-swatch</code>
+      is a color-well button, and <code>.k-picker</code> is the panel it
+      opens — shade area, rails, and swatch rows, usually as a
+      <code>[popover]</code> via <code>popovertarget</code> so Esc and
+      light-dismiss come free. Honest split: the <em>chrome</em> here is
+      keel CSS; the shade math, positioning, and saved-color storage are
+      your JavaScript. The <a href="../design.html">design page</a> runs a
+      complete reference implementation (view its <code>play.js</code>) —
+      2D drag, hue rail, recents, saved colors, EyeDropper, and a
+      <code>.k-picker__field</code> format row that reads and writes
+      Hex, RGB, HSL, HSV, and CMYK.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 22rem; margin-bottom: var(--k-space-4)">
+          <div class="k-cluster" style="margin-bottom: var(--k-space-3)">
+            <button type="button" class="k-swatch" style="--k-swatch-color: #4353e8" aria-label="Color picker demo swatch"></button>
+            <code>#4353e8</code>
+          </div>
+          <div class="k-picker">
+            <div class="k-picker__area" style="--k-picker-hue: hsl(231 100% 50%)" aria-hidden="true">
+              <span class="k-picker__cursor" style="left: 78%; top: 22%; background: #4353e8"></span>
+            </div>
+            <div class="k-picker__row"><span class="k-picker__label">Saved</span>
+              <button class="k-btn k-btn--ghost k-btn--small" type="button">+ Add</button></div>
+            <div class="k-picker__swatches" aria-hidden="true">
+              <button type="button" style="background:#d64229"></button>
+              <button type="button" style="background:#d99a06"></button>
+              <button type="button" style="background:#2e8a5c"></button>
+              <button type="button" style="background:#4353e8"></button>
+              <button type="button" style="background:#7a4fbf"></button>
+            </div>
+          </div>
+        </div>
+      </details>
+      <p><small>This demo is static — without the <code>popover</code>
+      attribute a <code>.k-picker</code> renders inline, which is also
+      how you'd embed one permanently.</small></p>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;button class="k-swatch" popovertarget="picker"
+        style="--k-swatch-color: #4353e8"
+        aria-label="Choose a color"&gt;&lt;/button&gt;
+
+&lt;div class="k-picker" id="picker" popover&gt;
+  &lt;div class="k-picker__area"&gt;
+    &lt;span class="k-picker__cursor"&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;input type="range" min="0" max="360"&gt;   &lt;!-- hue rail --&gt;
+  &lt;div class="k-picker__row"&gt;
+    &lt;span class="k-picker__label"&gt;Saved&lt;/span&gt;
+    &lt;button class="k-btn k-btn--ghost k-btn--small"&gt;+ Add&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="k-picker__swatches"&gt;…&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- wiring (drag math, storage, anchoring) is your JS;
+     see the design page's play.js for a reference --&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="f-date">
+      <h2>Date &amp; time</h2>
+      <p>The native temporal inputs are styled from the base layer
+      with no class — the field itself looks like every other keel
+      field, and the calendar-picker indicator beside it is quieted
+      until you hover it. Honestly: the popup calendar and clock
+      belong to the browser and cannot be styled from CSS. Native
+      inputs are free, accessible, localized, and keyboard-complete —
+      use them by default.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-form-row k-form-row--3" style="margin-bottom: var(--k-space-4)">
+          <div class="k-field">
+            <label for="demo-date">Launch date</label>
+            <input id="demo-date" type="date" value="2026-07-14">
+          </div>
+          <div class="k-field">
+            <label for="demo-time">Doors open</label>
+            <input id="demo-time" type="time" value="18:30">
+          </div>
+          <div class="k-field">
+            <label for="demo-datetime">Rehearsal</label>
+            <input id="demo-datetime" type="datetime-local" value="2026-07-13T16:00">
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-field"&gt;
+  &lt;label for="launch"&gt;Launch date&lt;/label&gt;
+  &lt;input id="launch" type="date"&gt;
+&lt;/div&gt;
+&lt;input type="time"&gt;
+&lt;input type="datetime-local"&gt;</code></pre>
+      </details>
+
+      <h3>The keel date field</h3>
+      <p>For when the design must match: a readonly text input, a
+      ghost icon button, and a <code>.k-calendar</code> inside a
+      <code>.k-picker</code> popover. The chrome — field, button,
+      panel, month grid — is all keel CSS; filling the input when a
+      day is clicked is a few lines of your own JavaScript (the demo
+      below ships exactly that, inline). You own that small script —
+      and the localization and keyboard work the native input did for
+      free. Try it: the calendar button opens a real popover, and the
+      days write into the field.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 24rem; margin-bottom: var(--k-space-4)">
+          <div class="k-field">
+            <label for="demo-kdate">Event date</label>
+            <div class="k-input-group">
+              <input id="demo-kdate" type="text" readonly placeholder="Pick a date" aria-describedby="demo-kdate-hint">
+              <button type="button" class="k-btn k-btn--ghost k-btn--icon" popovertarget="demo-kdate-pop" aria-label="Open calendar">
+                <span class="k-icon k-icon--calendar" aria-hidden="true"></span>
+              </button>
+            </div>
+            <p class="k-field__hint" id="demo-kdate-hint">A designed picker — keel chrome, your wiring.</p>
+          </div>
+          <div class="k-picker" id="demo-kdate-pop" popover>
+            <div class="k-calendar" style="border: 0; padding: 0; margin: 0">
+              <div class="k-calendar__head"><span>August 2026</span></div>
+              <div class="k-calendar__grid">
+                <abbr title="Monday">Mo</abbr><abbr title="Tuesday">Tu</abbr><abbr title="Wednesday">We</abbr><abbr title="Thursday">Th</abbr><abbr title="Friday">Fr</abbr><abbr title="Saturday">Sa</abbr><abbr title="Sunday">Su</abbr>
+                <button class="k-calendar__day k-calendar__day--muted" type="button" disabled>27</button>
+                <button class="k-calendar__day k-calendar__day--muted" type="button" disabled>28</button>
+                <button class="k-calendar__day k-calendar__day--muted" type="button" disabled>29</button>
+                <button class="k-calendar__day k-calendar__day--muted" type="button" disabled>30</button>
+                <button class="k-calendar__day k-calendar__day--muted" type="button" disabled>31</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-01">1</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-02">2</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-03">3</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-04">4</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-05">5</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-06">6</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-07">7</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-08">8</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-09">9</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-10">10</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-11">11</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-12">12</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-13">13</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-14" aria-current="date">14</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-15">15</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-16">16</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-17">17</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-18">18</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-19">19</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-20">20</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-21">21</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-22">22</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-23">23</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-24">24</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-25">25</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-26">26</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-27">27</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-28">28</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-29">29</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-30">30</button>
+                <button class="k-calendar__day" type="button" data-date="2026-08-31">31</button>
+                <button class="k-calendar__day k-calendar__day--muted" type="button" disabled>1</button>
+                <button class="k-calendar__day k-calendar__day--muted" type="button" disabled>2</button>
+                <button class="k-calendar__day k-calendar__day--muted" type="button" disabled>3</button>
+                <button class="k-calendar__day k-calendar__day--muted" type="button" disabled>4</button>
+                <button class="k-calendar__day k-calendar__day--muted" type="button" disabled>5</button>
+                <button class="k-calendar__day k-calendar__day--muted" type="button" disabled>6</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+      <script>
+        // Demo wiring for this page only — keel ships CSS, not this script.
+        (function () {
+          var input = document.getElementById('demo-kdate');
+          var pop = document.getElementById('demo-kdate-pop');
+          pop.querySelectorAll('.k-calendar__day[data-date]').forEach(function (day) {
+            day.addEventListener('click', function () {
+              input.value = day.dataset.date;
+              pop.hidePopover();
+            });
+          });
+        })();
+      </script>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-field"&gt;
+  &lt;label for="event-date"&gt;Event date&lt;/label&gt;
+  &lt;div class="k-input-group"&gt;
+    &lt;input id="event-date" type="text" readonly placeholder="Pick a date"&gt;
+    &lt;button class="k-btn k-btn--ghost k-btn--icon"
+            popovertarget="date-pop" aria-label="Open calendar"&gt;
+      &lt;span class="k-icon k-icon--calendar" aria-hidden="true"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="k-picker" id="date-pop" popover&gt;
+  &lt;div class="k-calendar"&gt;
+    &lt;div class="k-calendar__head"&gt;&lt;span&gt;August 2026&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="k-calendar__grid"&gt;
+      &lt;abbr title="Monday"&gt;Mo&lt;/abbr&gt; …
+      &lt;button class="k-calendar__day" data-date="2026-08-14"&gt;14&lt;/button&gt; …
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  // your wiring — day buttons fill the input and close the popover
+  pop.querySelectorAll('.k-calendar__day[data-date]').forEach(day =&gt;
+    day.addEventListener('click', () =&gt; {
+      input.value = day.dataset.date;
+      pop.hidePopover();
+    }));
+&lt;/script&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="f-sizes">
+      <h2>Sizes</h2>
+      <p>Two size modifiers, on the control itself:
+      <code>.k-input--small</code> tightens the padding and drops to
+      the small type step, <code>.k-input--large</code> loosens both.
+      The default needs no class. They work on any control the base
+      layer styles — inputs, selects, textareas.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 24rem; margin-bottom: var(--k-space-4)">
+          <div class="k-field">
+            <label for="demo-size-s">Small</label>
+            <input id="demo-size-s" type="text" class="k-input--small" placeholder="k-input--small">
+          </div>
+          <div class="k-field">
+            <label for="demo-size-m">Default</label>
+            <input id="demo-size-m" type="text" placeholder="no class">
+          </div>
+          <div class="k-field">
+            <label for="demo-size-l">Large</label>
+            <input id="demo-size-l" type="text" class="k-input--large" placeholder="k-input--large">
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;input type="text" class="k-input--small"&gt;
+&lt;input type="text"&gt;                        &lt;!-- default --&gt;
+&lt;input type="text" class="k-input--large"&gt;
+
+&lt;!-- works on any control --&gt;
+&lt;select class="k-input--small"&gt;…&lt;/select&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="f-states">
+      <h2>States</h2>
+      <p>All attribute-driven, no classes. <code>disabled</code>
+      controls sink to the second surface, fade, and stop responding
+      to the cursor. <code>readonly</code> inputs get the same quiet surface
+      with a <em>dashed</em> border — visibly "you can read this, not
+      edit it", and still focusable and copyable. For required fields,
+      <code>.k-field--required</code> paints a danger asterisk after
+      the label — but that's only the marker: the real work is the
+      HTML <code>required</code> attribute, which drives native
+      validation. Use both together.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-form-row k-form-row--2" style="margin-bottom: var(--k-space-4)">
+          <div class="k-field">
+            <label for="demo-disabled">Disabled input</label>
+            <input id="demo-disabled" type="text" value="Locked while the build runs" disabled>
+          </div>
+          <div class="k-field">
+            <label for="demo-disabled-select">Disabled select</label>
+            <select id="demo-disabled-select" disabled>
+              <option>Studio</option>
+            </select>
+          </div>
+          <div class="k-field">
+            <label for="demo-readonly">Readonly</label>
+            <input id="demo-readonly" type="text" value="KEEL-2041-88" readonly aria-describedby="demo-readonly-hint">
+            <p class="k-field__hint" id="demo-readonly-hint">Dashed border: readable, copyable, not editable.</p>
+          </div>
+          <div class="k-field k-field--required">
+            <label for="demo-required">Company</label>
+            <input id="demo-required" type="text" required placeholder="Required — the attribute does the real work">
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;input type="text" disabled&gt;
+&lt;select disabled&gt;…&lt;/select&gt;
+&lt;input type="text" value="KEEL-2041-88" readonly&gt;
+
+&lt;!-- the class draws the asterisk; the attribute enforces it --&gt;
+&lt;div class="k-field k-field--required"&gt;
+  &lt;label for="company"&gt;Company&lt;/label&gt;
+  &lt;input id="company" type="text" required&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+
+      <h3 id="f-states-matrix">The full input matrix</h3>
+      <p>Every condition a text input can be in, side by side. Four of
+      these are real — the disabled, readonly, invalid, and valid
+      fields below carry the actual attributes and values. Two belong
+      to the browser and can't be forced from a stylesheet: hover it
+      yourself to feel the border deepen, and the "focused" field is a
+      static fake wearing the real ring styles inline, labeled
+      <em>(simulated)</em>. And one honesty note on validation: keel
+      styles <code>:user-invalid</code> and <code>:user-valid</code>,
+      which fire only <em>after you interact</em> — so the two
+      prefilled fields sit quiet until you touch them.
+      <strong>Click into each, type (or don't), then tab away</strong>
+      and watch the border go danger or ok.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-form-row k-form-row--2" style="margin-bottom: var(--k-space-4)">
+          <div class="k-field">
+            <label for="demo-st-resting">Resting</label>
+            <input id="demo-st-resting" type="text" placeholder="Nothing special happening" aria-describedby="demo-st-resting-hint">
+            <p class="k-field__hint" id="demo-st-resting-hint">Surface, hairline border, soft inset.</p>
+          </div>
+          <div class="k-field">
+            <label for="demo-st-hover">Hover <span class="k-text-faint">(hover to feel)</span></label>
+            <input id="demo-st-hover" type="text" placeholder="Move the pointer over me" aria-describedby="demo-st-hover-hint">
+            <p class="k-field__hint" id="demo-st-hover-hint">Real state — the border deepens to <code>--k-text-faint</code>.</p>
+          </div>
+          <div class="k-field">
+            <label for="demo-st-focus">Focused <span class="k-text-faint">(simulated)</span></label>
+            <input id="demo-st-focus" type="text" placeholder="A static picture of focus" aria-describedby="demo-st-focus-hint"
+                   style="border-color: var(--k-accent); box-shadow: 0 0 0 3px var(--k-accent-trans-20)">
+            <p class="k-field__hint" id="demo-st-focus-hint">The real ring styles, worn inline — <code>:focus-visible</code> can't be forced. Click any field for the real thing.</p>
+          </div>
+          <div class="k-field">
+            <label for="demo-st-disabled">Disabled <span class="k-text-faint">(real)</span></label>
+            <input id="demo-st-disabled" type="text" value="Locked" disabled aria-describedby="demo-st-disabled-hint">
+            <p class="k-field__hint" id="demo-st-disabled-hint">Second surface, faded, cursor shows not-allowed.</p>
+          </div>
+          <div class="k-field">
+            <label for="demo-st-readonly">Readonly <span class="k-text-faint">(real)</span></label>
+            <input id="demo-st-readonly" type="text" value="KEEL-2041-88" readonly aria-describedby="demo-st-readonly-hint">
+            <p class="k-field__hint" id="demo-st-readonly-hint">Dashed border — readable, copyable, not editable.</p>
+          </div>
+          <div class="k-field">
+            <label for="demo-st-invalid">Invalid <span class="k-text-faint">(real — type, then blur)</span></label>
+            <input id="demo-st-invalid" type="email" required value="not-an-email" aria-describedby="demo-st-invalid-hint">
+            <p class="k-field__hint" id="demo-st-invalid-hint">The value is already bad, but <code>:user-invalid</code> waits for you — edit it, tab away, and the border goes danger.</p>
+          </div>
+          <div class="k-field">
+            <label for="demo-st-valid">Valid <span class="k-text-faint">(real — type, then blur)</span></label>
+            <input id="demo-st-valid" type="email" required value="ada@example.com" aria-describedby="demo-st-valid-hint">
+            <p class="k-field__hint" id="demo-st-valid-hint">Same rule: <code>:user-valid</code> fires after interaction. Touch it, tab away, and the border goes ok.</p>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;input type="text"&gt;                    &lt;!-- resting; hover and focus need no markup --&gt;
+&lt;input type="text" disabled&gt;
+&lt;input type="text" value="KEEL-2041-88" readonly&gt;
+
+&lt;!-- :user-invalid / :user-valid fire only after interaction --&gt;
+&lt;input type="email" required value="not-an-email"&gt;      &lt;!-- danger after blur --&gt;
+&lt;input type="email" required value="ada@example.com"&gt;   &lt;!-- ok after blur --&gt;
+
+&lt;!-- the "focused" cell above is simulated for display —
+     the real ring is applied by :focus-visible:
+     border-color: var(--k-accent);
+     box-shadow: 0 0 0 3px var(--k-accent-trans-20) --&gt;</code></pre>
+      </details>
+
+      <h3 id="f-switch-states">Switch states</h3>
+      <p>The <a href="#c-switch">switch</a> is a real checkbox, so it
+      carries the same conditions: on, off, and <code>disabled</code>
+      are all real below — a disabled switch keeps its track color and
+      simply fades. Keyboard focus draws the accent ring around the
+      pill; that's browser-managed, so the last row is a static fake
+      wearing the ring inline, labeled <em>(simulated)</em> — Tab to
+      any real switch for the genuine article.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div class="k-stack k-stack--tight" style="margin-bottom: var(--k-space-4)">
+          <label class="k-switch" style="display: flex; align-items: center; gap: var(--k-space-3)">
+            <input type="checkbox" checked>
+            <span>On</span>
+          </label>
+          <label class="k-switch" style="display: flex; align-items: center; gap: var(--k-space-3)">
+            <input type="checkbox">
+            <span>Off</span>
+          </label>
+          <label class="k-switch" style="display: flex; align-items: center; gap: var(--k-space-3)">
+            <input type="checkbox" checked disabled>
+            <span>Disabled <span class="k-text-faint">(real)</span></span>
+          </label>
+          <label class="k-switch" style="display: flex; align-items: center; gap: var(--k-space-3)">
+            <input type="checkbox" checked tabindex="-1" style="box-shadow: 0 0 0 3px var(--k-accent-trans-20)">
+            <span>Focus ring <span class="k-text-faint">(simulated)</span></span>
+          </label>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;label class="k-switch" style="display: flex; align-items: center; gap: var(--k-space-3)"&gt;
+  &lt;input type="checkbox" checked&gt;  &lt;!-- on --&gt;
+  &lt;span&gt;On&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;input type="checkbox"&gt;                   &lt;!-- off --&gt;
+&lt;input type="checkbox" checked disabled&gt;  &lt;!-- disabled: fades, stops taking input --&gt;
+
+&lt;!-- the focus ring is :focus-visible — Tab to a switch to see it:
+     box-shadow: 0 0 0 3px var(--k-accent-trans-20) --&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="c-form-validation">
+      <h2>Validation</h2>
+      <p>keel styles <code>:user-invalid</code> and
+      <code>:user-valid</code> natively — the border goes danger or ok
+      only <em>after</em> the user has interacted with the field, never
+      on page load. Add a <code>.k-field__error</code> inside a
+      <code>.k-field</code> and it stays hidden until the field is
+      actually invalid; <code>:has()</code> does the showing, no
+      script. The field's label turns danger at the same moment. Try
+      it: type something that isn't an email below, then tab away.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 24rem; margin-bottom: var(--k-space-4)">
+          <div class="k-field">
+            <label for="demo-val-email">Email</label>
+            <input id="demo-val-email" type="email" required placeholder="you@example.com" aria-describedby="demo-val-error">
+            <p class="k-field__error" id="demo-val-error">Enter a valid email address.</p>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-field"&gt;
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input id="email" type="email" required aria-describedby="email-error"&gt;
+  &lt;p class="k-field__error" id="email-error"&gt;Enter a valid email address.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="f-layout">
+      <h2>Layout</h2>
+      <p>Form rows: <code>.k-form-row</code> is a grid that stacks on
+      mobile; add <code>--2</code> or <code>--3</code> and it splits
+      into columns from the <code>sm</code> breakpoint up. Anything
+      outside a row is simply full width. Below, a realistic address
+      form: a two-column row, a three-column row, and a full-width
+      message.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 34rem; margin-bottom: var(--k-space-4)">
+          <div class="k-form-row k-form-row--2">
+            <div class="k-field">
+              <label for="demo-lay-name">Name</label>
+              <input id="demo-lay-name" type="text" placeholder="Ada Lovelace">
+            </div>
+            <div class="k-field">
+              <label for="demo-lay-email">Email</label>
+              <input id="demo-lay-email" type="email" placeholder="you@example.com">
+            </div>
+          </div>
+          <div class="k-form-row k-form-row--3">
+            <div class="k-field">
+              <label for="demo-lay-city">City</label>
+              <input id="demo-lay-city" type="text" placeholder="Ormoc">
+            </div>
+            <div class="k-field">
+              <label for="demo-lay-region">Region</label>
+              <input id="demo-lay-region" type="text" placeholder="Leyte">
+            </div>
+            <div class="k-field">
+              <label for="demo-lay-postal">Postal</label>
+              <input id="demo-lay-postal" type="text" placeholder="6541">
+            </div>
+          </div>
+          <div class="k-field">
+            <label for="demo-lay-message">Message</label>
+            <textarea id="demo-lay-message" placeholder="Anything the courier should know…"></textarea>
+          </div>
+        </div>
+      </details>
+      <p><code>.k-field--inline</code> lays the label and control on
+      one line — handy for compact settings rows and filters.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 24rem; margin-bottom: var(--k-space-4)">
+          <div class="k-field k-field--inline">
+            <label for="demo-lay-sort">Sort by</label>
+            <select id="demo-lay-sort">
+              <option>Newest</option>
+              <option>Oldest</option>
+              <option>Name</option>
+            </select>
+          </div>
+        </div>
+      </details>
+      <p><code>.k-field--split</code> is the settings-page row: label
+      (and hint) on the start side, control on the end side, on one line
+      from 640px up — stacking below that, same as any other field.</p>
+      <details class="k-demo" open>
+        <summary>Live demo</summary>
+        <div style="max-width: 30rem; margin-bottom: var(--k-space-4)">
+          <div class="k-field k-field--split">
+            <label for="demo-lay-notify">Email notifications</label>
+            <p class="k-field__hint">Ship updates and security alerts.</p>
+            <label class="k-switch" style="justify-self: end">
+              <input id="demo-lay-notify" type="checkbox" checked>
+            </label>
+          </div>
+        </div>
+      </details>
+      <p>For an input joined to a button — search bars, newsletter
+      signups — use <code>.k-input-group</code>, documented with the
+      other action patterns on
+      <a href="components-actions.html">Actions</a>.</p>
+      <details>
+        <summary>Markup</summary>
+        <pre><code>&lt;div class="k-form-row k-form-row--2"&gt;
+  &lt;div class="k-field"&gt;…name…&lt;/div&gt;
+  &lt;div class="k-field"&gt;…email…&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="k-form-row k-form-row--3"&gt;
+  &lt;div class="k-field"&gt;…city…&lt;/div&gt;
+  &lt;div class="k-field"&gt;…region…&lt;/div&gt;
+  &lt;div class="k-field"&gt;…postal…&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="k-field"&gt;…full-width message…&lt;/div&gt;
+
+&lt;div class="k-field k-field--inline"&gt;
+  &lt;label for="sort"&gt;Sort by&lt;/label&gt;
+  &lt;select id="sort"&gt;…&lt;/select&gt;
+&lt;/div&gt;</code></pre>
+      </details>
+    </section>
+
+      </main>
+
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

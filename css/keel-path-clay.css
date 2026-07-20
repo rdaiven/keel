@@ -1,0 +1,53 @@
+/* keel path: clay — claymorphism.
+   A PATH is a continuation of keel, not part of the install: link it
+   after keel.css only if your design is heading this way. Inflated,
+   soft-shadowed surfaces with generous corners — soft and readable,
+   because text contrast is untouched.
+
+     <link rel="stylesheet" href="keel.css">
+     <link rel="stylesheet" href="keel-path-clay.css">
+
+   Everything derives from your tokens, so clay follows your design
+   system. Styles live in @layer path — above keel's layers, below
+   your own unlayered CSS, which still always wins. */
+
+@layer path {
+  :root {
+    --k-radius: 26px;
+
+    /* the clay look is three shadows: a soft colored drop, a bright
+       inner top edge, a shaded inner bottom — all from your seeds. Big
+       and soft so the surface reads as inflated, not just raised. */
+    --k-clay-drop: 0 24px 44px -16px color-mix(in oklab, var(--k-accent), transparent 60%);
+    --k-clay-top: inset 0 3px 4px color-mix(in oklab, white, var(--k-surface) 12%);
+    --k-clay-bottom: inset 0 -12px 20px -8px color-mix(in oklab, var(--k-accent), transparent 74%);
+
+    --k-shadow-s: var(--k-clay-drop);
+    --k-shadow: var(--k-clay-drop), var(--k-clay-top), var(--k-clay-bottom);
+    --k-shadow-l: 0 34px 60px -20px color-mix(in oklab, var(--k-accent), transparent 54%),
+                  var(--k-clay-top), var(--k-clay-bottom);
+  }
+
+  /* surfaces puff: soft fill, no hairline borders */
+  .k-card, .k-panel, .k-alert, .k-stat, dialog, .k-menu, .k-popover, .k-toast {
+    border-color: transparent;
+    background: color-mix(in oklab, var(--k-surface), var(--k-accent) 4%);
+    box-shadow: var(--k-shadow);
+  }
+  .k-card--hover:hover { translate: 0 -3px; box-shadow: var(--k-shadow-l); }
+
+  /* controls read as pressable clay */
+  .k-btn {
+    border-radius: 999px;
+    box-shadow: var(--k-clay-drop), var(--k-clay-top);
+  }
+  .k-btn:active { box-shadow: var(--k-clay-bottom); }
+
+  input, select, textarea {
+    border-color: transparent;
+    background: color-mix(in oklab, var(--k-surface), var(--k-accent) 4%);
+    box-shadow: var(--k-clay-bottom);
+  }
+
+  .k-badge { border-radius: 999px; }
+}

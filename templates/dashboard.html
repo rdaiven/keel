@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beacon — revenue &amp; ops dashboard</title>
+<meta name="description" content="A fictional analytics dashboard built entirely with keel — stat cards, a data table, an activity timeline, a stacked sidebar. The whole cool-indigo admin theme is one tokens block in the head of this page.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The theme. This block is the entire difference between this page
+     and keel's defaults — every derived shade follows from it. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(228 24% 97%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(228 24% 95.5%);
+      --k-border: hsl(228 18% 90%);
+      --k-border-strong: hsl(228 16% 81%);
+      --k-text: hsl(228 32% 15%);
+      --k-text-soft: hsl(228 12% 42%);
+      --k-text-faint: hsl(228 10% 55%);
+      --k-accent: hsl(246 74% 59%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(190 88% 42%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-font-display: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      --k-display-weight: 750;
+      --k-tracking: -0.01em;
+      --k-radius: 9px;
+      --k-radius-l: 13px;
+      --k-ok: hsl(150 62% 38%);
+      --k-warn: hsl(35 92% 46%);
+      --k-danger: hsl(4 74% 54%);
+    }
+  }
+
+  /* Page-local layout only — the app shell. Everything inside is keel. */
+  .dash { display: grid; grid-template-columns: 15.5rem minmax(0, 1fr); min-block-size: 100vh; }
+  .dash__side {
+    position: sticky; inset-block-start: 0; align-self: start;
+    block-size: 100vh; overflow-y: auto;
+    display: flex; flex-direction: column; gap: var(--k-space-4);
+    padding: var(--k-space-4);
+    background: var(--k-surface);
+    border-inline-end: 1px solid var(--k-border);
+  }
+  .dash__brand {
+    display: flex; align-items: center; gap: var(--k-space-2);
+    font-family: var(--k-font-display); font-weight: 750;
+    font-size: var(--k-text-l); letter-spacing: -0.02em;
+    color: var(--k-text); text-decoration: none;
+    padding-inline: var(--k-space-2);
+  }
+  .dash__brand .k-icon { color: var(--k-accent); font-size: 1.35rem; }
+  .dash__side-foot { margin-block-start: auto; }
+  .dash__main { min-inline-size: 0; }
+  .dash__bar {
+    position: sticky; inset-block-start: 0; z-index: 10;
+    display: flex; align-items: center; gap: var(--k-space-3);
+    padding: var(--k-space-3) var(--k-space-5);
+    border-block-end: 1px solid var(--k-border);
+    background: color-mix(in oklab, var(--k-surface) 82%, transparent);
+    backdrop-filter: blur(10px);
+  }
+  .dash__search { flex: 1; min-inline-size: 0; max-inline-size: 26rem; }
+  .dash__search input { inline-size: 100%; }
+  .dash__body { padding: var(--k-space-5); display: grid; gap: var(--k-space-5); }
+  /* grid items must be allowed to shrink, so a wide table scrolls
+     inside its card instead of stretching the whole shell */
+  .dash__body > * { min-inline-size: 0; }
+  .dash-stats { display: grid; gap: var(--k-space-4);
+                grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); }
+  .dash-split { display: grid; gap: var(--k-space-5); grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
+  .dash-chart { inline-size: 100%; block-size: auto; display: block; }
+  .dash-menu-surface {
+    background: var(--k-surface); border: 1px solid var(--k-border);
+    border-radius: var(--k-radius); box-shadow: var(--k-shadow-l);
+    padding: var(--k-space-1); min-inline-size: 13rem;
+  }
+  /* stat cards — a label + corner icon chip, a big value, a soft delta pill */
+  .dash-stat { display: grid; gap: var(--k-space-2); align-content: start; }
+  .dash-stat__top { display: flex; align-items: center; justify-content: space-between; gap: var(--k-space-2); }
+  .dash-stat__top .k-stat__label { margin: 0; }
+  .dash-stat__icon {
+    display: grid; place-items: center; flex: none;
+    inline-size: 2rem; block-size: 2rem; border-radius: var(--k-radius);
+    background: var(--k-accent-soft); color: var(--k-accent); font-size: 0.95rem;
+  }
+  .dash-delta {
+    display: inline-flex; align-items: center; gap: 0.3em; inline-size: fit-content;
+    font-size: var(--k-text-xs); font-weight: 650;
+    padding: 0.15em 0.55em; border-radius: 999px;
+  }
+  .dash-delta .k-icon { font-size: 0.95em; }
+  .dash-delta--up { background: color-mix(in oklab, var(--k-ok) 15%, var(--k-surface)); color: var(--k-ok); }
+  .dash-delta--down { background: color-mix(in oklab, var(--k-danger) 15%, var(--k-surface)); color: var(--k-danger); }
+  .dash-delta__meta { color: var(--k-text-faint); font-weight: 500; margin-inline-start: 0.35em; }
+  /* a proper in-shell footer — slim, aligned to the main column */
+  .dash-foot {
+    display: flex; flex-wrap: wrap; gap: var(--k-space-2);
+    align-items: center; justify-content: space-between;
+    padding: var(--k-space-4) var(--k-space-5);
+    margin-block-start: auto;
+    border-block-start: 1px solid var(--k-border);
+    color: var(--k-text-faint); font-size: var(--k-text-xs);
+  }
+  .dash-foot a { color: var(--k-text-soft); }
+  .dash__main { display: flex; flex-direction: column; }
+  .dash__body { flex: 1; }
+  @media (max-width: 60rem) {
+    .dash { grid-template-columns: 1fr; }
+    .dash__side { position: static; block-size: auto; }
+    .dash-split { grid-template-columns: 1fr; }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is
+    the whole theme. <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<div class="dash">
+
+  <!-- Sidebar -->
+  <aside class="dash__side">
+    <a class="dash__brand" href="#"><span class="k-icon k-icon--activity" aria-hidden="true"></span> Beacon</a>
+
+    <nav class="k-nav k-nav--stack" aria-label="Dashboard">
+      <ul class="k-nav__links">
+        <li><a href="#" aria-current="page"><span class="k-icon k-icon--home" aria-hidden="true"></span> Overview</a></li>
+        <li><a href="#"><span class="k-icon k-icon--bar-chart" aria-hidden="true"></span> Analytics</a></li>
+        <li><a href="#"><span class="k-icon k-icon--credit-card" aria-hidden="true"></span> Billing</a></li>
+        <li><a href="#"><span class="k-icon k-icon--user" aria-hidden="true"></span> Customers</a></li>
+        <li><a href="#"><span class="k-icon k-icon--file" aria-hidden="true"></span> Invoices</a></li>
+      </ul>
+      <p class="k-uppercase k-text-faint k-text-xs" style="padding-inline: var(--k-space-3); margin-block: var(--k-space-3) var(--k-space-1)">Workspace</p>
+      <ul class="k-nav__links">
+        <li><a href="#"><span class="k-icon k-icon--sliders" aria-hidden="true"></span> Settings</a></li>
+        <li><a href="#"><span class="k-icon k-icon--bell" aria-hidden="true"></span> Alerts <span class="k-badge k-badge--solid" style="margin-inline-start: auto">3</span></a></li>
+      </ul>
+    </nav>
+
+    <div class="dash__side-foot">
+      <div class="k-card k-card--pad-sm k-media k-media--center" style="gap: var(--k-space-2)">
+        <span class="k-avatar k-avatar--small" aria-hidden="true">DR</span>
+        <div class="k-media__body" style="min-inline-size: 0">
+          <strong class="k-text-s" style="display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">Daiven Reyes</strong>
+          <span class="k-text-xs k-text-faint">Owner</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="dash__main" id="main" role="main">
+
+    <div class="dash__bar">
+      <label class="dash__search">
+        <span class="k-visually-hidden">Search</span>
+        <input type="search" placeholder="Search customers, invoices…" aria-label="Search">
+      </label>
+
+      <button class="k-btn k-btn--small" type="button" style="margin-inline-start: auto">
+        <span class="k-icon k-icon--plus" aria-hidden="true"></span> New invoice
+      </button>
+
+      <details class="k-dropdown">
+        <summary class="k-btn k-btn--ghost k-btn--icon" aria-label="Notifications">
+          <span class="k-icon k-icon--bell" aria-hidden="true"></span>
+        </summary>
+        <div class="dash-menu-surface" style="min-inline-size: 17rem">
+          <ul class="k-menu">
+            <li class="k-menu__label">Notifications</li>
+            <li><button type="button"><span class="k-icon k-icon--check-circle" aria-hidden="true"></span> Invoice #2041 paid <span class="k-menu__hint">2m</span></button></li>
+            <li><button type="button"><span class="k-icon k-icon--user" aria-hidden="true"></span> New customer: Harbor Co <span class="k-menu__hint">1h</span></button></li>
+            <li><button type="button" class="is-danger"><span class="k-icon k-icon--warn" aria-hidden="true"></span> Payment failed: Kite LLC <span class="k-menu__hint">3h</span></button></li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="k-dropdown">
+        <summary class="k-btn k-btn--ghost">
+          <span class="k-avatar k-avatar--small" aria-hidden="true">DR</span> <span class="k-icon k-icon--chevron-down" aria-hidden="true"></span>
+        </summary>
+        <div class="dash-menu-surface">
+          <ul class="k-menu">
+            <li><button type="button"><span class="k-icon k-icon--user" aria-hidden="true"></span> Profile</button></li>
+            <li><button type="button"><span class="k-icon k-icon--sliders" aria-hidden="true"></span> Settings <span class="k-menu__hint">⌘,</span></button></li>
+            <li><hr></li>
+            <li><button type="button" class="is-danger"><span class="k-icon k-icon--logout" aria-hidden="true"></span> Sign out</button></li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="dash__body">
+
+      <!-- Page header -->
+      <div class="k-cluster" style="justify-content: space-between; align-items: flex-end">
+        <div>
+          <nav class="k-breadcrumb" aria-label="Breadcrumb" style="margin-bottom: var(--k-space-1)">
+            <li><a href="#">Workspace</a></li>
+            <li aria-current="page">Overview</li>
+          </nav>
+          <h1 style="margin: 0">Overview</h1>
+        </div>
+        <div class="k-cluster">
+          <div class="k-unit" style="inline-size: auto">
+            <span class="k-unit__affix"><span class="k-icon k-icon--calendar" aria-hidden="true"></span></span>
+            <select aria-label="Date range">
+              <option>Last 7 days</option>
+              <option selected>Last 30 days</option>
+              <option>This quarter</option>
+              <option>Year to date</option>
+            </select>
+          </div>
+          <button class="k-btn"><span class="k-icon k-icon--download" aria-hidden="true"></span> Export</button>
+        </div>
+      </div>
+
+      <!-- Stat row -->
+      <div class="dash-stats">
+        <div class="k-card dash-stat">
+          <div class="dash-stat__top">
+            <span class="k-stat__label">Revenue</span>
+            <span class="dash-stat__icon"><span class="k-icon k-icon--credit-card" aria-hidden="true"></span></span>
+          </div>
+          <span class="k-stat__value">$48.2k</span>
+          <div class="k-cluster" style="gap: var(--k-space-2)">
+            <span class="dash-delta dash-delta--up"><span class="k-icon k-icon--trending-up" aria-hidden="true"></span> 12.4%</span>
+            <span class="k-text-xs k-text-faint">vs last month</span>
+          </div>
+        </div>
+        <div class="k-card dash-stat">
+          <div class="dash-stat__top">
+            <span class="k-stat__label">Active customers</span>
+            <span class="dash-stat__icon"><span class="k-icon k-icon--user" aria-hidden="true"></span></span>
+          </div>
+          <span class="k-stat__value">1,284</span>
+          <div class="k-cluster" style="gap: var(--k-space-2)">
+            <span class="dash-delta dash-delta--up"><span class="k-icon k-icon--trending-up" aria-hidden="true"></span> 3.1%</span>
+            <span class="k-text-xs k-text-faint">+38 this week</span>
+          </div>
+        </div>
+        <div class="k-card dash-stat">
+          <div class="dash-stat__top">
+            <span class="k-stat__label">Churn</span>
+            <span class="dash-stat__icon"><span class="k-icon k-icon--activity" aria-hidden="true"></span></span>
+          </div>
+          <span class="k-stat__value">2.4%</span>
+          <div class="k-cluster" style="gap: var(--k-space-2)">
+            <span class="dash-delta dash-delta--down"><span class="k-icon k-icon--trending-down" aria-hidden="true"></span> 0.6%</span>
+            <span class="k-text-xs k-text-faint">improving</span>
+          </div>
+        </div>
+        <div class="k-card dash-stat">
+          <div class="dash-stat__top">
+            <span class="k-stat__label">Avg. invoice</span>
+            <span class="dash-stat__icon"><span class="k-icon k-icon--bar-chart" aria-hidden="true"></span></span>
+          </div>
+          <span class="k-stat__value">$312</span>
+          <div class="k-cluster" style="gap: var(--k-space-2)">
+            <span class="dash-delta dash-delta--up"><span class="k-icon k-icon--trending-up" aria-hidden="true"></span> 5.0%</span>
+            <span class="k-text-xs k-text-faint">vs last month</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart + side -->
+      <div class="dash-split">
+
+        <!-- Revenue chart -->
+        <section class="k-card">
+          <div class="k-cluster" style="justify-content: space-between; margin-bottom: var(--k-space-4)">
+            <div>
+              <p class="k-card__kicker">Revenue</p>
+              <strong style="font-size: var(--k-text-xl)">$48,204</strong>
+            </div>
+            <div class="k-btn-group" role="group" aria-label="Granularity">
+              <button class="k-btn k-btn--ghost k-btn--small" type="button" aria-pressed="false">Day</button>
+              <button class="k-btn k-btn--ghost k-btn--small" type="button" aria-pressed="true">Week</button>
+              <button class="k-btn k-btn--ghost k-btn--small" type="button" aria-pressed="false">Month</button>
+            </div>
+          </div>
+          <svg class="dash-chart" viewBox="0 0 640 220" role="img" aria-label="Revenue trend rising over the last twelve weeks">
+            <defs>
+              <linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--k-accent)" stop-opacity="0.28"/>
+                <stop offset="1" stop-color="var(--k-accent)" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <!-- gridlines -->
+            <g stroke="var(--k-border)" stroke-width="1">
+              <line x1="0" y1="40" x2="640" y2="40"/>
+              <line x1="0" y1="90" x2="640" y2="90"/>
+              <line x1="0" y1="140" x2="640" y2="140"/>
+              <line x1="0" y1="190" x2="640" y2="190"/>
+            </g>
+            <!-- area + line -->
+            <path fill="url(#fill)" d="M0 170 L58 158 L116 165 L174 140 L232 148 L290 120 L348 128 L406 96 L464 104 L522 74 L580 82 L640 52 L640 190 L0 190 Z"/>
+            <path fill="none" stroke="var(--k-accent)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"
+                  d="M0 170 L58 158 L116 165 L174 140 L232 148 L290 120 L348 128 L406 96 L464 104 L522 74 L580 82 L640 52"/>
+            <circle cx="640" cy="52" r="4" fill="var(--k-accent)"/>
+          </svg>
+          <div class="k-cluster k-text-xs k-text-faint" style="justify-content: space-between; margin-top: var(--k-space-2)">
+            <span>Wk 1</span><span>Wk 4</span><span>Wk 8</span><span>Wk 12</span>
+          </div>
+        </section>
+
+        <!-- Activity + goals -->
+        <div class="k-flow">
+          <section class="k-card">
+            <p class="k-card__kicker">Recent activity</p>
+            <ol class="k-timeline" style="margin-bottom: 0">
+              <li class="is-ok">
+                <time class="k-timeline__time">09:41</time>
+                <p style="margin:0">Invoice <strong>#2041</strong> paid — $1,240</p>
+              </li>
+              <li>
+                <time class="k-timeline__time">08:02</time>
+                <p style="margin:0">Harbor Co upgraded to <strong>Fleet</strong></p>
+              </li>
+              <li class="is-warn">
+                <time class="k-timeline__time">Yesterday</time>
+                <p style="margin:0">Card expiring soon — Daiven Woodworks</p>
+              </li>
+              <li class="is-muted">
+                <time class="k-timeline__time">Mon</time>
+                <p style="margin:0">Quarterly report generated</p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="k-card">
+            <div class="k-cluster" style="justify-content: space-between; margin-bottom: var(--k-space-3)">
+              <p class="k-card__kicker" style="margin: 0">Monthly goal</p>
+              <span class="k-text-s k-text-soft">$48.2k / $60k</span>
+            </div>
+            <progress value="48.2" max="60" style="inline-size: 100%">80%</progress>
+            <p class="k-text-xs k-text-faint" style="margin-top: var(--k-space-2)">80% of target — 6 days left.</p>
+          </section>
+        </div>
+      </div>
+
+      <!-- Transactions table -->
+      <section class="k-card">
+        <div class="k-cluster" style="justify-content: space-between; margin-bottom: var(--k-space-3)">
+          <p class="k-card__kicker" style="margin: 0">Recent transactions</p>
+          <a class="k-btn k-btn--link" href="#">View all</a>
+        </div>
+        <div class="k-table-wrap">
+          <table class="k-table--dense k-table--hover">
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Invoice</th>
+                <th>Date</th>
+                <th aria-sort="descending"><button type="button">Amount</button></th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr aria-selected="true">
+                <td><span class="k-media k-media--center" style="gap: var(--k-space-2)"><span class="k-avatar k-avatar--small" aria-hidden="true">HC</span> Harbor Co</span></td>
+                <td class="k-text-faint">#2041</td>
+                <td class="k-text-soft">Jul 12</td>
+                <td class="k-num">$1,240.00</td>
+                <td><span class="k-badge k-badge--ok k-badge--dot">Paid</span></td>
+              </tr>
+              <tr>
+                <td><span class="k-media k-media--center" style="gap: var(--k-space-2)"><span class="k-avatar k-avatar--small" aria-hidden="true">KL</span> Kite LLC</span></td>
+                <td class="k-text-faint">#2040</td>
+                <td class="k-text-soft">Jul 11</td>
+                <td class="k-num">$860.00</td>
+                <td><span class="k-badge k-badge--danger k-badge--dot">Failed</span></td>
+              </tr>
+              <tr>
+                <td><span class="k-media k-media--center" style="gap: var(--k-space-2)"><span class="k-avatar k-avatar--small" aria-hidden="true">DW</span> Daiven Woodworks</span></td>
+                <td class="k-text-faint">#2039</td>
+                <td class="k-text-soft">Jul 11</td>
+                <td class="k-num">$3,120.00</td>
+                <td><span class="k-badge k-badge--warn k-badge--dot">Pending</span></td>
+              </tr>
+              <tr>
+                <td><span class="k-media k-media--center" style="gap: var(--k-space-2)"><span class="k-avatar k-avatar--small" aria-hidden="true">LF</span> Longform Media</span></td>
+                <td class="k-text-faint">#2038</td>
+                <td class="k-text-soft">Jul 10</td>
+                <td class="k-num">$540.00</td>
+                <td><span class="k-badge k-badge--ok k-badge--dot">Paid</span></td>
+              </tr>
+              <tr>
+                <td><span class="k-media k-media--center" style="gap: var(--k-space-2)"><span class="k-avatar k-avatar--small" aria-hidden="true">NB</span> Nautical Books</span></td>
+                <td class="k-text-faint">#2037</td>
+                <td class="k-text-soft">Jul 09</td>
+                <td class="k-num">$1,980.00</td>
+                <td><span class="k-badge k-badge--ok k-badge--dot">Paid</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+
+    <footer class="dash-foot">
+      <span>Beacon — a fictional dashboard built entirely with <a href="../index.html">keel</a>.</span>
+      <a href="../templates.html">All templates →</a>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>

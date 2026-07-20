@@ -1,0 +1,5 @@
+# keel — https://github.com/rdaiven/keel
+User-agent: *
+Allow: /
+
+Sitemap: https://rdaiven.github.io/keel/sitemap.xml

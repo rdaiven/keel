@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northline Instruments — a spec-driven product page template built with keel</title>
+<meta name="description" content="A technical equipment product page template built entirely with keel: a dark, monospace-leaning hero, a three-tier spec comparison table, and a CTA. The whole theme is one tokens block.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Replace this block and the page becomes yours. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(210 14% 8%);
+      --k-surface: hsl(210 14% 11%);
+      --k-surface-2: hsl(210 12% 15%);
+      --k-border: hsl(210 10% 22%);
+      --k-border-strong: hsl(210 10% 32%);
+      --k-text: hsl(190 20% 92%);
+      --k-text-soft: hsl(200 10% 68%);
+      --k-text-faint: hsl(200 8% 50%);
+      --k-accent: hsl(186 80% 48%);
+      --k-on-accent: hsl(210 30% 8%);
+      --k-accent-2: hsl(38 90% 55%);
+      --k-on-accent-2: hsl(210 30% 8%);
+      --k-font-display: "Consolas", "SFMono-Regular", Menlo, monospace;
+      --k-font-mono: "Consolas", "SFMono-Regular", Menlo, monospace;
+      --k-display-weight: 650;
+      --k-tracking: -0.01em;
+      --k-radius: 3px;
+      --k-density: 1;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local: highlight the recommended tier's column in the spec table */
+  .ns-table th[data-tier="pro"], .ns-table td[data-tier="pro"] {
+    background: var(--k-surface-2);
+  }
+  .ns-hero__grid { position: relative; overflow: hidden; }
+  .ns-hero__grid::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--k-border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--k-border) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.35;
+    mask-image: linear-gradient(to bottom, black, transparent 85%);
+  }
+  .ns-hero__grid > .k-container { position: relative; }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme, and the tier comparison is a plain
+    <code>.k-table--bordered</code>. <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Northline Instruments</a>
+      <ul class="k-nav__links">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#specs">Compare tiers</a></li>
+        <li><a href="#order">Order</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="k-hero ns-hero__grid" id="top">
+  <div class="k-container">
+    <p class="k-hero__eyebrow k-mono">MDL-40 SERIES · FIELD METER</p>
+    <h1>One meter.<br>Three build tiers.</h1>
+    <p class="k-hero__lead">The MDL-40 measures the same six channels at
+    every tier — what changes is battery life, sample rate, and how much
+    abuse the housing takes. Pick the tier that matches the job, not the
+    other way around.</p>
+    <p class="k-cluster k-mt-5">
+      <a class="k-btn k-btn--large" href="#specs">Compare tiers</a>
+      <a class="k-btn k-btn--ghost" href="#order">Order a unit</a>
+    </p>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="k-section k-section--tight" id="overview">
+  <div class="k-container">
+    <div class="k-cols-4 k-center">
+      <div><span class="k-stat__value">±0.2%</span><span class="k-stat__label">accuracy, all tiers</span></div>
+      <div><span class="k-stat__value">IP67</span><span class="k-stat__label">minimum rating</span></div>
+      <div><span class="k-stat__value">6</span><span class="k-stat__label">channels measured</span></div>
+      <div><span class="k-stat__value">3&nbsp;yr</span><span class="k-stat__label">calibration interval</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEC COMPARISON -->
+<section class="k-section k-section--alt" id="specs">
+  <div class="k-container">
+    <h2>Compare tiers</h2>
+    <p class="k-text-soft" style="max-width: 40em">Field is the base
+    build. Pro adds sample rate and battery life for daily field use.
+    Summit is rated for continuous unattended logging.</p>
+
+    <div class="k-table-wrap k-mt-5">
+      <table class="ns-table k-table--bordered">
+        <thead>
+          <tr>
+            <th>Spec</th>
+            <th>Field</th>
+            <th data-tier="pro">Pro</th>
+            <th>Summit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Price</td>
+            <td>$420</td>
+            <td data-tier="pro"><strong>$680</strong></td>
+            <td>$1,240</td>
+          </tr>
+          <tr>
+            <td>Sample rate</td>
+            <td>1 Hz</td>
+            <td data-tier="pro">10 Hz</td>
+            <td>100 Hz</td>
+          </tr>
+          <tr>
+            <td>Battery life</td>
+            <td>18 hrs</td>
+            <td data-tier="pro">40 hrs</td>
+            <td>200 hrs</td>
+          </tr>
+          <tr>
+            <td>Onboard storage</td>
+            <td>None (live only)</td>
+            <td data-tier="pro">4 GB / 30 days</td>
+            <td>64 GB / 1 year</td>
+          </tr>
+          <tr>
+            <td>Housing rating</td>
+            <td>IP67</td>
+            <td data-tier="pro">IP67</td>
+            <td>IP68, MIL-STD-810H</td>
+          </tr>
+          <tr>
+            <td>Connectivity</td>
+            <td>USB-C</td>
+            <td data-tier="pro">USB-C, Bluetooth</td>
+            <td>USB-C, Bluetooth, LoRa</td>
+          </tr>
+          <tr>
+            <td>Display</td>
+            <td>Numeric LCD</td>
+            <td data-tier="pro">Graphing LCD</td>
+            <td>Graphing LCD, backlit</td>
+          </tr>
+          <tr>
+            <td>Warranty</td>
+            <td>2 years</td>
+            <td data-tier="pro">3 years</td>
+            <td>5 years</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="k-cluster k-mt-4">
+      <span class="k-badge k-badge--outline">Field</span>
+      <span class="k-badge k-badge--solid">Pro · most common</span>
+      <span class="k-badge k-badge--outline">Summit</span>
+    </p>
+  </div>
+</section>
+
+<!-- ORDER / CTA -->
+<section class="k-section k-section--accent" id="order">
+  <div class="k-container k-center">
+    <h2>Every unit ships calibrated</h2>
+    <p style="max-width: 38em; margin-inline: auto">Each MDL-40 is
+    bench-calibrated against a NIST-traceable reference before it leaves
+    the shop, with the certificate included in the box.</p>
+    <p class="k-cluster k-mt-5" style="justify-content: center">
+      <a class="k-btn k-btn--large" href="#top">Order the Field</a>
+      <a class="k-btn k-btn--ghost" href="#top">Order the Pro</a>
+      <a class="k-btn k-btn--ghost" href="#top">Order the Summit</a>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>Northline Instruments — a fictional shop, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

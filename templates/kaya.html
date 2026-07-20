@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kaya — the mobile wallet for shared money</title>
+<meta name="description" content="A fictional fintech mobile-wallet landing page built entirely with keel: a CSS phone mockup, a three-step how-it-works section, and app-store-style buttons. The whole coral-and-mint theme is one tokens block.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Replace this block and the page becomes yours. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(20 45% 97%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(20 40% 93%);
+      --k-border: hsl(20 25% 87%);
+      --k-border-strong: hsl(20 22% 76%);
+      --k-text: hsl(18 30% 14%);
+      --k-text-soft: hsl(18 16% 36%);
+      --k-text-faint: hsl(18 10% 52%);
+      --k-accent: hsl(9 78% 60%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(160 45% 40%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-font-display: system-ui, "Segoe UI", sans-serif;
+      --k-font-body: system-ui, "Segoe UI", sans-serif;
+      --k-display-weight: 750;
+      --k-tracking: -0.01em;
+      --k-radius: 18px;
+      --k-density: 1.05;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local: a phone mockup built from divs — a k-frame-style rounded
+     rect containing mock UI rows. No images, nothing but tokens. */
+  .ky-phone {
+    inline-size: 15.5rem; block-size: 31rem; margin-inline: auto;
+    background: var(--k-text); border-radius: 2.4rem; padding: 0.55rem;
+    box-shadow: 0 30px 60px -20px hsl(18 30% 14% / 0.35);
+  }
+  .ky-phone__screen {
+    inline-size: 100%; block-size: 100%; border-radius: 1.9rem;
+    background: var(--k-surface); overflow: hidden; display: flex; flex-direction: column;
+  }
+  .ky-phone__bar {
+    background: var(--k-accent); color: var(--k-on-accent);
+    padding: var(--k-space-4) var(--k-space-4) var(--k-space-6);
+  }
+  .ky-phone__balance { font-size: 1.9rem; font-weight: 800; letter-spacing: -0.02em; }
+  .ky-phone__rows { padding: var(--k-space-4); display: grid; gap: var(--k-space-3); margin-top: -1.6rem; }
+  .ky-phone__row {
+    background: var(--k-surface); border: 1px solid var(--k-border);
+    border-radius: var(--k-radius-l); padding: var(--k-space-3);
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 4px 14px -8px hsl(18 30% 14% / 0.18);
+  }
+  .ky-phone__dot { inline-size: 2.1rem; block-size: 2.1rem; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme. <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Kaya</a>
+      <ul class="k-nav__links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#trust">Security</a></li>
+        <li><a href="#get">Get the app</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO — copy beside a CSS-built phone mockup, no images -->
+<section class="k-hero" id="top">
+  <div class="k-container">
+    <div class="k-split k-split--wide-start">
+      <div>
+        <p class="k-hero__eyebrow">Kaya · shared money, sorted</p>
+        <h1>Split the bill<br>before you leave the table.</h1>
+        <p class="k-hero__lead">
+          Kaya is a wallet built for money that touches more than one
+          person — rent with roommates, a group trip, a family tab. Send,
+          request, and settle up in seconds, with everyone seeing the
+          same numbers.
+        </p>
+        <div class="k-cluster" style="margin-top: var(--k-space-5)">
+          <a class="k-btn k-btn--ghost" href="#get">Download for iOS
+            <span class="k-icon k-icon--arrow-right" aria-hidden="true"></span></a>
+          <a class="k-btn k-btn--ghost" href="#get">Download for Android
+            <span class="k-icon k-icon--arrow-right" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div class="ky-phone" role="img" aria-label="Kaya app screen showing a balance of $412.60 and three recent transactions">
+        <div class="ky-phone__screen">
+          <div class="ky-phone__bar">
+            <p style="margin: 0; opacity: 0.85; font-size: var(--k-text-s)">Your balance</p>
+            <p class="ky-phone__balance" style="margin: 0">$412.60</p>
+          </div>
+          <div class="ky-phone__rows">
+            <div class="ky-phone__row">
+              <span class="k-cluster" style="gap: var(--k-space-2)">
+                <span class="ky-phone__dot" style="background: var(--k-accent-soft)">
+                  <span class="k-icon k-icon--home" aria-hidden="true" style="color: var(--k-accent)"></span></span>
+                <span><strong style="font-size: var(--k-text-s)">Rent split</strong><br>
+                <small class="k-text-faint">to Priya, Jon</small></span>
+              </span>
+              <strong>−$540</strong>
+            </div>
+            <div class="ky-phone__row">
+              <span class="k-cluster" style="gap: var(--k-space-2)">
+                <span class="ky-phone__dot" style="background: var(--k-accent-2-soft)">
+                  <span class="k-icon k-icon--check" aria-hidden="true" style="color: var(--k-accent-2)"></span></span>
+                <span><strong style="font-size: var(--k-text-s)">Weekend trip</strong><br>
+                <small class="k-text-faint">from Marco</small></span>
+              </span>
+              <strong style="color: var(--k-accent-2)">+$186</strong>
+            </div>
+            <div class="ky-phone__row">
+              <span class="k-cluster" style="gap: var(--k-space-2)">
+                <span class="ky-phone__dot" style="background: var(--k-surface-2)">
+                  <span class="k-icon k-icon--cart" aria-hidden="true"></span></span>
+                <span><strong style="font-size: var(--k-text-s)">Groceries</strong><br>
+                <small class="k-text-faint">to household tab</small></span>
+              </span>
+              <strong>−$64.40</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE TRIO -->
+<section class="k-section k-section--alt" id="features">
+  <div class="k-container">
+    <h2>Money that stays legible</h2>
+    <p class="k-text-soft" style="max-width: 40em">Three things Kaya does
+    well, so a shared tab never turns into a spreadsheet.</p>
+    <div class="k-thirds k-mt-5 k-stagger">
+      <article class="k-card k-card--hover k-anim-up">
+        <span class="ky-phone__dot" style="background: var(--k-accent-soft)">
+          <span class="k-icon k-icon--send" aria-hidden="true" style="color: var(--k-accent)"></span></span>
+        <h4 style="margin-top: var(--k-space-3)">Instant sends</h4>
+        <p><small>Money moves the moment you tap send — no "1-3 business
+        days," no waiting for it to clear before you can spend it.</small></p>
+      </article>
+      <article class="k-card k-card--hover k-anim-up">
+        <span class="ky-phone__dot" style="background: var(--k-accent-2-soft)">
+          <span class="k-icon k-icon--tag" aria-hidden="true" style="color: var(--k-accent-2)"></span></span>
+        <h4 style="margin-top: var(--k-space-3)">Splits that do the math</h4>
+        <p><small>Even, by share, or by what each person actually
+        ordered — Kaya works out who owes what and asks once.</small></p>
+      </article>
+      <article class="k-card k-card--hover k-anim-up">
+        <span class="ky-phone__dot" style="background: var(--k-surface-2)">
+          <span class="k-icon k-icon--bell" aria-hidden="true"></span></span>
+        <h4 style="margin-top: var(--k-space-3)">Gentle reminders</h4>
+        <p><small>A quiet nudge when a request sits unpaid for a week —
+        never a demand, always easy to settle in one tap.</small></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS — 3-step -->
+<section class="k-section" id="how">
+  <div class="k-container">
+    <h2>How it works</h2>
+    <p class="k-text-soft" style="max-width: 40em">No branches, no
+    paperwork. Most people send their first payment inside a minute of
+    downloading Kaya.</p>
+    <ol class="k-steps k-mt-5">
+      <li><strong>Link an account.</strong> Connect a debit card or bank
+      account — Kaya never holds your money longer than a transfer takes.</li>
+      <li><strong>Add the people you split with.</strong> Roommates,
+      travel friends, family — a group takes ten seconds to set up.</li>
+      <li><strong>Send, request, settle.</strong> Every payment shows up
+      for everyone in the group, so nobody has to ask "did that go through?"</li>
+    </ol>
+  </div>
+</section>
+
+<!-- TRUST / SECURITY BADGES -->
+<section class="k-section k-section--tint" id="trust">
+  <div class="k-container k-center">
+    <h2>Held to a bank's standard</h2>
+    <p style="max-width: 38em; margin-inline: auto">Kaya doesn't lend,
+    invest, or hold your money longer than a transfer requires — a
+    narrower job, done more carefully.</p>
+    <div class="k-cluster" style="justify-content: center; margin-top: var(--k-space-5)">
+      <span class="k-badge k-badge--outline"><span class="k-icon k-icon--shield-check" aria-hidden="true"></span> Bank-level encryption</span>
+      <span class="k-badge k-badge--outline"><span class="k-icon k-icon--lock" aria-hidden="true"></span> Insured, partner-bank accounts</span>
+      <span class="k-badge k-badge--outline"><span class="k-icon k-icon--badge-check" aria-hidden="true"></span> Biometric login</span>
+      <span class="k-badge k-badge--outline"><span class="k-icon k-icon--eye-off" aria-hidden="true"></span> No data sold, ever</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA — app-store-style buttons -->
+<section class="k-section k-section--accent" id="get">
+  <div class="k-container k-center">
+    <h2>Get Kaya</h2>
+    <p style="max-width: 36em; margin-inline: auto">Free to download, free
+    to send. One flat fee only if you cash out early to a debit card.</p>
+    <div class="k-cluster" style="justify-content: center; margin-top: var(--k-space-5)">
+      <a class="k-btn k-btn--ghost" style="color: inherit; border-color: currentColor" href="#">Download for iOS
+        <span class="k-icon k-icon--arrow-right" aria-hidden="true"></span></a>
+      <a class="k-btn k-btn--ghost" style="color: inherit; border-color: currentColor" href="#">Download for Android
+        <span class="k-icon k-icon--arrow-right" aria-hidden="true"></span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span><strong style="color: var(--k-text)">Kaya</strong> — a fictional wallet, for demonstration.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

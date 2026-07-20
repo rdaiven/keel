@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sections — keel</title>
+<meta name="description" content="keel's pattern library: complete page sections across several categories. Browse the grid, click any pattern to preview it full-width, and arrow through the rest. Copy the markup, keep your tokens.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<style>
+  /* pattern gallery — grid of cards, each opens the lightbox */
+  .sx-groups { display: grid; gap: var(--k-space-7); }
+  .sx-group__title { display: flex; align-items: baseline; gap: var(--k-space-2); margin-bottom: var(--k-space-3); }
+  .sx-group__title h2 { margin: 0; }
+  .sx-cards { display: grid; gap: var(--k-space-3);
+              grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); }
+  .sx-card {
+    display: flex; align-items: center; gap: var(--k-space-2);
+    inline-size: 100%; text-align: start; font: inherit; cursor: pointer;
+    background: var(--k-surface); border: 1px solid var(--k-border);
+    border-radius: var(--k-radius); color: var(--k-text);
+    padding: var(--k-space-3) var(--k-space-4);
+    transition: border-color var(--k-ease), background var(--k-ease), translate var(--k-ease);
+  }
+  .sx-card:hover { border-color: var(--k-border-strong); background: var(--k-surface-2); translate: 0 -2px; }
+  .sx-card:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--k-accent-trans-20); }
+  .sx-card__name { font-weight: 600; text-transform: capitalize; }
+  .sx-card > .k-icon { margin-inline-start: auto; color: var(--k-text-faint); font-size: 0.9em; }
+
+  /* lightbox */
+  .sx-modal {
+    inline-size: 96vw; max-inline-size: 1280px;
+    block-size: 92vh; max-block-size: 92vh;
+    padding: 0; border: 1px solid var(--k-border);
+    border-radius: var(--k-radius-l); overflow: hidden; background: var(--k-bg);
+  }
+  .sx-modal::backdrop { background: hsl(228 30% 8% / 0.55); backdrop-filter: blur(2px); }
+  .sx-modal__inner { position: relative; display: flex; flex-direction: column; block-size: 100%; }
+  .sx-modal__bar {
+    display: flex; align-items: center; gap: var(--k-space-3); flex: none;
+    padding: var(--k-space-2) var(--k-space-3);
+    border-block-end: 1px solid var(--k-border); background: var(--k-surface);
+  }
+  .sx-modal__title { text-transform: capitalize; }
+  .sx-modal__actions { display: flex; align-items: center; gap: var(--k-space-2); margin-inline-start: auto; }
+  .sx-stage { flex: 1; overflow: auto; background: var(--k-bg); min-block-size: 0; }
+  .sx-codebox { flex: none; max-block-size: 42%; overflow: auto; }
+  .sx-nav {
+    position: absolute; inset-block-start: 55%; translate: 0 -50%; z-index: 3;
+    inline-size: 2.6rem; block-size: 2.6rem; border-radius: 50%;
+    display: grid; place-items: center; cursor: pointer;
+    background: var(--k-surface); color: var(--k-text);
+    border: 1px solid var(--k-border); box-shadow: var(--k-shadow-l);
+    transition: background var(--k-ease), translate var(--k-ease);
+  }
+  .sx-nav:hover { background: var(--k-surface-2); }
+  .sx-nav--prev { inset-inline-start: var(--k-space-3); }
+  .sx-nav--next { inset-inline-end: var(--k-space-3); }
+  @media (max-width: 40rem) { .sx-nav { inline-size: 2.2rem; block-size: 2.2rem; } }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="../index.html">keel</a>
+      <ul class="k-nav__links k-desktop-only">
+        <li><a href="start.html">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html" aria-current="page">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+      <button class="k-btn k-btn--icon k-btn--ghost k-mobile-only" type="button"
+              aria-label="Menu" onclick="document.getElementById('site-menu').showModal()">
+        <span class="k-icon k-icon--menu" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <dialog class="k-drawer" id="site-menu" aria-label="Menu">
+      <div class="k-cluster k-justify-between">
+        <h4 class="k-mt-0 k-mb-0">Menu</h4>
+        <form method="dialog">
+          <button class="k-btn k-btn--ghost k-btn--icon k-btn--small" type="submit" aria-label="Close menu">
+            <span class="k-icon k-icon--x" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <ul class="k-menu">
+        <li><a href="start.html">Documentation</a></li>
+        <li><a href="../templates.html">Templates</a></li>
+        <li><a href="sections.html" aria-current="page">Sections</a></li>
+        <li><a href="icons.html">Icons</a></li>
+        <li><a href="../design.html">Design system</a></li>
+      </ul>
+    </dialog>
+  </div>
+</header>
+<main id="main">
+
+<section class="k-section">
+  <div class="k-container">
+    <h1>Sections</h1>
+    <p class="k-hero__lead">
+      <strong><span data-keel-count="sections">53</span> complete page sections</strong> across several categories.
+      Click any pattern to preview it full-width in your own design
+      system, then arrow left and right through the rest — copy the
+      markup when you find the one.
+    </p>
+    <p><small class="k-text-faint">Machine-readable too: every pattern
+    ships in <code>patterns.json</code> as
+    <code>{category, name, html}</code> — for builders and AI
+    tools.</small></p>
+
+    <div class="sx-groups k-mt-6" id="sx-grid">
+      <p class="k-text-faint">Loading patterns…
+      <noscript>Enable JavaScript to browse the gallery, or open a
+      category directly: <a href="sections-heroes.html">Heroes</a>,
+      <a href="sections-features.html">Features</a>,
+      <a href="sections-proof.html">Proof</a>,
+      <a href="sections-pricing.html">Pricing</a>,
+      <a href="sections-content.html">Content</a>,
+      <a href="sections-cta.html">CTA</a>,
+      <a href="sections-people.html">People</a>,
+      <a href="sections-chrome.html">Chrome</a>.</noscript></p>
+    </div>
+
+    <p class="k-mt-6">Whole pages assembled from these live on
+    <a href="../templates.html">Templates</a>; the page-level skeletons
+    are on <a href="layout.html#page-layouts">Layout · Page layouts</a>.</p>
+  </div>
+</section>
+
+<dialog id="sx-modal" class="sx-modal" aria-label="Pattern preview">
+  <div class="sx-modal__inner">
+    <div class="sx-modal__bar">
+      <strong class="sx-modal__title" id="sx-title"></strong>
+      <span class="k-badge k-badge--outline" id="sx-cat"></span>
+      <span class="k-text-faint k-text-xs" id="sx-count"></span>
+      <div class="sx-modal__actions">
+        <button type="button" class="k-btn k-btn--ghost k-btn--small" id="sx-code" aria-pressed="false"><span class="k-icon k-icon--code" aria-hidden="true"></span> Code</button>
+        <button type="button" class="k-btn k-btn--small" id="sx-copy"><span class="k-icon k-icon--copy" aria-hidden="true"></span> Copy markup</button>
+        <button type="button" class="k-btn k-btn--icon k-btn--ghost" id="sx-close" aria-label="Close preview"><span class="k-icon k-icon--x" aria-hidden="true"></span></button>
+      </div>
+    </div>
+    <div class="sx-stage" id="sx-stage"></div>
+    <div class="sx-codebox" id="sx-codebox" hidden>
+      <div class="k-editor k-editor--dark" style="margin:0;border:0;border-radius:0">
+        <div class="k-editor__body"><pre><code id="sx-editor-code"></code></pre></div>
+      </div>
+    </div>
+    <button type="button" class="sx-nav sx-nav--prev" id="sx-prev" aria-label="Previous pattern"><span class="k-icon k-icon--chevron-left" aria-hidden="true"></span></button>
+    <button type="button" class="sx-nav sx-nav--next" id="sx-next" aria-label="Next pattern"><span class="k-icon k-icon--chevron-right" aria-hidden="true"></span></button>
+  </div>
+</dialog>
+
+</main>
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>keel — a standalone CSS framework by Daiven Reyes.</span>
+    <span><a href="https://rdaiven.github.io">rdaiven.github.io</a></span>
+  </div>
+</footer>
+
+<script src="../assets/play.js"></script>
+<script src="../assets/docs.js"></script>
+<script>
+/* Sections gallery + lightbox — page-local.
+   Grid of pattern cards from patterns.json; click opens a full-width
+   dialog that renders the pattern live (in the visitor's palette),
+   with prev/next (buttons + arrow keys), copy, and a code toggle. */
+(function () {
+  var grid = document.getElementById("sx-grid");
+  var modal = document.getElementById("sx-modal");
+  var stage = document.getElementById("sx-stage");
+  if (!grid || !modal) return;
+
+  var CAT = { heroes: "Heroes", features: "Features", proof: "Social proof",
+    pricing: "Pricing", content: "Content", cta: "Calls to action",
+    people: "People & contact", chrome: "Headers & footers" };
+  var PAT = [], idx = 0;
+
+  fetch("../data/patterns.json")
+    .then(function (r) { return r.json(); })
+    .then(function (data) { PAT = data; buildGrid(); })
+    .catch(function () {
+      grid.innerHTML = '<p class="k-text-faint">Could not load patterns.json — open a category page from the list instead.</p>';
+    });
+
+  function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+
+  function buildGrid() {
+    var by = {};
+    PAT.forEach(function (p, i) { (by[p.category] = by[p.category] || []).push(i); });
+    var html = "";
+    Object.keys(by).forEach(function (cat) {
+      html += '<section class="sx-group"><div class="sx-group__title"><h2>' +
+        (CAT[cat] || cat) + '</h2><span class="k-badge k-badge--outline">' +
+        by[cat].length + '</span></div><div class="sx-cards">';
+      by[cat].forEach(function (i) {
+        html += '<button type="button" class="sx-card" data-i="' + i + '">' +
+          '<span class="sx-card__name">' + PAT[i].name + '</span>' +
+          '<span class="k-icon k-icon--maximize" aria-hidden="true"></span></button>';
+      });
+      html += '</div></section>';
+    });
+    grid.innerHTML = html;
+  }
+
+  var titleEl = document.getElementById("sx-title");
+  var catEl = document.getElementById("sx-cat");
+  var countEl = document.getElementById("sx-count");
+  var codeEl = document.getElementById("sx-editor-code");
+  var codebox = document.getElementById("sx-codebox");
+  var codeBtn = document.getElementById("sx-code");
+
+  function render() {
+    var p = PAT[idx];
+    stage.innerHTML = p.html;
+    stage.scrollTop = 0;
+    titleEl.textContent = p.name;
+    catEl.textContent = CAT[p.category] || p.category;
+    countEl.textContent = (idx + 1) + " / " + PAT.length;
+    codeEl.innerHTML = esc(p.html);
+    codebox.hidden = true;
+    codeBtn.setAttribute("aria-pressed", "false");
+  }
+  function open(i) { idx = i; render(); if (!modal.open) modal.showModal(); }
+  function go(d) { idx = (idx + d + PAT.length) % PAT.length; render(); }
+
+  grid.addEventListener("click", function (e) {
+    var c = e.target.closest(".sx-card");
+    if (c) open(Number(c.dataset.i));
+  });
+  document.getElementById("sx-prev").addEventListener("click", function () { go(-1); });
+  document.getElementById("sx-next").addEventListener("click", function () { go(1); });
+  document.getElementById("sx-close").addEventListener("click", function () { modal.close(); });
+  modal.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
+  });
+  codeBtn.addEventListener("click", function () {
+    var show = codebox.hidden;
+    codebox.hidden = !show;
+    codeBtn.setAttribute("aria-pressed", String(show));
+  });
+  document.getElementById("sx-copy").addEventListener("click", function () {
+    var t = this, label = t.querySelector(".k-icon") ? t : t;
+    if (navigator.clipboard) navigator.clipboard.writeText(PAT[idx].html).catch(function () {});
+    var prev = t.innerHTML;
+    t.innerHTML = '<span class="k-icon k-icon--check" aria-hidden="true"></span> Copied';
+    setTimeout(function () { t.innerHTML = prev; }, 1200);
+  });
+})();
+</script>
+</body>
+</html>

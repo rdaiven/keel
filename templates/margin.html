@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Margin — a quieter writing assistant</title>
+<meta name="description" content="A fictional AI writing-assistant landing page built entirely with keel: dark editorial theme, a typewriter-cursor hero, and prose-styled feature copy instead of cards. The whole theme is one tokens block.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Replace this block and the page becomes yours. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(30 12% 8%);
+      --k-surface: hsl(30 12% 11%);
+      --k-surface-2: hsl(30 10% 15%);
+      --k-border: hsl(30 8% 22%);
+      --k-border-strong: hsl(30 8% 32%);
+      --k-text: hsl(36 28% 92%);
+      --k-text-soft: hsl(34 14% 74%);
+      --k-text-faint: hsl(34 10% 56%);
+      --k-accent: hsl(38 78% 58%);
+      --k-on-accent: hsl(30 30% 10%);
+      --k-accent-2: hsl(14 55% 52%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-font-display: Georgia, "Times New Roman", serif;
+      --k-font-body: Georgia, "Times New Roman", serif;
+      --k-display-weight: 500;
+      --k-tracking: 0em;
+      --k-radius: 4px;
+      --k-density: 1.1;
+    }
+  }
+  html { color-scheme: dark; }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local: a typewriter cursor — a blinking border-right on a span,
+     gated under prefers-reduced-motion like keel's own motion utilities. */
+  .mg-cursor { border-right: 3px solid var(--k-accent); padding-inline-end: 0.1em; }
+  @media (prefers-reduced-motion: no-preference) {
+    .mg-cursor { animation: mg-blink 1s step-end infinite; }
+    @keyframes mg-blink { 50% { border-color: transparent; } }
+  }
+
+  /* page-local: feature list read as editorial paragraphs, not cards */
+  .mg-entry { border-block-start: 1px solid var(--k-border); padding-block: var(--k-space-6); }
+  .mg-entry:first-child { border-block-start: 0; padding-block-start: 0; }
+  .mg-entry__num { font-family: var(--k-font-display); color: var(--k-accent); font-size: var(--k-text-s); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme. <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Margin</a>
+      <ul class="k-nav__links">
+        <li><a href="#practice">The practice</a></li>
+        <li><a href="#reader">A reader</a></li>
+        <li><a href="#start">Begin</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO — a typewriter-cursor headline -->
+<section class="k-hero" id="top">
+  <div class="k-container--narrow k-container">
+    <p class="k-hero__eyebrow">Margin · a writing assistant, not a writer</p>
+    <h1>It waits for the sentence<span class="mg-cursor">&nbsp;</span></h1>
+    <p class="k-hero__lead">
+      Margin reads what you've written and asks what you meant — a
+      question in the margin, never a rewrite in the body. The draft
+      stays yours; Margin just notices where it wobbles.
+    </p>
+    <p class="k-cluster k-mt-5">
+      <a class="k-btn" href="#start">Start writing</a>
+      <a class="k-btn k-btn--ghost" href="#practice">How it reads</a>
+    </p>
+  </div>
+</section>
+
+<!-- FEATURES — editorial paragraphs, not cards -->
+<section class="k-section k-section--alt" id="practice">
+  <div class="k-container--narrow k-container">
+    <h2>What it actually does</h2>
+
+    <div class="mg-entry">
+      <p class="mg-entry__num">I.</p>
+      <h3>Margin notes, not overwrites</h3>
+      <p>Every suggestion sits beside your paragraph, not inside it. You
+      read the note, decide, and either take it or close it — the draft
+      never changes underneath you while you're not looking.</p>
+    </div>
+
+    <div class="mg-entry">
+      <p class="mg-entry__num">II.</p>
+      <h3>It tracks your argument, not your grammar</h3>
+      <p>A comma splice is the least interesting thing about a paragraph.
+      Margin follows the claim across pages and flags where it quietly
+      contradicts itself two thousand words later — the kind of thing a
+      spellchecker was never built to see.</p>
+    </div>
+
+    <div class="mg-entry">
+      <p class="mg-entry__num">III.</p>
+      <h3>It reads at your pace, not the model's</h3>
+      <p>Notes appear when you pause, not the instant you stop typing.
+      Nothing interrupts a sentence that's still being written — Margin
+      waits for the full stop before it says anything at all.</p>
+    </div>
+
+    <div class="mg-entry">
+      <p class="mg-entry__num">IV.</p>
+      <h3>Your drafts stay off the record</h3>
+      <p>Nothing you write trains anything. Drafts are yours, stored
+      encrypted, and deleted on request — the same day, not "within 30
+      days" in a footnote.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE / TESTIMONIAL -->
+<section class="k-section" id="reader">
+  <div class="k-container--narrow k-container">
+    <blockquote style="border-color: var(--k-accent)">
+      <p>I stopped noticing it was there, which is the highest compliment
+      I have for a piece of software that reads my sentences. It never
+      once tried to finish one for me.</p>
+    </blockquote>
+    <p class="k-text-faint"><small>— Odalys Ferrer, essayist, three
+    years of drafts in Margin</small></p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="k-section k-section--tint" id="start">
+  <div class="k-container--narrow k-container k-center">
+    <h2>Bring the draft you already have</h2>
+    <p style="max-width: 34em; margin-inline: auto">No blank-page prompt,
+    no outline wizard. Paste in a page that already exists and Margin
+    starts from what you meant, not what a template assumes.</p>
+    <form class="k-cluster k-mt-5" style="justify-content: center" action="#" method="get">
+      <label class="k-visually-hidden" for="mg-email">Email</label>
+      <input id="mg-email" type="email" placeholder="you@example.com" style="min-inline-size: 18rem">
+      <button class="k-btn" type="submit">Get early access</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span><strong style="color: var(--k-text)">Margin</strong> — a fictional product, for demonstration.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

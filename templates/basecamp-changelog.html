@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Changelog — Driftwood CLI docs — a docs site template built with keel</title>
+<meta name="description" content="The dated changelog page of the Driftwood CLI keel docs template — a simple entries list, newest first.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Byte-identical across all three basecamp pages. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(240 8% 9%);
+      --k-surface: hsl(240 8% 13%);
+      --k-surface-2: hsl(240 8% 17%);
+      --k-border: hsl(240 6% 24%);
+      --k-border-strong: hsl(240 6% 32%);
+      --k-text: hsl(40 15% 92%);
+      --k-text-soft: hsl(240 6% 70%);
+      --k-text-faint: hsl(240 6% 50%);
+      --k-accent: hsl(38 90% 55%);
+      --k-on-accent: hsl(30 45% 10%);
+      --k-accent-2: hsl(205 12% 58%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-font-display: system-ui, "Segoe UI", sans-serif;
+      --k-display-weight: 650;
+      --k-tracking: -0.01em;
+      --k-radius: 6px;
+      --k-density: 1;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local (prefix "bc-"): identical on every basecamp page */
+  .bc-side-title { font-family: var(--k-font-mono); font-size: var(--k-text-xs);
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--k-text-faint);
+    margin-block: var(--k-space-4) var(--k-space-2); }
+  .bc-side-title:first-child { margin-block-start: 0; }
+  .bc-wordmark { font-family: var(--k-font-mono); }
+  .bc-wordmark strong { color: var(--k-accent); }
+
+  /* changelog entry layout, this page only, still "bc-" prefix */
+  .bc-entry + .bc-entry { margin-block-start: var(--k-space-6); padding-block-start: var(--k-space-6);
+    border-top: 1px solid var(--k-border); }
+  .bc-entry__date { font-family: var(--k-font-mono); color: var(--k-text-faint); font-size: var(--k-text-s); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme, shared across a linked three-page docs site.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand bc-wordmark" href="basecamp-guide.html">drift<strong>wood</strong></a>
+      <ul class="k-nav__links">
+        <li><a href="basecamp-guide.html">Guide</a></li>
+        <li><a href="basecamp-reference.html">Reference</a></li>
+        <li><a href="basecamp-changelog.html" aria-current="page">Changelog</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="k-section k-section--tight">
+  <div class="k-container--wide k-container">
+    <div class="k-sidebar">
+      <aside class="k-sticky">
+        <nav aria-label="Documentation">
+          <p class="bc-side-title">Getting started</p>
+          <ul class="k-list k-list--flush">
+            <li><a href="basecamp-guide.html">Guide</a></li>
+            <li><a href="basecamp-guide.html#bc-install">Install</a></li>
+            <li><a href="basecamp-guide.html#bc-deploy">First deploy</a></li>
+            <li><a href="basecamp-guide.html#bc-domains">Attach a domain</a></li>
+          </ul>
+          <p class="bc-side-title">Reference</p>
+          <ul class="k-list k-list--flush">
+            <li><a href="basecamp-reference.html">Commands</a></li>
+            <li><a href="basecamp-reference.html#bc-config">Config file</a></li>
+          </ul>
+          <p class="bc-side-title">Project</p>
+          <ul class="k-list k-list--flush">
+            <li aria-current="page"><a href="basecamp-changelog.html">Changelog</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main id="main">
+        <h1>Changelog</h1>
+        <p class="k-text-soft">Every release, newest first. Driftwood
+        follows semantic versioning; patch releases are bug fixes only.</p>
+
+        <div class="k-mt-6">
+
+          <div class="bc-entry">
+            <p class="bc-entry__date">2026-06-30 · v4.2.0</p>
+            <h3>Pinned deploys for domains</h3>
+            <p><code>driftwood domains add</code> now accepts
+            <code>--pin &lt;hash&gt;</code>, so a domain can point at a
+            specific deploy instead of always tracking the latest one.
+            Useful for staged rollouts.</p>
+          </div>
+
+          <div class="bc-entry">
+            <p class="bc-entry__date">2026-05-14 · v4.1.2</p>
+            <h3>Fix: <code>driftwood logs</code> dropping lines under load</h3>
+            <p>Log streaming buffered incorrectly above roughly 200
+            requests per second, silently dropping lines instead of
+            backpressuring. Fixed by switching the stream to a bounded
+            channel with an explicit drop counter reported in the CLI.</p>
+          </div>
+
+          <div class="bc-entry">
+            <p class="bc-entry__date">2026-04-02 · v4.1.0</p>
+            <h3>Secret environment variables</h3>
+            <p><code>driftwood env set --secret</code> stores a value
+            encrypted at rest and omits it from <code>driftwood env
+            list</code> output. Existing plain variables are unaffected.</p>
+          </div>
+
+          <div class="bc-entry">
+            <p class="bc-entry__date">2026-02-20 · v4.0.0</p>
+            <h3>Config file replaces flags-only setup</h3>
+            <p>Introduces <code>driftwood.json</code>. Projects without
+            one keep working exactly as before — this is additive, not a
+            breaking change, despite the major version bump for the new
+            regions format.</p>
+          </div>
+
+          <div class="bc-entry">
+            <p class="bc-entry__date">2025-11-08 · v3.6.1</p>
+            <h3>Fix: certificate renewal race on multi-domain projects</h3>
+            <p>Projects with more than one attached domain could hit a
+            renewal race that left one domain briefly unencrypted.
+            Renewals are now serialized per project.</p>
+          </div>
+
+          <div class="bc-entry">
+            <p class="bc-entry__date">2025-09-01 · v3.6.0</p>
+            <h3>Initial public release</h3>
+            <p>Deploy, domains, logs, and env — the four commands most
+            projects need on day one.</p>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span class="bc-wordmark">driftwood — a fictional CLI, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glasswater — an app template on keel's liquid path</title>
+<meta name="description" content="A music-app landing built with keel and the liquid path: frosted panes floating over a vivid mesh, a specular edge on every surface. One tokens block plus one path link is the whole look.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<link rel="stylesheet" href="../css/keel-path-liquid.css">
+<style>
+  /* The theme: one tokens block + the liquid path linked above.
+     A vivid mesh backdrop gives the glass plenty to frost. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(234 52% 9%);
+      --k-surface: hsl(232 44% 16%);
+      --k-surface-2: hsl(234 40% 22%);
+      --k-border: hsl(232 34% 30%);
+      --k-border-strong: hsl(232 32% 46%);
+      --k-text: hsl(228 34% 96%);
+      --k-text-soft: hsl(228 22% 78%);
+      --k-text-faint: hsl(228 16% 62%);
+      --k-accent: hsl(188 92% 60%);
+      --k-on-accent: hsl(230 60% 8%);
+      --k-accent-2: hsl(282 88% 68%);
+      --k-on-accent-2: hsl(230 60% 8%);
+      --k-display-weight: 720;
+      --k-radius: 18px;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+  /* A brighter, more saturated mesh than the path's default so the
+     frosted panes clearly read as glass. */
+  body {
+    color-scheme: dark;
+    background-image:
+      radial-gradient(52rem 34rem at 88% -6%,  hsl(282 88% 66% / 0.55), transparent 56%),
+      radial-gradient(46rem 32rem at -4% 20%,  hsl(188 92% 58% / 0.42), transparent 56%),
+      radial-gradient(44rem 32rem at 30% 118%, hsl(322 84% 62% / 0.40), transparent 56%),
+      radial-gradient(60rem 44rem at 70% 60%,  hsl(250 80% 56% / 0.30), transparent 60%);
+    background-attachment: fixed;
+  }
+  .gw-eq { display: flex; gap: 6px; align-items: flex-end; block-size: 64px; }
+  .gw-eq span { flex: 1; border-radius: 5px; background: var(--k-gradient); }
+  .gw-float { margin-block-start: calc(var(--k-space-5) * -1); }
+  @media (max-width: 48rem) { .gw-float { margin-block-start: 0; } }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template on the <a href="../docs/paths.html">liquid path</a> —
+    one tokens block + one path link is the whole look.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header>
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">
+        <span class="k-icon k-icon--contrast" aria-hidden="true"></span> Glasswater</a>
+      <ul class="k-nav__links">
+        <li><a href="#listen">Listen</a></li>
+        <li><a href="#rooms">Rooms</a></li>
+        <li><a href="#get">Get the app</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="k-section" id="top">
+  <div class="k-container">
+    <div class="k-split" style="align-items: center">
+      <div>
+        <p class="k-hero__eyebrow">Ambient radio for deep work</p>
+        <h1>Music you can<br>see through.</h1>
+        <p class="k-hero__lead">Endless generative soundscapes that stay
+        out of your way — tuned to the hour, the weather, and how long
+        you've been at it.</p>
+        <p class="k-cluster k-mt-5">
+          <a class="k-btn k-btn--large" href="#get">Start listening</a>
+          <a class="k-btn k-btn--ghost k-btn--large" href="#rooms">Browse rooms</a>
+        </p>
+      </div>
+      <div class="k-card gw-float">
+        <p class="k-card__kicker">Now playing · Rainhouse</p>
+        <h3>Low Tide, 9 p.m.</h3>
+        <div class="gw-eq k-mt-4" aria-hidden="true">
+          <span style="block-size: 40%"></span><span style="block-size: 72%"></span>
+          <span style="block-size: 55%"></span><span style="block-size: 92%"></span>
+          <span style="block-size: 63%"></span><span style="block-size: 34%"></span>
+          <span style="block-size: 80%"></span><span style="block-size: 48%"></span>
+          <span style="block-size: 68%"></span><span style="block-size: 30%"></span>
+          <span style="block-size: 58%"></span><span style="block-size: 44%"></span>
+        </div>
+        <div class="k-cluster k-mt-4" style="justify-content: space-between; align-items: center">
+          <span class="k-num k-text-faint">02:14 / ∞</span>
+          <span class="k-cluster">
+            <button class="k-btn k-btn--soft" type="button" aria-label="Previous">
+              <span class="k-icon k-icon--chevron-left" aria-hidden="true"></span></button>
+            <button class="k-btn" type="button">Pause</button>
+            <button class="k-btn k-btn--soft" type="button" aria-label="Next room">
+              <span class="k-icon k-icon--chevron-right" aria-hidden="true"></span></button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section" id="listen">
+  <div class="k-container">
+    <h2>Frosted, not frozen</h2>
+    <p class="k-text-soft" style="max-width: 42em">Every pane here is real
+    glass — translucent surfaces with a specular edge, floating over the
+    mesh. That's the liquid path doing the work; the markup is ordinary
+    keel cards.</p>
+    <div class="k-cols-3 k-mt-5">
+      <div class="k-card">
+        <span class="k-icon k-icon--derive k-text-accent" style="font-size: 1.5rem" aria-hidden="true"></span>
+        <h3 class="k-mt-3">Tuned to now</h3>
+        <p>The mix reads the clock and the sky, so mornings shimmer and
+        late nights go sub-bass.</p>
+      </div>
+      <div class="k-card">
+        <span class="k-icon k-icon--contrast k-text-accent" style="font-size: 1.5rem" aria-hidden="true"></span>
+        <h3 class="k-mt-3">Four-hour memory</h3>
+        <p>A room never repeats a phrase you've already heard today —
+        it just keeps unfolding.</p>
+      </div>
+      <div class="k-card">
+        <span class="k-icon k-icon--path k-text-accent" style="font-size: 1.5rem" aria-hidden="true"></span>
+        <h3 class="k-mt-3">One tap, no account</h3>
+        <p>The free tier needs nothing from you. Press play and get
+        back to work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section" id="rooms">
+  <div class="k-container">
+    <h2>Rooms</h2>
+    <div class="k-cols-3 k-mt-5">
+      <div class="k-card">
+        <span class="k-badge k-badge--dot">Live · 2,410 listening</span>
+        <h3 class="k-mt-3">Rainhouse</h3>
+        <p>Slow piano under a tin roof. The thunder is generated too.</p>
+        <p><a href="#get">Tune in →</a></p>
+      </div>
+      <div class="k-card">
+        <span class="k-badge k-badge--dot">Live · 980 listening</span>
+        <h3 class="k-mt-3">Terminal C</h3>
+        <p>Airport ambience with the announcements sanded off.</p>
+        <p><a href="#get">Tune in →</a></p>
+      </div>
+      <div class="k-card">
+        <span class="k-badge k-badge--dot">Live · 5,204 listening</span>
+        <h3 class="k-mt-3">Deep Shelf</h3>
+        <p>Sub-bass drones for the last hour before a deadline.</p>
+        <p><a href="#get">Tune in →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--accent" id="get">
+  <div class="k-container k-center">
+    <h2>Four hours free, every day</h2>
+    <p style="max-width: 36em; margin-inline: auto">No account for the
+    free tier. Press play and get to work.</p>
+    <p class="k-cluster k-mt-5" style="justify-content: center">
+      <a class="k-btn k-btn--large" href="#top">Open the web player</a>
+      <a class="k-btn k-btn--ghost k-btn--large" href="#top">Get the desktop app</a>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>Glasswater — a fictional app on the liquid path.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../docs/paths.html">About paths</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

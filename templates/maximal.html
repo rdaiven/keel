@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Harvest — a festival template on keel's maximal path</title>
+<meta name="description" content="A music-festival one-pager built with keel and the maximal path: oversized display type, gradient furniture, mesh-washed bands. One tokens block plus one path link is the whole look.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-path-maximal.css">
+<style>
+  /* The theme: one tokens block + the maximal path linked above. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(268 30% 97%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(268 30% 92%);
+      --k-border: hsl(268 20% 85%);
+      --k-border-strong: hsl(268 20% 68%);
+      --k-text: hsl(268 45% 14%);
+      --k-text-soft: hsl(268 20% 34%);
+      --k-text-faint: hsl(268 12% 48%);
+      --k-accent: hsl(268 80% 48%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(160 85% 30%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-density: 1.1;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+  .nh-lineup li { font-size: var(--k-text-xl); font-weight: 750; }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template on the <a href="../docs/paths.html">maximal path</a> —
+    one tokens block + one path link is the whole look.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">NEON HARVEST</a>
+      <ul class="k-nav__links">
+        <li><a href="#lineup">Lineup</a></li>
+        <li><a href="#days">Days</a></li>
+        <li><a href="#tickets">Tickets</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="k-hero k-bg-mesh" id="top">
+  <div class="k-container k-center">
+    <p class="k-hero__eyebrow">Nov 6 – 8 · Rice terraces amphitheater</p>
+    <h1><span class="k-text-gradient">Three nights.</span><br>Forty acts.<br>One valley.</h1>
+    <p class="k-hero__lead" style="margin-inline: auto">The harvest-season
+    festival where the last set ends at sunrise and breakfast is part of
+    the ticket.</p>
+    <p class="k-cluster k-mt-5" style="justify-content: center">
+      <a class="k-btn k-btn--large" href="#tickets">Get tickets</a>
+      <a class="k-btn k-btn--ghost k-btn--large" href="#lineup">Full lineup</a>
+    </p>
+    <div class="k-cols-3 k-mt-7">
+      <div class="k-card k-center">
+        <span class="k-stat__value">3</span>
+        <span class="k-stat__label">nights, dusk to sunrise</span>
+      </div>
+      <div class="k-card k-center">
+        <span class="k-stat__value">40</span>
+        <span class="k-stat__label">acts across four stages</span>
+      </div>
+      <div class="k-card k-center">
+        <span class="k-stat__value">1</span>
+        <span class="k-stat__label">valley in the rice terraces</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section" id="lineup">
+  <div class="k-container">
+    <h2>Headliners</h2>
+    <div class="k-split k-mt-5">
+      <ul class="k-list k-list--flush nh-lineup">
+        <li>Manila Traffic Choir</li>
+        <li>DJ Habagat</li>
+        <li>The Lowland Sisters</li>
+        <li>Bakunawa Sound System</li>
+        <li>Piko &amp; The Field Recorders</li>
+      </ul>
+      <div class="k-card">
+        <p class="k-card__kicker">Plus</p>
+        <h3>35 more across four stages</h3>
+        <p>Rice-terrace main stage, the bamboo grove, a vinyl-only tent,
+        and the sunrise ridge. Set times drop a week before gates.</p>
+        <p><a href="#tickets">See every act →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--alt" id="days">
+  <div class="k-container">
+    <h2>Three days, three moods</h2>
+    <div class="k-cols-3 k-mt-5">
+      <div class="k-card k-card--hover">
+        <p class="k-card__kicker">Friday</p>
+        <h3>Arrival</h3>
+        <p>Slow sets while the valley fills. Lantern walk at dusk.</p>
+      </div>
+      <div class="k-card k-card--hover">
+        <p class="k-card__kicker">Saturday</p>
+        <h3>The big one</h3>
+        <p>Four stages at full tilt until the generators beg.</p>
+      </div>
+      <div class="k-card k-card--hover">
+        <p class="k-card__kicker">Sunday</p>
+        <h3>Sunrise</h3>
+        <p>Acoustic sets on the ridge, breakfast for every wristband.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--accent" id="tickets">
+  <div class="k-container k-center">
+    <h2>Wristbands from ₱2,800</h2>
+    <p style="max-width: 36em; margin-inline: auto">Camping included.
+    Payment plans for students. Kids under 12 free with family.</p>
+    <p class="k-cluster k-mt-5" style="justify-content: center">
+      <a class="k-btn k-btn--large" href="#top">Buy a wristband</a>
+      <a class="k-btn k-btn--ghost" href="#top">Volunteer instead</a>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>NEON HARVEST — a fictional festival on the maximal path.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../docs/paths.html">About paths</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

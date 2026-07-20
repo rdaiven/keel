@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stoa Nord — an architecture-studio template built with keel</title>
+<meta name="description" content="An editorial project index for an architecture studio, built entirely with keel: restrained near-white/near-black tokens, a plain list of projects, and thin inline-SVG line drawings.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Replace this block and the page becomes yours. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(40 10% 98%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(40 8% 94%);
+      --k-border: hsl(40 6% 86%);
+      --k-border-strong: hsl(40 6% 70%);
+      --k-text: hsl(40 8% 12%);
+      --k-text-soft: hsl(40 5% 34%);
+      --k-text-faint: hsl(40 4% 50%);
+      --k-accent: hsl(30 12% 40%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(40 8% 12%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-font-display: Georgia, "Times New Roman", serif;
+      --k-display-weight: 400;
+      --k-tracking: 0em;
+      --k-radius: 2px;
+      --k-density: 1.15;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local: editorial index rows, plain list not cards */
+  .sn-index { list-style: none; margin: 0; padding: 0; }
+  .sn-index li {
+    display: grid; grid-template-columns: 1fr auto auto;
+    gap: var(--k-space-4); align-items: baseline;
+    padding-block: var(--k-space-4); border-block-end: 1px solid var(--k-border);
+  }
+  .sn-index li:first-child { border-block-start: 1px solid var(--k-border); }
+  .sn-index .sn-name { font-family: var(--k-font-display); font-size: var(--k-text-xl); }
+  .sn-index .sn-loc, .sn-index .sn-year { color: var(--k-text-faint); font-size: var(--k-text-s); }
+  .sn-line { stroke: var(--k-text); stroke-width: 1; fill: none; }
+  .sn-fill { fill: var(--k-surface-2); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme, every drawing is inline SVG.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Stoa Nord</a>
+      <ul class="k-nav__links">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#about">Studio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO — large type, wide whitespace -->
+<section class="k-hero" id="top">
+  <div class="k-container--narrow k-container">
+    <p class="k-hero__eyebrow">Stoa Nord · architecture &amp; interiors</p>
+    <h1>We design buildings<br>that get quieter<br>with time.</h1>
+    <p class="k-hero__lead">A six-person studio working in concrete, timber,
+    and restraint. Based in Baguio, working across Northern Luzon.</p>
+    <p class="k-cluster k-mt-5">
+      <a class="k-btn k-btn--large" href="#projects">View the index</a>
+      <a class="k-btn k-btn--ghost k-btn--large" href="#contact">Start a project</a>
+    </p>
+  </div>
+</section>
+
+<!-- FEATURED — two larger projects with line-drawing motifs -->
+<section class="k-section" id="featured">
+  <div class="k-container">
+    <div class="k-split" style="align-items: center">
+      <div>
+        <svg viewBox="0 0 320 220" role="img" aria-label="Line drawing of the Amihan House, a low gabled roof over a glazed base" style="width: 100%; height: auto">
+          <rect class="sn-fill" x="40" y="120" width="240" height="70"/>
+          <path class="sn-line" d="M20 120 L160 40 L300 120"/>
+          <path class="sn-line" d="M40 120 L40 190 M280 120 L280 190"/>
+          <path class="sn-line" d="M40 190 L280 190"/>
+          <path class="sn-line" d="M70 130 L70 180 M110 130 L110 180 M150 130 L150 180 M190 130 L190 180 M230 130 L230 180"/>
+        </svg>
+      </div>
+      <div>
+        <p class="k-card__kicker">01 · Residential</p>
+        <h2>Amihan House</h2>
+        <p>A gabled roof lifted clear of a glazed base, so the pine line
+        reads through every room. Passive cross-ventilation, no
+        mechanical cooling.</p>
+        <p class="k-text-faint">Baguio, 2024</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="k-section k-section--alt" id="featured-2">
+  <div class="k-container">
+    <div class="k-split" style="align-items: center">
+      <div>
+        <p class="k-card__kicker">02 · Civic</p>
+        <h2>Kalasag Reading Room</h2>
+        <p>A public library built around one long concrete vault. Light
+        enters only from above, through a saw-tooth clerestory.</p>
+        <p class="k-text-faint">La Trinidad, 2023</p>
+      </div>
+      <div>
+        <svg viewBox="0 0 320 220" role="img" aria-label="Line drawing of the Kalasag Reading Room, a barrel vault with saw-tooth skylights" style="width: 100%; height: auto">
+          <rect class="sn-fill" x="30" y="150" width="260" height="50"/>
+          <path class="sn-line" d="M30 150 Q160 60 290 150"/>
+          <path class="sn-line" d="M70 100 l20 -18 l20 18 M140 92 l20 -18 l20 18 M210 100 l20 -18 l20 18"/>
+          <path class="sn-line" d="M30 150 L30 200 M290 150 L290 200 M30 200 L290 200"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT INDEX — plain list, editorial restraint -->
+<section class="k-section" id="projects">
+  <div class="k-container--narrow k-container">
+    <h2>Index</h2>
+    <ul class="sn-index k-mt-5">
+      <li><span class="sn-name">Amihan House</span><span class="sn-loc">Baguio</span><span class="sn-year">2024</span></li>
+      <li><span class="sn-name">Kalasag Reading Room</span><span class="sn-loc">La Trinidad</span><span class="sn-year">2023</span></li>
+      <li><span class="sn-name">Bantay Ridge Chapel</span><span class="sn-loc">Sagada</span><span class="sn-year">2023</span></li>
+      <li><span class="sn-name">Tagaytay Weekend House</span><span class="sn-loc">Tagaytay</span><span class="sn-year">2022</span></li>
+      <li><span class="sn-name">Northline Cold Store</span><span class="sn-loc">Benguet</span><span class="sn-year">2021</span></li>
+      <li><span class="sn-name">Panorama Overlook</span><span class="sn-loc">Atok</span><span class="sn-year">2020</span></li>
+      <li><span class="sn-name">Studio Annex</span><span class="sn-loc">Baguio</span><span class="sn-year">2019</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ABOUT / PHILOSOPHY -->
+<section class="k-section k-section--alt" id="about">
+  <div class="k-container--narrow k-container">
+    <h2>What we mean by quiet</h2>
+    <p>Stoa Nord is six people. We take on four buildings a year, never
+    more, because a fifth building means someone stops drawing and
+    starts managing. We would rather draw.</p>
+    <p>Quiet is not the absence of decisions — it is the absence of
+    decisions that call attention to themselves. A door handle should
+    feel inevitable, not designed. We spend most of our fee on the
+    parts no one photographs: the section, the threshold, the way a
+    corridor meets the light.</p>
+    <blockquote>
+      <p>The building should still make sense after the client forgets
+      why they hired us.</p>
+    </blockquote>
+    <p class="k-text-faint"><small>— studio note, 2024</small></p>
+  </div>
+</section>
+
+<!-- CONTACT / CTA -->
+<section class="k-section k-section--accent" id="contact">
+  <div class="k-container k-center">
+    <h2>We take on four buildings a year.</h2>
+    <p style="max-width: 34em; margin-inline: auto">Tell us about the
+    site and the season you're building in. We reply within a week,
+    always in writing.</p>
+    <form class="k-cluster k-mt-5" style="justify-content: center" action="#" method="get">
+      <label class="k-visually-hidden" for="sn-email">Email</label>
+      <input id="sn-email" type="email" placeholder="you@example.com" style="min-inline-size: 18rem">
+      <button class="k-btn" type="submit">Start a conversation</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>Stoa Nord — a fictional studio, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

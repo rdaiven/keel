@@ -1,0 +1,23 @@
+{
+  "name": "keelcss",
+  "version": "0.8.0",
+  "description": "keel — a zero-dependency CSS framework that starts with your design system. Five native cascade layers, a full component library, zero JavaScript.",
+  "license": "MIT",
+  "author": "Daiven Reyes (https://rdaiven.github.io)",
+  "type": "module",
+  "main": "tools/keel-system.mjs",
+  "style": "css/keel.css",
+  "bin": { "keel": "tools/cli.mjs", "keelcss": "tools/cli.mjs" },
+  "files": [
+    "css/",
+    "data/",
+    "tools/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "node tools/build.mjs"
+  },
+  "keywords": ["css", "framework", "design-system", "design-tokens", "cascade-layers", "zero-dependency"]
+}

@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Axis — a flagship product page built with keel</title>
+<meta name="description" content="A fictional flagship device page built with keel: a CSS-only 3D device mockup that tilts as you scroll the hero, then a plain, static feature grid, specs table, and closing CTA. No images, no libraries — the device is div and transform.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Replace this block and the page becomes yours. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(0 0% 100%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(220 20% 96%);
+      --k-border: hsl(220 14% 88%);
+      --k-border-strong: hsl(220 14% 74%);
+      --k-text: hsl(220 25% 10%);
+      --k-text-soft: hsl(220 12% 34%);
+      --k-text-faint: hsl(220 10% 50%);
+      --k-accent: hsl(220 90% 52%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(340 78% 52%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-font-display: -apple-system, "Segoe UI", system-ui, sans-serif;
+      --k-display-weight: 650;
+      --k-tracking: -0.02em;
+      --k-radius: 14px;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* AXIS hero — a CSS-only device mockup, no images. The wrapper sets
+     perspective; JS applies rotateY (and a touch of scale) to the
+     device as the hero scrolls, computed from that section's own
+     bounding rect. Reduced motion: JS never touches the transform and
+     the device sits at the fixed neutral angle below. */
+  .ax-hero { padding-block: var(--k-space-8); overflow: hidden; }
+  .ax-hero__grid { display: grid; gap: var(--k-space-8); align-items: center; }
+  @media (min-width: 900px) {
+    .ax-hero__grid { grid-template-columns: 1.1fr 1fr; }
+  }
+  .ax-stage {
+    perspective: 1400px;
+    display: grid; place-items: center;
+    min-block-size: 22rem;
+  }
+  .ax-device {
+    position: relative;
+    inline-size: 12.5rem;
+    block-size: 25.5rem;
+    border-radius: 2.4rem;
+    background: linear-gradient(155deg, hsl(220 18% 22%), hsl(220 22% 8%));
+    border: 2px solid hsl(220 18% 30%);
+    box-shadow: 0 30px 60px -20px hsl(220 60% 20% / 0.45), 0 4px 14px hsl(220 60% 10% / 0.25);
+    transform: perspective(1400px) rotateY(-20deg) rotateX(2deg);
+    transform-style: preserve-3d;
+    /* JS overwrites the inline transform on scroll; this is the
+       reduced-motion / no-JS neutral angle. */
+  }
+  .ax-device--static { transform: perspective(1400px) rotateY(-8deg) rotateX(1deg); }
+  .ax-device__notch {
+    position: absolute; top: 0.55rem; left: 50%; translate: -50% 0;
+    inline-size: 3.6rem; block-size: 0.55rem; border-radius: 1rem;
+    background: hsl(220 25% 4%);
+  }
+  .ax-device__screen {
+    position: absolute; inset: 0.5rem;
+    border-radius: 1.9rem;
+    background:
+      radial-gradient(120% 90% at 30% 10%, hsl(220 90% 52% / 0.55), transparent 60%),
+      linear-gradient(200deg, hsl(220 70% 30%), hsl(230 60% 12%));
+    overflow: hidden;
+    display: grid; align-content: end; gap: 0.4rem;
+    padding: 1.1rem;
+  }
+  .ax-device__glow {
+    position: absolute; inset: -30% -10% auto -10%; block-size: 60%;
+    background: radial-gradient(closest-side, hsl(340 90% 60% / 0.5), transparent 70%);
+  }
+  .ax-device__label { position: relative; color: hsl(0 0% 100% / 0.92); font-size: var(--k-text-s); font-weight: 650; }
+  .ax-device__sub { position: relative; color: hsl(0 0% 100% / 0.6); font-size: var(--k-text-xs); }
+  .ax-device__edge {
+    position: absolute; inset-block-start: 30%; inset-inline-end: -3px;
+    inline-size: 3px; block-size: 3.4rem; border-radius: 2px;
+    background: hsl(220 18% 34%);
+  }
+  .ax-hero__copy { max-inline-size: 32rem; }
+  .ax-progress {
+    inline-size: 100%; block-size: 3px; border-radius: 2px;
+    background: var(--k-border); overflow: hidden; margin-block-start: var(--k-space-4);
+  }
+  .ax-progress__bar { inline-size: 0%; block-size: 100%; background: var(--k-accent); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — the hero device is CSS
+    transforms on plain divs, tilted by a page-local scroll script.
+    Everything below the hero is static keel, no JS at all.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="#top">Axis</a>
+      <ul class="k-nav__links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#specs">Specs</a></li>
+        <li><a href="#buy">Buy</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO — CSS-3D device, scroll-tilted by JS -->
+<section class="ax-hero" id="top">
+  <div class="k-container ax-hero__grid">
+    <div class="ax-hero__copy">
+      <p class="k-hero__eyebrow">Axis · introducing</p>
+      <h1>One slab of glass. Nothing else to explain.</h1>
+      <p class="k-hero__lead">Axis is the phone we kept subtracting from
+      until only the parts that mattered were left: a screen that goes
+      edge to edge, a battery that outlasts the day, and a case machined
+      from a single piece of aluminum.</p>
+      <p class="k-cluster k-mt-5">
+        <a class="k-btn k-btn--large" href="#buy">Order Axis — $899</a>
+        <a class="k-btn k-btn--ghost" href="#features">See what's new</a>
+      </p>
+      <div class="ax-progress" aria-hidden="true"><div class="ax-progress__bar" id="ax-progress-bar"></div></div>
+      <p class="k-text-xs k-text-faint k-mt-2">Scroll to turn the device — a CSS transform, no images.</p>
+    </div>
+    <div class="ax-stage">
+      <div class="ax-device" id="ax-device">
+        <div class="ax-device__notch"></div>
+        <div class="ax-device__edge"></div>
+        <div class="ax-device__screen">
+          <div class="ax-device__glow" aria-hidden="true"></div>
+          <span class="ax-device__label">Axis</span>
+          <span class="ax-device__sub">6.4&Prime; · titanium frame</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF STRIP -->
+<section class="k-section k-section--tight k-section--alt">
+  <div class="k-container">
+    <div class="k-cols-4 k-center">
+      <div><span class="k-stat__value">29 h</span><span class="k-stat__label">video playback</span></div>
+      <div><span class="k-stat__value">1 piece</span><span class="k-stat__label">milled aluminum body</span></div>
+      <div><span class="k-stat__value">IP68</span><span class="k-stat__label">dust &amp; water rating</span></div>
+      <div><span class="k-stat__value">5 yrs</span><span class="k-stat__label">of software updates</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES — plain static grid, no JS below the hero -->
+<section class="k-section" id="features">
+  <div class="k-container">
+    <h2>What's new in Axis</h2>
+    <p class="k-text-soft" style="max-width: 40em">Everything from here
+    down is static keel — cards, a table, a form. The motion budget was
+    spent entirely on the hero above.</p>
+    <div class="k-cols-3 k-mt-5">
+      <div class="k-card">
+        <p class="k-card__kicker">Display</p>
+        <h3>Edge Canvas</h3>
+        <p>A 6.4-inch panel with a bezel thin enough that the screen
+        reads as the whole front of the phone.</p>
+      </div>
+      <div class="k-card">
+        <p class="k-card__kicker">Battery</p>
+        <h3>All-day, actually</h3>
+        <p>29 hours of video on one charge, and a 20-minute stop gets
+        you through the rest of the night.</p>
+      </div>
+      <div class="k-card">
+        <p class="k-card__kicker">Body</p>
+        <h3>One piece of titanium</h3>
+        <p>No seams, no antenna lines to hide. Milled, anodized, and
+        rated for a two-meter drop onto concrete.</p>
+      </div>
+      <div class="k-card">
+        <p class="k-card__kicker">Camera</p>
+        <h3>Three lenses, one exposure</h3>
+        <p>Wide, ultra-wide, and telephoto shoot the same frame at once
+        so the software can pick the best of the three.</p>
+      </div>
+      <div class="k-card">
+        <p class="k-card__kicker">Chip</p>
+        <h3>Axis Silicon A2</h3>
+        <p>Built for on-device machine learning — nothing about how you
+        use Axis leaves the phone unless you send it.</p>
+      </div>
+      <div class="k-card">
+        <p class="k-card__kicker">Software</p>
+        <h3>Five years of updates</h3>
+        <p>Security and feature updates are scheduled through the fifth
+        year, on every Axis, no matter the storage tier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECS -->
+<section class="k-section k-section--alt" id="specs">
+  <div class="k-container k-container--narrow">
+    <h2>Specs</h2>
+    <div class="k-table-wrap">
+      <table class="k-table--striped k-table--bordered">
+        <tbody>
+          <tr><td>Display</td><td>6.4&Prime; OLED, 120 Hz, 2,000 nits peak</td></tr>
+          <tr><td>Chip</td><td>Axis Silicon A2, 3 nm</td></tr>
+          <tr><td>Storage</td><td>128 GB · 256 GB · 512 GB · 1 TB</td></tr>
+          <tr><td>Battery</td><td>29 h video · 20 min fast-charge to 50%</td></tr>
+          <tr><td>Camera</td><td>Wide + ultra-wide + 3x telephoto, 48 MP each</td></tr>
+          <tr><td>Body</td><td>Milled titanium, IP68</td></tr>
+          <tr><td>Weight</td><td>187 g</td></tr>
+          <tr><td>Colors</td><td>Slate, Birch, Moss, Titanium</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- BUY / CTA -->
+<section class="k-section k-section--accent" id="buy">
+  <div class="k-container k-center">
+    <h2>Axis. From $899.</h2>
+    <p style="max-width: 34em; margin-inline: auto">Trade in an eligible
+    phone or pay monthly — either way it ships in three days.</p>
+    <p class="k-cluster k-mt-5" style="justify-content: center">
+      <a class="k-btn k-btn--large" href="#top">Order now</a>
+      <a class="k-btn k-btn--ghost" href="#specs">Compare specs</a>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>Axis — a fictional device, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+<script>
+  /* Axis hero — page-local vanilla JS, scoped to this page only. keel
+     ships zero JS; the CSS-3D device tilt is the deliberate exception,
+     and it is gated behind prefers-reduced-motion like every animation
+     in keel itself. */
+  var prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  function initHeroTilt() {
+    var hero = document.querySelector('#top');
+    var device = document.getElementById('ax-device');
+    var bar = document.getElementById('ax-progress-bar');
+    if (!hero || !device) return;
+
+    if (prefersReducedMotion) {
+      // Static fallback: fixed neutral angle, no scroll listener, no
+      // rAF loop is ever started.
+      device.classList.add('ax-device--static');
+      if (bar) bar.style.width = '50%';
+      return;
+    }
+
+    var ticking = false;
+
+    function apply() {
+      var rect = hero.getBoundingClientRect();
+      var total = rect.height + window.innerHeight;
+      // Progress 0 → hero just entering from below, 1 → hero fully
+      // scrolled past the top of the viewport.
+      var progress = 1 - (rect.bottom / total);
+      progress = Math.max(0, Math.min(1, progress));
+
+      var rotY = -20 + progress * 40;   // -20deg .. 20deg
+      var rotX = 2 - progress * 4;      // slight counter-tilt
+      var scale = 0.96 + progress * 0.08;
+      device.style.transform =
+        'perspective(1400px) rotateY(' + rotY + 'deg) rotateX(' + rotX + 'deg) scale(' + scale + ')';
+      if (bar) bar.style.width = (progress * 100) + '%';
+
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(apply);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    apply();
+  }
+
+  initHeroTilt();
+</script>
+</body>
+</html>

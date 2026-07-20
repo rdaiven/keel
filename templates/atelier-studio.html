@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio — Northbank Atelier — a studio site template built with keel</title>
+<meta name="description" content="The about/philosophy and contact page for the Northbank Atelier keel template — a studio note, a small team list, and a plain contact form.">
+<link rel="stylesheet" href="../css/keel.css">
+<link rel="stylesheet" href="../css/keel-icons.css">
+<style>
+  /* The entire theme. Byte-identical across all three atelier pages. */
+  @layer tokens {
+    :root {
+      --k-bg: hsl(160 8% 95%);
+      --k-surface: hsl(0 0% 100%);
+      --k-surface-2: hsl(160 7% 91%);
+      --k-border: hsl(160 6% 84%);
+      --k-border-strong: hsl(160 6% 70%);
+      --k-text: hsl(160 10% 14%);
+      --k-text-soft: hsl(160 6% 34%);
+      --k-text-faint: hsl(160 5% 48%);
+      --k-accent: hsl(150 16% 34%);
+      --k-on-accent: hsl(0 0% 100%);
+      --k-accent-2: hsl(30 10% 42%);
+      --k-on-accent-2: hsl(0 0% 100%);
+      --k-font-display: Georgia, "Times New Roman", serif;
+      --k-display-weight: 650;
+      --k-tracking: -0.01em;
+      --k-radius: 4px;
+      --k-density: 1.05;
+    }
+  }
+  .demo-note { padding-block: var(--k-space-2); }
+
+  /* page-local (prefix "at-"): identical on every atelier page */
+  .at-nav-current { color: var(--k-text); font-weight: 650; }
+  .at-hero { padding-block: var(--k-space-8) var(--k-space-6); }
+  .at-hero__mark { color: var(--k-accent); }
+  .at-teaser-row {
+    display: grid; gap: var(--k-space-5);
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 720px) { .at-teaser-row { grid-template-columns: 1fr; } }
+  .at-teaser {
+    border-top: 2px solid var(--k-border-strong);
+    padding-block-start: var(--k-space-3);
+  }
+  .at-teaser__year { color: var(--k-text-faint); font-family: var(--k-font-mono); font-size: var(--k-text-xs); }
+</style>
+</head>
+<body>
+<a class="k-skip-link" href="#main">Skip to content</a>
+
+<div class="k-section--tint demo-note">
+  <div class="k-container k-center">
+    <small>A template built entirely with keel — one tokens block is the
+    whole theme, shared across a linked three-page studio site.
+    <a href="../templates.html">All templates</a></small>
+  </div>
+</div>
+
+<header class="k-section--alt">
+  <div class="k-container">
+    <nav class="k-nav" aria-label="Site">
+      <a class="k-nav__brand" href="atelier-index.html">Northbank Atelier</a>
+      <ul class="k-nav__links">
+        <li><a href="atelier-index.html">Index</a></li>
+        <li><a href="atelier-work.html">Work</a></li>
+        <li><a class="at-nav-current" href="atelier-studio.html" aria-current="page">Studio</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="k-section k-section--tight">
+  <div class="k-container--narrow k-container">
+    <h1>Studio</h1>
+    <p class="k-text-soft">Twelve people, one long table, a site visit
+    most Fridays.</p>
+
+    <h2>What we believe</h2>
+    <p>A plan is a promise about how someone will move through a room
+    before the room exists. We spend most of our time testing that
+    promise — walking the empty site with tape on the floor, mocking up
+    a stair in the workshop before it's poured, asking the client to
+    stand where the sink will be. Software renders convince clients;
+    they rarely convince us.</p>
+    <p>We keep the material list short on purpose. Concrete, timber,
+    block, glass — used honestly enough that you can tell what's
+    structural and what's decoration, because on our jobs there usually
+    isn't a difference.</p>
+
+    <blockquote>
+      <p>The best compliment a finished building gets is that no one
+      asks who designed it.</p>
+    </blockquote>
+
+    <h2>The people</h2>
+    <ul class="k-list k-mt-5">
+      <li><strong>Renata Cole</strong> — founding principal, mostly on
+      site these days</li>
+      <li><strong>Théo Mbeki-Sorn</strong> — principal, civic &amp;
+      institutional work</li>
+      <li><strong>Aditi Prasad</strong> — studio director, keeps the
+      other eleven of us on schedule</li>
+      <li><strong>Faro Lindqvist</strong> — model shop, builds everything
+      twice before we build it once</li>
+    </ul>
+
+    <h2>Contact</h2>
+    <p>We answer project inquiries within a week. Tell us about the
+    site before you tell us about the program — the site usually has
+    opinions.</p>
+    <form class="k-mt-5" action="#" method="get">
+      <p>
+        <label for="at-name">Name</label>
+        <input id="at-name" type="text" name="name" placeholder="Your name">
+      </p>
+      <p>
+        <label for="at-email">Email</label>
+        <input id="at-email" type="email" name="email" placeholder="you@example.com">
+      </p>
+      <p>
+        <label for="at-note">Tell us about the site</label>
+        <textarea id="at-note" name="note" rows="4" placeholder="Location, scale, timeline…"></textarea>
+      </p>
+      <button class="k-btn" type="submit">Send inquiry</button>
+    </form>
+
+    <p class="k-mt-6 k-text-faint"><small>Northbank Atelier · 14 Founders
+    Wharf, river side · open by appointment</small></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="k-footer">
+  <div class="k-container k-cluster" style="justify-content: space-between">
+    <span>Northbank Atelier — a fictional studio, a real keel template.</span>
+    <span><a href="../templates.html">All templates</a> · <a href="../index.html">keel</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
