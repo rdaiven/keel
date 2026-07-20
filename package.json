@@ -4,6 +4,12 @@
   "description": "keel — a zero-dependency CSS framework that starts with your design system. Five native cascade layers, a full component library, zero JavaScript.",
   "license": "MIT",
   "author": "Daiven Reyes (https://rdaiven.github.io)",
+  "homepage": "https://rdaiven.github.io/keel/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rdaiven/keel.git"
+  },
+  "bugs": "https://github.com/rdaiven/keel/issues",
   "type": "module",
   "main": "tools/keel-system.mjs",
   "style": "css/keel.css",

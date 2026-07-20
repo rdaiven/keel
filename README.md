@@ -23,7 +23,7 @@ nothing to install.
 
 **Status: pre-1.0.** A standalone, self-contained framework by
 Daiven Reyes. Class names and tokens may still tighten before 1.0 —
-changes land in [the changelog](docs/changelog.html).
+changes land in [the changelog](https://rdaiven.github.io/keel/docs/changelog.html).
 
 ---
 
@@ -308,7 +308,7 @@ you bring type via tokens.
 
 keel follows [semantic versioning](https://semver.org). It is **pre-1.0**
 — while stabilizing, minor releases may carry breaking changes, always
-recorded in the [changelog](CHANGELOG.md).
+recorded in the [changelog](https://rdaiven.github.io/keel/docs/changelog.html).
 
 - **Stable surface** (breaking changes are versioned and announced):
   public token names (`--k-*`), component class names (`k-*`), and the
@@ -316,12 +316,12 @@ recorded in the [changelog](CHANGELOG.md).
 - **Internal** (may change any time): build scripts and the exact bytes
   of the minified output.
 
-The [roadmap](.github/ROADMAP.md) explains what "toward 1.0" means and where
+The [roadmap](https://github.com/rdaiven/keel/blob/main/.github/ROADMAP.md) explains what "toward 1.0" means and where
 keel is headed.
 
 ## Contributing
 
-Issues and PRs welcome — please read [CONTRIBUTING.md](.github/CONTRIBUTING.md)
+Issues and PRs welcome — please read [CONTRIBUTING.md](https://github.com/rdaiven/keel/blob/main/.github/CONTRIBUTING.md)
 first. keel holds firm lines (zero framework JavaScript, token-derived
 values, an inviolable contrast guarantee); an issue before a PR saves
 everyone time.
