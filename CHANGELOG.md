@@ -4,6 +4,58 @@ keel is pre-1.0 — class names and tokens may still tighten before a
 stable 1.0. Each version below records what changed. Format follows
 Keep a Changelog. Dates are 2026.
 
+## [0.9.0] — 07-20
+
+Collapsible navigation, live demo wrappers, a native styled select
+popup, motion that the framework itself uses — plus a reorganized
+site with clean template URLs.
+
+### Components
+- **`.k-nav-group`** — a `<details>` wrapper for a labeled sidebar
+  group: native open/close, the base disclosure chevron, no JS. The
+  docs' own sidebar runs on it.
+- **`.k-sidebar--collapsible`** + **`.is-collapsed`** — an icon-rail
+  mode for sidebars: labels (`.nav-label` spans) hide, icons stay, the
+  rail shrinks to ~3.25rem. Toggled by one line of JS on a `.k-tool`
+  button, same tolerance as `showModal()`.
+- **`.k-demo`** — a flush `<details open>` wrapper for a live example
+  paired with its markup: a real minimize/expand control on every demo,
+  reusing the native disclosure chevron.
+- **Styled `<select>` popup** — behind
+  `@supports (appearance: base-select)`, the select dropdown itself
+  (`::picker(select)`, each option) picks up keel's tokens instead of
+  raw OS chrome, falling back invisibly where unsupported.
+
+### Motion
+- **`.k-bg-mesh--live`** — the hero mesh drifts: six `@property`
+  -registered gradient positions interpolate smoothly through a slow
+  keyframe loop. **`.k-glow--pulse`** breathes a CTA's halo. Both sit
+  behind `prefers-reduced-motion: no-preference`.
+
+### Utilities
+- Aspect ratio: `.k-aspect-square` / `.k-aspect-video` /
+  `.k-aspect-portrait`; print: `.k-print-hide`; `.k-stagger` no longer
+  caps the number of animated children.
+
+### Fixed
+- `.k-alert` content now lays out correctly when its body wraps
+  (the flex bug), and `.k-alert--row` handles the inline case.
+- `.k-marquee` fully stops under `prefers-reduced-motion: reduce`.
+- `.k-btn--icon.k-btn--small` is actually small: the pair now gets
+  compact padding instead of `--icon` silently overriding `--small`.
+- A `.k-card__kicker` hugs the heading it introduces — the base
+  layer's content-to-heading gap no longer opens between them.
+
+### Site
+- **27 new templates** — e-commerce, landing pages, motion studies,
+  multi-page sites, working apps — and the whole gallery moved to
+  clean URLs under `templates/` (old root URLs redirect).
+- Docs: mobile hamburger nav, a collapsible icon-rail sidebar, live
+  demo wrappers on every component example, filled-in utilities docs,
+  and a warmer start page (terminal hero, numbered quick-start cards).
+- Site chrome consolidated under `assets/`; a keel-styled `404.html`
+  handles every missing path.
+
 ## [0.8.0] — 07-13
 
 The design-system release — a wider, guided generator that seeds five

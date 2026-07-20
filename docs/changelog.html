@@ -68,6 +68,18 @@
     <strong>pre-1.0</strong> — class names and tokens may still tighten,
     but it lands here, not as a surprise.</p>
     <div class="cl">
+      <h2 class="cl-ver">[0.9.0] — 07-20</h2>
+      <p>Collapsible navigation, live demo wrappers, a native styled select popup, motion that the framework itself uses — plus a reorganized site with clean template URLs.</p>
+      <h3>Components</h3>
+      <ul><li><strong><code>.k-nav-group</code></strong> — a <code>&lt;details&gt;</code> wrapper for a labeled sidebar group: native open/close, the base disclosure chevron, no JS. The docs' own sidebar runs on it.</li><li><strong><code>.k-sidebar--collapsible</code></strong> + <strong><code>.is-collapsed</code></strong> — an icon-rail mode for sidebars: labels (<code>.nav-label</code> spans) hide, icons stay, the rail shrinks to ~3.25rem. Toggled by one line of JS on a <code>.k-tool</code> button, same tolerance as <code>showModal()</code>.</li><li><strong><code>.k-demo</code></strong> — a flush <code>&lt;details open&gt;</code> wrapper for a live example paired with its markup: a real minimize/expand control on every demo, reusing the native disclosure chevron.</li><li><strong>Styled <code>&lt;select&gt;</code> popup</strong> — behind <code>@supports (appearance: base-select)</code>, the select dropdown itself (<code>::picker(select)</code>, each option) picks up keel's tokens instead of raw OS chrome, falling back invisibly where unsupported.</li></ul>
+      <h3>Motion</h3>
+      <ul><li><strong><code>.k-bg-mesh--live</code></strong> — the hero mesh drifts: six <code>@property</code> -registered gradient positions interpolate smoothly through a slow keyframe loop. <strong><code>.k-glow--pulse</code></strong> breathes a CTA's halo. Both sit behind <code>prefers-reduced-motion: no-preference</code>.</li></ul>
+      <h3>Utilities</h3>
+      <ul><li>Aspect ratio: <code>.k-aspect-square</code> / <code>.k-aspect-video</code> / <code>.k-aspect-portrait</code>; print: <code>.k-print-hide</code>; <code>.k-stagger</code> no longer caps the number of animated children.</li></ul>
+      <h3>Fixed</h3>
+      <ul><li><code>.k-alert</code> content now lays out correctly when its body wraps (the flex bug), and <code>.k-alert--row</code> handles the inline case.</li><li><code>.k-marquee</code> fully stops under <code>prefers-reduced-motion: reduce</code>.</li><li><code>.k-btn--icon.k-btn--small</code> is actually small: the pair now gets compact padding instead of <code>--icon</code> silently overriding <code>--small</code>.</li><li>A <code>.k-card__kicker</code> hugs the heading it introduces — the base layer's content-to-heading gap no longer opens between them.</li></ul>
+      <h3>Site</h3>
+      <ul><li><strong>27 new templates</strong> — e-commerce, landing pages, motion studies, multi-page sites, working apps — and the whole gallery moved to clean URLs under <code>templates/</code> (old root URLs redirect).</li><li>Docs: mobile hamburger nav, a collapsible icon-rail sidebar, live demo wrappers on every component example, filled-in utilities docs, and a warmer start page (terminal hero, numbered quick-start cards).</li><li>Site chrome consolidated under <code>assets/</code>; a keel-styled <code>404.html</code> handles every missing path.</li></ul>
       <h2 class="cl-ver">[0.8.0] — 07-13</h2>
       <p>The design-system release — a wider, guided generator that seeds five colors and a fluid type scale, plus a third brand color, an unlayered build, and downloads with your own class names.</p>
       <h3>Design tool — download with your own class prefix</h3>
