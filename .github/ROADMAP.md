@@ -5,21 +5,21 @@ solo project ships when it's ready, not on a date. It's here so you can
 see where keel is going before you build on it, and so you know what's
 stable enough to depend on today.
 
-## Where keel is now — 0.7.x
+## Where keel is now — 0.9.x
 
-The framework is feature-complete for a first public release: five
-cascade layers, a full component library across ten categories, ~61
-tokens, a 326-icon set, the design-system generator (WCAG AA enforced
+The framework is public and on npm (`npm i keelcss`): five cascade
+layers, a full component library across ten categories, the token
+system, the icon set, the design-system generator (WCAG AA enforced
 in code), a CLI, and MCP servers. The website, docs, changelog, and
 machine-readable surfaces (`llms.txt`, `icons.json`, `patterns.json`)
-ship with it.
+ship with it, along with a portable (unlayered) build for page-builder
+environments.
 
 The near-term work is stabilization, not new surface area:
 
 - Lock class names and token names (see **Stability** below).
-- Publish `keelcss` to npm and expose a CDN link.
-- Tighten docs, add a "how keel compares" page, and gather real-world
-  feedback from first users.
+- Publish the CLI so `npx keelcss init` works out of the box.
+- Tighten docs and gather real-world feedback from first users.
 
 ## Toward 1.0
 
@@ -51,7 +51,7 @@ are the lines keel holds.
 
 - keel follows [semantic versioning](https://semver.org). While pre-1.0,
   the minor version may carry breaking changes; they are always listed
-  in the [changelog](CHANGELOG.md).
+  in the [changelog](../CHANGELOG.md).
 - **Stable surface** (changes are breaking, versioned, and announced):
   public token names (`--k-*`), component class names (`k-*`), and the
   cascade-layer order.
@@ -63,6 +63,6 @@ are the lines keel holds.
 ## Shaping the roadmap
 
 keel is maintained by one person. The best way to influence direction is
-a clear, specific issue — a real use case beats a feature request. What
-keel *won't* do is as intentional as what it will; when it refuses
-something, the docs say why.
+a clear, specific issue — a real use case beats a feature request. keel's
+scope is as intentional as its features — the lines above are part of
+the design, and the docs explain the reasoning behind them.

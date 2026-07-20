@@ -58,4 +58,4 @@ node tools/build.mjs        # zero dependencies; regenerates min css + all artif
 ## License
 
 By contributing, you agree your contributions are licensed under the
-project's [MIT license](LICENSE).
+project's [MIT license](../LICENSE).

@@ -316,12 +316,12 @@ recorded in the [changelog](CHANGELOG.md).
 - **Internal** (may change any time): build scripts and the exact bytes
   of the minified output.
 
-The [roadmap](ROADMAP.md) explains what "toward 1.0" means and where
+The [roadmap](.github/ROADMAP.md) explains what "toward 1.0" means and where
 keel is headed.
 
 ## Contributing
 
-Issues and PRs welcome — please read [CONTRIBUTING.md](CONTRIBUTING.md)
+Issues and PRs welcome — please read [CONTRIBUTING.md](.github/CONTRIBUTING.md)
 first. keel holds firm lines (zero framework JavaScript, token-derived
 values, an inviolable contrast guarantee); an issue before a PR saves
 everyone time.
