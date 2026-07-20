@@ -346,6 +346,15 @@ console.log(`llms.txt: ${componentEntries.length} components indexed`);
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Changelog — keel</title>
 <meta name="description" content="keel's changelog — every release and what changed. keel is pre-1.0; changes land here, not as a surprise.">
+<link rel="canonical" href="https://rdaiven.github.io/keel/docs/changelog.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="keel">
+<meta property="og:title" content="Changelog — keel">
+<meta property="og:description" content="keel's changelog — every release and what changed. keel is pre-1.0; changes land here, not as a surprise.">
+<meta property="og:url" content="https://rdaiven.github.io/keel/docs/changelog.html">
+<meta property="og:image" content="https://rdaiven.github.io/keel/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://rdaiven.github.io/keel/assets/og.png">
 <link rel="stylesheet" href="../css/keel.css">
 <link rel="stylesheet" href="../css/keel-icons.css">
 <link rel="stylesheet" href="../assets/fonts.css">
@@ -460,7 +469,7 @@ ${body.replace(/^/gm, "      ").replace(/\s+$/, "")}
   writeFileSync(at("sitemap.xml"), sitemap);
   console.log(`sitemap.xml: ${all.length} pages`);
 
-  const robots = `# keel — https://github.com/rdaiven/keel\nUser-agent: *\nAllow: /\n\nSitemap: ${SITE_ORIGIN}/sitemap.xml\n`;
+  const robots = `# keel — https://github.com/rdaiven/keel\n# All crawlers welcome, including AI assistants — start at /llms.txt.\nUser-agent: *\nAllow: /\n\nSitemap: ${SITE_ORIGIN}/sitemap.xml\n`;
   writeFileSync(at("robots.txt"), robots);
   console.log(`robots.txt: written`);
 }

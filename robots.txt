@@ -1,4 +1,5 @@
 # keel — https://github.com/rdaiven/keel
+# All crawlers welcome, including AI assistants — start at /llms.txt.
 User-agent: *
 Allow: /
 

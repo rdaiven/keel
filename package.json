@@ -25,5 +25,5 @@
   "scripts": {
     "build": "node tools/build.mjs"
   },
-  "keywords": ["css", "framework", "design-system", "design-tokens", "cascade-layers", "zero-dependency"]
+  "keywords": ["css", "framework", "css-framework", "design-system", "design-tokens", "cascade-layers", "zero-dependency", "no-build", "ui-components", "wcag", "accessibility", "semantic-html"]
 }
